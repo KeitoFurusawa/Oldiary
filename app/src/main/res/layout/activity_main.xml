@@ -12,8 +12,10 @@
         android:text="Oldiary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.553"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.158" />
 
     <EditText
         android:id="@+id/editTextTextPersonName2"
@@ -30,7 +32,7 @@
         android:layout_width="354dp"
         android:layout_height="190dp"
         app:srcCompat="@drawable/img"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="401dp" />
+        tools:layout_editor_absoluteX="301dp"
+        tools:layout_editor_absoluteY="135dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
