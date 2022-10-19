@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -20,19 +21,27 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
-        //
+
 
         ImageView titleLogoView = findViewById(R.id.imageViewTitleLogo);
         titleLogoView.setImageResource(R.drawable.oldiary_title);
-        int i = 1024;
-        Log.i("=====This is Debug=====", Integer.valueOf(i).toString());
 
-        Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-        sleepf(3000);
-        startActivity(intent);
+        //ハンドラーで3秒待ち gerMainLooperはメインスレッドで実行するためのおまじない
+        Handler handler = new Handler(getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        }, 3000);
 
+        //sleepf(3000);
+        //Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+        //startActivity(intent);
     }
 
+    //スレッドスリープ関数
     public void sleepf(long millis) {
         try {
             Thread.sleep(millis);
@@ -40,5 +49,4 @@ public class MainActivity extends AppCompatActivity {
             Log.d("sleepf: ", "ERROR");
         }
     }
-
 }
