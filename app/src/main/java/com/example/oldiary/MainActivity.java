@@ -11,11 +11,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-}
-<<<<<<< HEAD
-=======
+
+} 
 ///master branch
 ///
 ///
 ///
->>>>>>> master
+
