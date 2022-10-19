@@ -14,10 +14,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //アクションバー
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.hide();
         }
+        //
 
         ImageView titleLogoView =findViewById(R.id.imageViewTitleLogo);
         titleLogoView.setImageResource(R.drawable.oldiary_title);
