@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="AAAA"
+        android:text="ABBACCA"
         tools:layout_editor_absoluteX="79dp"
         tools:layout_editor_absoluteY="282dp" />
 
