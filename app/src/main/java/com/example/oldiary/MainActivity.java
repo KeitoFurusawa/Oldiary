@@ -20,25 +20,5 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
-        //
-
-        ImageView titleLogoView = findViewById(R.id.imageViewTitleLogo);
-        titleLogoView.setImageResource(R.drawable.oldiary_title);
-        int i = 1024;
-        Log.i("=====This is Debug=====", Integer.valueOf(i).toString());
-
-        Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-        sleepf(3000);
-        startActivity(intent);
-
     }
-
-    public void sleepf(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            Log.d("sleepf: ", "ERROR");
-        }
-    }
-
 }
