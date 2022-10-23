@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.widget.Button;
+import android.view.MotionEvent;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,12 +14,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
 
-        Button sendButton = findViewById(R.id.send_button);
-        // lambda式
-        sendButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplication(), SubActivity.class);
-            startActivity(intent);
-        });
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                Intent intent = new Intent(getApplication(), SubActivity.class);
+                startActivity(intent);
+        }
+        return false;
     }
 }
