@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 
+
 public class SubActivity extends AppCompatActivity {
 
     @Override
@@ -22,6 +23,13 @@ public class SubActivity extends AppCompatActivity {
         returnButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), MainActivity.class);
             startActivity(intent);
+
+            switch (v.getId()) {
+                case R.id.return_button:
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    break;
+            }
         });
+
     }
 }
