@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "425344741206",
+    "project_id": "oldiary",
+    "storage_bucket": "oldiary.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425344741206:android:4cd51a504f18b10a85f0f7",
+        "android_client_info": {
+          "package_name": "com.example.oldiary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425344741206-2353ko1auhs3cp22r59vsesherhnb879.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.oldiary",
+            "certificate_hash": "9ca3f9b884b20b74bcc0755637edeb55c3e0c728"
+          }
+        },
+        {
+          "client_id": "425344741206-61s9vuicku45qnp3uno6qu175oaknuvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYFEZqI64q0kd5z8OGbvzIh3Ujyn8rsYo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425344741206-61s9vuicku45qnp3uno6qu175oaknuvk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
