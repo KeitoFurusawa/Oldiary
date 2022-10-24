@@ -19,6 +19,7 @@ public class SubActivity extends AppCompatActivity {
         ImageView HomeImage = findViewById(R.id.imageView2);
 
         Button returnButton = findViewById(R.id.return_button);
+
         // lambda式
         returnButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), MainActivity.class);
@@ -30,6 +31,13 @@ public class SubActivity extends AppCompatActivity {
                     break;
             }
         });
+
+        Button jumpToRegister = findViewById(R.id.buttonToRegister);
+        jumpToRegister.setOnClickListener(v -> {
+                    Intent intent = new Intent(getApplication(), RegisterActivity.class);
+                    startActivity(intent);
+                }
+        );
 
     }
 }

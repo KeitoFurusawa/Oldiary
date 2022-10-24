@@ -43,4 +43,14 @@
         app:layout_constraintVertical_bias="0.912"
         app:srcCompat="@raw/home" />
 
+    <Button
+        android:id="@+id/buttonToRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="データ送信テストへ"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/return_button" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

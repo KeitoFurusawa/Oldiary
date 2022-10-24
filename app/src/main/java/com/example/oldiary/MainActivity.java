@@ -27,11 +27,9 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer.setLooping(true);
 
 
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message2");
 
-        myRef.setValue("Hey! Firebase");
+        ReadAndWrite.writeMessage("m02", "string");
+
     }
 
     protected void onResume() {
@@ -49,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer.release();
         mediaPlayer = null;
     }
+
+
 
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
