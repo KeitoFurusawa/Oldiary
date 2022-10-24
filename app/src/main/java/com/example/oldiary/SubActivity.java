@@ -3,9 +3,7 @@ package com.example.oldiary;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.widget.Button;
-import android.widget.ImageView;
-
+import android.widget.ImageButton;
 
 
 public class SubActivity extends AppCompatActivity {
@@ -13,19 +11,16 @@ public class SubActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_sub);
 
-        ImageView HomeImage = findViewById(R.id.imageView2);
-
-        Button returnButton = findViewById(R.id.return_button);
+        ImageButton imageButton = findViewById(R.id.imageButton);
         // lambda式
-        returnButton.setOnClickListener(v -> {
+        imageButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), MainActivity.class);
             startActivity(intent);
 
             switch (v.getId()) {
-                case R.id.return_button:
+                case R.id.imageButton:
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     break;
             }
