@@ -63,8 +63,7 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
-            android:exported="false"
-            android:screenOrientation="sensorLandscape">
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
