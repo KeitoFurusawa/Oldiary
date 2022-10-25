@@ -1,15 +1,15 @@
 package com.example.oldiary;
 // https://akira-watson.com/android/activity-1.html←参考
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import android.content.Intent;
-import android.view.MotionEvent;
-import android.widget.TextView;
-import android.view.animation.Animation;
-import android.view.animation.AlphaAnimation;
 import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         imageButton.setOnClickListener(v -> {
             try {
                 imageButton.setImageResource(R.drawable.opendoor);
-                Thread.sleep(500);
+                Thread.sleep(1000);
                 Intent intent = new Intent(getApplication(), LoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
