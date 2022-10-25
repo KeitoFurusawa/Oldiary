@@ -1,5 +1,4 @@
 package com.example.oldiary;
-// https://akira-watson.com/android/activity-1.html←参考
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
