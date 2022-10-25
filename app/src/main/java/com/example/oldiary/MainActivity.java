@@ -9,8 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AlphaAnimation;
 import android.media.MediaPlayer;
 import android.widget.ImageButton;
-import android.view.MotionEvent;
-import androidx.appcompat.app.AppCompatActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,34 +23,20 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds);
         mediaPlayer.setLooping(true);
 
+        setOnClick();
+
         TextView txtView_start = findViewById(R.id.textView2);
         blinkText(txtView_start, 650, 200);
 
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent motionEvent) {
-        ImageButton imageButton = findViewById(R.id.closedoor);
-        switch (motionEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                imageButton.setImageResource(R.drawable.opendoor);
-        }
-        return false;
-    }
-
     protected void setOnClick() {
-        ImageButton imageButton = findViewById(R.drawable.opendoor);
+        ImageButton imageButton = findViewById(R.id.imageButton2);
 
         // lambda式
         imageButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), LoginActivity.class);
             startActivity(intent);
-
-            switch (v.getId()) {
-                case R.drawable.opendoor:
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                    break;
-            }
         });
     }
 
