@@ -3,12 +3,12 @@ package com.example.oldiary;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.view.MotionEvent;
 import android.widget.TextView;
 import android.view.animation.Animation;
 import android.view.animation.AlphaAnimation;
 import android.media.MediaPlayer;
 import android.widget.ImageButton;
+
 
 
 public class MainActivity extends AppCompatActivity {
