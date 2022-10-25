@@ -4,6 +4,7 @@ package com.example.oldiary;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.view.MotionEvent;
 import android.widget.TextView;
 import android.view.animation.Animation;
 import android.view.animation.AlphaAnimation;
@@ -23,11 +24,23 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds);
         mediaPlayer.setLooping(true);
 
+        imageChange();
+
+
         setOnClick();
 
         TextView txtView_start = findViewById(R.id.textView2);
         blinkText(txtView_start, 650, 200);
 
+    }
+
+    protected void  imageChange() {
+        ImageButton imageButton = findViewById(R.id.imageButton2);
+        imageButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplication(), LoginActivity.class);
+            startActivity(intent);
+        });
+        imageButton.setImageResource(R.drawable.opendoor);
     }
 
     protected void setOnClick() {
