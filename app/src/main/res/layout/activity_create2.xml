@@ -40,7 +40,7 @@
         android:id="@+id/button15"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="340dp"
+        android:layout_marginBottom="364dp"
         android:text="訂正"
         android:textColor="#FFEB3B"
         android:textSize="20sp"

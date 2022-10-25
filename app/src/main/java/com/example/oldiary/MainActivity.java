@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton imageButton = findViewById(R.id.imageButton3);
         // lambda式
         imageButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplication(), SubActivity.class);
+            Intent intent = new Intent(getApplication(), LoginActivity.class);
             startActivity(intent);
 
             switch (v.getId()) {
