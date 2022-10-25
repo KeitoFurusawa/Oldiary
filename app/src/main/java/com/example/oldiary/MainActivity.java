@@ -4,7 +4,7 @@ package com.example.oldiary;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.view.MotionEvent;
+import android.media.SoundPool;
 import android.widget.TextView;
 import android.view.animation.Animation;
 import android.view.animation.AlphaAnimation;
@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 public class MainActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
+    SoundPool soundPool;
+    int openDoor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds);
         mediaPlayer.setLooping(true);
+
+        openDoor = soundPool.load(this, R.raw.opendoor, 1);
 
         imageChange();
 
@@ -36,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
         imageButton.setOnClickListener(v -> {
             try {
                 imageButton.setImageResource(R.drawable.opendoor);
-                Thread.sleep(500);
+                soundPool.play(openDoor, 1f, 1f, 0, 0, 1);
+                Thread.sleep(1000);
                 Intent intent = new Intent(getApplication(), LoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
