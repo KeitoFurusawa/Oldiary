@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         });
         imageButton.setImageResource(R.drawable.opendoor);
     }
-
+//あああ
     protected void setOnClick() {
         ImageButton imageButton = findViewById(R.id.imageButton2);
 
