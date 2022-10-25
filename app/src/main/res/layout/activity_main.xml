@@ -33,7 +33,7 @@
         app:srcCompat="@drawable/oldiary_title" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/closedoor"
         android:layout_width="253dp"
         android:layout_height="476dp"
         app:layout_constraintBottom_toBottomOf="parent"
