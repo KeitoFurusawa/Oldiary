@@ -34,9 +34,16 @@ public class MainActivity extends AppCompatActivity {
     protected void  imageChange() {
         ImageButton imageButton = findViewById(R.id.imageButton2);
         imageButton.setOnClickListener(v -> {
-            imageButton.setImageResource(R.drawable.opendoor);
-            Intent intent = new Intent(getApplication(), LoginActivity.class);
-            startActivity(intent);
+            try {
+                imageButton.setImageResource(R.drawable.opendoor);
+                Thread.sleep(500);
+                Intent intent = new Intent(getApplication(), LoginActivity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
         });
     }
 
