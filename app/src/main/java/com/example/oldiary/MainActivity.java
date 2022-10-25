@@ -26,9 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
         imageChange();
 
-
-        setOnClick();
-
         TextView txtView_start = findViewById(R.id.textView2);
         blinkText(txtView_start, 650, 200);
 
@@ -37,17 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void  imageChange() {
         ImageButton imageButton = findViewById(R.id.imageButton2);
         imageButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplication(), LoginActivity.class);
-            startActivity(intent);
-        });
-        imageButton.setImageResource(R.drawable.opendoor);
-    }
-//あああ
-    protected void setOnClick() {
-        ImageButton imageButton = findViewById(R.id.imageButton2);
-
-        // lambda式
-        imageButton.setOnClickListener(v -> {
+            imageButton.setImageResource(R.drawable.opendoor);
             Intent intent = new Intent(getApplication(), LoginActivity.class);
             startActivity(intent);
         });
