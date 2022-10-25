@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "425344741206-rfb7otkc56in2dtum4hnss78fss0nse7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.oldiary",
+            "certificate_hash": "5273fd88df6516503eed155c5bed2e015ba4221b"
+          }
+        },
+        {
           "client_id": "425344741206-61s9vuicku45qnp3uno6qu175oaknuvk.apps.googleusercontent.com",
           "client_type": 3
         }
