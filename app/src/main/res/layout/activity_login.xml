@@ -12,22 +12,20 @@
         android:id="@+id/editTextNumberSigned8"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="356dp"
         android:background="@drawable/border"
         android:ems="10"
         android:inputType="numberSigned"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.756"
+        app:layout_constraintHorizontal_bias="0.739"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.063" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.477" />
 
     <EditText
         android:id="@+id/editTextNumberSigned7"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="356dp"
         android:background="@drawable/border"
         android:ems="10"
         android:inputType="numberSigned"
@@ -35,23 +33,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.581"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.063" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.477" />
 
     <EditText
         android:id="@+id/editTextNumberSigned6"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="356dp"
         android:background="@drawable/border"
         android:ems="10"
         android:inputType="numberSigned"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintHorizontal_bias="0.415"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.063" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.477" />
 
     <TextView
         android:id="@+id/textView7"
@@ -71,25 +68,23 @@
         android:id="@+id/editTextNumberSigned"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="356dp"
         android:background="@drawable/border"
         android:ems="10"
         android:inputType="numberSigned"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintHorizontal_bias="0.257"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.063" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.477" />
 
     <EditText
         android:id="@+id/editTextTextPersonName2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="464dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="登録した電話番号"
+        android:inputType="phone"
+        android:hint="登録した電話番号"
         android:textAlignment="center"
         android:textColor="#575353"
         android:textSize="20sp"
@@ -98,8 +93,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.139" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.326" />
 
     <TextView
         android:id="@+id/textView6"
