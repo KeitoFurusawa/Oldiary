@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Create2Activity extends AppCompatActivity {
     String phoneNumber;
     String password = "";
-
     int count = 0;
     private static final String TAG = "CreateActivity";
 
@@ -31,7 +30,6 @@ public class Create2Activity extends AppCompatActivity {
     }
     protected void setOnClick() {
         Button button = findViewById(R.id.back);
-        // lambda式
         button.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), CreateActivity.class);
             startActivity(intent);
@@ -39,23 +37,16 @@ public class Create2Activity extends AppCompatActivity {
     }
     protected void setOnClick2() {
         Button buttonGo = findViewById(R.id.go);
-        // lambda式
         buttonGo.setOnClickListener(v -> {
             if (password.length() < 4) {
                 Log.e(TAG, "ERROR: the length of password is not enough.");
             } else {
                 ReadAndWrite readAndWrite = new ReadAndWrite();
-                Log.d(TAG, "else1: " + phoneNumber + ", " + password);
                 readAndWrite.addNewUser(phoneNumber, password);
-                Log.d(TAG, "else2: " + phoneNumber + ", " + password);
                 Intent intent2 = new Intent(getApplication(), SuccessActivity.class);
-                Log.d(TAG, "else3: " + phoneNumber + ", " + password);
                 startActivity(intent2);
-                Log.d(TAG, "else4: " + phoneNumber + ", " + password);
             }
         });
-
-
     }
 
     protected void passWord() {
