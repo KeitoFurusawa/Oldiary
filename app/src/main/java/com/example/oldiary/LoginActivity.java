@@ -2,6 +2,7 @@ package com.example.oldiary;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
 
         setOnClick();
         setOnClick2();
+        setOnClick3();
     }
     protected void setOnClick() {
         ImageButton imageButton = findViewById(R.id.imageButton);
@@ -35,4 +37,13 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+    protected void setOnClick3() {
+        Button button3 = findViewById(R.id.button16);
+        button3.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplication(), HomeActivity.class);
+            startActivity(intent);
+        });
+    }
+
 }
