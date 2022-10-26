@@ -23,5 +23,12 @@ public class SuccessActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplication(), LoginActivity.class);
             startActivity(intent);
         });
+
+        Button jumpToRegister = findViewById(R.id.buttonToRegister);
+        jumpToRegister.setOnClickListener(v -> {
+                    Intent intent = new Intent(getApplication(), RegisterActivity.class);
+                    startActivity(intent);
+                }
+        );
     }
 }
