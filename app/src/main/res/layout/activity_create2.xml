@@ -7,25 +7,23 @@
     tools:context=".Create2Activity">
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/back"
         android:layout_width="120dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
         android:text="戻る"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.261"
+        app:layout_constraintHorizontal_bias="0.288"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintVertical_bias="0.321" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975" />
 
     <Button
-        android:id="@+id/button14"
+        android:id="@+id/go"
         android:layout_width="120dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
         android:text="次に進む"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -33,14 +31,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.735"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintVertical_bias="0.321" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975" />
 
     <Button
-        android:id="@+id/button15"
+        android:id="@+id/cancel"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="364dp"
         android:text="訂正"
         android:textColor="#FFEB3B"
         android:textSize="20sp"
@@ -49,11 +46,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintVertical_bias="0.321" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.468" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/button_0"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@color/white"
@@ -67,13 +64,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberSigned5"
-        app:layout_constraintVertical_bias="0.053"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.475"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/button_7"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@color/white"
@@ -87,13 +84,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberSigned5"
-        app:layout_constraintVertical_bias="0.704"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.779"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/button_4"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@color/white"
@@ -107,13 +104,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberSigned5"
-        app:layout_constraintVertical_bias="0.488"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.678"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/button_5"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@color/white"
@@ -127,13 +124,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberSigned5"
-        app:layout_constraintVertical_bias="0.488"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.678"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/button_9"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@color/white"
@@ -147,13 +144,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.689"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberSigned5"
-        app:layout_constraintVertical_bias="0.704"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.779"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/button_8"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@color/white"
@@ -167,8 +164,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberSigned5"
-        app:layout_constraintVertical_bias="0.704"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.779"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -200,64 +197,8 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.038" />
 
-    <EditText
-        android:id="@+id/editTextNumberSigned2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/border"
-        android:ems="10"
-        android:inputType="numberSigned"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.232"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.063" />
-
-    <EditText
-        android:id="@+id/editTextNumberSigned5"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/border"
-        android:ems="10"
-        android:inputType="numberSigned"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.764"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.063" />
-
-    <EditText
-        android:id="@+id/editTextNumberSigned3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/border"
-        android:ems="10"
-        android:inputType="numberSigned"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.404"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.063" />
-
-    <EditText
-        android:id="@+id/editTextNumberSigned4"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/border"
-        android:ems="10"
-        android:inputType="numberSigned"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.592"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.063" />
-
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_3"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@color/white"
@@ -271,13 +212,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.689"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberSigned5"
-        app:layout_constraintVertical_bias="0.266"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.576"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button_1"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@color/white"
@@ -291,13 +232,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberSigned5"
-        app:layout_constraintVertical_bias="0.266"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.576"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/button_2"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@color/white"
@@ -311,13 +252,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberSigned5"
-        app:layout_constraintVertical_bias="0.266"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.576"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/button_6"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@color/white"
@@ -331,8 +272,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.689"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberSigned5"
-        app:layout_constraintVertical_bias="0.488"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.678"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="暗証番号(4桁)"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.364" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,16 @@
 package com.example.oldiary;
-// https://akira-watson.com/android/activity-1.html←参考
+
+import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.content.Intent;
-import android.widget.TextView;
-import android.view.animation.Animation;
-import android.view.animation.AlphaAnimation;
-import android.media.MediaPlayer;
-import android.widget.ImageButton;
-import android.view.MotionEvent;
-import androidx.appcompat.app.AppCompatActivity;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,34 +24,26 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds);
         mediaPlayer.setLooping(true);
 
+        imageChange();
+
         TextView txtView_start = findViewById(R.id.textView2);
         blinkText(txtView_start, 650, 200);
 
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent motionEvent) {
-        ImageButton imageButton = findViewById(R.id.closedoor);
-        switch (motionEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                imageButton.setImageResource(R.drawable.opendoor);
-        }
-        return false;
-    }
-
-    protected void setOnClick() {
-        ImageButton imageButton = findViewById(R.drawable.opendoor);
-
-        // lambda式
+    protected void  imageChange() {
+        ImageButton imageButton = findViewById(R.id.imageButton2);
         imageButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplication(), LoginActivity.class);
-            startActivity(intent);
-
-            switch (v.getId()) {
-                case R.drawable.opendoor:
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                    break;
+            try {
+                imageButton.setImageResource(R.drawable.opendoor);
+                Thread.sleep(500);
+                Intent intent = new Intent(getApplication(), LoginActivity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+
         });
     }
 
@@ -80,3 +72,4 @@ public class MainActivity extends AppCompatActivity {
         txtView.startAnimation(anm);
     }
 }
+///

@@ -1,9 +1,10 @@
 package com.example.oldiary;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SuccessActivity extends AppCompatActivity {
 
@@ -12,9 +13,13 @@ public class SuccessActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_success);
 
-        Button button = findViewById(R.id.button17);
+        setOnClick();
+    }
+    protected void setOnClick() {
+        Button Button = findViewById(R.id.button17);
+
         // lambda式
-        button.setOnClickListener(v -> {
+        Button.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), LoginActivity.class);
             startActivity(intent);
         });
