@@ -17,10 +17,10 @@ public class CreateActivity extends AppCompatActivity {
         setOnClick2();
     }
     protected void setOnClick() {
-        Button Button = findViewById(R.id.button3);
+        Button button = findViewById(R.id.button3);
 
         // lambda式
-        Button.setOnClickListener(v -> {
+        button.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), LoginActivity.class);
             startActivity(intent);
         });
