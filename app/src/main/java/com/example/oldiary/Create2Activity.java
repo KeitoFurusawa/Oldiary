@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresPermission;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Create2Activity extends AppCompatActivity {
@@ -13,16 +14,16 @@ public class Create2Activity extends AppCompatActivity {
     String password = "";
 
     int count = 0;
-    private static final String TAG = "MyActivity";
+    private static final String TAG = "CreateActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create2);
 
-        Intent intent = getIntent();
-        phoneNumber = intent.getStringExtra("PhoneNumber");
-        Log.i(TAG, "PhoneNumber: " + phoneNumber);
+        Intent intent1 = getIntent();
+        phoneNumber = intent1.getStringExtra("PhoneNumber");
+        Log.d(TAG, "PhoneNumber: " + phoneNumber);
 
         setOnClick();
         setOnClick2();
@@ -37,13 +38,24 @@ public class Create2Activity extends AppCompatActivity {
         });
     }
     protected void setOnClick2() {
-        Button button2 = findViewById(R.id.go);
+        Button buttonGo = findViewById(R.id.go);
         // lambda式
-        if (password.length() < 4)//////here
-        button2.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplication(), SuccessActivity.class);
-            startActivity(intent);
+        buttonGo.setOnClickListener(v -> {
+            if (password.length() < 4) {
+                Log.e(TAG, "ERROR: the length of password is not enough.");
+            } else {
+                ReadAndWrite readAndWrite = new ReadAndWrite();
+                Log.d(TAG, "else1: " + phoneNumber + ", " + password);
+                readAndWrite.addNewUser(phoneNumber, password);
+                Log.d(TAG, "else2: " + phoneNumber + ", " + password);
+                Intent intent2 = new Intent(getApplication(), SuccessActivity.class);
+                Log.d(TAG, "else3: " + phoneNumber + ", " + password);
+                startActivity(intent2);
+                Log.d(TAG, "else4: " + phoneNumber + ", " + password);
+            }
         });
+
+
     }
 
     protected void passWord() {

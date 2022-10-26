@@ -2,6 +2,7 @@ package com.example.oldiary;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class CreateActivity extends AppCompatActivity {
     private String phoneNumber;
+    private static final String TAG = "CreateActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +34,13 @@ public class CreateActivity extends AppCompatActivity {
     protected void setOnClick2() {
         Button ButtonNext = findViewById(R.id.button_next);
         TextView textView = findViewById(R.id.editTextPhoneNumber);
-        phoneNumber = textView.getText().toString();
-        //本来はここで正常な電話番号であることを確認するエラーハンドル
+
+
         // lambda式
         ButtonNext.setOnClickListener(v -> {
+            phoneNumber = textView.getText().toString();
+            Log.d(TAG, phoneNumber);
+            //本来はここで正常な電話番号であることを確認するエラーハンドル
             Intent intent = new Intent(getApplication(), Create2Activity.class);
             intent.putExtra("PhoneNumber", phoneNumber);
             startActivity(intent);
