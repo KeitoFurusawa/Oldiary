@@ -1,17 +1,19 @@
 package com.example.oldiary;
-
-import android.content.Intent;
-import android.media.MediaPlayer;
-import android.os.Bundle;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.widget.ImageButton;
-import android.widget.TextView;
+// https://akira-watson.com/android/activity-1.html←参考
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.os.Bundle;
+import android.content.Intent;
+import android.view.MotionEvent;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.media.AudioAttributes;
 
-//Shogo-branch
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class MainActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
@@ -21,30 +23,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds);
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.talkative);
         mediaPlayer.setLooping(true);
 
-        imageChange();
 
-        TextView txtView_start = findViewById(R.id.textView2);
-        blinkText(txtView_start, 650, 200);
 
-    }
+        ReadAndWrite.writeMessage("m02", "string");
 
-    protected void  imageChange() {
-        ImageButton imageButton = findViewById(R.id.imageButton2);
-        imageButton.setOnClickListener(v -> {
-            try {
-                imageButton.setImageResource(R.drawable.opendoor);
-                Thread.sleep(500);
-                Intent intent = new Intent(getApplication(), LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        });
     }
 
     protected void onResume() {
@@ -63,13 +48,14 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer = null;
     }
 
-    private void blinkText(TextView txtView, long duration, long offset){
-        Animation anm = new AlphaAnimation(0.0f, 1.0f);
-        anm.setDuration(duration);
-        anm.setStartOffset(offset);
-        anm.setRepeatMode(Animation.REVERSE);
-        anm.setRepeatCount(Animation.INFINITE);
-        txtView.startAnimation(anm);
+
+
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                Intent intent = new Intent(getApplication(), SubActivity.class);
+                startActivity(intent);
+        }
+        return false;
     }
 }
-///
