@@ -1,13 +1,14 @@
 package com.example.oldiary;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import android.content.Intent;
-import android.widget.TextView;
-import android.view.animation.Animation;
-import android.view.animation.AlphaAnimation;
 import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 
 
@@ -71,3 +72,4 @@ public class MainActivity extends AppCompatActivity {
         txtView.startAnimation(anm);
     }
 }
+///
