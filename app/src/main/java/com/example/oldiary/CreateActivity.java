@@ -3,10 +3,12 @@ package com.example.oldiary;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CreateActivity extends AppCompatActivity {
+    private String phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,8 +18,9 @@ public class CreateActivity extends AppCompatActivity {
         setOnClick();
         setOnClick2();
     }
+    //Back
     protected void setOnClick() {
-        Button button = findViewById(R.id.button3);
+        Button button = findViewById(R.id.button_back);
 
         // lambda式
         button.setOnClickListener(v -> {
@@ -25,12 +28,16 @@ public class CreateActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+    //Next
     protected void setOnClick2() {
-        Button Button2 = findViewById(R.id.button2);
-
+        Button ButtonNext = findViewById(R.id.button_next);
+        TextView textView = findViewById(R.id.editTextPhoneNumber);
+        phoneNumber = textView.getText().toString();
+        //本来はここで正常な電話番号であることを確認するエラーハンドル
         // lambda式
-        Button2.setOnClickListener(v -> {
+        ButtonNext.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), Create2Activity.class);
+            intent.putExtra("PhoneNumber", phoneNumber);
             startActivity(intent);
         });
     }
