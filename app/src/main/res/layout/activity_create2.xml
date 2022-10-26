@@ -10,22 +10,20 @@
         android:id="@+id/back"
         android:layout_width="120dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
         android:text="戻る"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.261"
+        app:layout_constraintHorizontal_bias="0.288"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintVertical_bias="0.321" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975" />
 
     <Button
         android:id="@+id/go"
         android:layout_width="120dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
         android:text="次に進む"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -33,14 +31,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.735"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintVertical_bias="0.321" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975" />
 
     <Button
         android:id="@+id/cancel"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="364dp"
         android:text="訂正"
         android:textColor="#FFEB3B"
         android:textSize="20sp"
@@ -49,14 +46,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintVertical_bias="0.321" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.468" />
 
     <Button
         android:id="@+id/button_0"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="352dp"
         android:background="@color/white"
         android:backgroundTint="#e5e5e5"
         android:text="0"
@@ -68,6 +64,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.475"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -75,7 +73,6 @@
         android:id="@+id/button_7"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="148dp"
         android:background="@color/white"
         android:backgroundTint="#e5e5e5"
         android:text="7"
@@ -87,6 +84,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.779"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -94,7 +93,6 @@
         android:id="@+id/button_4"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="216dp"
         android:background="@color/white"
         android:backgroundTint="#e5e5e5"
         android:text="4"
@@ -106,6 +104,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.678"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -113,7 +113,6 @@
         android:id="@+id/button_5"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="216dp"
         android:background="@color/white"
         android:backgroundTint="#e5e5e5"
         android:text="5"
@@ -125,6 +124,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.678"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -132,7 +133,6 @@
         android:id="@+id/button_9"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="148dp"
         android:background="@color/white"
         android:backgroundTint="#e5e5e5"
         android:text="9"
@@ -144,6 +144,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.689"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.779"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -151,7 +153,6 @@
         android:id="@+id/button_8"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="148dp"
         android:background="@color/white"
         android:backgroundTint="#e5e5e5"
         android:text="8"
@@ -163,6 +164,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.779"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -198,7 +201,6 @@
         android:id="@+id/button_3"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="284dp"
         android:background="@color/white"
         android:backgroundTint="#e5e5e5"
         android:text="3"
@@ -210,6 +212,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.689"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.576"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -217,7 +221,6 @@
         android:id="@+id/button_1"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="284dp"
         android:background="@color/white"
         android:backgroundTint="#e5e5e5"
         android:text="1"
@@ -229,6 +232,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.576"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -236,7 +241,6 @@
         android:id="@+id/button_2"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="284dp"
         android:background="@color/white"
         android:backgroundTint="#e5e5e5"
         android:text="2"
@@ -248,6 +252,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.576"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -255,7 +261,6 @@
         android:id="@+id/button_6"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="216dp"
         android:background="@color/white"
         android:backgroundTint="#e5e5e5"
         android:text="6"
@@ -267,6 +272,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.689"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.678"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 

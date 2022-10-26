@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Create2Activity extends AppCompatActivity {
-
+    String Pass = "";
     String nStr = "";
     int count = 0;
     private static final String TAG = "MyActivity";
@@ -21,6 +21,8 @@ public class Create2Activity extends AppCompatActivity {
 
         setOnClick();
         setOnClick2();
+        Log.d(TAG, "Create");
+        passWord();
     }
     protected void setOnClick() {
         Button button = findViewById(R.id.back);
@@ -52,85 +54,114 @@ public class Create2Activity extends AppCompatActivity {
         Button button9 = findViewById(R.id.button_9);
         Button cancel = findViewById(R.id.cancel);
 
-        while (count == 4) {
-            button0.setOnClickListener(v -> {
+        button0.setOnClickListener(v -> {
+            count += 1;
+            if (count < 5) {
                 nStr += "0";
-                count += 1;
                 Log.d(TAG, nStr);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(nStr);
-            });
+            }
+        });
 
-            button1.setOnClickListener(v -> {
+        button1.setOnClickListener(v -> {
+            count += 1;
+            if (count < 5) {
                 nStr += "1";
-                count += 1;
+                Log.d(TAG, nStr);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(nStr);
-            });
+            }
+        });
 
-            button2.setOnClickListener(v -> {
+        button2.setOnClickListener(v -> {
+            count += 1;
+            if (count < 5) {
                 nStr += "2";
-                count += 1;
+                Log.d(TAG, nStr);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(nStr);
-            });
+            }
+        });
 
-            button3.setOnClickListener(v -> {
+        button3.setOnClickListener(v -> {
+            count += 1;
+            if (count < 5) {
                 nStr += "3";
-                count += 1;
+                Log.d(TAG, nStr);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(nStr);
-            });
+            }
+        });
 
-            button4.setOnClickListener(v -> {
+        button4.setOnClickListener(v -> {
+            count += 1;
+            if (count < 5) {
                 nStr += "4";
-                count += 1;
+                Log.d(TAG, nStr);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(nStr);
-            });
+            }
+        });
 
-            button5.setOnClickListener(v -> {
+        button5.setOnClickListener(v -> {
+            count += 1;
+            if (count < 5) {
                 nStr += "5";
-                count += 1;
+                Log.d(TAG, nStr);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(nStr);
-            });
+            }
+        });
 
-            button6.setOnClickListener(v -> {
+        button6.setOnClickListener(v -> {
+            count += 1;
+            if (count < 5) {
                 nStr += "6";
-                count += 1;
+                Log.d(TAG, nStr);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(nStr);
-            });
+            }
+        });
 
-            button7.setOnClickListener(v -> {
+        button7.setOnClickListener(v -> {
+            count += 1;
+            if (count < 5) {
                 nStr += "7";
-                count += 1;
+                Log.d(TAG, nStr);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(nStr);
-            });
+            }
+        });
 
-            button8.setOnClickListener(v -> {
+        button8.setOnClickListener(v -> {
+            count += 1;
+            if (count < 5) {
                 nStr += "8";
-                count += 1;
+                Log.d(TAG, nStr);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(nStr);
-            });
+            }
+        });
 
-            button9.setOnClickListener(v -> {
+        button9.setOnClickListener(v -> {
+            count += 1;
+            if (count < 5) {
                 nStr += "9";
-                count += 1;
+                Log.d(TAG, nStr);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(nStr);
-            });
+            }
+        });
 
-            cancel.setOnClickListener(v -> {
-                nStr = "";
-                count = 0;
-                TextView textView = findViewById(R.id.password);
-                textView.setText(nStr);
-            });
-        }
+        cancel.setOnClickListener(v -> {
+            Log.d(TAG, "Previous Pass:" + nStr);
+            nStr = "";
+            count = 0;
+            TextView textView = findViewById(R.id.password);
+            textView.setText(nStr);
+        });
+
     }
 
 }
