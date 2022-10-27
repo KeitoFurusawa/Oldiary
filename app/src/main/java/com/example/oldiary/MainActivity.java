@@ -1,11 +1,8 @@
 package com.example.oldiary;
 
 import android.content.Intent;
-import android.media.AudioAttributes;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageButton;
@@ -18,8 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
-    private SoundPool soundPool;
-    private int soundOne;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds);
         mediaPlayer.setLooping(true);
 
-        soundPlay();
-        playMusic();
         imageChange();
 
         TextView txtView_start = findViewById(R.id.textView2);
@@ -43,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         imageButton.setOnClickListener(v -> {
             try {
                 imageButton.setImageResource(R.drawable.opendoor);
-                Thread.sleep(3000);
+                Thread.sleep(1500);
                 Intent intent = new Intent(getApplication(), LoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -77,16 +70,5 @@ public class MainActivity extends AppCompatActivity {
         anm.setRepeatMode(Animation.REVERSE);
         anm.setRepeatCount(Animation.INFINITE);
         txtView.startAnimation(anm);
-    }
-
-    public void soundPlay() {
-        soundOne = soundPool.load(this, R.raw.opendoor, 1);
-    }
-
-    public void playMusic() {
-        ImageButton imageButton = findViewById(R.id.imageButton2);
-        imageButton.setOnClickListener( v -> {
-            soundPool.play(soundOne, 1.0f, 1.0f, 0, 0, 1.0f);
-        });
     }
 }
