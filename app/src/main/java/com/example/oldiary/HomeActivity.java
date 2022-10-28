@@ -1,8 +1,8 @@
 package com.example.oldiary;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +34,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void  imageChange() {
         ImageButton imageButton = findViewById(R.id.imageButton4);
         imageButton.setOnClickListener(v -> {
-            Log.d("debug","status");
+            Intent intent = new Intent(getApplication(), ProfileActivity.class);
+            startActivity(intent);
 
 
         });
