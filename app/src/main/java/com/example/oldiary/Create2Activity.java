@@ -49,8 +49,8 @@ public class Create2Activity extends AppCompatActivity {
                 ReadAndWrite readAndWrite = new ReadAndWrite();
                 readAndWrite.addNewUser(phoneNumber, password);
                 new AlertDialog.Builder(Create2Activity.this)
-                        .setTitle("passcheck")
-                        .setMessage("忘れても大丈夫なように\nパスワードの保管をおススメします。")
+                        .setTitle("注意")
+                        .setMessage("忘れても大丈夫なように、\nパスワードの保管をおススメします。\n" + "電話番号： " + phoneNumber + "\n" + "パスワード： " + password + "\n")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // OKボタン押下時の処理
