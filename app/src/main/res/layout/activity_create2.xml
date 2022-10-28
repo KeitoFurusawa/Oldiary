@@ -24,7 +24,7 @@
         android:id="@+id/go"
         android:layout_width="120dp"
         android:layout_height="70dp"
-        android:text="次に進む"
+        android:text="確定"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,7 +47,7 @@
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.468" />
+        app:layout_constraintVertical_bias="0.81" />
 
     <Button
         android:id="@+id/button_0"
@@ -65,7 +65,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.475"
+        app:layout_constraintVertical_bias="0.779"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -85,7 +85,7 @@
         app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.779"
+        app:layout_constraintVertical_bias="0.678"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -105,7 +105,7 @@
         app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.678"
+        app:layout_constraintVertical_bias="0.576"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -125,7 +125,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.678"
+        app:layout_constraintVertical_bias="0.576"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -145,7 +145,7 @@
         app:layout_constraintHorizontal_bias="0.689"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.779"
+        app:layout_constraintVertical_bias="0.678"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -165,7 +165,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.779"
+        app:layout_constraintVertical_bias="0.678"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -213,7 +213,7 @@
         app:layout_constraintHorizontal_bias="0.689"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.576"
+        app:layout_constraintVertical_bias="0.475"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -233,7 +233,7 @@
         app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.576"
+        app:layout_constraintVertical_bias="0.475"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -253,7 +253,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.576"
+        app:layout_constraintVertical_bias="0.475"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -273,7 +273,7 @@
         app:layout_constraintHorizontal_bias="0.689"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.678"
+        app:layout_constraintVertical_bias="0.576"
         app:rippleColor="@color/white"
         app:strokeColor="@color/white" />
 
@@ -282,9 +282,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="暗証番号(4桁)"
+        android:inputType="textPersonName"
         android:textAlignment="center"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
