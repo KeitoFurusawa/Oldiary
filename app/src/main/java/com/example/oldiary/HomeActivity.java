@@ -1,9 +1,11 @@
 package com.example.oldiary;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import android.media.MediaPlayer;
-import android.widget.Button;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageButton;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -13,6 +15,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        imageChange();
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.ensolarado);
         mediaPlayer.setLooping(true);
@@ -26,5 +30,13 @@ public class HomeActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         mediaPlayer.pause();
+    }
+    protected void  imageChange() {
+        ImageButton imageButton = findViewById(R.id.imageButton4);
+        imageButton.setOnClickListener(v -> {
+            Log.d("debug","status");
+
+
+        });
     }
 }
