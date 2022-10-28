@@ -1,8 +1,18 @@
 package com.example.oldiary;
 
-import android.content.Intent;
-import android.media.MediaPlayer;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.os.Bundle;
+import android.content.Intent;
+import android.view.MotionEvent;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.media.AudioAttributes;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageButton;
@@ -10,8 +20,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
-//Shogo-branch
 public class MainActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
@@ -30,13 +38,12 @@ public class MainActivity extends AppCompatActivity {
         blinkText(txtView_start, 650, 200);
 
     }
-
     protected void  imageChange() {
         ImageButton imageButton = findViewById(R.id.imageButton2);
         imageButton.setOnClickListener(v -> {
             try {
                 imageButton.setImageResource(R.drawable.opendoor);
-                Thread.sleep(1500);
+                Thread.sleep(500);
                 Intent intent = new Intent(getApplication(), LoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -57,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer.pause();
     }
 
-    protected void onDestory() {
+    protected void onDestroy() {
         super.onDestroy();
         mediaPlayer.release();
         mediaPlayer = null;
