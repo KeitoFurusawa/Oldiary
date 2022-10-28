@@ -37,6 +37,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
     public void onA(View v){
         // ④ 再生処理(再生ボタン)
-        soundPool.play(mp3a,1f , 1f, 0, 0, 1f);
+        soundPool.play(mp3a,9 , 9, 0, 0, 2);
     }
 }
