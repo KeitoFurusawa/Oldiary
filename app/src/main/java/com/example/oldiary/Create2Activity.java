@@ -1,5 +1,7 @@
 package com.example.oldiary;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,8 +48,18 @@ public class Create2Activity extends AppCompatActivity {
             } else {
                 ReadAndWrite readAndWrite = new ReadAndWrite();
                 readAndWrite.addNewUser(phoneNumber, password);
-                Intent intent2 = new Intent(getApplication(), SuccessActivity.class);
-                startActivity(intent2);
+                new AlertDialog.Builder(Create2Activity.this)
+                        .setTitle("passcheck")
+                        .setMessage("忘れても大丈夫なように\nパスワードの保管をおススメします。")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // OKボタン押下時の処理
+                                Intent intent2 = new Intent(getApplication(), SuccessActivity.class);
+                                startActivity(intent2);
+                                Log.d("AlertDialog", "Positive which :" + which);
+                            }
+                        })
+                        .show();
             }
         });
     }
