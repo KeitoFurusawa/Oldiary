@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,8 +24,6 @@ public class CreateActivity extends AppCompatActivity {
     //Back
     protected void setOnClick() {
         Button button = findViewById(R.id.button_back);
-
-        // lambda式
         button.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), LoginActivity.class);
             startActivity(intent);
@@ -35,15 +34,19 @@ public class CreateActivity extends AppCompatActivity {
         Button ButtonNext = findViewById(R.id.button_next);
         TextView textView = findViewById(R.id.editTextPhoneNumber);
 
-
-        // lambda式
         ButtonNext.setOnClickListener(v -> {
             phoneNumber = textView.getText().toString();
             Log.d(TAG, phoneNumber);
-            //本来はここで正常な電話番号であることを確認するエラーハンドル
-            Intent intent = new Intent(getApplication(), Create2Activity.class);
-            intent.putExtra("PhoneNumber", phoneNumber);
-            startActivity(intent);
+            if (phoneNumber.length() < 9) { //エラーハンドル
+                Log.d(TAG, "length of phoneNumber is not enough");
+                Toast.makeText(
+                        CreateActivity.this, "正しい電話番号を入力してください", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(getApplication(), Create2Activity.class);
+                intent.putExtra("PhoneNumber", phoneNumber);
+                startActivity(intent);
+            }
+
         });
     }
 }
