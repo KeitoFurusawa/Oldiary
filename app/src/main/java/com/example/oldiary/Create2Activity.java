@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresPermission;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,8 @@ public class Create2Activity extends AppCompatActivity {
         buttonGo.setOnClickListener(v -> {
             if (password.length() < 4) {
                 Log.e(TAG, "ERROR: the length of password is not enough.");
+                Toast.makeText(
+                        Create2Activity.this, "パスワードは4桁入力してください", Toast.LENGTH_SHORT).show();
             } else {
                 ReadAndWrite readAndWrite = new ReadAndWrite();
                 readAndWrite.addNewUser(phoneNumber, password);

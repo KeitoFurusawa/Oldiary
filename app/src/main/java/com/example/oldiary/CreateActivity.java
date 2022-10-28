@@ -37,14 +37,14 @@ public class CreateActivity extends AppCompatActivity {
         ButtonNext.setOnClickListener(v -> {
             phoneNumber = textView.getText().toString();
             Log.d(TAG, phoneNumber);
-            if (phoneNumber.length() < 9) { //エラーハンドル
-                Log.d(TAG, "length of phoneNumber is not enough");
-                Toast.makeText(
-                        CreateActivity.this, "正しい電話番号を入力してください", Toast.LENGTH_SHORT).show();
-            } else {
+            if ((phoneNumber.length() > 8) || (phoneNumber != "0")) { //エラーハンドル //0はデバッグ用
                 Intent intent = new Intent(getApplication(), Create2Activity.class);
                 intent.putExtra("PhoneNumber", phoneNumber);
                 startActivity(intent);
+            } else {
+                Log.d(TAG, "length of phoneNumber is not enough");
+                Toast.makeText(
+                        CreateActivity.this, "正しい電話番号を入力してください", Toast.LENGTH_SHORT).show();
             }
 
         });
