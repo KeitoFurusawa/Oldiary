@@ -1,24 +1,13 @@
 package com.example.oldiary;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.os.Bundle;
 import android.content.Intent;
-import android.view.MotionEvent;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
-import android.media.AudioAttributes;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,17 +18,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds);
-        mediaPlayer.setLooping(true);
-
+        playMusic();
         imageChange();
 
-        TextView txtView_start = findViewById(R.id.textView2);
+        TextView txtView_start = findViewById(R.id.announce);
         blinkText(txtView_start, 650, 200);
 
     }
+
+    protected void playMusic() {
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds);
+        mediaPlayer.setLooping(true);
+    }
     protected void  imageChange() {
-        ImageButton imageButton = findViewById(R.id.imageButton2);
+        ImageButton imageButton = findViewById(R.id.door);
         imageButton.setOnClickListener(v -> {
             try {
                 imageButton.setImageResource(R.drawable.opendoor);

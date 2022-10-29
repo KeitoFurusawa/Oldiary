@@ -16,7 +16,7 @@ public class SubActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_sub);
 
-        ImageView HomeImage = findViewById(R.id.imageView2);
+        ImageView HomeImage = findViewById(R.id.icon);
 
 
         Button returnButton = findViewById(R.id.return_button);

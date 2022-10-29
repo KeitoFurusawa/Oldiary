@@ -3,7 +3,6 @@ package com.example.oldiary;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SuccessActivity extends AppCompatActivity {
@@ -16,9 +15,8 @@ public class SuccessActivity extends AppCompatActivity {
         setOnClick();
     }
     protected void setOnClick() {
-        Button Button = findViewById(R.id.button17);
+        Button Button = findViewById(R.id.try_login);
 
-        // lambda式
         Button.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), LoginActivity.class);
             startActivity(intent);

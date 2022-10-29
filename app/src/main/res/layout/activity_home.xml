@@ -7,7 +7,7 @@
     tools:context=".HomeActivity">
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/room" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/go_outside"
         android:layout_width="154dp"
         android:layout_height="312dp"
         android:scaleType="centerCrop"
@@ -30,7 +30,7 @@
         app:srcCompat="@drawable/closedoor" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/Avatar"
         android:layout_width="84dp"
         android:layout_height="239dp"
         android:background="@null"
@@ -43,28 +43,47 @@
         app:layout_constraintVertical_bias="0.554"
         app:srcCompat="@drawable/mii" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="155dp"
-        android:layout_height="359dp"
+    <ImageButton
+        android:id="@+id/bookshelf"
+        android:layout_width="187dp"
+        android:layout_height="334dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471"
+        app:layout_constraintVertical_bias="0.385"
         app:srcCompat="@drawable/bookshelf" />
 
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="298dp"
-        android:layout_height="418dp"
-        android:layout_marginTop="408dp"
+    <ImageButton
+        android:id="@+id/write"
+        android:layout_width="173dp"
+        android:layout_height="193dp"
+        android:layout_marginTop="520dp"
+        android:background="@null"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.747"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/book_and_pen" />
+
+    <ImageButton
+        android:id="@+id/back_start"
+        android:layout_width="53dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="16dp"
+        android:background="@null"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

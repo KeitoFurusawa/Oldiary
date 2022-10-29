@@ -32,7 +32,7 @@ public class CreateActivity extends AppCompatActivity {
     //Next
     protected void setOnClick2() {
         Button ButtonNext = findViewById(R.id.button_next);
-        TextView textView = findViewById(R.id.editTextPhoneNumber);
+        TextView textView = findViewById(R.id.input_num);
 
         ButtonNext.setOnClickListener(v -> {
             phoneNumber = textView.getText().toString();
@@ -44,7 +44,7 @@ public class CreateActivity extends AppCompatActivity {
             } else {
                 Log.d(TAG, "length of phoneNumber is not enough");
                 Toast.makeText(
-                        CreateActivity.this, "正しい電話番号を入力してください", Toast.LENGTH_SHORT).show();
+                        CreateActivity.this, "正しい電話番号を入力してください", Toast.LENGTH_LONG).show();
             }
 
         });

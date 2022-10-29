@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     protected void setOnClick2() {
-        TextView textView = findViewById(R.id.textView9);
+        TextView textView = findViewById(R.id.push_this);
         // lambda式
         textView.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), CreateActivity.class);
@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     protected void setOnClick3() {
-        Button button3 = findViewById(R.id.button16);
+        Button button3 = findViewById(R.id.login_check);
         button3.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), HomeActivity.class);
             startActivity(intent);

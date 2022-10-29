@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresPermission;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Create2Activity extends AppCompatActivity {
@@ -23,23 +22,29 @@ public class Create2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create2);
 
-        Intent intent1 = getIntent();
-        phoneNumber = intent1.getStringExtra("PhoneNumber");
-        Log.d(TAG, "PhoneNumber: " + phoneNumber);
 
         setOnClick();
-        setOnClick2();
+        getPhonenumber();
+        getPassword();
         passWord();
     }
     protected void setOnClick() {
-        Button button = findViewById(R.id.back);
+        Button button = findViewById(R.id.button_back);
         button.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), CreateActivity.class);
             startActivity(intent);
         });
     }
-    protected void setOnClick2() {
-        Button buttonGo = findViewById(R.id.go);
+
+    protected void getPhonenumber() {
+        Intent intent1 = getIntent();
+        phoneNumber = intent1.getStringExtra("PhoneNumber");
+        Log.d(TAG, "PhoneNumber: " + phoneNumber);
+
+    }
+
+    protected void getPassword() {
+        Button buttonGo = findViewById(R.id.button_next);
         buttonGo.setOnClickListener(v -> {
             if (password.length() < 4) {
                 Log.e(TAG, "ERROR: the length of password is not enough.");

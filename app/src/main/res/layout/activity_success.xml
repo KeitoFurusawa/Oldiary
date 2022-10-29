@@ -7,7 +7,7 @@
     tools:context=".SuccessActivity">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/icon"
         android:layout_width="232dp"
         android:layout_height="199dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/od_logo" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/congrats_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="おめでとうございます！\nアカウントの作成に成功しました"
@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.462" />
 
     <Button
-        android:id="@+id/button17"
+        android:id="@+id/try_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ログインを行う"
