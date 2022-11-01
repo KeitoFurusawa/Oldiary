@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplication(), LoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+                //ReadAndWrite rad = new ReadAndWrite();
+                //rad.getData("id_0120444444");
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
