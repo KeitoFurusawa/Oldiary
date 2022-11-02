@@ -1,11 +1,9 @@
 package com.example.oldiary;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.media.MediaPlayer;
-import android.widget.ImageButton;
+import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -16,17 +14,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        playMusic();
-        setOnClick();
-        setOnClick2();
-    }
-
-    protected void playMusic() {
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.ensolarado);
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.home_music);
         mediaPlayer.setLooping(true);
-
     }
-
 
     protected void onResume() {
         super.onResume();
@@ -36,21 +26,5 @@ public class HomeActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         mediaPlayer.pause();
-    }
-
-    protected void setOnClick() {
-        ImageButton button = findViewById(R.id.back_start);
-        button.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplication(), MainActivity.class);
-            startActivity(intent);
-        });
-    }
-
-    protected void setOnClick2() {
-        ImageButton button2 = findViewById(R.id.write);
-        button2.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplication(), WriteActivity.class);
-            startActivity(intent);
-        });
     }
 }
