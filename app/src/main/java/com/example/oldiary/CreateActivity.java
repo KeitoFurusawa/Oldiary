@@ -93,7 +93,9 @@ public class CreateActivity extends AppCompatActivity {
                 }
                 else {
                     String value = String.valueOf(task.getResult().getValue());
+                    Log.d(TAG, "this is the result in OnCompleteListener: " + value);
                     setResult(value);
+
                     /*
                     try {
                         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("verification.txt", CreateActivity.this.MODE_PRIVATE));
