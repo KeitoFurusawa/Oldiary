@@ -24,9 +24,6 @@ public class HomeActivity extends AppCompatActivity {
         playMusic();
         setOnClick();
         setOnClick2();
-
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.home_music);
-        mediaPlayer.setLooping(true);
     }
 
     protected void playMusic() {
