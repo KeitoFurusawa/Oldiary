@@ -27,7 +27,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     protected void playMusic() {
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.ensolarado);
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.sou);
         mediaPlayer.setLooping(true);
     }
 
