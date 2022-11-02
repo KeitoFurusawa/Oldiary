@@ -30,9 +30,6 @@ public class ReadAndWrite extends CreateActivity {
     private static final String CACHE = "cache.txt";
     private  DatabaseReference mDatabase;
 
-
-
-
     public ReadAndWrite() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
@@ -51,58 +48,4 @@ public class ReadAndWrite extends CreateActivity {
         Log.d(TAG, ID);
         mDatabase.child("users").child(ID).setValue(user);
     }
-
-
-    /*  コンテキスト関連でトラブったので一旦CreateActivityに直書き
-    データベースから一度だけ情報を読み取る
-    public String getData(String userId) {
-        mDatabase.child("users").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
-                }
-                else {
-                    String value = String.valueOf(task.getResult().getValue());
-                    //Log.d(TAG, "this is inner result " + value);
-
-                    try {
-                        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("verification.txt", ReadAndWrite.this.MODE_PRIVATE));
-                        outputStreamWriter.write(value);
-                        outputStreamWriter.close();
-                    } catch (FileNotFoundException e) {
-                        Log.e(TAG, "ERROR FileNotFoundException");
-                    } catch (IOException e) {
-                        Log.e(TAG, "ERROR IOException");
-                    }
-
-
-                    //ReadWriteOnCache rwCache = new ReadWriteOnCache(CACHE);
-                    //rwCache.writeOnCache(value); //キャッシュファイルに書き込み
-
-                }
-            }
-        });
-        StringBuffer ret = new StringBuffer();
-        try {
-            InputStream inputStream = openFileInput("verification.txt");
-
-            if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                ret.append(bufferedReader.readLine());
-            }
-        } catch (IOException e) {
-            Log.e(TAG, "ERROR IOException");
-        }
-
-        return ret.toString();
-        //ReadWriteOnCache rwCache = new ReadWriteOnCache(CACHE);
-        //String ret =  rwCache.readOnCache();
-        //rwCache.deleteCache();
-        //return ret;
-        // キーバリューデータを試す
-    }
-    */
 }

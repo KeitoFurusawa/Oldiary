@@ -6,27 +6,18 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 
 public class CreateActivity extends AppCompatActivity {
     private String phoneNumber;
     private static final String TAG = "CreateActivity";
-    private static final String CACHE = "cache.txt";
     private DatabaseReference mDatabase;
     private static String getResult;
 
@@ -50,7 +41,6 @@ public class CreateActivity extends AppCompatActivity {
     protected void setOnClick2() {
         Button ButtonNext = findViewById(R.id.button_next);
         TextView textView = findViewById(R.id.editTextPhoneNumber);
-
         ButtonNext.setOnClickListener(v -> {
             phoneNumber = textView.getText().toString();
             if (phoneNumber.length() > 8) { //エラーハンドル
@@ -70,6 +60,7 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
     }
+
     //onComplete
     // データベースから一度だけ情報を読み取る
     protected void getData(String userId) {
@@ -85,41 +76,9 @@ public class CreateActivity extends AppCompatActivity {
                     String value = String.valueOf(task.getResult().getValue());
                     setResult(value);
                     checkResult(userId);
-                    /*
-                    try {
-                        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("verification.txt", CreateActivity.this.MODE_PRIVATE));
-                        outputStreamWriter.write(value);
-                        outputStreamWriter.close();
-                    } catch (FileNotFoundException e) {
-                        Log.e(TAG, "wERROR: FileNotFoundException");
-                    } catch (IOException e) {
-                        Log.e(TAG, "wERROR: IOException");
-                    }
-                    Log.d(TAG, "this is the result in OnCompleteListener: " + value);
-                    /*
-                    ReadWriteOnCache rwCache = new ReadWriteOnCache(CACHE);
-                    rwCache.writeOnCache(value); //キャッシュファイルに書き込み
-                    */
                 }
             }
         });
-        /*
-        StringBuffer ret = new StringBuffer();
-        try {
-            InputStream inputStream = openFileInput("verification.txt");
-            if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                ret.append(bufferedReader.readLine());
-            }
-        } catch (IOException e) {
-            Log.e(TAG, "rERROR: IOException");
-        }
-        Log.d(TAG, "this is Return value: " + ret.toString());
-        return ret.toString();
-
-         */
     }
 
     protected void setResult(String result) {
@@ -142,37 +101,4 @@ public class CreateActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
-    /*
-        try {
-            Thread.sleep(1000); // (1000ミリ秒)間だけ処理を止める
-        } catch (InterruptedException e) {
-            Log.e(TAG, "rERROR: InterruptedException");
-        }
-        */
-    //ReadWriteOnCache rwCache = new ReadWriteOnCache(CACHE);
-    //String ret =  rwCache.readOnCache();
-    //rwCache.deleteCache();
-    //return ret;
-    // キーバリューデータを試す
-
-    /*
-    public String readData() {
-        StringBuffer ret = new StringBuffer();
-        try {
-            InputStream inputStream = openFileInput("verification.txt");
-
-            if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                ret.append(bufferedReader.readLine());
-            }
-        } catch (IOException e) {
-            Log.e(TAG, "rERROR: IOException");
-        }
-        Log.d(TAG, "this is read result " + ret.toString());
-        return ret.toString();
-    }
-    */
 }
