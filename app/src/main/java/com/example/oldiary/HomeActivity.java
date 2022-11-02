@@ -59,8 +59,8 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
     protected void setOnClick3() {
-        ImageButton imagebutton3 = findViewById(R.id.bookshelf);
-        imagebutton3.setOnClickListener(v -> {
+        ImageButton imageButton3 = findViewById(R.id.bookshelf);
+        imageButton3.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), HistoryActivity.class);
             startActivity(intent);
         });
