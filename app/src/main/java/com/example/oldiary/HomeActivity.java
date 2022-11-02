@@ -18,7 +18,7 @@ public class HomeActivity extends AppCompatActivity {
 
         imageChange();
 
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.ensolarado);
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.sou);
         mediaPlayer.setLooping(true);
     }
 
