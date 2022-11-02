@@ -9,12 +9,12 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/in_num"
+        android:id="@+id/editTextPhoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="登録した電話番号"
         android:inputType="phone"
+        android:hint="登録した電話番号"
         android:textAlignment="center"
         android:textColor="#575353"
         android:textSize="20sp"
@@ -27,7 +27,7 @@
         app:layout_constraintVertical_bias="0.326" />
 
     <EditText
-        android:id="@+id/in_pass"
+        android:id="@+id/editTextPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -45,7 +45,7 @@
         app:layout_constraintVertical_bias="0.439" />
 
     <TextView
-        android:id="@+id/welcome"
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
@@ -60,7 +60,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/login"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
@@ -76,7 +76,7 @@
         app:layout_constraintVertical_bias="0.238" />
 
     <TextView
-        android:id="@+id/no_account"
+        android:id="@+id/textViewCreateNewText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="アカウントをお持ちでない方は"
@@ -91,7 +91,7 @@
         app:layout_constraintVertical_bias="0.685" />
 
     <TextView
-        android:id="@+id/push_this"
+        android:id="@+id/textViewCreateNewButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="こちら"
@@ -106,7 +106,7 @@
         app:layout_constraintVertical_bias="0.716" />
 
     <Button
-        android:id="@+id/login_check"
+        android:id="@+id/buttonLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ログインする"
@@ -118,7 +118,7 @@
         app:layout_constraintVertical_bias="0.585" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButtonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -129,5 +129,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976"
         app:srcCompat="@android:drawable/ic_menu_revert" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="デバッグ用: 0番"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.38" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
