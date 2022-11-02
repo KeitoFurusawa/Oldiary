@@ -29,7 +29,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void playMusic() {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.ensolarado);
         mediaPlayer.setLooping(true);
-
     }
 
     protected void onResume() {
