@@ -8,45 +8,46 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
+
 
 public class MainActivity extends AppCompatActivity {
-
     MediaPlayer mediaPlayer;
+    SoundPool soundPool;    // 効果音を鳴らす本体（コンポ）
+    int mp3a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        playMusic();
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds);
+        mediaPlayer.setLooping(true);
+
         imageChange();
+        ss();
 
         TextView txtView_start = findViewById(R.id.announce);
         blinkText(txtView_start, 650, 200);
 
     }
 
-    protected void playMusic() {
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds);
-        mediaPlayer.setLooping(true);
-    }
     protected void  imageChange() {
         ImageButton imageButton = findViewById(R.id.door);
         imageButton.setOnClickListener(v -> {
             try {
                 imageButton.setImageResource(R.drawable.opendoor);
+                soundPool.play(mp3a,9 , 9, 0, 0, 2);
                 Thread.sleep(500);
                 Intent intent = new Intent(getApplication(), LoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
-                //ReadAndWrite rad = new ReadAndWrite();
-                //rad.getData("id_0120444444");
-
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         });
     }
 
@@ -73,5 +74,21 @@ public class MainActivity extends AppCompatActivity {
         anm.setRepeatMode(Animation.REVERSE);
         anm.setRepeatCount(Animation.INFINITE);
         txtView.startAnimation(anm);
+    }
+
+    protected void ss(){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        } else {
+            AudioAttributes attr = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build();
+            soundPool = new SoundPool.Builder()
+                    .setAudioAttributes(attr)
+                    .setMaxStreams(5)
+                    .build();
+            mp3a = soundPool.load(this, R.raw.opdoor, 1);
+        }
     }
 }
