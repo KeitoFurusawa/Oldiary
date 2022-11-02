@@ -1,18 +1,12 @@
 package com.example.oldiary;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
-import android.os.Bundle;
 import android.content.Intent;
-import android.view.MotionEvent;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
-import android.media.AudioAttributes;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
+import android.os.Build;
+import android.os.Bundle;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageButton;
@@ -23,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
+    SoundPool soundPool;    // 効果音を鳴らす本体（コンポ）
+    int mp3a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer.setLooping(true);
 
         imageChange();
+        ss();
 
         TextView txtView_start = findViewById(R.id.textView2);
         blinkText(txtView_start, 650, 200);
@@ -43,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         imageButton.setOnClickListener(v -> {
             try {
                 imageButton.setImageResource(R.drawable.opendoor);
+                soundPool.play(mp3a,9 , 9, 0, 0, 2);
                 Thread.sleep(500);
                 Intent intent = new Intent(getApplication(), LoginActivity.class);
                 startActivity(intent);
@@ -78,4 +76,21 @@ public class MainActivity extends AppCompatActivity {
         anm.setRepeatCount(Animation.INFINITE);
         txtView.startAnimation(anm);
     }
+    protected void ss(){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        } else {
+            AudioAttributes attr = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build();
+            soundPool = new SoundPool.Builder()
+                    .setAudioAttributes(attr)
+                    .setMaxStreams(5)
+                    .build();
+
+            mp3a = soundPool.load(this, R.raw.opdoor, 1);
+        }
+    }
+
 }
