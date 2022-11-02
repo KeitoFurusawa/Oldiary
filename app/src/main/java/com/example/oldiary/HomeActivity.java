@@ -17,6 +17,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         imageChange();
+        setOnClick();
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.sou);
         mediaPlayer.setLooping(true);
@@ -38,6 +39,13 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
 
 
+        });
+    }
+    protected void setOnClick() {
+        ImageButton imagebutton = findViewById(R.id.imageButton7);
+        imagebutton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplication(), HistoryActivity.class);
+            startActivity(intent);
         });
     }
 }

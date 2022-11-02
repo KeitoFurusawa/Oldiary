@@ -43,16 +43,16 @@
         app:layout_constraintVertical_bias="0.554"
         app:srcCompat="@drawable/mii" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="155dp"
-        android:layout_height="359dp"
+    <ImageButton
+        android:id="@+id/imageButton7"
+        android:layout_width="197dp"
+        android:layout_height="303dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471"
+        app:layout_constraintVertical_bias="0.458"
         app:srcCompat="@drawable/bookshelf" />
 
     <ImageView
