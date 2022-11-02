@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.197" />
 
     <EditText
-        android:id="@+id/input_num"
+        android:id="@+id/editTextPhoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.742"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_num"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumber"
         app:layout_constraintVertical_bias="0.321" />
 
     <Button
@@ -76,7 +76,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.254"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_num"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumber"
         app:layout_constraintVertical_bias="0.321" />
 
     <TextView
@@ -84,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="デバッグ用: 0番"
-        app:layout_constraintBottom_toTopOf="@+id/input_num"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPhoneNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/num_announce" />

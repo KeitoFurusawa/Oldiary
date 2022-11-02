@@ -24,7 +24,7 @@ public class Create2Activity extends AppCompatActivity {
 
 
         setOnClick();
-        getPhonenumber();
+        getPhoneNumber();
         getPassword();
         passWord();
     }
@@ -36,7 +36,7 @@ public class Create2Activity extends AppCompatActivity {
         });
     }
 
-    protected void getPhonenumber() {
+    protected void getPhoneNumber() {
         Intent intent1 = getIntent();
         phoneNumber = intent1.getStringExtra("PhoneNumber");
         Log.d(TAG, "PhoneNumber: " + phoneNumber);
