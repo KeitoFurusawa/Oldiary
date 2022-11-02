@@ -1,11 +1,12 @@
 package com.example.oldiary;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.media.MediaPlayer;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
@@ -24,10 +25,11 @@ public class HomeActivity extends AppCompatActivity {
         playMusic();
         setOnClick();
         setOnClick2();
+        setOnClick3();
     }
 
     protected void playMusic() {
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.ensolarado);
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.sou);
         mediaPlayer.setLooping(true);
 
     }
@@ -43,17 +45,24 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     protected void setOnClick() {
-        ImageButton button = findViewById(R.id.back_start);
-        button.setOnClickListener(v -> {
+        ImageButton imagebutton = findViewById(R.id.back_start);
+        imagebutton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), MainActivity.class);
             startActivity(intent);
         });
     }
 
     protected void setOnClick2() {
-        ImageButton button2 = findViewById(R.id.write);
-        button2.setOnClickListener(v -> {
+        ImageButton imageButton2 = findViewById(R.id.write);
+        imageButton2.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), WriteActivity.class);
+            startActivity(intent);
+        });
+    }
+    protected void setOnClick3() {
+        ImageButton imagebutton3 = findViewById(R.id.bookshelf);
+        imagebutton3.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplication(), HistoryActivity.class);
             startActivity(intent);
         });
     }
