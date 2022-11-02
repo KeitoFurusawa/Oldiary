@@ -17,4 +17,19 @@ public class HistoryActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.history);
         mediaPlayer.setLooping(true);
     }
+    protected void onResume() {
+        super.onResume();
+        mediaPlayer.start();
+    }
+
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer.pause();
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.release();
+        mediaPlayer = null;
+    }
 }
