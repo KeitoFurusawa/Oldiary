@@ -26,6 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         setOnClick();
         setOnClick2();
         setOnClick3();
+        setOnClick4();
     }
 
     protected void playMusic() {
@@ -62,6 +63,14 @@ public class HomeActivity extends AppCompatActivity {
         ImageButton imageButton3 = findViewById(R.id.bookshelf);
         imageButton3.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), HistoryActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    protected void setOnClick4() {
+        ImageButton imageButton4 = findViewById(R.id.go_outside);
+        imageButton4.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplication(), ConnectActivity.class);
             startActivity(intent);
         });
     }

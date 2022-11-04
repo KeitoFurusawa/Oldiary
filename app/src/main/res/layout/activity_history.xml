@@ -31,4 +31,17 @@
         app:srcCompat="@drawable/photo_example"
         tools:layout_editor_absoluteX="-180dp"
         tools:layout_editor_absoluteY="0dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="108dp"
+        android:layout_height="304dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginEnd="151dp"
+        android:layout_marginBottom="51dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_home"
+        app:srcCompat="@drawable/mii" />
 </androidx.constraintlayout.widget.ConstraintLayout>

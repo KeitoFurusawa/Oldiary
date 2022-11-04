@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="history_arrays">
+        <item>@drawable/photo_example</item>
+        <item>@drawable/photo_example2</item>
+        <item>@drawable/photo_example3</item>
+    </array>
+</resources>

@@ -66,6 +66,5 @@ public class HistoryActivity extends AppCompatActivity {
         translate.setFillAfter(true);
         //アニメーションの開始
         img.startAnimation(translate);
-
     }
 }
