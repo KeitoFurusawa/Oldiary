@@ -3,12 +3,15 @@ package com.example.oldiary;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Create2Activity extends AppCompatActivity {
@@ -17,17 +20,37 @@ public class Create2Activity extends AppCompatActivity {
     int count = 0;
     private static final String TAG = "CreateActivity";
 
+    SoundPool soundPool;
+    int mp3a;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create2);
 
-
         setOnClick();
         getPhoneNumber();
         getPassword();
         passWord();
+        ss();
     }
+
+    protected void ss() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        } else {
+            AudioAttributes attr = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build();
+            soundPool = new SoundPool.Builder()
+                    .setAudioAttributes(attr)
+                    .setMaxStreams(5)
+                    .build();
+            mp3a = soundPool.load(this, R.raw.success, 1);
+        }
+    }
+
     protected void setOnClick() {
         Button button = findViewById(R.id.button_back);
         button.setOnClickListener(v -> {
@@ -51,6 +74,7 @@ public class Create2Activity extends AppCompatActivity {
                 Toast.makeText(
                         Create2Activity.this, "パスワードは4桁入力してください", Toast.LENGTH_SHORT).show();
             } else {
+
                 ReadAndWrite readAndWrite = new ReadAndWrite();
                 readAndWrite.addNewUser(phoneNumber, password);
                 new AlertDialog.Builder(Create2Activity.this)
@@ -61,6 +85,7 @@ public class Create2Activity extends AppCompatActivity {
                                 // OKボタン押下時の処理
                                 Intent intent2 = new Intent(getApplication(), SuccessActivity.class);
                                 startActivity(intent2);
+                                soundPool.play(mp3a,9 , 9, 0, 0, 2);
                                 Log.d("AlertDialog", "Positive which :" + which);
                             }
                         })
@@ -189,7 +214,6 @@ public class Create2Activity extends AppCompatActivity {
             TextView textView = findViewById(R.id.password);
             textView.setText(password);
         });
-
     }
 
 }
