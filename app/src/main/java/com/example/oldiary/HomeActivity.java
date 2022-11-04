@@ -58,6 +58,7 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
     protected void setOnClick3() {
         ImageButton imageButton3 = findViewById(R.id.bookshelf);
         imageButton3.setOnClickListener(v -> {
