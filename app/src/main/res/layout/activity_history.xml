@@ -24,13 +24,21 @@
         app:layout_constraintVertical_bias="0.187"
         app:srcCompat="@android:drawable/ic_menu_revert"/>
 
+
     <ImageView
         android:id="@+id/photo_example"
-        android:layout_width="184dp"
-        android:layout_height="130dp"
-        app:srcCompat="@drawable/photo_example"
-        tools:layout_editor_absoluteX="-180dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:layout_width="100dp"
+        android:layout_height="60dp"/>
+
+    <ImageView
+        android:id="@+id/photo_example2"
+        android:layout_width="120dp"
+        android:layout_height="60dp"/>
+
+    <ImageView
+        android:id="@+id/photo_example3"
+        android:layout_width="120dp"
+        android:layout_height="72dp"/>
 
     <ImageView
         android:id="@+id/imageView"
