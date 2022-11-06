@@ -27,18 +27,45 @@
 
     <ImageView
         android:id="@+id/photo_example"
-        android:layout_width="100dp"
-        android:layout_height="60dp"/>
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="126dp"
+        android:layout_marginEnd="185dp"
+        android:layout_marginBottom="104dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.084" />
 
     <ImageView
         android:id="@+id/photo_example2"
-        android:layout_width="120dp"
-        android:layout_height="60dp"/>
+        android:layout_width="99dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="243dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="191dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.809"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.396" />
 
     <ImageView
         android:id="@+id/photo_example3"
-        android:layout_width="120dp"
-        android:layout_height="72dp"/>
+        android:layout_width="210dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="249dp"
+        android:layout_marginBottom="108dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.288"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/photo_example" />
 
     <ImageView
         android:id="@+id/imageView"

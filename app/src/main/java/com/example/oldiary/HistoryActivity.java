@@ -5,10 +5,9 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.view.animation.AnimationUtils;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +29,7 @@ public class HistoryActivity extends AppCompatActivity {
         changePhoto2();
         changePhoto3();
     }
+
     protected void onResume() {
         super.onResume();
         mediaPlayer.start();
@@ -57,70 +57,30 @@ public class HistoryActivity extends AppCompatActivity {
     protected void changePhoto() {
         ImageView choose1 = findViewById(R.id.photo_example);
         TypedArray photo1 = getApplicationContext().getResources().obtainTypedArray(R.array.history_arrays);
-        int rand = (int)(Math.floor(Math.random() * 3));
+        int rand = (int) (Math.floor(Math.random() * 3));
         Drawable drawable = photo1.getDrawable(rand);
         choose1.setImageDrawable(drawable);
 
-        TranslateAnimation translate;
-        translate = new TranslateAnimation(
-                Animation.ABSOLUTE, -100.0f,
-                Animation.ABSOLUTE, 1200.0f,
-                Animation.ABSOLUTE, 30.0f,
-                Animation.ABSOLUTE, 30.0f);
-        //アニメーション時間(ミリ秒)
-        translate.setDuration(10000);
-        // 繰り返し時間
-        translate.setRepeatCount(0);
-        //アニメーションが終わったらそのまま表示にする
-        translate.setFillAfter(true);
-        //アニメーションの開始
-        choose1.startAnimation(translate);
+        choose1.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim));
     }
 
     protected void changePhoto2() {
         ImageView choose2 = findViewById(R.id.photo_example2);
         TypedArray photo2 = getApplicationContext().getResources().obtainTypedArray(R.array.history_arrays);
-        int rand = (int)(Math.floor(Math.random() * 3));
+        int rand = (int) (Math.floor(Math.random() * 3));
         Drawable drawable = photo2.getDrawable(rand);
         choose2.setImageDrawable(drawable);
 
-        TranslateAnimation translate;
-        translate = new TranslateAnimation(
-                Animation.ABSOLUTE, 900.0f,
-                Animation.ABSOLUTE, -500.0f,
-                Animation.ABSOLUTE, 250.0f,
-                Animation.ABSOLUTE, 250.0f);
-        //アニメーション時間(ミリ秒)
-        translate.setDuration(6000);
-        // 繰り返し時間
-        translate.setRepeatCount(0);
-        //アニメーションが終わったらそのまま表示にする
-        translate.setFillAfter(true);
-        //アニメーションの開始
-        choose2.startAnimation(translate);
+        choose2.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim2));
     }
 
     protected void changePhoto3() {
         ImageView choose3 = findViewById(R.id.photo_example3);
         TypedArray photo3 = getApplicationContext().getResources().obtainTypedArray(R.array.history_arrays);
-        int rand = (int)(Math.floor(Math.random() * 3));
+        int rand = (int) (Math.floor(Math.random() * 3));
         Drawable drawable = photo3.getDrawable(rand);
         choose3.setImageDrawable(drawable);
 
-        TranslateAnimation translate;
-        translate = new TranslateAnimation(
-                Animation.ABSOLUTE, -100.0f,
-                Animation.ABSOLUTE, 1200.0f,
-                Animation.ABSOLUTE, 500.0f,
-                Animation.ABSOLUTE, 500.0f);
-        //アニメーション時間(ミリ秒)
-        translate.setDuration(8000);
-        // 繰り返し時間
-        translate.setRepeatCount(0);
-        //アニメーションが終わったらそのまま表示にする
-        translate.setFillAfter(true);
-        //アニメーションの開始
-        choose3.startAnimation(translate);
+        choose3.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim3));
     }
-
 }
