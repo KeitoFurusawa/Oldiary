@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         imageChange();
         ss();
+        debug();
 
         TextView txtView_start = findViewById(R.id.announce);
         blinkText(txtView_start, 650, 200);
@@ -48,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        });
+    }
+
+    protected void debug() {
+        ImageButton imgButtonD = findViewById(R.id.imageButtonDebug);
+        imgButtonD.setOnClickListener(v -> {
+            Intent intentD = new Intent(getApplication(), RegisterActivity.class);
+            startActivity(intentD);
         });
     }
 

@@ -37,6 +37,7 @@ public class CreateActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
     //Next
     protected void setOnClick2() {
         Button ButtonNext = findViewById(R.id.button_next);

@@ -18,7 +18,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Intent intent1 = getIntent();
-        userId = intent1.getStringExtra("UserID");
+        userId = intent1.getStringExtra("UserName");
         TextView textViewUserId = findViewById(R.id.textViewId);
         textViewUserId.setText(userId);
 

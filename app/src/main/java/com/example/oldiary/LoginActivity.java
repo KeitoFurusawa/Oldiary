@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         setOnClickCreateNew();
         setOnClickLogin();
     }
+
     //戻る
     protected void setOnClickBack() {
         ImageButton imageButton = findViewById(R.id.imageButtonBack);
@@ -67,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
 
             } else {
                 if (phoneNumber.equals("0")) { //0番は通過
-                    Intent intent = new Intent(getApplication(), HomeActivity.class);
+                    Intent intent = new Intent(getApplication(), MakeProfile.class);
                     intent.putExtra("UserID", userId); //インテントにユーザIDを渡す
                     startActivity(intent);
                 } else {
@@ -118,13 +119,36 @@ public class LoginActivity extends AppCompatActivity {
             String resultPhoneNumber = getResult.substring(idxOfRePass, idxOfRePass+4);
             if (password.equals(resultPhoneNumber)) { //パスワードが正しい
                 Log.d(TAG, "login success");
-                Intent intent = new Intent(getApplication(), HomeActivity.class);
-                intent.putExtra("UserID", userId); //インテントにユーザIDを渡す
-                startActivity(intent);
+                checkUserName(userId);
             } else { //パスワードが誤り
                 Log.e(TAG, "ERROR: incorrect password");
                 Toast.makeText(LoginActivity.this, "パスワードが間違っています", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    protected void checkUserName(String userId) {
+        mDatabase.child("users").child(userId).child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                Log.d("debug", "this is onComplete");
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    String userName = String.valueOf(task.getResult().getValue());
+                    Log.d(TAG, userName); //debug
+                    if (userName.equals("null")) { //初回ログイン
+                        Intent intentNext = new Intent(getApplication(), MakeProfile.class);
+                        intentNext.putExtra("UserID", userId); //インテントにユーザIDを渡す
+                        startActivity(intentNext);
+                    } else { //2回目以降
+                        Intent intentNext = new Intent(getApplication(), LoginActivity.class);
+                        intentNext.putExtra("UserName", userName);
+                        startActivity(intentNext);
+                    }
+                }
+            }
+        });
     }
 }
