@@ -143,7 +143,8 @@ public class LoginActivity extends AppCompatActivity {
                         intentNext.putExtra("UserID", userId); //インテントにユーザIDを渡す
                         startActivity(intentNext);
                     } else { //2回目以降
-                        Intent intentNext = new Intent(getApplication(), LoginActivity.class);
+                        Intent intentNext = new Intent(getApplication(), HomeActivity.class);
+                        intentNext.putExtra("UserID", userId);
                         intentNext.putExtra("UserName", userName);
                         startActivity(intentNext);
                     }
