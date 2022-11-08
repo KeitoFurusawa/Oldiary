@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
+    String userName;
     String userId;
 
     @Override
@@ -18,9 +19,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Intent intent1 = getIntent();
-        userId = intent1.getStringExtra("UserName");
+        userName = intent1.getStringExtra("UserName");
+        userId = intent1.getStringExtra("UserId");
         TextView textViewUserId = findViewById(R.id.textViewId);
-        textViewUserId.setText(userId);
+        textViewUserId.setText(userName);
 
         playMusic();
         setOnClick();

@@ -80,7 +80,7 @@ public class MakeProfile extends AppCompatActivity {
                     mDatabase.child("users").child(userId).child("name").setValue(userName);
                     AgeCalculator setData = new AgeCalculator(year, month, date, age);
                     mDatabase.child("users").child(userId).child("DateOfBirth").setValue(setData);
-                    Intent intentNext = new Intent(getApplication(), HomeActivity.class);
+                    Intent intentNext = new Intent(getApplication(), SelectGenreActivity.class);
                     intentNext.putExtra("UserID", userId);
                     intentNext.putExtra("UserName", userName);
                     startActivity(intentNext);
