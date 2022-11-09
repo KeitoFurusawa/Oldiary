@@ -9,10 +9,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +27,8 @@ public class SelectGenreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_genre);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        bStates = false;
+        selectedGenreList = new ArrayList<Integer>();
         //idとnameを受け取る
         Intent intent1 = getIntent();
         userId = intent1.getStringExtra("UserID");
@@ -98,7 +97,6 @@ public class SelectGenreActivity extends AppCompatActivity {
             Log.d(TAG, String.valueOf("Button States: " + bStates)); //有効
             if (bStates) { //ボタン有効時
                 mDatabase.child("users").child(userId).child("favoriteGenre").setValue(selectedGenreList); //firebaseにデータ送信
-
                 Intent intentNext = new Intent(getApplication(), HomeActivity.class);
                 intentNext.putExtra("UserID", userId);
                 intentNext.putExtra("UserName", userName);
