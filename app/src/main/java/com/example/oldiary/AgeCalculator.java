@@ -26,12 +26,24 @@ public class AgeCalculator {
 
     public boolean monthCheck30(int month) {
         int[] mList30 = {4, 6, 9, 11};
-        return Arrays.asList(mList30).contains(month);
+        for (int i = 0; i < mList30.length; i++) {
+            if (mList30[i] == month) {
+                return true;
+            }
+        }
+        //Log.d(TAG, "contains{4, 6, 9, 11}" + Arrays.asList(mList30).contains(month));
+        return false;
     }
 
     public boolean monthCheck31(int month) {
         int[] mList31 = {1, 3, 5, 7, 8, 10, 12};
-        return Arrays.asList(mList31).contains(month);
+        for (int i = 0; i < mList31.length; i++) {
+            if (mList31[i] == month) {
+                return true;
+            }
+        }
+        //Log.d(TAG, "contains{4, 6, 9, 11}" + Arrays.asList(mList30).contains(month));
+        return false;
     }
 
     public int getAge(int year, int month, int date) {
@@ -42,12 +54,25 @@ public class AgeCalculator {
         int nowM = c.get(Calendar.MONTH) + 1;
         int nowD = c.get(Calendar.DATE);
         int result = nowY - year;
-        if ((result < 0) || (year < 1900) || (month < 1) || (month > 12) || (date < 1)
-                || (monthCheck30(month) && date > 30) || (monthCheck31(month) && date > 31)
-                || (leap(year) && month == 2) || (!(leap(year)) && month == 2 && date > 28)) {
-            Log.e(TAG, "input date is wrong");
+
+        //debug
+        Log.d(TAG, "30month? " + (monthCheck30(month)));
+        Log.d(TAG, "31month? " + (monthCheck31(month)));
+
+
+        if ((result < 0) || (year < 1900) || (month < 1) || (month > 12) || (date < 1)) {
+            Log.e(TAG, "input date is wrong code:1");
             return -1;
         }
+        if ((monthCheck30(month) && (date > 30)) || (monthCheck31(month) && (date > 31))) {
+            Log.e(TAG, "input date is wrong code:2");
+            return -1;
+        }
+        if (((leap(year) && month == 2) && (date > 29)) || (!(leap(year)) && (month == 2) && (date > 28))) {
+            Log.e(TAG, "input date is wrong code:3");
+            return -1;
+        }
+
         if (month > nowM) {
             result--;
         }
