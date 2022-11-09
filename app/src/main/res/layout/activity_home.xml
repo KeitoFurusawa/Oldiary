@@ -30,7 +30,7 @@
         app:srcCompat="@drawable/closedoor" />
 
     <ImageButton
-        android:id="@+id/Avatar"
+        android:id="@+id/avatar"
         android:layout_width="84dp"
         android:layout_height="239dp"
         android:background="@null"

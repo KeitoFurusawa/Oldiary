@@ -1,9 +1,14 @@
 package com.example.oldiary;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageButton;
@@ -18,12 +23,35 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
     SoundPool soundPool;    // 効果音を鳴らす本体（コンポ）
     int mp3a;
+    private SharedPreferences preference;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
+        editor = preference.edit();
+
+        if (preference.getBoolean("Launched", false)==false) {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("テスト")
+                    .setMessage("あなたは初めてこのアプリを立ち上げましたね？")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // OKボタン押下時の処理
+                            editor.putBoolean("Launched", true);
+                            editor.commit();
+                            startScene();
+                        }
+                    })
+                    .show();
+        }
+        startScene();
+    }
+
+    protected void startScene() {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds);
         mediaPlayer.setLooping(true);
 
@@ -32,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
         TextView txtView_start = findViewById(R.id.announce);
         blinkText(txtView_start, 650, 200);
-
     }
 
     protected void  imageChange() {
