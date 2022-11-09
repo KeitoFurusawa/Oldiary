@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
                             // OKボタン押下時の処理
                             editor.putBoolean("Launched", true);
                             editor.commit();
-                            startScene();
                         }
                     })
                     .show();
@@ -56,11 +55,26 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer.setLooping(true);
 
         imageChange();
+        setOnClick();
         ss();
         debug();
 
         TextView txtView_start = findViewById(R.id.announce);
         blinkText(txtView_start, 650, 200);
+    }
+
+    protected void setOnClick() {
+        ImageButton imageButton = findViewById(R.id.info);
+        imageButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("ヒント")
+                    .setMessage("扉を押すと…？")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
+        });
     }
 
     protected void  imageChange() {
