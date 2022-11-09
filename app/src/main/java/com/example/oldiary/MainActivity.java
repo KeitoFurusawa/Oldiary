@@ -1,5 +1,6 @@
 package com.example.oldiary;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -18,21 +19,31 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class MainActivity extends AppCompatActivity {
+    private final static String TAG = "main";
     MediaPlayer mediaPlayer;
     SoundPool soundPool;    // 効果音を鳴らす本体（コンポ）
     int mp3a;
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
+
 
         if (preference.getBoolean("Launched", false)==false) {
             new AlertDialog.Builder(MainActivity.this)
@@ -80,12 +91,12 @@ public class MainActivity extends AppCompatActivity {
     protected void  imageChange() {
         ImageButton imageButton = findViewById(R.id.door);
         imageButton.setOnClickListener(v -> {
+            String loggedInId = preference.getString("UserID", "");
             try {
                 imageButton.setImageResource(R.drawable.opendoor);
                 soundPool.play(mp3a,9 , 9, 0, 0, 2);
                 Thread.sleep(500);
-                Intent intent = new Intent(getApplication(), LoginActivity.class);
-                startActivity(intent);
+                checkLoggedIn(loggedInId); //ログインチェック
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -141,4 +152,35 @@ public class MainActivity extends AppCompatActivity {
             mp3a = soundPool.load(this, R.raw.opdoor, 1);
         }
     }
+
+    protected void checkLoggedIn(String loggedInId) {
+        Log.d(TAG, loggedInId);
+        if (loggedInId.length() == 0) { //未ログイン
+            Intent intentLogin = new Intent(getApplication(), LoginActivity.class);
+            startActivity(intentLogin);
+        } else { //ログイン済み
+            Intent intentHome = new Intent(getApplication(), HomeActivity.class);
+            intentHome.putExtra("UserID", loggedInId);
+
+            mDatabase.child("users").child(loggedInId).child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    Log.d("debug", "this is onComplete");
+                    if (!task.isSuccessful()) {
+                        //Log.e(TAG, "Error getting data", task.getException());
+                    }
+                    else {
+                        String value = String.valueOf(task.getResult().getValue());
+                        intentHome.putExtra("UserName", value);
+                        startActivity(intentHome);
+                    }
+                }
+            });
+        }
+    }
+    /*
+    protected void goHome(String id) {
+
+    }
+    */
 }

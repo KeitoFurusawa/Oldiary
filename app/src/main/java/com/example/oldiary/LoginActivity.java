@@ -1,6 +1,7 @@
 package com.example.oldiary;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -24,11 +25,15 @@ public class LoginActivity extends AppCompatActivity {
     private String password;
     private DatabaseReference mDatabase;
     private static String getResult;
+    private SharedPreferences preference;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
+        editor = preference.edit();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         setOnClickBack();
         setOnClickCreateNew();
@@ -146,6 +151,8 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intentNext = new Intent(getApplication(), HomeActivity.class);
                         intentNext.putExtra("UserID", userId);
                         intentNext.putExtra("UserName", userName);
+                        editor.putString("UserID", userId);
+                        editor.commit();
                         startActivity(intentNext);
                     }
                 }

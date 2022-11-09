@@ -1,8 +1,10 @@
 package com.example.oldiary;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -12,17 +14,20 @@ public class HomeActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
     String userName;
     String userId;
+    private SharedPreferences preference;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         Intent intent1 = getIntent();
         userName = intent1.getStringExtra("UserName");
         userId = intent1.getStringExtra("UserId");
         TextView textViewUserId = findViewById(R.id.textViewId);
         textViewUserId.setText(userName);
+        preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
+        editor = preference.edit();
 
         playMusic();
         setOnClick();
@@ -30,6 +35,7 @@ public class HomeActivity extends AppCompatActivity {
         setOnClick3();
         setOnClick4();
         setOnClick5();
+        setOnClickLogout();
     }
 
     protected void playMusic() {
@@ -83,6 +89,16 @@ public class HomeActivity extends AppCompatActivity {
         ImageButton imageButton5 = findViewById(R.id.avatar);
         imageButton5.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), ProfileActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    protected void setOnClickLogout() {
+        Button btn = findViewById(R.id.buttonLogout);
+        btn.setOnClickListener(v -> {
+            editor.putString("UserID", "");
+            editor.commit();
+            Intent intent = new Intent(getApplication(), MainActivity.class);
             startActivity(intent);
         });
     }

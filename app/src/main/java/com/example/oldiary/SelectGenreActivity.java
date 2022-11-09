@@ -3,6 +3,7 @@ package com.example.oldiary;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -18,6 +19,8 @@ public class SelectGenreActivity extends AppCompatActivity {
     private static ArrayList<Integer> selectedGenreList = new ArrayList<>();//
     public static boolean bStates = false;//
     private DatabaseReference mDatabase;
+    private SharedPreferences preference;
+    private SharedPreferences.Editor editor;
     String userId;
     String userName;
     private final static String TAG = "checkbox";
@@ -33,6 +36,10 @@ public class SelectGenreActivity extends AppCompatActivity {
         Intent intent1 = getIntent();
         userId = intent1.getStringExtra("UserID");
         userName = intent1.getStringExtra("UserName");
+        //プリファレンス
+        preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
+        editor = preference.edit();
+
         setOnClick(); //確定ボタン
 
         ListView listView = findViewById(R.id.listViewGenre);
@@ -100,6 +107,8 @@ public class SelectGenreActivity extends AppCompatActivity {
                 Intent intentNext = new Intent(getApplication(), HomeActivity.class);
                 intentNext.putExtra("UserID", userId);
                 intentNext.putExtra("UserName", userName);
+                editor.putString("UserID", userId);
+                editor.commit();
                 startActivity(intentNext);
             } else { //無効時
                 Toast.makeText(SelectGenreActivity.this, "ジャンルを3つ選んで下さい", Toast.LENGTH_SHORT).show();
