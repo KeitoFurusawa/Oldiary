@@ -24,7 +24,6 @@ public class WriteActivity extends AppCompatActivity {
     static final int REQUEST_CAPTURE_IMAGE = 100;
 
     Button button1;
-    ImageView imageView1;
 
 
     private static final int RESULT_PICK_IMAGEFILE = 1000;
@@ -38,7 +37,7 @@ public class WriteActivity extends AppCompatActivity {
         findViews();
         setListeners();
 
-        imageView = (ImageView)findViewById(R.id.image_view);
+        imageView = findViewById(R.id.image_view);
 
         findViewById(R.id.button5).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +72,7 @@ public class WriteActivity extends AppCompatActivity {
     }
 
     protected void findViews(){
-        button1 = (Button)findViewById(R.id.button3);
-        imageView1 = (ImageView)findViewById(R.id.imageView);
+        button1 = findViewById(R.id.button3);
     }
     protected void setListeners(){
         button1.setOnClickListener(new OnClickListener(){
@@ -89,18 +87,18 @@ public class WriteActivity extends AppCompatActivity {
         });
     }
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (REQUEST_CAPTURE_IMAGE == requestCode
+        if (requestCode == REQUEST_CAPTURE_IMAGE
                 && resultCode == Activity.RESULT_OK) {
             Bitmap capturedImage =
-                    (Bitmap) resultData.getExtras().get("data");
-            imageView1.setImageBitmap(capturedImage);
+                    (Bitmap) data.getExtras().get("data");
+            imageView.setImageBitmap(capturedImage);
         }
         if (requestCode == RESULT_PICK_IMAGEFILE && resultCode == RESULT_OK) {
             Uri uri = null;
-            if (resultData != null) {
-                uri = resultData.getData();
+            if (data != null) {
+                uri = data.getData();
 
                 try {
                     Bitmap bmp = getBitmapFromUri(uri);
