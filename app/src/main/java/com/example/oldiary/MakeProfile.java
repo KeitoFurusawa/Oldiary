@@ -66,8 +66,11 @@ public class MakeProfile extends AppCompatActivity {
                 AgeCalculator ac = new AgeCalculator();
                 int age = ac.getAge(year, month, date);
                 Log.d(TAG, String.format("name: %s, %d/%d/%d, age: %d", userName, year, month, date, age));
-
-                if(age == -1) {
+                if (userName.equals("null")) {
+                    Toast.makeText(
+                            MakeProfile.this, "その名前はご利用いただけません。", Toast.LENGTH_SHORT).show();
+                }
+                else if(age == -1) {
                     Log.e(TAG, "input values of birthday are wrong");
                     Toast.makeText(
                             MakeProfile.this, "正しい生年月日を入力してください", Toast.LENGTH_SHORT).show();
