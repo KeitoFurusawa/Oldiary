@@ -77,7 +77,7 @@ public class MakeProfile extends AppCompatActivity {
                     Toast.makeText(
                             MakeProfile.this, "60歳未満の方はご利用いただけません", Toast.LENGTH_SHORT).show();
                 } else { //正しく動く時
-                    mDatabase.child("users").child(userId).child("name").setValue(userName);
+                    mDatabase.child("users").child(userId).child("userName").setValue(userName);
                     AgeCalculator setData = new AgeCalculator(year, month, date, age);
                     mDatabase.child("users").child(userId).child("DateOfBirth").setValue(setData);
                     Intent intentNext = new Intent(getApplication(), SelectGenreActivity.class);
