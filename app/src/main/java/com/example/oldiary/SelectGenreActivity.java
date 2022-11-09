@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectGenreActivity extends AppCompatActivity {
-    private static ArrayList<Integer> selectedGenreList = new ArrayList<>();
-    public static boolean bStates = false;
+    private static ArrayList<Integer> selectedGenreList = new ArrayList<>();//
+    public static boolean bStates = false;//
     private DatabaseReference mDatabase;
     String userId;
     String userName;
@@ -98,6 +98,7 @@ public class SelectGenreActivity extends AppCompatActivity {
             Log.d(TAG, String.valueOf("Button States: " + bStates)); //有効
             if (bStates) { //ボタン有効時
                 mDatabase.child("users").child(userId).child("favoriteGenre").setValue(selectedGenreList); //firebaseにデータ送信
+
                 Intent intentNext = new Intent(getApplication(), HomeActivity.class);
                 intentNext.putExtra("UserID", userId);
                 intentNext.putExtra("UserName", userName);
