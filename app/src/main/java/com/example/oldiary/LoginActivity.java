@@ -1,10 +1,6 @@
 package com.example.oldiary;
 
 import android.content.Intent;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.SoundPool;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -29,10 +25,6 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private static String getResult;
 
-    SoundPool soundPool;
-    int mp3a;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         setOnClickBack();
         setOnClickCreateNew();
         setOnClickLogin();
-        ss();
     }
+
     //戻る
     protected void setOnClickBack() {
         ImageButton imageButton = findViewById(R.id.imageButtonBack);
@@ -74,18 +66,14 @@ public class LoginActivity extends AppCompatActivity {
             if ((phoneNumber.length() > 8) && (password.length() == 4)) {
                 getData(userId);
 
-            }
-            else {
+            } else {
                 if (phoneNumber.equals("0")) { //0番は通過
-                        soundPool.play(mp3a,9 , 9, 0, 0, 2);
-                        Intent intent = new Intent(getApplication(), HomeActivity.class);
-                        intent.putExtra("UserID", userId); //インテントにユーザIDを渡す
-                        startActivity(intent);
-
-                }
-                else {
+                    Intent intent = new Intent(getApplication(), MakeProfile.class);
+                    intent.putExtra("UserID", userId); //インテントにユーザIDを渡す
+                    startActivity(intent);
+                } else {
                     Log.d(TAG, "incorrect input value");//入力が正しくない
-                    Toast.makeText(LoginActivity.this, "電話番号・暗証番号を\n正しく入力してください", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "電話番号・暗証番号を正しく入力してください", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -131,10 +119,7 @@ public class LoginActivity extends AppCompatActivity {
             String resultPhoneNumber = getResult.substring(idxOfRePass, idxOfRePass+4);
             if (password.equals(resultPhoneNumber)) { //パスワードが正しい
                 Log.d(TAG, "login success");
-                soundPool.play(mp3a,9 , 9, 0, 0, 2);
-                Intent intent = new Intent(getApplication(), HomeActivity.class);
-                intent.putExtra("UserID", userId); //インテントにユーザIDを渡す
-                startActivity(intent);
+                checkUserName(userId);
             } else { //パスワードが誤り
                 Log.e(TAG, "ERROR: incorrect password");
                 Toast.makeText(LoginActivity.this, "パスワードが間違っています", Toast.LENGTH_SHORT).show();
@@ -142,19 +127,29 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    protected void ss(){
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
-        } else {
-            AudioAttributes attr = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_MEDIA)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                    .build();
-            soundPool = new SoundPool.Builder()
-                    .setAudioAttributes(attr)
-                    .setMaxStreams(5)
-                    .build();
-            mp3a = soundPool.load(this, R.raw.success, 1);
-        }
+    protected void checkUserName(String userId) {
+        mDatabase.child("users").child(userId).child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                Log.d("debug", "this is onComplete");
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    String userName = String.valueOf(task.getResult().getValue());
+                    Log.d(TAG, userName); //debug
+                    if (userName.equals("null")) { //初回ログイン
+                        Intent intentNext = new Intent(getApplication(), MakeProfile.class);
+                        intentNext.putExtra("UserID", userId); //インテントにユーザIDを渡す
+                        startActivity(intentNext);
+                    } else { //2回目以降
+                        Intent intentNext = new Intent(getApplication(), HomeActivity.class);
+                        intentNext.putExtra("UserID", userId);
+                        intentNext.putExtra("UserName", userName);
+                        startActivity(intentNext);
+                    }
+                }
+            }
+        });
     }
 }

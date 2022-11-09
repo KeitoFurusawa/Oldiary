@@ -1,21 +1,33 @@
 package com.example.oldiary;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class RegisterActivity extends AppCompatActivity {
+    private static final String TAG = "Debug";
     static String contentPath, contentMessage;
+    private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //Button btn =  findViewById(R.id.button);
         /*
@@ -46,6 +58,35 @@ public class RegisterActivity extends AppCompatActivity {
                     String.format("Failed to submit data", contentPath, contentMessage),
                     Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void onClickDebug(View v) {
+        mDatabase.child("users").child("id_0").child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                Log.d("debug", "this is onComplete");
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    String value = String.valueOf(task.getResult().getValue());
+                    Log.d(TAG, value);
+                }
+            }
+        });
+        mDatabase.child("users").child("id_0").child("password").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                Log.d("debug", "this is onComplete");
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    String value = String.valueOf(task.getResult().getValue());
+                    Log.d(TAG, value);
+                }
+            }
+        });
     }
 
     public int sendMessage() {
