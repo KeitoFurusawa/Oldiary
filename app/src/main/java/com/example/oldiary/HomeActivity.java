@@ -4,31 +4,40 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class HomeActivity extends AppCompatActivity {
+    private final static String TAG = "home";
     MediaPlayer mediaPlayer;
     String userName;
     String userId;
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Intent intent1 = getIntent();
-        userName = intent1.getStringExtra("UserName");
-        userId = intent1.getStringExtra("UserId");
-        TextView textViewUserId = findViewById(R.id.textViewId);
-        textViewUserId.setText(userName);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
 
+        userId = preference.getString("UserID", "");
+        checkUserId();
+        setUserName();
         playMusic();
         setOnClick();
         setOnClick2();
@@ -100,6 +109,35 @@ public class HomeActivity extends AppCompatActivity {
             editor.commit();
             Intent intent = new Intent(getApplication(), MainActivity.class);
             startActivity(intent);
+        });
+    }
+
+    private void checkUserId() {
+        if (userId.equals("")) {
+            Log.e(TAG, "failed to get User ID");
+        } else {
+            Log.d(TAG, userId);
+        }
+    }
+
+    private void setUserName() {
+        mDatabase.child("users").child(userId).child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    String userNameResult = String.valueOf(task.getResult().getValue());
+                    if (userNameResult.equals("null")) { //初回ログイン
+                        Log.e(TAG, "ERROR: cannot get name");
+                    } else {
+                        userName = userNameResult;
+                        TextView textViewUserId = findViewById(R.id.textViewId);
+                        textViewUserId.setText(userName);
+                    }
+                }
+            }
         });
     }
 }

@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class WriteActivity extends AppCompatActivity {
-    private final static String TAG = "write";
+    private final static String TAG = "home";
     private String userId;
     private SharedPreferences preference;
 
@@ -26,6 +26,8 @@ public class WriteActivity extends AppCompatActivity {
     protected void checkUserId() {
         if (userId.equals("")) {
             Log.e(TAG, "failed to get User ID");
+        } else {
+            Log.d(TAG, userId);
         }
     }
 
