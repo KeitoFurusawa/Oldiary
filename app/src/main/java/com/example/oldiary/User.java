@@ -13,6 +13,10 @@ public class User {
     public User(String phoneNumber, String password) {
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.userName = "null";
+        if (phoneNumber.equals("0")) {
+            this.userName = "debug";
+        } else {
+            this.userName = "null";
+        }
     }
 }

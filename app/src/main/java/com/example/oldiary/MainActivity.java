@@ -107,7 +107,9 @@ public class MainActivity extends AppCompatActivity {
     protected void debug() {
         ImageButton imgButtonD = findViewById(R.id.imageButtonDebug);
         imgButtonD.setOnClickListener(v -> {
-            Intent intentD = new Intent(getApplication(), SelectGenreActivity.class);
+            editor.putString("UserID", "id_0");
+            editor.commit();
+            Intent intentD = new Intent(getApplication(), WriteActivity.class);
             startActivity(intentD);
         });
     }
@@ -178,9 +180,5 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
-    /*
-    protected void goHome(String id) {
 
-    }
-    */
 }
