@@ -60,15 +60,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void setOnClickLogin() {
         Button buttonLogin = findViewById(R.id.buttonLogin);
         TextView textViewPhoneNumber = findViewById(R.id.editTextPhoneNumber);
-        TextView textViewPassword = findViewById(R.id.editTextPassword);
+        //TextView textViewPassword = findViewById(R.id.editTextPassword);
         buttonLogin.setOnClickListener(v -> {
             phoneNumber = textViewPhoneNumber.getText().toString();
-            password = textViewPassword.getText().toString();
+            //password = textViewPassword.getText().toString();
             String userId = "id_" + phoneNumber;
             Log.d(TAG, phoneNumber);//debug 確認用
-            Log.d(TAG, password);   //debug 確認用
+            //Log.d(TAG, password);   //debug 確認用
 
-            if ((phoneNumber.length() > 8) && (password.length() == 4)) {
+            if ((phoneNumber.length() > 8) /*&& (password.length() == 4)*/) {
                 getData(userId);
 
             } else {
@@ -85,18 +85,18 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     protected void getData(String userId) {
-        Log.d("debug", "this is getData");
+        //Log.d("debug", "this is getData");
         mDatabase.child("users").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Log.d("debug", "this is onComplete");
+                //Log.d("debug", "this is onComplete");
                 if (!task.isSuccessful()) {
                     Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     String value = String.valueOf(task.getResult().getValue());
-                    setResult(value);
-                    checkResult(userId);
+                    setResult(value); //firebaseから取ってきたデータをセットする
+                    checkResult(userId); //データのチェックをする
                 }
             }
         });
@@ -116,47 +116,29 @@ public class LoginActivity extends AppCompatActivity {
         if (getResult.equals("null")) { //電話番号未登録
             Log.e(TAG, "ERROR: that PhoneNumber wasn't registered");
             Toast.makeText(LoginActivity.this, "その電話番号は登録されていません", Toast.LENGTH_SHORT).show();
-        } else {
+        } else { //登録済み
+            /*idを渡してパスワード入力画面へ*/
+            Intent intentNext = new Intent(getApplication(), Login2Activity.class);
+            intentNext.putExtra("UserID", userId);
+            startActivity(intentNext);
+
+            /*
             //int idxAddPhoneNum = "phoneNumber=".length(); // = 12
             int idxAddPass = "password=".length(); // = 9
             //int idxOfRePhoneNum = getResult.indexOf("phoneNumber=") + idxAddPhoneNum;
             int idxOfRePass = getResult.indexOf("password=") + idxAddPass;
-            String resultPhoneNumber = getResult.substring(idxOfRePass, idxOfRePass+4);
-            if (password.equals(resultPhoneNumber)) { //パスワードが正しい
+            String resultPassword = getResult.substring(idxOfRePass, idxOfRePass+4);
+
+            if (password.equals(resultPassword)) { //パスワードが正しい
                 Log.d(TAG, "login success");
                 checkUserName(userId);
             } else { //パスワードが誤り
                 Log.e(TAG, "ERROR: incorrect password");
                 Toast.makeText(LoginActivity.this, "パスワードが間違っています", Toast.LENGTH_SHORT).show();
             }
+            */
         }
     }
 
-    protected void checkUserName(String userId) {
-        mDatabase.child("users").child(userId).child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Log.d("debug", "this is onComplete");
-                if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
-                }
-                else {
-                    String userName = String.valueOf(task.getResult().getValue());
-                    Log.d(TAG, userName); //debug
-                    if (userName.equals("null")) { //初回ログイン
-                        Intent intentNext = new Intent(getApplication(), MakeProfile.class);
-                        intentNext.putExtra("UserID", userId); //インテントにユーザIDを渡す
-                        startActivity(intentNext);
-                    } else { //2回目以降
-                        Intent intentNext = new Intent(getApplication(), HomeActivity.class);
-                        intentNext.putExtra("UserID", userId);
-                        intentNext.putExtra("UserName", userName);
-                        editor.putString("UserID", userId);
-                        editor.commit();
-                        startActivity(intentNext);
-                    }
-                }
-            }
-        });
-    }
+
 }
