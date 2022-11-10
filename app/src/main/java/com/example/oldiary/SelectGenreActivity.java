@@ -81,9 +81,6 @@ public class SelectGenreActivity extends AppCompatActivity {
         return selectedGenreList.size();
     }
 
-    public void toastA() {
-        Toast.makeText(getApplicationContext(), "選択できるジャンルは最大3つです", Toast.LENGTH_SHORT).show();
-    }
 
     public void enableButton() { //チェック済みが3つになったら呼ぶ
         //Button b = findViewById(R.id.buttonConfirm);

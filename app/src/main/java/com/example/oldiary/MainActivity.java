@@ -178,9 +178,5 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
-    /*
-    protected void goHome(String id) {
 
-    }
-    */
 }
