@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
+    /*
     private static final String TAG = "Debug";
     static String contentPath, contentMessage;
     private DatabaseReference mDatabase;
@@ -30,20 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //Button btn =  findViewById(R.id.button);
-        /*
-        btn.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        EditText editTextPath = (EditText) findViewById(R.id.editTextTextPath);
-                        EditText editTextMessage = (EditText) findViewById(R.id.editTextTextMessage);
-                        String contentPath = editTextPath.getText().toString();
-                        String contentMessage = editTextMessage.getText().toString();
-                        Toast.makeText(RegisterActivity.this, String.format("Submit data\n[path:%s, message:%s]", contentPath, contentMessage), Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
-         */
+
     }
 
     public void onClickSubmit(View v) {
@@ -98,4 +86,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         return 0;
     }
+
+     */
 }
