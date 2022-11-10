@@ -2,12 +2,16 @@ package com.example.oldiary;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.media.SoundPool;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     private static String getResult;
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
+    SoundPool soundPool;
+    int mp3a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,24 @@ public class LoginActivity extends AppCompatActivity {
         setOnClickBack();
         setOnClickCreateNew();
         setOnClickLogin();
+        ss();
+    }
+
+    protected void ss() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        } else {
+            AudioAttributes attr = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build();
+            soundPool = new SoundPool.Builder()
+                    .setAudioAttributes(attr)
+                    .setMaxStreams(5)
+                    .build();
+            mp3a = soundPool.load(this, R.raw.error, 1);
+
+        }
     }
 
     //戻る
@@ -77,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                     intent.putExtra("UserID", userId); //インテントにユーザIDを渡す
                     startActivity(intent);
                 } else {
+                    soundPool.play(mp3a,9 , 9, 0, 0, 1);
                     Log.d(TAG, "incorrect input value");//入力が正しくない
                     Toast.makeText(LoginActivity.this, "電話番号・暗証番号を正しく入力してください", Toast.LENGTH_SHORT).show();
                 }
@@ -114,6 +139,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         Log.d(TAG, userId + ": " + getResult); //debug
         if (getResult.equals("null")) { //電話番号未登録
+            soundPool.play(mp3a,9 , 9, 0, 0, 1);
             Log.e(TAG, "ERROR: that PhoneNumber wasn't registered");
             Toast.makeText(LoginActivity.this, "その電話番号は登録されていません", Toast.LENGTH_SHORT).show();
         } else {
@@ -126,6 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(TAG, "login success");
                 checkUserName(userId);
             } else { //パスワードが誤り
+                soundPool.play(mp3a,9 , 9, 0, 0, 1);
                 Log.e(TAG, "ERROR: incorrect password");
                 Toast.makeText(LoginActivity.this, "パスワードが間違っています", Toast.LENGTH_SHORT).show();
             }

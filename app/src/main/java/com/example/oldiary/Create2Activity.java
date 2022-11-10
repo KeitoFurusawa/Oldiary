@@ -21,7 +21,7 @@ public class Create2Activity extends AppCompatActivity {
     private static final String TAG = "CreateActivity";
 
     SoundPool soundPool;
-    int mp3a;
+    int mp3a, mp3b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,7 @@ public class Create2Activity extends AppCompatActivity {
                     .setMaxStreams(5)
                     .build();
             mp3a = soundPool.load(this, R.raw.success, 1);
+            mp3b = soundPool.load(this, R.raw.error, 1);
         }
     }
 
@@ -70,6 +71,7 @@ public class Create2Activity extends AppCompatActivity {
         Button buttonGo = findViewById(R.id.button_next);
         buttonGo.setOnClickListener(v -> {
             if (password.length() < 4) {
+                soundPool.play(mp3b,9 , 9, 0, 0, 1f);
                 Log.e(TAG, "ERROR: the length of password is not enough.");
                 Toast.makeText(
                         Create2Activity.this, "パスワードは4桁入力してください", Toast.LENGTH_SHORT).show();
