@@ -14,8 +14,6 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 public class MyAdapter extends ArrayAdapter<GenreData> {
 
     private final static String TAG = "checkbox";
@@ -36,7 +34,7 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
         if (null == convertView) convertView = mLayoutInflater.inflate(R.layout.genre_list, null);
 
         // GenreDataのデータをViewの各ウィジェットにセットする
-        TextView textView = convertView.findViewById(R.id.textView);
+        TextView textView = convertView.findViewById(R.id.collection_of_words);
         textView.setText(item.getTextData());
         textView.setTextColor(Color.BLACK); //リストビューの色変更
         textView.setTextSize(20); //リストビューのテキストサイズ

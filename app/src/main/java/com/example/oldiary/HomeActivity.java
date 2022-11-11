@@ -44,6 +44,7 @@ public class HomeActivity extends AppCompatActivity {
         setOnClick3();
         setOnClick4();
         setOnClick5();
+        setOnClick6();
         setOnClickLogout();
     }
 
@@ -98,6 +99,14 @@ public class HomeActivity extends AppCompatActivity {
         ImageButton imageButton5 = findViewById(R.id.avatar);
         imageButton5.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), ProfileActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    protected void setOnClick6() {
+        ImageButton imageButton6 = findViewById(R.id.collection_of_words);
+        imageButton6.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplication(), WordActivity.class);
             startActivity(intent);
         });
     }

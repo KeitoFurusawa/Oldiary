@@ -4,4 +4,9 @@
     <string name="move">MOVE</string>
     <string name="sub">Sub Activity</string>
     <string name="return_sub">RETURN</string>
+
+    //以下、カタカナ用語集用
+    <string name="words">
+         ・ログイン\nインターネット上のサービスを利用する際に、IDとパスワードを使って本人を確認する仕組みのこと
+    </string>
 </resources>
