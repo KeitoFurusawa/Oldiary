@@ -7,20 +7,25 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
-public class ConnectActivity extends AppCompatActivity {
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
+
+public class ConnectActivity extends YouTubeBaseActivity {
 
     MediaPlayer mediaPlayer;
+    private static final String API_KEY = "AIzaSyBtAfSPNfUXI3bUWBf65-nw-50pg9sXyF4";
+    YouTubePlayerView mYouTubePlayerView;
+    YouTubePlayer.OnInitializedListener mOnInitializedListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
 
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.wii_music);
-        mediaPlayer.setLooping(true);
-
-
         setOnClick();
+        playYoutube();
 
     }
 
@@ -32,20 +37,22 @@ public class ConnectActivity extends AppCompatActivity {
         });
     }
 
-    protected void onResume() {
-        super.onResume();
-        mediaPlayer.start();
-    }
+    protected void playYoutube() {
+        mYouTubePlayerView = findViewById(R.id.Youtube_view);
 
-    protected void onPause() {
-        super.onPause();
-        mediaPlayer.pause();
-    }
+        mOnInitializedListener = new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                youTubePlayer.loadVideo("WIKKyrGGaDk");
+            }
 
-    protected void onDestroy() {
-        super.onDestroy();
-        mediaPlayer.release();
-        mediaPlayer = null;
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+            }
+        };
+
+        mYouTubePlayerView.initialize(API_KEY, mOnInitializedListener);
     }
 
 }
