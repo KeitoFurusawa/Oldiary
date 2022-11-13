@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,14 @@ public class WriteActivity extends AppCompatActivity {
     private final static String TAG = "home";
     private String userId;
     private SharedPreferences preference;
+
+    static final int REQUEST_CAPTURE_IMAGE = 100;
+
+    Button button1;
+
+
+    private static final int RESULT_PICK_IMAGEFILE = 1000;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
