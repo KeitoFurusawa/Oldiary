@@ -45,9 +45,10 @@ public class SelectGenreActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.listViewGenre);
         List<GenreData> list = new ArrayList<>();
         String[] textData = {
-                "サッカー", "野球", "テニス", "ガーデニング",
-                "読書", "ピアノ", "ゴルフ", "映画鑑賞", "音楽鑑賞",
-                "散歩", "ランニング", "料理", "ボランティア", "将棋"
+                "サッカー", "野球", "テニス", "ガーデニング", "読書",
+                "ピアノ", "ゴルフ", "映画鑑賞", "音楽鑑賞", "散歩",
+                "ランニング", "料理", "ボランティア", "将棋", "囲碁",
+                "カラオケ", "旅行", "ワープロ", "手芸", "ギター",
         };
         for (int i = 0; i < textData.length; i++) {
             GenreData genreData = new GenreData();
