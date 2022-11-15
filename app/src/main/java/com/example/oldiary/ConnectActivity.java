@@ -7,17 +7,10 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
-import com.google.android.youtube.player.YouTubeBaseActivity;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerView;
-
-public class ConnectActivity extends YouTubeBaseActivity {
+public class ConnectActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
     private static final String API_KEY = "AIzaSyBtAfSPNfUXI3bUWBf65-nw-50pg9sXyF4";
-    YouTubePlayerView mYouTubePlayerView;
-    YouTubePlayer.OnInitializedListener mOnInitializedListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +18,6 @@ public class ConnectActivity extends YouTubeBaseActivity {
         setContentView(R.layout.activity_connect);
 
         setOnClick();
-        playYoutube();
 
     }
 
@@ -35,24 +27,6 @@ public class ConnectActivity extends YouTubeBaseActivity {
             Intent intent = new Intent(getApplication(), HomeActivity.class);
             startActivity(intent);
         });
-    }
-
-    protected void playYoutube() {
-        mYouTubePlayerView = findViewById(R.id.Youtube_view);
-
-        mOnInitializedListener = new YouTubePlayer.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                youTubePlayer.loadVideo("WIKKyrGGaDk");
-            }
-
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
-            }
-        };
-
-        mYouTubePlayerView.initialize(API_KEY, mOnInitializedListener);
     }
 
 }
