@@ -12,6 +12,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
+
 public class ReadAndWrite extends CreateActivity {
     private static final String TAG = "firebase";
     private static final String CACHE = "cache.txt";
@@ -21,7 +23,7 @@ public class ReadAndWrite extends CreateActivity {
     public ReadAndWrite() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
-    public void writeDiary(String userId, String text) {
+    public void writeDiary(String userId, String text, String dateTime, long timeInMillis) {
         Log.d(TAG, text);
         mDatabase.child("users").child(userId).child("d_cnt").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -37,11 +39,16 @@ public class ReadAndWrite extends CreateActivity {
                         mDatabase.child("users").child(userId).child("d_cnt").setValue(1);
                         //mDatabase.child("users").child(userId).child("diaries").child("d_id").setValue(userId+"1");
                         mDatabase.child("users").child(userId).child("diaries").child("d_"+userId+"1").child("text").setValue(text);
+                        mDatabase.child("users").child(userId).child("diaries").child("d_"+userId+"1").child("postedAt").setValue(dateTime);
+                        mDatabase.child("users").child(userId).child("diaries").child("d_"+userId+"1").child("timeInMillis").setValue(timeInMillis);
+
                     } else { // 2回目以降
                         int count = Integer.parseInt(getResult) + 1;
                         mDatabase.child("users").child(userId).child("d_cnt").setValue(count);
                         //mDatabase.child("users").child(userId).child("diaries").child("d_id").setValue(userId+count);
                         mDatabase.child("users").child(userId).child("diaries").child("d_"+userId+count).child("text").setValue(text);
+                        mDatabase.child("users").child(userId).child("diaries").child("d_"+userId+count).child("postedAt").setValue(dateTime);
+                        mDatabase.child("users").child(userId).child("diaries").child("d_"+userId+count).child("timeInMillis").setValue(timeInMillis);
                     }
                 }
             }

@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import java.io.FileDescriptor;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 public class WriteActivity extends AppCompatActivity {
     private final static String TAG = "home";
@@ -85,21 +87,28 @@ public class WriteActivity extends AppCompatActivity {
         btnPost.setOnClickListener(v -> {
             TextView textView = findViewById(R.id.editTextTextMultiLine2);
             String txt = textView.getText().toString();
-            ReadAndWrite rad = new ReadAndWrite();
-            rad.writeDiary(userId, txt);
-            new AlertDialog.Builder(WriteActivity.this)
-                    .setTitle("")
-                    .setMessage("投稿されました！")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // OKボタン押下時の処理
-                            Intent intent = new Intent(getApplication(), HomeActivity.class);
-                            startActivity(intent);
-                            Log.d("AlertDialog", "Positive which :" + which);
-                        }
-                    })
-                    .show();
-
+            if (txt.length() == 0) {
+                Log.d(TAG, dateTime());
+                Toast.makeText(WriteActivity.this, "投稿内容がありません", Toast.LENGTH_SHORT).show();
+            } else {
+                ReadAndWrite rad = new ReadAndWrite();
+                Calendar c = Calendar.getInstance();
+                TimeZone tz = TimeZone.getTimeZone("Asia/Tokyo");
+                c.setTimeZone(tz); //日本時間に設定
+                rad.writeDiary(userId, txt, dateTime(), c.getTimeInMillis());
+                new AlertDialog.Builder(WriteActivity.this)
+                        .setTitle("")
+                        .setMessage("投稿されました！")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // OKボタン押下時の処理
+                                Intent intent = new Intent(getApplication(), HomeActivity.class);
+                                startActivity(intent);
+                                Log.d("AlertDialog", "Positive which :" + which);
+                            }
+                        })
+                        .show();
+            }
         });
     }
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {
@@ -150,5 +159,20 @@ public class WriteActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    private String dateTime() {
+        int year, month, date, hour, minute, second;
+        Calendar c = Calendar.getInstance();
+        Log.d(TAG, String.valueOf(c));
+        TimeZone tz = TimeZone.getTimeZone("Asia/Tokyo");
+        c.setTimeZone(tz); //日本時間に設定
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH) + 1;
+        date = c.get(Calendar.DATE);
+        hour = c.get(Calendar.HOUR);
+        minute = c.get(Calendar.MINUTE);
+        second = c.get(Calendar.SECOND);
+        return String.format("%d/%02d/%02d %02d:%02d:%02d", year, month, date, hour, minute, second);
     }
 }
