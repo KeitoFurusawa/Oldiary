@@ -74,8 +74,8 @@ public class LoginActivity extends AppCompatActivity {
     }
     //新規アカウント作成
     protected void setOnClickCreateNew() {
-        TextView textView = findViewById(R.id.textViewCreateNewButton);
-        textView.setOnClickListener(v -> {
+        Button button= findViewById(R.id.button4);
+        button.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), CreateActivity.class);
             startActivity(intent);
         });
