@@ -44,13 +44,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     protected void editProfile() {
         Button button = findViewById(R.id.button2);
-        dialog = new Dialog(this);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.setContentView(R.layout.popup_prof);
-                final View contactPopupView = getLayoutInflater().inflate(R.layout.popup_prof, null);
-            }
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplication(), PopupActivity.class);
+            startActivity(intent);
         });
 
     }
