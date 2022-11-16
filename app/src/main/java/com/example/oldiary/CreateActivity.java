@@ -1,12 +1,17 @@
 package com.example.oldiary;
 
 import android.content.Intent;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import android.media.SoundPool;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,6 +25,8 @@ public class CreateActivity extends AppCompatActivity {
     private static final String TAG = "CreateActivity";
     private DatabaseReference mDatabase;
     private static String getResult;
+    SoundPool soundPool;
+    int mp3a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +35,26 @@ public class CreateActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         setOnClick();
         setOnClick2();
+        ss();
     }
+
+    protected void ss() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        } else {
+            AudioAttributes attr = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build();
+            soundPool = new SoundPool.Builder()
+                    .setAudioAttributes(attr)
+                    .setMaxStreams(5)
+                    .build();
+            mp3a = soundPool.load(this, R.raw.error, 1);
+
+        }
+    }
+
     //Back
     protected void setOnClick() {
         Button button = findViewById(R.id.button_back);
@@ -55,6 +81,7 @@ public class CreateActivity extends AppCompatActivity {
                     intent.putExtra("PhoneNumber", phoneNumber);
                     startActivity(intent);
                 } else { //電話番号の長さが9未満はエラー
+                    soundPool.play(mp3a,9 , 9, 0, 0, 1);
                     Log.d(TAG, "length of phoneNumber is not enough");
                     Toast.makeText(CreateActivity.this, "正しい電話番号を入力してください", Toast.LENGTH_SHORT).show();
                 }
@@ -94,6 +121,7 @@ public class CreateActivity extends AppCompatActivity {
         }
         Log.d(TAG, userId + ": " + getResult); //debug
         if (!(getResult.equals("null"))) { //idでサーバを検索した時登録済みの場合はエラー
+            soundPool.play(mp3a,9 , 9, 0, 0, 1);
             Log.e(TAG, "ERROR: that PhoneNumber was already registered");
             Toast.makeText(CreateActivity.this, "その電話番号はすでに使われています。", Toast.LENGTH_SHORT).show();
         } else { //未登録の番号はOK

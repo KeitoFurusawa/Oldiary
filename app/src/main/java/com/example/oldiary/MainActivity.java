@@ -94,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
             String loggedInId = preference.getString("UserID", "");
             try {
                 imageButton.setImageResource(R.drawable.opendoor);
-                soundPool.play(mp3a,9 , 9, 0, 0, 2);
                 Thread.sleep(500);
+                soundPool.play(mp3a,9 , 9, 0, 0, 2);
                 checkLoggedIn(loggedInId); //ログインチェック
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             } catch (InterruptedException e) {
@@ -107,9 +107,7 @@ public class MainActivity extends AppCompatActivity {
     protected void debug() {
         ImageButton imgButtonD = findViewById(R.id.imageButtonDebug);
         imgButtonD.setOnClickListener(v -> {
-            editor.putString("UserID", "id_0");
-            editor.commit();
-            Intent intentD = new Intent(getApplication(), WriteActivity.class);
+            Intent intentD = new Intent(getApplication(), SelectGenreActivity.class);
             startActivity(intentD);
         });
     }
@@ -180,5 +178,4 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
-
 }

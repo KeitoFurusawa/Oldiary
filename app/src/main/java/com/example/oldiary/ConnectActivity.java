@@ -10,15 +10,12 @@ import android.widget.ImageButton;
 public class ConnectActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
+    private static final String API_KEY = "AIzaSyBtAfSPNfUXI3bUWBf65-nw-50pg9sXyF4";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
-
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.wii_music);
-        mediaPlayer.setLooping(true);
-
 
         setOnClick();
 
@@ -30,22 +27,6 @@ public class ConnectActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplication(), HomeActivity.class);
             startActivity(intent);
         });
-    }
-
-    protected void onResume() {
-        super.onResume();
-        mediaPlayer.start();
-    }
-
-    protected void onPause() {
-        super.onPause();
-        mediaPlayer.pause();
-    }
-
-    protected void onDestroy() {
-        super.onDestroy();
-        mediaPlayer.release();
-        mediaPlayer = null;
     }
 
 }
