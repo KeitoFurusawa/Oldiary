@@ -25,9 +25,9 @@ public class HistoryActivity extends AppCompatActivity {
         mediaPlayer.setLooping(true);
 
         setOnClickBack();
-        changePhoto();
-        changePhoto2();
-        changePhoto3();
+        //changePhoto();
+        //changePhoto2();
+        //changePhoto3();
     }
 
     protected void onResume() {
