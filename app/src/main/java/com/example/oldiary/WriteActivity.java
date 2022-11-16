@@ -170,7 +170,7 @@ public class WriteActivity extends AppCompatActivity {
         year = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH) + 1;
         date = c.get(Calendar.DATE);
-        hour = c.get(Calendar.HOUR);
+        hour = c.get(Calendar.HOUR_OF_DAY);
         minute = c.get(Calendar.MINUTE);
         second = c.get(Calendar.SECOND);
         return String.format("%d/%02d/%02d %02d:%02d:%02d", year, month, date, hour, minute, second);
