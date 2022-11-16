@@ -126,5 +126,19 @@
         app:layout_constraintVertical_bias="0.475"
         app:srcCompat="@drawable/prev" />
 
+    <TextView
+        android:id="@+id/textViewPostedAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="postedAt"
+        android:textColor="#010101"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPost"
+        app:layout_constraintVertical_bias="0.013" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
