@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,9 +26,9 @@ public class HistoryActivity extends AppCompatActivity {
         mediaPlayer.setLooping(true);
 
         setOnClickBack();
-        changePhoto();
-        changePhoto2();
-        changePhoto3();
+        //changePhoto();
+        //changePhoto2();
+        //changePhoto3();
     }
 
     protected void onResume() {
@@ -82,5 +83,11 @@ public class HistoryActivity extends AppCompatActivity {
         choose3.setImageDrawable(drawable);
 
         choose3.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim3));
+    }
+
+    private void setElm() {
+        ImageButton ibNext = findViewById(R.id.imageButtonNext);
+        ImageButton ibPrev = findViewById(R.id.imageButtonPrev);
+        TextView post = findViewById(R.id.textViewPost);
     }
 }
