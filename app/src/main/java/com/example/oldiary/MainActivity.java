@@ -76,9 +76,18 @@ public class MainActivity extends AppCompatActivity {
         setOnClick();
         ss();
         debug();
+        doMusicTest();
 
         TextView txtView_start = findViewById(R.id.announce);
         blinkText(txtView_start, 650, 200);
+    }
+
+    protected void doMusicTest() {
+        Button button = findViewById(R.id.button6);
+        button.setOnClickListener(v -> {
+            Intent intentD = new Intent(getApplication(), MusicTestActivity.class);
+            startActivity(intentD);
+        });
     }
 
     protected void setOnClick() {
