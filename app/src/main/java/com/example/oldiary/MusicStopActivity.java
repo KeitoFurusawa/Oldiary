@@ -14,6 +14,6 @@ public class MusicStopActivity extends AlarmActivity {
     }
 
     public void STOP(View v) {
-        mStop();
+        mDestroy();
     }
 }
