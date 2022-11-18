@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-public class LoginActivity extends AppCompatActivity {
+public abstract class LoginActivity extends AppCompatActivity {
     private static final String TAG = "Login";
     private String phoneNumber;
     private String password;
@@ -33,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     SoundPool soundPool;
     int mp3a;
+    MediaPlayer music;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +43,14 @@ public class LoginActivity extends AppCompatActivity {
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
         setOnClickBack();
         setOnClickCreateNew();
         setOnClickLogin();
         ss();
     }
+
+
 
     protected void ss() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -168,4 +173,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    public abstract void onCreate();
+
+    public abstract int onStartCommand(Intent intent, int flags, int startId);
 }
