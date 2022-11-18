@@ -1,5 +1,7 @@
 package com.example.oldiary;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
@@ -117,6 +119,17 @@ public class LoginActivity extends AppCompatActivity {
                 //Log.d("debug", "this is onComplete");
                 if (!task.isSuccessful()) {
                     Log.e(TAG, "Error getting data", task.getException());
+                    new AlertDialog.Builder(LoginActivity.this)
+                            .setTitle("エラー")
+                            .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // OKボタン押下時の処理
+                                    Intent intent2 = new Intent(getApplication(), MainActivity.class);
+                                    startActivity(intent2);
+                                }
+                            })
+                            .show();
                 }
                 else {
                     String value = String.valueOf(task.getResult().getValue());
