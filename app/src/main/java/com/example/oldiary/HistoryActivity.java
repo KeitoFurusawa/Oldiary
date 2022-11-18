@@ -38,6 +38,7 @@ public class HistoryActivity extends AppCompatActivity {
     int nowDNum;
     ImageButton ibNext;
     ImageButton ibPrev;
+    ImageButton ibReload;
     boolean ibNextStatus;
     boolean ibPrevStatus;
     TextView post;
@@ -59,6 +60,7 @@ public class HistoryActivity extends AppCompatActivity {
         //changePhoto2();
         //changePhoto3();
         setElm();
+        setOnClickReload();
     }
 
     protected void onResume() {
@@ -118,6 +120,7 @@ public class HistoryActivity extends AppCompatActivity {
     private void setElm() {
         ibNext = findViewById(R.id.imageButtonNext);
         ibPrev = findViewById(R.id.imageButtonPrev);
+        ibReload = findViewById(R.id.imageButtonReload);
         post = findViewById(R.id.textViewPost);
         postedAt = findViewById(R.id.textViewPostedAt);
         roadCnt(); //ポストの数を読み込む
@@ -245,6 +248,12 @@ public class HistoryActivity extends AppCompatActivity {
                 setDiaryText();
                 setDiaryDateTime();
             }
+        });
+    }
+
+    private void setOnClickReload() {
+        ibReload.setOnClickListener(v -> {
+            setElm();
         });
     }
 
