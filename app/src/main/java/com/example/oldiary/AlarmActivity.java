@@ -42,6 +42,11 @@ public class AlarmActivity extends Activity {
         }
     }
 
+    protected void mDestroy() {
+        mp.release();
+        mp = null;
+    }
+
     protected int getMaxVolume() {
         int max = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         return max;
