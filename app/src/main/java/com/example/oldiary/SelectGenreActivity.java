@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectGenreActivity extends AppCompatActivity {
+public class SelectGenreActivity extends AlarmActivity {
     private static ArrayList<Integer> selectedGenreList = new ArrayList<>();//
     public static boolean bStates = false;//
     private DatabaseReference mDatabase;
@@ -107,6 +107,7 @@ public class SelectGenreActivity extends AppCompatActivity {
                 intentNext.putExtra("UserName", userName);
                 editor.putString("UserID", userId);
                 editor.commit();
+                mDestroy();
                 startActivity(intentNext);
             } else { //無効時
                 Toast.makeText(SelectGenreActivity.this, "ジャンルを3つ選んで下さい", Toast.LENGTH_SHORT).show();

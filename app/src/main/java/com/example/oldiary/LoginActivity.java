@@ -1,13 +1,15 @@
 package com.example.oldiary;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -24,7 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-public abstract class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AlarmActivity {
     private static final String TAG = "Login";
     private String phoneNumber;
     private String password;
@@ -34,7 +36,6 @@ public abstract class LoginActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     SoundPool soundPool;
     int mp3a;
-    MediaPlayer music;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +44,22 @@ public abstract class LoginActivity extends AppCompatActivity {
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        playMusic();
         setOnClickBack();
         setOnClickCreateNew();
         setOnClickLogin();
         ss();
     }
 
+    public void playMusic() {
+        try {
+            Thread.sleep(800);
+            mStart();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+    }
 
     protected void ss() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -74,6 +83,7 @@ public abstract class LoginActivity extends AppCompatActivity {
         ImageButton imageButton = findViewById(R.id.imageButtonBack);
         imageButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), MainActivity.class);
+            mDestroy();
             startActivity(intent);
         });
     }
@@ -122,6 +132,18 @@ public abstract class LoginActivity extends AppCompatActivity {
                 //Log.d("debug", "this is onComplete");
                 if (!task.isSuccessful()) {
                     Log.e(TAG, "Error getting data", task.getException());
+                    new AlertDialog.Builder(LoginActivity.this)
+                            .setTitle("エラー")
+                            .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // OKボタン押下時の処理
+                                    Intent intent2 = new Intent(getApplication(), MainActivity.class);
+                                    mDestroy();
+                                    startActivity(intent2);
+                                }
+                            })
+                            .show();
                 }
                 else {
                     String value = String.valueOf(task.getResult().getValue());
@@ -173,7 +195,4 @@ public abstract class LoginActivity extends AppCompatActivity {
     }
 
 
-    public abstract void onCreate();
-
-    public abstract int onStartCommand(Intent intent, int flags, int startId);
 }
