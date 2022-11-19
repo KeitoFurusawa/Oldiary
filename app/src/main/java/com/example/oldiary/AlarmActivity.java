@@ -20,7 +20,7 @@ public class AlarmActivity extends Activity {
 
         // MediaPlayerインスタンスの生成
         if (mp == null) {
-            Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.wii_music);
+            Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.afternoon_peace);
             mp = MediaPlayer.create(this, uri);
             mp.setLooping(true);
         }
