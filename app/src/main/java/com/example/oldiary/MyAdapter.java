@@ -18,6 +18,7 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
 
     private final static String TAG = "checkbox";
     private LayoutInflater mLayoutInflater;
+    private CheckBox checkBox; ///
 
     public MyAdapter(Context context, int resourceId, List<GenreData> objects) {
         super(context, resourceId, objects);
@@ -38,7 +39,7 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
         textView.setText(item.getTextData());
         textView.setTextColor(Color.BLACK); //リストビューの色変更
         textView.setTextSize(20); //リストビューのテキストサイズ
-        CheckBox checkBox = convertView.findViewById(R.id.checkBox);
+        checkBox = convertView.findViewById(R.id.checkBox);
         checkBox.setOnCheckedChangeListener(null);
         checkBox.setChecked(item.isChecked());
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -75,5 +76,9 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
         });
 
         return convertView;
+    }
+
+    public void onClickElm(int pos) {
+        checkBox.performClick();
     }
 }
