@@ -84,6 +84,7 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
                 }
             });
         } else {
+
             checkBoxList.get(position).setOnCheckedChangeListener(null);
             checkBoxList.get(position).setChecked(item.isChecked());
             checkBoxList.get(position).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -118,8 +119,9 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
                     }
                 }
             });
-        }
 
+
+        }
 
         return convertView;
     }
