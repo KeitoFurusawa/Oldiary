@@ -33,19 +33,20 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
     // getView()は各行を表示しようとした時に呼び出される
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //Log.d(TAG, "getView"+po);
         // position のデータを取る
         GenreData item = (GenreData)getItem(position);
         // convertViewは使いまわされている可能性があるのでnullの時だけ新しく作る
         if (null == convertView) convertView = mLayoutInflater.inflate(R.layout.genre_list, null);
-
-        // GenreDataのデータをViewの各ウィジェットにセットする
+        //GenreDataのデータをViewの各ウィジェットにセットする
         TextView textView = convertView.findViewById(R.id.collection_of_words);
         textView.setText(item.getTextData());
         textView.setTextColor(Color.BLACK); //リストビューの色変更
         textView.setTextSize(20); //リストビューのテキストサイズ
+
         CheckBox checkBox = convertView.findViewById(R.id.checkBox);
         if (!checkBoxTextList.contains(item.getTextData())) {
+
+            //checkBox.setId(position);
             Log.d(TAG, "setCheckBok"+position);
             checkBoxTextList.add(item.getTextData());
             checkBoxList.add(checkBox);
@@ -84,9 +85,9 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
                 }
             });
         } else {
-
             checkBoxList.get(position).setOnCheckedChangeListener(null);
             checkBoxList.get(position).setChecked(item.isChecked());
+            Log.d(TAG, "else" + position);
             checkBoxList.get(position).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -120,7 +121,6 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
                 }
             });
 
-
         }
 
         return convertView;
@@ -131,6 +131,6 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
             //Log.d(TAG, s);
         }
         checkBoxList.get(pos).performClick();
-        Log.d(TAG, "sizeOfCheckbox: " + checkBoxTextList.size());
+        //Log.d(TAG, "sizeOfCheckbox: " + checkBoxTextList.size());
     }
 }

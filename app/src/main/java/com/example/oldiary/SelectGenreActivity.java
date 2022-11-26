@@ -26,6 +26,7 @@ public class SelectGenreActivity extends AppCompatActivity {
     String userId;
     String userName;
     private final static String TAG = "checkbox";
+    //private GenreData[] genreData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
