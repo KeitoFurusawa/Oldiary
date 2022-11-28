@@ -21,14 +21,7 @@
         android:theme="@style/Theme.Oldiary"
         tools:targetApi="31">
         <activity
-            android:name=".MusicStopActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".MusicTestActivity"
+            android:name=".IntroActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -41,12 +34,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
-        <service
-            android:name=".BGMService"
-            android:enabled="true"
-            android:exported="true" />
-
         <activity
             android:name=".PopupActivity"
             android:exported="false">
