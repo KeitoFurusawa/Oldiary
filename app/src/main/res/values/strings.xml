@@ -4,6 +4,9 @@
     <string name="move">MOVE</string>
     <string name="sub">Sub Activity</string>
     <string name="return_sub">RETURN</string>
+    <string name="edittext_hint">
+        <font size="20">登録した電話番号</font>
+    </string>
 
     //以下、用語集用
     <string name="words">
