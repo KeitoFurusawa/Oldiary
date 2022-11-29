@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Oldinary</string>
+    <string name="app_name">Oldiary</string>
     <string name="main">Main Activity</string>
     <string name="move">MOVE</string>
     <string name="sub">Sub Activity</string>

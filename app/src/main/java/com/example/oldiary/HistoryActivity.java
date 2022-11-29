@@ -1,5 +1,7 @@
 package com.example.oldiary;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
@@ -26,6 +28,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 public class HistoryActivity extends AppCompatActivity {
     private static final String TAG = "history";
     private SharedPreferences preference;
@@ -38,10 +42,12 @@ public class HistoryActivity extends AppCompatActivity {
     int nowDNum;
     ImageButton ibNext;
     ImageButton ibPrev;
+    ImageButton ibReload;
     boolean ibNextStatus;
     boolean ibPrevStatus;
     TextView post;
     TextView postedAt;
+    ArrayList<String> d_idList;
 
 
     @Override
@@ -54,11 +60,13 @@ public class HistoryActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.history);
         mediaPlayer.setLooping(true);
         userId = preference.getString("UserID", "");
+        d_idList = new ArrayList<String>();
         setOnClickBack();
         //changePhoto();
         //changePhoto2();
         //changePhoto3();
         setElm();
+        setOnClickReload();
     }
 
     protected void onResume() {
@@ -118,10 +126,36 @@ public class HistoryActivity extends AppCompatActivity {
     private void setElm() {
         ibNext = findViewById(R.id.imageButtonNext);
         ibPrev = findViewById(R.id.imageButtonPrev);
+        ibReload = findViewById(R.id.imageButtonReload);
         post = findViewById(R.id.textViewPost);
         postedAt = findViewById(R.id.textViewPostedAt);
+        roadDList(); //ポストのidのリストを読み込む
         roadCnt(); //ポストの数を読み込む
         //Log.d(TAG, String.valueOf(d_cnt)); //debug
+    }
+
+    private void roadDList() {
+        mDatabase.child("users").child(userId).child("diaries").child("d_idList").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                    Toast.makeText(HistoryActivity.this, "データの取得に失敗しました。\nネットワークに接続してください。", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    String d_idListResult = String.valueOf(task.getResult().getValue());
+                    //Log.d(TAG, "result on roadCnt: " + d_cntResult); //debug
+                    if (d_idListResult.equals("null")) { //投稿がない
+                        Log.e(TAG, "ERROR: cannot get post");
+                    } else {
+                        String[] split = d_idListResult.split(",");
+                        for (String xs : split) {
+                            d_idList.add(xs);
+                        }
+                    }
+                }
+            }
+        });
     }
 
     private void roadCnt() {
@@ -171,8 +205,9 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void setDiaryText() {
-        String d_id = String.format("d_%s%d", userId, nowDNum);
-        mDatabase.child("users").child(userId).child("diaries").child(d_id).child("text").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        //String d_id = String.format("d_%s%d", userId, nowDNum);
+        String d_id = d_idList.get(nowDNum-1);
+        mDatabase.child("diaries").child(d_id).child("text").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
@@ -192,13 +227,24 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void setDiaryDateTime() {
-        String d_id = String.format("d_%s%d", userId, nowDNum);
-        mDatabase.child("users").child(userId).child("diaries").child(d_id).child("postedAt").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        //String d_id = String.format("d_%s%d", userId, nowDNum);
+        String d_id = d_idList.get(nowDNum-1);
+        mDatabase.child("diaries").child(d_id).child("postedAt").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
                     Log.e(TAG, "Error getting data", task.getException());
-                    Toast.makeText(HistoryActivity.this, "データの取得に失敗しました。\nネットワークに接続してください。", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(HistoryActivity.this)
+                            .setTitle("エラー")
+                            .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // OKボタン押下時の処理
+                                    Intent intent2 = new Intent(getApplication(), MainActivity.class);
+                                    startActivity(intent2);
+                                }
+                            })
+                            .show();
                 }
                 else {
                     String textResult = String.valueOf(task.getResult().getValue());
@@ -245,6 +291,12 @@ public class HistoryActivity extends AppCompatActivity {
                 setDiaryText();
                 setDiaryDateTime();
             }
+        });
+    }
+
+    private void setOnClickReload() {
+        ibReload.setOnClickListener(v -> {
+            setElm();
         });
     }
 

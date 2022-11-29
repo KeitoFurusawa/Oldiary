@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ public class SelectGenreActivity extends AppCompatActivity {
     String userId;
     String userName;
     private final static String TAG = "checkbox";
+    //private GenreData[] genreData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,18 @@ public class SelectGenreActivity extends AppCompatActivity {
             list.add(genreData);
         }
         MyAdapter adapter = new MyAdapter(SelectGenreActivity.this,R.layout.genre_list,list);
+        //listView.setOnClickListener();
         listView.setAdapter(adapter);
+        /*
+        listView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Log.d(TAG, "pushed pos: " + position);
+                        adapter.onClickElm(position);
+                    }
+        });
+        */
     }
 
     public void addSelectedGenreListList(int pos) {

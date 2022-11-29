@@ -64,7 +64,6 @@ public class Create2Activity extends AppCompatActivity {
         Intent intent1 = getIntent();
         phoneNumber = intent1.getStringExtra("PhoneNumber");
         Log.d(TAG, "PhoneNumber: " + phoneNumber);
-
     }
 
     protected void getPassword() {
