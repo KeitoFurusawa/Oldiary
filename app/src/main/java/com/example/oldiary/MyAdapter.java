@@ -20,7 +20,7 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
 
     private final static String TAG = "checkbox";
     private LayoutInflater mLayoutInflater;
-    private  static ArrayList<String> checkBoxTextList = new ArrayList<>(); ///
+    private static ArrayList<String> checkBoxTextList = new ArrayList<>(); ///
     private static ArrayList<CheckBox> checkBoxList = new ArrayList<>(); ///
 
 
@@ -45,7 +45,6 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
 
         CheckBox checkBox = convertView.findViewById(R.id.checkBox);
         if (!checkBoxTextList.contains(item.getTextData())) {
-
             //checkBox.setId(position);
             Log.d(TAG, "setCheckBok"+position);
             checkBoxTextList.add(item.getTextData());

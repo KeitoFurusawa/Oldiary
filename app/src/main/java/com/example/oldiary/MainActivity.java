@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     protected void debug() {
         ImageButton imgButtonD = findViewById(R.id.imageButtonDebug);
         imgButtonD.setOnClickListener(v -> {
-            Intent intentD = new Intent(getApplication(), SelectGenreActivity.class);
+            Intent intentD = new Intent(getApplication(), RegisterActivity.class);
             startActivity(intentD);
         });
     }

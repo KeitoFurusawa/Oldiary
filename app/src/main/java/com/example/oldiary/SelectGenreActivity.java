@@ -62,7 +62,7 @@ public class SelectGenreActivity extends AppCompatActivity {
         MyAdapter adapter = new MyAdapter(SelectGenreActivity.this,R.layout.genre_list,list);
         //listView.setOnClickListener();
         listView.setAdapter(adapter);
-        ///
+        /*
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
@@ -71,7 +71,7 @@ public class SelectGenreActivity extends AppCompatActivity {
                         adapter.onClickElm(position);
                     }
         });
-        ///
+        */
     }
 
     public void addSelectedGenreListList(int pos) {

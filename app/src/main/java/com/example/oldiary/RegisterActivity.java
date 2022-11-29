@@ -18,8 +18,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegisterActivity extends AppCompatActivity {
-    /*
+
     private static final String TAG = "Debug";
     static String contentPath, contentMessage;
     private DatabaseReference mDatabase;
@@ -33,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         //Button btn =  findViewById(R.id.button);
 
     }
-
+    /*
     public void onClickSubmit(View v) {
         if (sendMessage() == 0) {
             Toast.makeText(
@@ -47,9 +50,10 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
     }
+    */
 
     public void onClickDebug(View v) {
-        mDatabase.child("users").child("id_0").child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        mDatabase.child("users").child("id_0").child("DateOfBirth").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 Log.d("debug", "this is onComplete");
@@ -70,13 +74,14 @@ public class RegisterActivity extends AppCompatActivity {
                     Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
-                    String value = String.valueOf(task.getResult().getValue());
-                    Log.d(TAG, value);
+                    //String value = task.getResult().getValue();
+                    Log.d(TAG, "value: " + (String)task.getResult().getValue());
                 }
             }
         });
     }
 
+    /*
     public int sendMessage() {
         EditText editTextPath = (EditText) findViewById(R.id.editTextTextPath);
         EditText editTextMessage = (EditText) findViewById(R.id.editTextTextMessage);
@@ -86,6 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         return 0;
     }
+    */
 
-     */
+
 }
