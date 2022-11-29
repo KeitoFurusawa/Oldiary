@@ -23,7 +23,8 @@ public class ReadAndWrite extends CreateActivity {
     public ReadAndWrite() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
-    public void writeDiary(String userId, String text, String dateTime, long timeInMillis) {
+
+    public void writeDiary(String userId, String userName, String text, String dateTime, long timeInMillis) {
         Log.d(TAG, text);
         mDatabase.child("users").child(userId).child("d_cnt").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -38,17 +39,22 @@ public class ReadAndWrite extends CreateActivity {
                         Log.d(TAG, "ERROR: cnt is null");
                         mDatabase.child("users").child(userId).child("d_cnt").setValue(1);
                         //mDatabase.child("users").child(userId).child("diaries").child("d_id").setValue(userId+"1");
-                        mDatabase.child("users").child(userId).child("diaries").child("d_"+userId+"1").child("text").setValue(text);
-                        mDatabase.child("users").child(userId).child("diaries").child("d_"+userId+"1").child("postedAt").setValue(dateTime);
-                        mDatabase.child("users").child(userId).child("diaries").child("d_"+userId+"1").child("timeInMillis").setValue(timeInMillis);
-
+                        mDatabase.child("diaries").child("d_"+userId+"1").child("text").setValue(text);
+                        mDatabase.child("diaries").child("d_"+userId+"1").child("postedAt").setValue(dateTime);
+                        mDatabase.child("diaries").child("d_"+userId+"1").child("timeInMillis").setValue(timeInMillis);
+                        mDatabase.child("diaries").child("d_"+userId+"1").child("postedBy").setValue(userName);
+                        addNewDiaryPublic("d_"+userId+"1");
+                        addNewDiaryPersonal(userId, "d_"+userId+"1");
                     } else { // 2回目以降
                         int count = Integer.parseInt(getResult) + 1;
                         mDatabase.child("users").child(userId).child("d_cnt").setValue(count);
                         //mDatabase.child("users").child(userId).child("diaries").child("d_id").setValue(userId+count);
-                        mDatabase.child("users").child(userId).child("diaries").child("d_"+userId+count).child("text").setValue(text);
-                        mDatabase.child("users").child(userId).child("diaries").child("d_"+userId+count).child("postedAt").setValue(dateTime);
-                        mDatabase.child("users").child(userId).child("diaries").child("d_"+userId+count).child("timeInMillis").setValue(timeInMillis);
+                        mDatabase.child("diaries").child("d_"+userId+count).child("text").setValue(text);
+                        mDatabase.child("diaries").child("d_"+userId+count).child("postedAt").setValue(dateTime);
+                        mDatabase.child("diaries").child("d_"+userId+count).child("timeInMillis").setValue(timeInMillis);
+                        mDatabase.child("diaries").child("d_"+userId+count).child("postedBy").setValue(userName);
+                        addNewDiaryPublic("d_"+userId+count);
+                        addNewDiaryPersonal(userId, "d_"+userId+count);
                     }
                 }
             }
@@ -63,5 +69,74 @@ public class ReadAndWrite extends CreateActivity {
         String ID = sb.toString();
         Log.d(TAG, ID);
         mDatabase.child("users").child(ID).setValue(user);
+    }
+
+    public void addNewDiaryPublic(String diaryId) {
+        mDatabase.child("diaries").child("d_idList").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                Log.d("debug", "this is onComplete");
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    String value = String.valueOf(task.getResult().getValue());
+                    if (value.equals("null")) { //first diary
+                        mDatabase.child("diaries").child("d_idList").setValue(diaryId);
+                    }
+                    else {
+                        StringBuffer sb = new StringBuffer(value);
+                        sb.append(",").append(diaryId);
+                        mDatabase.child("diaries").child("d_idList").setValue(sb.toString());
+                    }
+                    //Log.d(TAG, value);
+                }
+            }
+        });
+
+        mDatabase.child("diaries").child("dCntPublic").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                Log.d("debug", "this is onComplete");
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    String value = String.valueOf(task.getResult().getValue());
+                    if (value.equals("null")) { //first diary on public
+                        mDatabase.child("diaries").child("dCntPublic").setValue(1);
+                    }
+                    else { //２つ目以降
+                        int cnt = Integer.parseInt(value);
+                        mDatabase.child("diaries").child("dCntPublic").setValue(++cnt);
+                    }
+                    //Log.d(TAG, value);
+                }
+            }
+        });
+    }
+
+    public void addNewDiaryPersonal(String userId, String diaryId) {
+        mDatabase.child("users").child(userId).child("diaries").child("d_idList").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                Log.d("debug", "this is onComplete");
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    String value = String.valueOf(task.getResult().getValue());
+                    if (value.equals("null")) { //first diary
+                        mDatabase.child("users").child(userId).child("diaries").child("d_idList").setValue(diaryId);
+                    }
+                    else {
+                        StringBuffer sb = new StringBuffer(value);
+                        sb.append(",").append(diaryId);
+                        mDatabase.child("users").child(userId).child("diaries").child("d_idList").setValue(sb.toString());
+                    }
+                    //Log.d(TAG, value);
+                }
+            }
+        });
     }
 }

@@ -29,6 +29,7 @@ import java.util.TimeZone;
 public class WriteActivity extends AppCompatActivity {
     private final static String TAG = "home";
     private String userId;
+    private String userName;
     private SharedPreferences preference;
 
     static final int REQUEST_CAPTURE_IMAGE = 100;
@@ -45,6 +46,8 @@ public class WriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_write);
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         userId =  preference.getString("UserID", "");
+        Intent intent1 = getIntent();
+        userName = intent1.getStringExtra("UserName");
         checkUserId();
         setOnClick();
         setOnClickPost();
@@ -95,7 +98,7 @@ public class WriteActivity extends AppCompatActivity {
                 Calendar c = Calendar.getInstance();
                 TimeZone tz = TimeZone.getTimeZone("Asia/Tokyo");
                 c.setTimeZone(tz); //日本時間に設定
-                rad.writeDiary(userId, txt, dateTime(), c.getTimeInMillis());
+                rad.writeDiary(userId, userName, txt, dateTime(), c.getTimeInMillis());
                 new AlertDialog.Builder(WriteActivity.this)
                         .setTitle("")
                         .setMessage("投稿されました！")

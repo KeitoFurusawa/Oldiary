@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
     */
 
     public void onClickDebug(View v) {
-        mDatabase.child("users").child("id_0").child("DateOfBirth").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        mDatabase.child("users").child("id_0120002222").child("diaries").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 Log.d("debug", "this is onComplete");
@@ -62,10 +62,15 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else {
                     String value = String.valueOf(task.getResult().getValue());
-                    Log.d(TAG, value);
+                    String[] split = value.split("[,{}]");
+                    for (String xs : split) {
+                        Log.d(TAG, xs);
+                    }
+                    //Log.d(TAG, value);
                 }
             }
         });
+        /**
         mDatabase.child("users").child("id_0").child("password").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -79,6 +84,8 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+         **/
     }
 
     /*

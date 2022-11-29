@@ -78,6 +78,7 @@ public class HomeActivity extends AppCompatActivity {
         ImageButton imageButton2 = findViewById(R.id.write);
         imageButton2.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), WriteActivity.class);
+            intent.putExtra("UserName", userName);
             startActivity(intent);
         });
     }
