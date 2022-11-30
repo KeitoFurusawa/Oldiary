@@ -32,12 +32,8 @@ public class WriteActivity extends AppCompatActivity {
     private String userId;
     private String userName;
     private SharedPreferences preference;
-
     static final int REQUEST_CAPTURE_IMAGE = 100;
-
     Button button1;
-
-
     private static final int RESULT_PICK_IMAGEFILE = 1000;
     private ImageView imageView;
 
