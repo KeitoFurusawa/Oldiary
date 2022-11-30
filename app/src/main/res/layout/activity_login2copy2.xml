@@ -7,7 +7,7 @@
     tools:context=".Login2copy2Activity">
 
     <Button
-        android:id="@+id/cancel2"
+        android:id="@+id/cancel"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:backgroundTint="#F57C00"
@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.81" />
 
     <Button
-        android:id="@+id/button_back2"
+        android:id="@+id/button_back"
         android:layout_width="120dp"
         android:layout_height="70dp"
         android:backgroundTint="#D32F2F"
@@ -31,14 +31,14 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_next2"
+        app:layout_constraintEnd_toStartOf="@+id/button_next"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.933" />
 
     <Button
-        android:id="@+id/button_next2"
+        android:id="@+id/button_next"
         android:layout_width="120dp"
         android:layout_height="70dp"
         android:backgroundTint="#388E3C"
@@ -48,7 +48,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button_back2"
+        app:layout_constraintStart_toEndOf="@+id/button_back"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.933" />
 
