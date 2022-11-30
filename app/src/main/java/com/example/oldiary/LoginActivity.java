@@ -16,6 +16,7 @@ import android.widget.Toast;
 import android.media.SoundPool;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,6 +41,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
         mDatabase = FirebaseDatabase.getInstance().getReference();

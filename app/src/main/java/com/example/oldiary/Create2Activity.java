@@ -12,6 +12,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Create2Activity extends AppCompatActivity {
@@ -27,12 +29,16 @@ public class Create2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create2);
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
         setOnClick();
         getPhoneNumber();
         getPassword();
         passWord();
         ss();
+
     }
 
     protected void ss() {
