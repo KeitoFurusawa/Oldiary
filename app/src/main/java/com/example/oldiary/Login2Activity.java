@@ -290,6 +290,10 @@ public class Login2Activity extends AppCompatActivity {
                         editor.putString("UserID", userId);
                         editor.commit();
                         startActivity(intentNext);
+                        //
+                        AlarmActivity alm = new AlarmActivity();
+                        alm.mDestroy();
+                        //
                     }
                 }
             }

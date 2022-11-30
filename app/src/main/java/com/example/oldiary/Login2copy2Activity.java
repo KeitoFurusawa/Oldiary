@@ -262,6 +262,10 @@ public class Login2copy2Activity extends AppCompatActivity {
                         intentNext.putExtra("UserName", userName);
                         editor.putString("UserID", userId);
                         editor.commit();
+                        //
+                        AlarmActivity alm = new AlarmActivity();
+                        alm.mDestroy();
+                        //
                         startActivity(intentNext);
                     }
                 }
