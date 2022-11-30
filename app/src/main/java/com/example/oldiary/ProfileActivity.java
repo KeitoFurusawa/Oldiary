@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
@@ -29,18 +30,19 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        setOnClickBack();
-        editProfile();
+        // setOnClickBack();
+        // editProfile();
 
     }
-
+    /*
     protected void setOnClickBack() {
-        ImageButton imageButton = findViewById(R.id.imageButton);
-        imageButton.setOnClickListener(v -> {
+        ImageView imageView = findViewById(R.id.back);
+        imageView.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), HomeActivity.class);
             startActivity(intent);
         });
     }
+
 
     protected void editProfile() {
         Button button = findViewById(R.id.button2);
@@ -50,4 +52,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
     }
+
+     */
 }
