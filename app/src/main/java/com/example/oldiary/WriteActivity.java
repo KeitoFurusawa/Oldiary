@@ -92,7 +92,10 @@ public class WriteActivity extends AppCompatActivity {
         btnPost.setOnClickListener(v -> {
             TextView textView = findViewById(R.id.editTextTextMultiLine2);
             String txt = textView.getText().toString();
-            if (txt.length() == 0) {
+            if (userId.equals("id_0")) {
+                Toast.makeText(WriteActivity.this, "デバッグユーザ0は投稿できません", Toast.LENGTH_SHORT).show();
+            }
+            else if (txt.length() == 0) {
                 Log.d(TAG, dateTime());
                 Toast.makeText(WriteActivity.this, "投稿内容がありません", Toast.LENGTH_SHORT).show();
             } else {

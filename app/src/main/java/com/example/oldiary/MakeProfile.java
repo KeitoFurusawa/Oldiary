@@ -3,6 +3,7 @@ package com.example.oldiary;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.ActionBar;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -18,6 +19,9 @@ public class MakeProfile extends AppCompatActivity {
     String userId;
     private String userName;
     private DatabaseReference mDatabase;
+    private SharedPreferences preference;
+    private SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +31,8 @@ public class MakeProfile extends AppCompatActivity {
             actionBar.hide();
         }
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
+        editor = preference.edit();
         getUserId();
         setOnClick();
         setOnClick2();
@@ -56,7 +62,19 @@ public class MakeProfile extends AppCompatActivity {
         TextView textViewMonth = findViewById(R.id.editTextMonth);
         TextView textViewDate = findViewById(R.id.editTextDate);
         ButtonNext.setOnClickListener(v -> {
-            if (textViewUserName.getText().toString().length() == 0 ||
+            if (userId.equals("id_0") && textViewUserName.getText().toString().length() == 0) {
+                Intent intentNext = new Intent(getApplication(), HomeActivity.class);
+                intentNext.putExtra("UserID", userId);
+                intentNext.putExtra("UserName", userName);
+                editor.putString("UserID", userId);
+                editor.commit();
+                startActivity(intentNext);
+                //
+                AlarmActivity alm = new AlarmActivity();
+                alm.mDestroy();
+                //
+            }
+            else if (textViewUserName.getText().toString().length() == 0 ||
                 textViewYear.getText().toString().length() == 0 ||
                 textViewMonth.getText().toString().length() == 0 ||
                 textViewDate.getText().toString().length() == 0) {
