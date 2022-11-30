@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MakeProfile extends AppCompatActivity {
+public class MakeProfile extends AlarmActivity {
     private static final String TAG = "profile";
     String userId;
     private String userName;
@@ -44,6 +44,7 @@ public class MakeProfile extends AppCompatActivity {
         ImageButton imgButton = findViewById(R.id.imageButtonBack);
         imgButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), LoginActivity.class);
+            mDestroy();
             startActivity(intent);
         });
     }

@@ -11,7 +11,7 @@
         android:id="@+id/announce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="扉を開けて始める"
+        android:text="扉を押して始める"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

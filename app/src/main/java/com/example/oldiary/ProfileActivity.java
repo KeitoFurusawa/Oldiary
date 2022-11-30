@@ -2,13 +2,21 @@ package com.example.oldiary;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -21,22 +29,20 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle("プロフィール");
-        }
-        setOnClickBack();
-        editProfile();
+
+        // setOnClickBack();
+        // editProfile();
 
     }
-
+    /*
     protected void setOnClickBack() {
-        ImageButton imageButton = findViewById(R.id.imageButton);
-        imageButton.setOnClickListener(v -> {
+        ImageView imageView = findViewById(R.id.back);
+        imageView.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), HomeActivity.class);
             startActivity(intent);
         });
     }
+
 
     protected void editProfile() {
         Button button = findViewById(R.id.button2);
@@ -46,4 +52,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
     }
+
+     */
 }
