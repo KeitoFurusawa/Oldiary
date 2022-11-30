@@ -2,6 +2,7 @@ package com.example.oldiary;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -21,12 +22,12 @@ import java.io.FileDescriptor;
 import java.io.IOException;
 
 public class WriteActivity extends AppCompatActivity {
-
+    private final static String TAG = "home";
+    private String userId;
+    private String userName;
+    private SharedPreferences preference;
     static final int REQUEST_CAPTURE_IMAGE = 100;
-
     Button button1;
-
-
     private static final int RESULT_PICK_IMAGEFILE = 1000;
     private ImageView imageView;
 
