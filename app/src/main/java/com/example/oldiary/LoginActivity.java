@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
         } else { //登録済み
             /*idを渡してパスワード入力画面へ*/
             Random random = new Random();
-            int randomValue = random.nextInt(3);
+            int randomValue = random.nextInt(1) + 1;
             switch(randomValue){
                 case 0:
                     Intent intentNext = new Intent(getApplication(), Login2Activity.class);
