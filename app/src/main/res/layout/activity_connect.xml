@@ -7,62 +7,6 @@
     tools:context=".ConnectActivity">
 
     <ImageButton
-        android:id="@+id/imageButtonReload"
-        android:layout_width="55dp"
-        android:layout_height="52dp"
-        android:background="@drawable/button_overlay"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.98"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.017"
-        app:srcCompat="@drawable/reload" />
-
-    <TextView
-        android:id="@+id/textViewPostedAt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="postedAt"
-        android:textColor="#010101"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPost"
-        app:layout_constraintVertical_bias="0.013" />
-
-    <ImageButton
-        android:id="@+id/imageButtonPrev"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@drawable/button_overlay"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.475"
-        app:srcCompat="@drawable/prev" />
-
-    <ImageButton
-        android:id="@+id/imageButtonNext"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@drawable/button_overlay"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.953"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.475"
-        app:srcCompat="@drawable/next" />
-
-    <ImageButton
         android:id="@+id/back_home"
         android:layout_width="74dp"
         android:layout_height="68dp"
@@ -92,7 +36,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.162" />
+        app:layout_constraintVertical_bias="0.267" />
 
     <Button
         android:id="@+id/buttonNewDiary"
@@ -106,7 +50,21 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toEndOf="@+id/imageButtonPrev"
         app:layout_constraintTop_toBottomOf="@+id/textViewPostedAt"
-        app:layout_constraintVertical_bias="0.184" />
+        app:layout_constraintVertical_bias="0.212" />
+
+    <ImageButton
+        android:id="@+id/imageButtonNext"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/button_overlay"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.953"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.553"
+        app:srcCompat="@drawable/next" />
 
     <TextView
         android:id="@+id/textViewPostedBy"
@@ -121,5 +79,48 @@
         app:layout_constraintHorizontal_bias="0.586"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.518" />
+        app:layout_constraintVertical_bias="0.754" />
+
+    <ImageButton
+        android:id="@+id/imageButtonReload"
+        android:layout_width="55dp"
+        android:layout_height="52dp"
+        android:background="@drawable/button_overlay"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.092"
+        app:srcCompat="@drawable/reload" />
+
+    <TextView
+        android:id="@+id/textViewPostedAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="postedAt"
+        android:textColor="#010101"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPost"
+        app:layout_constraintVertical_bias="0.015" />
+
+    <ImageButton
+        android:id="@+id/imageButtonPrev"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/button_overlay"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.553"
+        app:srcCompat="@drawable/prev" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
