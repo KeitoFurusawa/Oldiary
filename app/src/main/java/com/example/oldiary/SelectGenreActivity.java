@@ -1,5 +1,6 @@
 package com.example.oldiary;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -32,6 +33,10 @@ public class SelectGenreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_genre);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
         mDatabase = FirebaseDatabase.getInstance().getReference();
         bStates = false;
         selectedGenreList = new ArrayList<Integer>();

@@ -1,5 +1,6 @@
 package com.example.oldiary;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -44,6 +45,10 @@ public class WriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("投稿する");
+        }
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         userId =  preference.getString("UserID", "");
         Intent intent1 = getIntent();
