@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.media.SoundPool;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -24,6 +24,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Random;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -162,9 +164,26 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "その電話番号は登録されていません", Toast.LENGTH_SHORT).show();
         } else { //登録済み
             /*idを渡してパスワード入力画面へ*/
-            Intent intentNext = new Intent(getApplication(), Login2Activity.class);
-            intentNext.putExtra("UserID", userId);
-            startActivity(intentNext);
+            Random random = new Random();
+            int randomValue = random.nextInt(1) + 1;
+            switch(randomValue){
+                case 0:
+                    Intent intentNext = new Intent(getApplication(), Login2Activity.class);
+                    intentNext.putExtra("UserID", userId);
+                    startActivity(intentNext);
+                    break;
+                case 1:
+                    Intent intentNext2 = new Intent(getApplication(), Login2copy1Activity.class);
+                    intentNext2.putExtra("UserID", userId);
+                    startActivity(intentNext2);
+                    break;
+                case 2:
+                    Intent intentNext3 = new Intent(getApplication(), Login2copy2Activity.class);
+                    intentNext3.putExtra("UserID", userId);
+                    startActivity(intentNext3);
+            }
+
+
 
             /*
             //int idxAddPhoneNum = "phoneNumber=".length(); // = 12

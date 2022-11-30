@@ -21,6 +21,20 @@
         android:theme="@style/Theme.Oldiary"
         tools:targetApi="31">
         <activity
+            android:name=".Login2copy2Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Login2copy1Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".PopupActivity"
             android:exported="false">
             <meta-data

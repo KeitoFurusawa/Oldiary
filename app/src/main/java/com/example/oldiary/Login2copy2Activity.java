@@ -21,7 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Login2copy1Activity extends AppCompatActivity {
+public class Login2copy2Activity extends AppCompatActivity {
 
     private static final String TAG = "Login";
     String userId;
@@ -38,7 +38,8 @@ public class Login2copy1Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login2copy1);
+        setContentView(R.layout.activity_login2copy2);
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
@@ -86,7 +87,7 @@ public class Login2copy1Activity extends AppCompatActivity {
             if (inputPassword.length() < 4) {
                 Log.e(TAG, "ERROR: the length of inputPassword is not enough.");
                 Toast.makeText(
-                        Login2copy1Activity.this, "パスワードは4桁入力してください", Toast.LENGTH_SHORT).show();
+                        Login2copy2Activity.this, "パスワードは4桁入力してください", Toast.LENGTH_SHORT).show();
             } else {
                 Log.d(TAG, "inputPass: " + inputPassword);
                 Log.d(TAG, "correctPass: " + correctPassword);
@@ -94,7 +95,7 @@ public class Login2copy1Activity extends AppCompatActivity {
                     checkUserName();
                 } else {
                     Log.e(TAG, "ERROR: incorrect password");
-                    Toast.makeText(Login2copy1Activity.this, "パスワードが間違っています", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login2copy2Activity.this, "パスワードが間違っています", Toast.LENGTH_SHORT).show();
                 }
             }
         });
