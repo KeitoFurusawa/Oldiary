@@ -175,7 +175,6 @@ public class LoginActivity extends AlarmActivity {
             Intent intentNext = new Intent(getApplication(), Login2Activity.class);
             intentNext.putExtra("UserID", userId);
             startActivity(intentNext);
-
             /*
             //int idxAddPhoneNum = "phoneNumber=".length(); // = 12
             int idxAddPass = "password=".length(); // = 9
