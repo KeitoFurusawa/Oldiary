@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -83,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     //新規アカウント作成
     protected void setOnClickCreateNew() {
-        Button button= findViewById(R.id.button4);
+        Button button= findViewById(R.id.make_account);
         button.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), CreateActivity.class);
             startActivity(intent);
@@ -92,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
     //ログイン
     protected void setOnClickLogin() {
         Button buttonLogin = findViewById(R.id.buttonLogin);
-        TextView textViewPhoneNumber = findViewById(R.id.editTextPhoneNumber);
+        EditText textViewPhoneNumber = findViewById(R.id.editTextPhoneNumber);
         //TextView textViewPassword = findViewById(R.id.editTextPassword);
         buttonLogin.setOnClickListener(v -> {
             phoneNumber = textViewPhoneNumber.getText().toString();
