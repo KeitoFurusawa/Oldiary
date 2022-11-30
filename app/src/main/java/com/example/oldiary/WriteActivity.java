@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.FileDescriptor;
@@ -33,7 +34,17 @@ public class WriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("投稿する");
+        }
+        preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
+        userId =  preference.getString("UserID", "");
+        Intent intent1 = getIntent();
+        userName = intent1.getStringExtra("UserName");
+        checkUserId();
+        setOnClick();
+        setOnClickPost();
         findViews();
         setListeners();
 
@@ -48,8 +59,6 @@ public class WriteActivity extends AppCompatActivity {
                 startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
             }
         });
-
-        setOnClick();
     }
 
     protected void setOnClick() {
