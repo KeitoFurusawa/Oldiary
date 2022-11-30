@@ -26,6 +26,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Random;
+
 
 public class LoginActivity extends AlarmActivity {
     private static final String TAG = "Login";
@@ -172,27 +174,24 @@ public class LoginActivity extends AlarmActivity {
             Toast.makeText(LoginActivity.this, "その電話番号は登録されていません", Toast.LENGTH_SHORT).show();
         } else { //登録済み
             /*idを渡してパスワード入力画面へ*/
-            Intent intentNext = new Intent(getApplication(), Login2Activity.class);
-            intentNext.putExtra("UserID", userId);
-            startActivity(intentNext);
-            /*
-            //int idxAddPhoneNum = "phoneNumber=".length(); // = 12
-            int idxAddPass = "password=".length(); // = 9
-            //int idxOfRePhoneNum = getResult.indexOf("phoneNumber=") + idxAddPhoneNum;
-            int idxOfRePass = getResult.indexOf("password=") + idxAddPass;
-            String resultPassword = getResult.substring(idxOfRePass, idxOfRePass+4);
-
-            if (password.equals(resultPassword)) { //パスワードが正しい
-                Log.d(TAG, "login success");
-                checkUserName(userId);
-            } else { //パスワードが誤り
-                soundPool.play(mp3a,9 , 9, 0, 0, 1);
-                Log.e(TAG, "ERROR: incorrect password");
-                Toast.makeText(LoginActivity.this, "パスワードが間違っています", Toast.LENGTH_SHORT).show();
+            Random random = new Random();
+            int randomValue = random.nextInt(3);
+            switch(randomValue) {
+                case 0:
+                    Intent intentNext = new Intent(getApplication(), Login2Activity.class);
+                    intentNext.putExtra("UserID", userId);
+                    startActivity(intentNext);
+                    break;
+                case 1:
+                    Intent intentNext2 = new Intent(getApplication(), Login2copy1Activity.class);
+                    intentNext2.putExtra("UserID", userId);
+                    startActivity(intentNext2);
+                    break;
+                case 2:
+                    Intent intentNext3 = new Intent(getApplication(), Login2copy2Activity.class);
+                    intentNext3.putExtra("UserID", userId);
+                    startActivity(intentNext3);
             }
-            */
         }
     }
-
-
 }
