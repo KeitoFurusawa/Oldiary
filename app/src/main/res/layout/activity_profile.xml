@@ -46,7 +46,7 @@
         android:layout_marginTop="5dp"/>
 
     <LinearLayout
-        android:id="@+id/linearlayout_1"
+        android:id="@+id/linearlayoutGenre1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -61,6 +61,7 @@
             />
 
         <TextView
+            android:id="@+id/textViewGenre1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="好きなコンテンツ１"
@@ -71,11 +72,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearlayout_2"
+        android:id="@+id/linearlayoutGenre2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/linearlayout_1"
+        android:layout_below="@+id/linearlayoutGenre1"
         android:layout_marginTop="10dp">
 
         <ImageView
@@ -86,6 +87,7 @@
             />
 
         <TextView
+            android:id="@+id/textViewGenre2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="好きなコンテンツ２"
@@ -96,11 +98,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearlayout_3"
+        android:id="@+id/linearlayoutGenre3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/linearlayout_2"
+        android:layout_below="@+id/linearlayoutGenre2"
         android:layout_marginTop="10dp">
 
         <ImageView
@@ -111,6 +113,7 @@
             />
 
         <TextView
+            android:id="@+id/textViewGenre3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="好きなコンテンツ３"
@@ -121,11 +124,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearlayout_4"
+        android:id="@+id/linearlayout_editProf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/linearlayout_3"
+        android:layout_below="@+id/linearlayoutGenre3"
         android:layout_marginTop="30dp">
 
         <ImageView
