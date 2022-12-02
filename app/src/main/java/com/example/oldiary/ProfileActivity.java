@@ -30,6 +30,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProfileActivity extends AppCompatActivity {
     private static final String TAG = "prof";
     private DatabaseReference mDatabase;
@@ -55,34 +60,54 @@ public class ProfileActivity extends AppCompatActivity {
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
         getUserId();
+        setUserName();
+        setGenre();
+        setOnClickEdit();
         // setOnClickBack();
-        // editProfile();
     }
 
     protected void getUserId() {
-        Intent intent1 = getIntent();
-        userId = intent1.getStringExtra("UserID");
-        Log.d(TAG, "PhoneNumber: " + userId);
+        userId = preference.getString("UserID", "");
+    }
+
+    private void setUserName() {
+        mDatabase.child("users").child(userId).child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    String resultUserName = String.valueOf(task.getResult().getValue());
+                    TextView textUserName = findViewById(R.id.textViewUserName);
+                    textUserName.setText(resultUserName);
+                }
+            }
+        });
     }
 
     private void setGenre() {
-        for (int i = 0; i < 3; i++) {
-            mDatabase.child("users").child(userId).child("favoriteGenre").child(String.valueOf(i)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (!task.isSuccessful()) {
-                        Log.e(TAG, "Error getting data", task.getException());
-                    }
-                    else {
-                        Resources res = getResources();
-                        int viewId = res.getIdentifier("textViewGenre" + String.valueOf(i), "id", getPackageName());
-                        int genreID = Integer.parseInt(String.valueOf(task.getResult().getValue()));
-                        TextView genre1 = findViewById(R.id.textViewGenre1);
-                        genre1.setText(genreList[genreID]);
+        List<String> gCodeList = new ArrayList<>();
+        mDatabase.child("users").child(userId).child("favoriteGenre").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    String Result = String.valueOf(task.getResult().getValue());
+                    String reResult = Result.replace("[", "").replace("]", "").replace(" ", "");
+                    String[] split = reResult.split(",");
+                    int i = 0;
+                    for (String xs : split) {
+                        i++;
+                        int viewId = getResources().getIdentifier("textViewGenre" + i, "id", getPackageName());
+                        TextView genre = findViewById(viewId);
+                        genre.setText(genreList[Integer.parseInt(xs)]);
                     }
                 }
-            });
-        }
+            }
+        });
     }
     /*
     protected void setOnClickBack() {
@@ -93,15 +118,14 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-
-    protected void editProfile() {
-        Button button = findViewById(R.id.button2);
-        button.setOnClickListener(v -> {
+    */
+    protected void setOnClickEdit() {
+        LinearLayout lnEdit = findViewById(R.id.linearlayout_editProf);
+        lnEdit.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), PopupActivity.class);
             startActivity(intent);
         });
 
     }
 
-     */
 }

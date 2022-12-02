@@ -17,7 +17,7 @@
 
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/textViewUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/profile_image"
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ひとことコメント"
-        android:layout_below="@id/title"
+        android:layout_below="@id/textViewUserName"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp" />
 
@@ -123,31 +123,30 @@
             android:layout_marginTop="5dp"/>
     </LinearLayout>
 
+
     <LinearLayout
         android:id="@+id/linearlayout_editProf"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="45dp"
         android:layout_below="@+id/linearlayoutGenre3"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="33dp"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_settings"
             android:layout_marginLeft="80dp"
-            />
+            android:src="@drawable/ic_settings" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="プロフィール 編集"
-            android:textSize="22sp"
-            android:textColor="#000"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp"
+            android:text="プロフィール 編集"
+            android:textColor="#000"
+            android:textSize="22sp" />
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/linearlayout_logout"
