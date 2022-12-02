@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     Log.d("debug", "this is onComplete");
                     if (!task.isSuccessful()) {
-                        //Log.e(TAG, "Error getting data", task.getException());
+                        Log.e(TAG, "Error getting data", task.getException());
                         alertFailedGetData();
                     }
                     else {
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void alertFailedGetData() {
-        new AlertDialog.Builder(this)
+        new AlertDialog.Builder(MainActivity.this)
                 .setTitle("エラー")
                 .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {

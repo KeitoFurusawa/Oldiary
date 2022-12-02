@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -18,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
     Dialog dialog;
     EditText user_name, content1, content2, content3, comment;
     Button save, cancel;
-    private static final String[] GenreList = {
+    private static final String[] genreList = {
             "サッカー", "野球", "テニス", "ガーデニング", "読書",
             "ピアノ", "ゴルフ", "映画鑑賞", "音楽鑑賞", "散歩",
             "ランニング", "料理", "ボランティア", "将棋", "囲碁",
@@ -72,24 +74,11 @@ public class ProfileActivity extends AppCompatActivity {
                         Log.e(TAG, "Error getting data", task.getException());
                     }
                     else {
-                        String userName = String.valueOf(task.getResult().getValue());
-                        Log.d(TAG, userName); //debug
-                        if (userName.equals("null")) { //初回ログイン
-                            Intent intentNext = new Intent(getApplication(), MakeProfile.class);
-                            intentNext.putExtra("UserID", userId); //インテントにユーザIDを渡す
-                            startActivity(intentNext);
-                        } else { //2回目以降
-                            Intent intentNext = new Intent(getApplication(), HomeActivity.class);
-                            intentNext.putExtra("UserID", userId);
-                            intentNext.putExtra("UserName", userName);
-                            editor.putString("UserID", userId);
-                            editor.commit();
-                            //
-                            AlarmActivity alm = new AlarmActivity();
-                            alm.mDestroy();
-                            //
-                            startActivity(intentNext);
-                        }
+                        Resources res = getResources();
+                        int viewId = res.getIdentifier("textViewGenre" + String.valueOf(i), "id", getPackageName());
+                        int genreID = Integer.parseInt(String.valueOf(task.getResult().getValue()));
+                        TextView genre1 = findViewById(R.id.textViewGenre1);
+                        genre1.setText(genreList[genreID]);
                     }
                 }
             });
