@@ -29,7 +29,7 @@
         android:textSize="18sp"/>
 
     <TextView
-        android:id="@+id/desc"
+        android:id="@+id/comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ひとことコメント"
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:src="@drawable/profile_ui"
-        android:layout_below="@id/desc"
+        android:layout_below="@id/comment"
         android:layout_marginTop="5dp"/>
 
     <LinearLayout
