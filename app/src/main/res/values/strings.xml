@@ -29,4 +29,15 @@
         ユーザー\nサービスを利用する人を指す。\n\n
 
     </string>
+
+    // チュートリアル画面用
+    <string name="heading1">Oldiaryへようこそ!</string>
+    <string name="heading2">過去の自分の振り返りに</string>
+    <string name="heading3">仲間との会話のきっかけに</string>
+    <string name="heading4">さあ、Oldiaryを始めましょう</string>
+    <string name="desc1">--------------説明１--------------</string>
+    <string name="desc2">--------------説明２--------------</string>
+    <string name="desc3">--------------説明３--------------</string>
+    <string name="desc4">--------------説明４--------------</string>
+
 </resources>
