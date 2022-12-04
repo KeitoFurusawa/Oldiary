@@ -1,5 +1,7 @@
 package com.example.oldiary;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
@@ -15,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,6 +40,10 @@ public class MainScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
@@ -45,6 +52,16 @@ public class MainScreen extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds);
         mediaPlayer.setLooping(true);
 
+        imageChange();
+        ss();
+        debug();
+
+        TextView txtView_start = findViewById(R.id.announce);
+        blinkText(txtView_start, 650, 200);
+
+    }
+
+    protected void  imageChange() {
         ImageButton imageButton = findViewById(R.id.door);
         imageButton.setOnClickListener(v -> {
             String loggedInId = preference.getString("UserID", "");
@@ -58,21 +75,12 @@ public class MainScreen extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-
-        ss();
-        debug();
-
-        TextView txtView_start = findViewById(R.id.announce);
-        blinkText(txtView_start, 650, 200);
-
-
     }
-
 
     protected void debug() {
         ImageButton imgButtonD = findViewById(R.id.imageButtonDebug);
         imgButtonD.setOnClickListener(v -> {
-            Intent intentD = new Intent(getApplication(), SelectGenreActivity.class);
+            Intent intentD = new Intent(getApplication(), RegisterActivity.class);
             startActivity(intentD);
         });
     }
@@ -133,6 +141,17 @@ public class MainScreen extends AppCompatActivity {
                     Log.d("debug", "this is onComplete");
                     if (!task.isSuccessful()) {
                         //Log.e(TAG, "Error getting data", task.getException());
+                        new AlertDialog.Builder(MainScreen.this)
+                                .setTitle("エラー")
+                                .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // OKボタン押下時の処理
+                                        Intent intent2 = new Intent(getApplication(), MainScreen.class);
+                                        startActivity(intent2);
+                                    }
+                                })
+                                .show();
                     }
                     else {
                         String value = String.valueOf(task.getResult().getValue());
