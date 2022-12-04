@@ -36,7 +36,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         R.string.desc4
     };
 
-    public ViewPagerAdapter(Context content) {
+    public ViewPagerAdapter(Context context) {
         this.context = context;
     }
 

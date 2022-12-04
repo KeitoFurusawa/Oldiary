@@ -42,22 +42,9 @@ public class MainScreen extends AppCompatActivity {
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
 
-        startScene();
-    }
-
-    protected void startScene() {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds);
         mediaPlayer.setLooping(true);
 
-        imageChange();
-        ss();
-        debug();
-
-        TextView txtView_start = findViewById(R.id.announce);
-        blinkText(txtView_start, 650, 200);
-    }
-
-    protected void  imageChange() {
         ImageButton imageButton = findViewById(R.id.door);
         imageButton.setOnClickListener(v -> {
             String loggedInId = preference.getString("UserID", "");
@@ -71,7 +58,16 @@ public class MainScreen extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
+
+        ss();
+        debug();
+
+        TextView txtView_start = findViewById(R.id.announce);
+        blinkText(txtView_start, 650, 200);
+
+
     }
+
 
     protected void debug() {
         ImageButton imgButtonD = findViewById(R.id.imageButtonDebug);
