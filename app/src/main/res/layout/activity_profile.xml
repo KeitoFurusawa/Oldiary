@@ -126,7 +126,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@+id/linearlayout_3"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="20dp">
 
         <ImageView
             android:layout_width="40dp"
@@ -139,6 +139,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="プロフィール 編集"
+            android:textSize="22sp"
+            android:textColor="#000"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearlayout_4"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_settings"
+            android:layout_marginLeft="80dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="アバター 編集"
             android:textSize="22sp"
             android:textColor="#000"
             android:layout_marginLeft="20dp"
