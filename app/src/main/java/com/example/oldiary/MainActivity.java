@@ -1,6 +1,7 @@
 package com.example.oldiary;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -21,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     TextView[] dots;
     ViewPagerAdapter viewPagerAdapter;
 
+    private SharedPreferences preference;
+    private SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +34,24 @@ public class MainActivity extends AppCompatActivity {
         nextbtn = findViewById(R.id.nextbtn);
         skipbtn = findViewById(R.id.skipButton);
 
+        preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
+        editor = preference.edit();
+
+        if (preference.getBoolean("Launched", false)==false) {
+            tutorial();
+            editor.putBoolean("Launched", true);
+            editor.commit();
+        } else {
+            Intent i = new Intent(MainActivity.this,  MainScreen.class);
+            startActivity(i);
+            finish();
+        }
+
+
+
+    }
+
+    public void tutorial() {
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
