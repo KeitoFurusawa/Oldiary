@@ -2,23 +2,13 @@ package com.example.oldiary;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.SoundPool;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,8 +20,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,9 +56,8 @@ public class ProfileActivity extends AppCompatActivity {
         setUserName();
         setComment();
         setGenre();
-        setOnClickEdit();
-        setOnClickLogout();
-        // setOnClickBack();
+        editProfile();
+        editAvatar();
     }
 
     protected void getUserId() {
@@ -134,31 +121,24 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
-    /*
-    protected void setOnClickBack() {
-        ImageView imageView = findViewById(R.id.back);
-        imageView.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplication(), HomeActivity.class);
+
+    protected void editProfile() {
+        LinearLayout linearLayout = findViewById(R.id.linearlayout_editProf);
+        linearLayout.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplication(), EditprofileActivity.class);
             startActivity(intent);
         });
+
     }
 
-    */
-    private void setOnClickEdit() {
-        LinearLayout lnEdit = findViewById(R.id.linearlayout_editProf);
-        lnEdit.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplication(), PopupActivity.class);
-            startActivity(intent);
-        });
-    }
 
-    private void setOnClickLogout() {
-        LinearLayout lnLogout = findViewById(R.id.linearlayout_logout);
-        lnLogout.setOnClickListener(v -> {
-            editor.putString("UserID", "");
-            editor.commit();
-            Intent intent = new Intent(getApplication(), MainActivity.class);
+
+    protected void editAvatar() {
+        LinearLayout linearLayout = findViewById(R.id.linearlayout_EditAvatar);
+        linearLayout.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplication(), AvatarMakeActivity.class);
             startActivity(intent);
         });
+
     }
 }
