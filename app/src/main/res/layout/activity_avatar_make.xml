@@ -95,9 +95,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ques2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="5dp">
 
+
+        <LinearLayout
+            android:id="@+id/ques2_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
 
             <RadioButton
                 android:id="@+id/blue"
@@ -127,6 +132,13 @@
                 android:layout_weight="1"
                 android:text="赤" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ques2_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
 
             <RadioButton
                 android:id="@+id/pink"
@@ -148,6 +160,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="黄色" />
+        </LinearLayout>
 
     </RadioGroup>
 
