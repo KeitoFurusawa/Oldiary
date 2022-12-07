@@ -32,7 +32,7 @@
         android:id="@+id/avatar"
         android:layout_width="150dp"
         android:layout_height="220dp"
-        app:srcCompat="@drawable/example"
+        app:srcCompat="@drawable/blue_man"
         android:layout_below="@+id/avatar_now"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"/>
@@ -59,7 +59,7 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/q1_btn1"
+            android:id="@+id/man"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -68,7 +68,7 @@
             android:text="男性" />
 
         <RadioButton
-            android:id="@+id/q1_btn2"
+            android:id="@+id/woman"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -82,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/choice1"
-        android:text="好きな色をお選びください"
+        android:text="好きな色をお選びください(1色)"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:textColor="#000"
@@ -95,70 +95,59 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ques2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/ques2_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
 
             <RadioButton
-                android:id="@+id/q2_btn1"
+                android:id="@+id/blue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="青" />
 
             <RadioButton
-                android:id="@+id/q2_btn2"
+                android:id="@+id/green"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="緑" />
 
             <RadioButton
-                android:id="@+id/q2_btn3"
+                android:id="@+id/purple"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="紫" />
 
             <RadioButton
-                android:id="@+id/q2_btn4"
+                android:id="@+id/red"
                 android:layout_width="59dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="赤" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
 
             <RadioButton
-                android:id="@+id/q2_btn5"
+                android:id="@+id/pink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="ピンク" />
 
             <RadioButton
-                android:id="@+id/q2_btn6"
+                android:id="@+id/light_blue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="水色" />
 
             <RadioButton
-                android:id="@+id/q2_btn7"
+                android:id="@+id/yellow"
                 android:layout_width="71dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="黄色" />
-        </LinearLayout>
 
     </RadioGroup>
 
@@ -167,7 +156,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="決定する"
+        android:onClick="onClick"
         android:layout_below="@+id/choice2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/keep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="確定する"
+        android:layout_below="@+id/decide"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
 

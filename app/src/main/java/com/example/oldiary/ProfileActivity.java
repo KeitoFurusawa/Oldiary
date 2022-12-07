@@ -21,19 +21,20 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        // setOnClickBack();
+        editProfile();
         editAvatar();
 
     }
-    /*
-    protected void setOnClickBack() {
-        ImageView imageView = findViewById(R.id.back);
-        imageView.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplication(), HomeActivity.class);
+
+    protected void editProfile() {
+        LinearLayout linearLayout = findViewById(R.id.linearlayout_4);
+        linearLayout.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplication(), EditprofileActivity.class);
             startActivity(intent);
         });
+
     }
-     */
+
 
 
     protected void editAvatar() {
