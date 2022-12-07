@@ -1,5 +1,7 @@
 package com.example.oldiary;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,6 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AvatarMakeActivity extends AppCompatActivity {
+
+    int image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,28 +29,25 @@ public class AvatarMakeActivity extends AppCompatActivity {
 
         if (id == R.id.man) {
             if (id2 == R.id.blue) {
-                imageView.setImageResource(R.drawable.blue_man);
+                image = R.drawable.blue_man;
             }
             else if (id2 == R.id.green) {
-                imageView.setImageResource(R.drawable.green_man);
-            }
-            else if (id2 == R.id.green) {
-                imageView.setImageResource(R.drawable.green_man);
+                image = R.drawable.green_man;
             }
             else if (id2 == R.id.purple) {
-                imageView.setImageResource(R.drawable.purple_man);
+                image = R.drawable.purple_man;
             }
             else if (id2 == R.id.red) {
-                imageView.setImageResource(R.drawable.red_man);
+                image = R.drawable.red_man;
             }
             else if (id2 == R.id.pink) {
-                imageView.setImageResource(R.drawable.pink_man);
+                image = R.drawable.pink_man;
             }
             else if (id2 == R.id.light_blue) {
-                imageView.setImageResource(R.drawable.lightblue_man);
+                image = R.drawable.lightblue_man;
             }
             else if (id2 == R.id.yellow) {
-                imageView.setImageResource(R.drawable.yellow_man);
+                image = R.drawable.yellow_man;
             }
             else {
                 Toast.makeText(AvatarMakeActivity.this, "error1", Toast.LENGTH_SHORT).show();
@@ -54,28 +55,25 @@ public class AvatarMakeActivity extends AppCompatActivity {
         }
         else if (id == R.id.woman) {
             if (id2 == R.id.blue) {
-                imageView.setImageResource(R.drawable.blue_woman);
+                image = R.drawable.blue_woman;
             }
             else if (id2 == R.id.green) {
-                imageView.setImageResource(R.drawable.green_woman);
-            }
-            else if (id2 == R.id.green) {
-                imageView.setImageResource(R.drawable.green_woman);
+                image = R.drawable.green_woman;
             }
             else if (id2 == R.id.purple) {
-                imageView.setImageResource(R.drawable.purple_woman);
+                image = R.drawable.purple_woman;
             }
             else if (id2 == R.id.red) {
-                imageView.setImageResource(R.drawable.red_woman);
+                image = R.drawable.red_woman;
             }
             else if (id2 == R.id.pink) {
-                imageView.setImageResource(R.drawable.pink_woman);
+                image = R.drawable.pink_woman;
             }
             else if (id2 == R.id.light_blue) {
-                imageView.setImageResource(R.drawable.lightblue_woman);
+                image = R.drawable.lightblue_woman;
             }
             else if (id2 == R.id.yellow) {
-                imageView.setImageResource(R.drawable.yellow_woman);
+                image = R.drawable.yellow_woman;
             }
             else {
                 Toast.makeText(AvatarMakeActivity.this, "error2", Toast.LENGTH_SHORT).show();
@@ -84,5 +82,24 @@ public class AvatarMakeActivity extends AppCompatActivity {
         else {
             Toast.makeText(AvatarMakeActivity.this, "error3", Toast.LENGTH_SHORT).show();
         }
+
+        imageView.setImageResource(image);
+    }
+
+    public void onClick2(View view) {
+        ImageView imageView = new ImageView(getBaseContext());
+        imageView.setImageResource(image);
+
+        new AlertDialog.Builder(this)
+                .setTitle("これでよろしいですか？")
+                .setView(imageView)
+                .setPositiveButton("はい", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // OK button pressed
+                    }
+                })
+                .setNegativeButton("いいえ", null)
+                .show();
     }
 }
