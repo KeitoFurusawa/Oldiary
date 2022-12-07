@@ -98,12 +98,6 @@
         android:layout_marginTop="5dp">
 
 
-        <LinearLayout
-            android:id="@+id/ques2_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
-
             <RadioButton
                 android:id="@+id/blue"
                 android:layout_width="wrap_content"
@@ -132,13 +126,7 @@
                 android:layout_weight="1"
                 android:text="赤" />
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ques2_down"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
 
             <RadioButton
                 android:id="@+id/pink"
@@ -160,27 +148,31 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="黄色" />
-        </LinearLayout>
 
     </RadioGroup>
 
-    <Button
-        android:id="@+id/decide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="決定する"
-        android:onClick="onClick"
-        android:layout_below="@+id/choice2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/decide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="変更する"
+            android:onClick="onClick"
+            android:layout_below="@+id/choice2"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="90dp"/>
 
     <Button
         android:id="@+id/keep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="確定する"
-        android:layout_below="@+id/decide"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+        android:layout_below="@+id/choice2"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="200dp"/>
 
 </RelativeLayout>
+
+
+
+
