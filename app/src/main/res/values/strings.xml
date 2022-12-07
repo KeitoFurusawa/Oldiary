@@ -29,4 +29,15 @@
         ユーザー\nサービスを利用する人を指す。\n\n
 
     </string>
+
+    // チュートリアル画面用
+    <string name="heading1">Oldiaryへようこそ!</string>
+    <string name="heading2">過去の自分の振り返りに</string>
+    <string name="heading3">仲間との会話のきっかけに</string>
+    <string name="heading4">さあOldiaryを始めましょう</string>
+    <string name="desc1">このアプリを使用していただき\nありがとうございます。</string>
+    <string name="desc2">自分の過去の投稿を\n見ることができます。\n画像を挿入することもできます。</string>
+    <string name="desc3">他の利用者との\nやりとりがきっかけで、\n新たな仲間を\n作ることができるかも…？</string>
+    <string name="desc4">扉を開けたら、\nOldiaryの始まりです。\n是非、楽しいOldiary生活を！</string>
+
 </resources>
