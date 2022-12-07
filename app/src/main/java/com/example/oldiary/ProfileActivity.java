@@ -124,11 +124,13 @@ public class ProfileActivity extends AppCompatActivity {
                     String reResult = Result.replace("[", "").replace("]", "").replace(" ", "");
                     String[] split = reResult.split(",");
                     int i = 0;
-                    for (String xs : split) {
-                        i++;
-                        int viewId = getResources().getIdentifier("textViewGenre" + i, "id", getPackageName());
-                        TextView genre = findViewById(viewId);
-                        genre.setText(genreList[Integer.parseInt(xs)]);
+                    if(!userId.equals("id_0")) {
+                        for (String xs : split) {
+                            i++;
+                            int viewId = getResources().getIdentifier("textViewGenre" + i, "id", getPackageName());
+                            TextView genre = findViewById(viewId);
+                            genre.setText(genreList[Integer.parseInt(xs)]);
+                        }
                     }
                 }
             }
@@ -147,6 +149,19 @@ public class ProfileActivity extends AppCompatActivity {
     private void setOnClickEdit() {
         LinearLayout lnEdit = findViewById(R.id.linearlayout_editProf);
         lnEdit.setOnClickListener(v -> {
+            if (userId.equals("id_0")) {
+                new AlertDialog.Builder(ProfileActivity.this)
+                        .setTitle("注意")
+                        .setMessage("debugユーザ0はその機能を使えません。")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent2 = new Intent(getApplication(), HomeActivity.class);
+                                startActivity(intent2);
+                            }
+                        })
+                        .show();
+            }
+
             Intent intent = new Intent(getApplication(), PopupActivity.class);
             startActivity(intent);
         });
