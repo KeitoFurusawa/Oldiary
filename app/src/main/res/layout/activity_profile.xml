@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".AttendActivity">
 
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
         android:layout_width="120dp"
@@ -14,7 +13,6 @@
         android:src="@drawable/icon_sample"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"/>
-
 
     <TextView
         android:id="@+id/textViewUserName"
@@ -130,7 +128,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_below="@+id/linearlayoutGenre3"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="21dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -153,9 +151,8 @@
         android:id="@+id/linearlayout_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="80dp"
+        android:layout_below="@+id/linearlayout_editProf"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="horizontal">
 
