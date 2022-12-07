@@ -85,4 +85,8 @@ public class AvatarMakeActivity extends AppCompatActivity {
             Toast.makeText(AvatarMakeActivity.this, "error3", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void onClick2(View view) {
+
+    }
 }

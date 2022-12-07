@@ -167,12 +167,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="確定する"
+        android:onClick="onClick2"
         android:layout_below="@+id/choice2"
         android:layout_marginTop="10dp"
         android:layout_marginStart="200dp"/>
 
 </RelativeLayout>
-
-
-
-
