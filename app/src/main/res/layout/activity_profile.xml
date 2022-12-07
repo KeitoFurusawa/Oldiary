@@ -121,7 +121,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearlayout_4"
+        android:id="@+id/linearlayout_editProf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -146,11 +146,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearlayout_5"
+        android:id="@+id/linearlayout_EditAvatar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/linearlayout_4"
+        android:layout_below="@+id/linearlayout_editProf"
         android:layout_marginTop="20dp">
 
         <ImageView
