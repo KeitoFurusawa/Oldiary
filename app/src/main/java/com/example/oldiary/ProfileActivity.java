@@ -125,26 +125,18 @@ public class ProfileActivity extends AppCompatActivity {
                     String reResult = Result.replace("[", "").replace("]", "").replace(" ", "");
                     String[] split = reResult.split(",");
                     int i = 0;
-                    for (String xs : split) {
-                        i++;
-                        int viewId = getResources().getIdentifier("textViewGenre" + i, "id", getPackageName());
-                        TextView genre = findViewById(viewId);
-                        genre.setText(genreList[Integer.parseInt(xs)]);
+                    if (!userId.equals("id_0")) {
+                        for (String xs : split) {
+                            i++;
+                            int viewId = getResources().getIdentifier("textViewGenre" + i, "id", getPackageName());
+                            TextView genre = findViewById(viewId);
+                            genre.setText(genreList[Integer.parseInt(xs)]);
+                        }
                     }
                 }
             }
         });
     }
-    /*
-    protected void setOnClickBack() {
-        ImageView imageView = findViewById(R.id.back);
-        imageView.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplication(), HomeActivity.class);
-            startActivity(intent);
-        });
-    }
-
-    */
     private void setOnClickEdit() {
         LinearLayout lnEdit = findViewById(R.id.linearlayout_editProf);
         lnEdit.setOnClickListener(v -> {
@@ -159,10 +151,10 @@ public class ProfileActivity extends AppCompatActivity {
                             }
                         })
                         .show();
+            } else {
+                Intent intent = new Intent(getApplication(), PopupActivity.class);
+                startActivity(intent);
             }
-
-            Intent intent = new Intent(getApplication(), PopupActivity.class);
-            startActivity(intent);
         });
     }
 
