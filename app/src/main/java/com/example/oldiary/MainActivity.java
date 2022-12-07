@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < dots.length; i++) {
             dots[i] = new TextView(this);
-            dots[i].setText(Html.fromHtml("&#8266"));
+            dots[i].setText(Html.fromHtml("●"));
             dots[i].setTextSize(35);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 dots[i].setTextColor(getResources().getColor(R.color.inactive, getApplicationContext().getTheme()));

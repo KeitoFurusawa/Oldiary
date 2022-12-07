@@ -50,6 +50,28 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".Login2copy1Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Login2copy2Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".WriteActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
             android:name=".AttendActivity"
             android:exported="false">
             <meta-data
@@ -85,7 +107,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".WriteActivity"
+            android:name=".EditGenreActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
