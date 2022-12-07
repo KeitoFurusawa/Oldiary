@@ -70,6 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
         setGenre();
         setOnClickEdit();
         setOnClickLogout();
+        setOnclickAvatar();
         // setOnClickBack();
     }
 
@@ -124,13 +125,11 @@ public class ProfileActivity extends AppCompatActivity {
                     String reResult = Result.replace("[", "").replace("]", "").replace(" ", "");
                     String[] split = reResult.split(",");
                     int i = 0;
-                    if(!userId.equals("id_0")) {
-                        for (String xs : split) {
-                            i++;
-                            int viewId = getResources().getIdentifier("textViewGenre" + i, "id", getPackageName());
-                            TextView genre = findViewById(viewId);
-                            genre.setText(genreList[Integer.parseInt(xs)]);
-                        }
+                    for (String xs : split) {
+                        i++;
+                        int viewId = getResources().getIdentifier("textViewGenre" + i, "id", getPackageName());
+                        TextView genre = findViewById(viewId);
+                        genre.setText(genreList[Integer.parseInt(xs)]);
                     }
                 }
             }
@@ -175,5 +174,14 @@ public class ProfileActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplication(), MainActivity.class);
             startActivity(intent);
         });
+    }
+
+    protected void setOnclickAvatar() {
+        LinearLayout linearLayout = findViewById(R.id.linearlayout_EditAvatar);
+        linearLayout.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplication(), AvatarMakeActivity.class);
+            startActivity(intent);
+        });
+
     }
 }
