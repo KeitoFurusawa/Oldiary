@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AvatarMakeActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="アバター 編集"
+        android:textColor="#000"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/avatar_now"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:text="↓現在のアバター↓"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="#000"
+        android:textSize="20sp"/>
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="150dp"
+        android:layout_height="220dp"
+        app:srcCompat="@drawable/blue_man"
+        android:layout_below="@+id/avatar_now"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/ques1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/avatar"
+        android:text="あなたの性別をお選びください"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+    <RadioGroup
+        android:id="@+id/choice1"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ques1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/man"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:text="男性" />
+
+        <RadioButton
+            android:id="@+id/woman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:text="女性" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/ques2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/choice1"
+        android:text="好きな色をお選びください(1色)"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+    <RadioGroup
+        android:id="@+id/choice2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ques2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+
+            <RadioButton
+                android:id="@+id/blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="青" />
+
+            <RadioButton
+                android:id="@+id/green"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="緑" />
+
+            <RadioButton
+                android:id="@+id/purple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="紫" />
+
+        <RadioButton
+            android:id="@+id/red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="赤" />
+
+
+        <RadioButton
+            android:id="@+id/pink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="ピンク" />
+
+            <RadioButton
+                android:id="@+id/light_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="水色" />
+
+        <RadioButton
+            android:id="@+id/yellow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="黄色" />
+
+    </RadioGroup>
+
+
+        <Button
+            android:id="@+id/decide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="変更する"
+            android:onClick="onClick"
+            android:layout_below="@+id/choice2"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="90dp"/>
+
+    <Button
+        android:id="@+id/keep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="確定する"
+        android:layout_below="@+id/choice2"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="200dp"/>
+
+</RelativeLayout>
+
+
+
+
