@@ -174,18 +174,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     Log.d("debug", "this is onComplete");
                     if (!task.isSuccessful()) {
-                        //Log.e(TAG, "Error getting data", task.getException());
-                        new AlertDialog.Builder(MainActivity.this)
-                                .setTitle("エラー")
-                                .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        // OKボタン押下時の処理
-                                        Intent intent2 = new Intent(getApplication(), MainActivity.class);
-                                        startActivity(intent2);
-                                    }
-                                })
-                                .show();
+                        Log.e(TAG, "Error getting data", task.getException());
+                        alertFailedGetData();
                     }
                     else {
                         String value = String.valueOf(task.getResult().getValue());
@@ -195,5 +185,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void alertFailedGetData() {
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle("エラー")
+                .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // OKボタン押下時の処理
+                        Intent intent2 = new Intent(getApplication(), MainActivity.class);
+                        startActivity(intent2);
+                    }
+                })
+                .show();
     }
 }

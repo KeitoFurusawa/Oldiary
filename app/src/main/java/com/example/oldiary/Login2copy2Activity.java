@@ -78,7 +78,6 @@ public class Login2copy2Activity extends AppCompatActivity {
         Intent intent1 = getIntent();
         userId = intent1.getStringExtra("UserID");
         Log.d(TAG, "PhoneNumber: " + userId);
-
     }
 
     protected void setOnclickConfirm() {

@@ -260,12 +260,44 @@ public class ConnectActivity extends AppCompatActivity {
                     if (textResult.equals("null")) { //中身がない
                         Log.e(TAG, "ERROR: cannot get data"); //debug
                     } else {
+                        innerSetPostedBy(textResult);
+                    }
+                }
+            }
+        });
+    }
+
+    private void innerSetPostedBy(String userId) {
+        mDatabase.child("users").child(userId).child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                    new AlertDialog.Builder(ConnectActivity.this)
+                            .setTitle("エラー")
+                            .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // OKボタン押下時の処理
+                                    Intent intent2 = new Intent(getApplication(), MainActivity.class);
+                                    startActivity(intent2);
+                                }
+                            })
+                            .show();
+                }
+                else {
+                    String textResult = String.valueOf(task.getResult().getValue());
+                    if (textResult.equals("null")) { //中身がない
+                        Log.e(TAG, "ERROR: cannot get data"); //debug
+                        postedBy.setText("NoDATA");
+                    } else {
                         postedBy.setText(textResult + " さんの投稿");
                     }
                 }
             }
         });
     }
+
 
     private void setOnClickNext() {
         ibNext.setOnClickListener(v -> {

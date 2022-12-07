@@ -42,7 +42,7 @@ public class ReadAndWrite extends CreateActivity {
                         mDatabase.child("diaries").child("d_"+userId+"1").child("text").setValue(text);
                         mDatabase.child("diaries").child("d_"+userId+"1").child("postedAt").setValue(dateTime);
                         mDatabase.child("diaries").child("d_"+userId+"1").child("timeInMillis").setValue(timeInMillis);
-                        mDatabase.child("diaries").child("d_"+userId+"1").child("postedBy").setValue(userName);
+                        mDatabase.child("diaries").child("d_"+userId+"1").child("postedBy").setValue(userId);
                         addNewDiaryPublic("d_"+userId+"1");
                         addNewDiaryPersonal(userId, "d_"+userId+"1");
                     } else { // 2回目以降
@@ -52,7 +52,7 @@ public class ReadAndWrite extends CreateActivity {
                         mDatabase.child("diaries").child("d_"+userId+count).child("text").setValue(text);
                         mDatabase.child("diaries").child("d_"+userId+count).child("postedAt").setValue(dateTime);
                         mDatabase.child("diaries").child("d_"+userId+count).child("timeInMillis").setValue(timeInMillis);
-                        mDatabase.child("diaries").child("d_"+userId+count).child("postedBy").setValue(userName);
+                        mDatabase.child("diaries").child("d_"+userId+count).child("postedBy").setValue(userId);
                         addNewDiaryPublic("d_"+userId+count);
                         addNewDiaryPersonal(userId, "d_"+userId+count);
                     }
