@@ -95,7 +95,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ques2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
 
 
             <RadioButton
@@ -119,35 +120,34 @@
                 android:layout_weight="1"
                 android:text="紫" />
 
-            <RadioButton
-                android:id="@+id/red"
-                android:layout_width="59dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="赤" />
+        <RadioButton
+            android:id="@+id/red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="赤" />
 
 
-
-            <RadioButton
-                android:id="@+id/pink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ピンク" />
+        <RadioButton
+            android:id="@+id/pink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="ピンク" />
 
             <RadioButton
                 android:id="@+id/light_blue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="水色" />
 
-            <RadioButton
-                android:id="@+id/yellow"
-                android:layout_width="71dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="黄色" />
+        <RadioButton
+            android:id="@+id/yellow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="黄色" />
 
     </RadioGroup>
 
