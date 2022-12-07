@@ -61,8 +61,10 @@ public class ProfileActivity extends AppCompatActivity {
         editor = preference.edit();
         getUserId();
         setUserName();
+        setComment();
         setGenre();
         setOnClickEdit();
+        setOnClickLogout();
         // setOnClickBack();
     }
 
@@ -81,6 +83,24 @@ public class ProfileActivity extends AppCompatActivity {
                     String resultUserName = String.valueOf(task.getResult().getValue());
                     TextView textUserName = findViewById(R.id.textViewUserName);
                     textUserName.setText(resultUserName);
+                }
+            }
+        });
+    }
+
+    private void setComment() {
+        mDatabase.child("users").child(userId).child("comment").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    String resultComment = String.valueOf(task.getResult().getValue());
+                    if (!resultComment.equals("null")) {
+                        TextView textViewComment = findViewById(R.id.comment);
+                        textViewComment.setText(resultComment);
+                    }
                 }
             }
         });
@@ -119,13 +139,23 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     */
-    protected void setOnClickEdit() {
+    private void setOnClickEdit() {
         LinearLayout lnEdit = findViewById(R.id.linearlayout_editProf);
         lnEdit.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), PopupActivity.class);
             startActivity(intent);
         });
-
     }
+
+    private void setOnClickLogout() {
+        LinearLayout lnLogout = findViewById(R.id.linearlayout_logout);
+        lnLogout.setOnClickListener(v -> {
+            editor.putString("UserID", "");
+            editor.commit();
+            Intent intent = new Intent(getApplication(), MainActivity.class);
+            startActivity(intent);
+        });
+    }
+
 
 }
