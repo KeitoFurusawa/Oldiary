@@ -137,7 +137,7 @@ public class EditProfileActivity extends AppCompatActivity {
         //Button btnCancel = findViewById(R.id.cancel);
         Button btnChose = findViewById(R.id.buttonChoseContent);
         Button btnConfirm = findViewById(R.id.confirm);
-        /**
+        /** 戻るボタン
         btnCancel.setOnClickListener(v -> {
             new AlertDialog.Builder(EditProfileActivity.this)
                     .setTitle("注意")
