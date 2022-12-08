@@ -141,7 +141,7 @@ public class ProfileActivity extends AppCompatActivity {
                         })
                         .show();
             } else {
-                Intent intent = new Intent(getApplication(), EditprofileActivity.class);
+                Intent intent = new Intent(getApplication(), EditProfileActivity.class);
                 startActivity(intent);
             }
         });
