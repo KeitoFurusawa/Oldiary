@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@color/inactive"
-    tools:context=".EditprofileActivity">
+    tools:context=".EditProfileActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/user_name"
+                android:id="@+id/textViewUserName"
                 android:background="@drawable/lavender_border"
                 android:layout_marginTop="40dp"
                 android:padding="8dp"
@@ -43,70 +43,74 @@
                 android:drawablePadding="8dp"
                 android:textColor="@color/black" />
 
-            <Button
-                android:id="@+id/content_choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/color2"
-                android:text="選ぶ"
-                android:textColor="@color/black"
-                android:textAlignment="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="100sp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/content1"
-                android:background="@drawable/lavender_border"
-                android:layout_marginTop="10dp"
-                android:padding="8dp"
-                android:hint="好きなコンテンツ１"
-                android:drawableLeft="@drawable/ic_filter_1"
-                android:drawablePadding="8dp"
-                android:textColor="@color/black"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/content2"
-                android:background="@drawable/lavender_border"
-                android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:hint="好きなコンテンツ2"
-                android:drawableLeft="@drawable/ic_filter_2"
-                android:drawablePadding="8dp"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/content3"
-                android:background="@drawable/lavender_border"
-                android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:hint="好きなコンテンツ3"
-                android:drawableLeft="@drawable/ic_filter_3"
-                android:drawablePadding="8dp"
-                android:textColor="@color/black"/>
-
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
                 android:id="@+id/comment"
-                android:background="@drawable/lavender_border"
+                android:layout_width="match_parent"
+                android:layout_height="73dp"
                 android:layout_marginTop="30dp"
-                android:padding="8dp"
-                android:hint="ひとことコメント"
+                android:background="@drawable/lavender_border"
                 android:drawableLeft="@drawable/ic_comment"
                 android:drawablePadding="8dp"
-                android:textColor="@color/black" />
+                android:hint="ひとことコメント"
+                android:padding="8dp"
+                android:scrollbars="vertical"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/buttonChoseContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100sp"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/color2"
+                android:text="選ぶ"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/content1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/lavender_border"
+                android:drawableLeft="@drawable/ic_filter_1"
+                android:drawablePadding="8dp"
+                android:hint="好きなコンテンツ１"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/content2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/lavender_border"
+                android:drawableLeft="@drawable/ic_filter_2"
+                android:drawablePadding="8dp"
+                android:hint="好きなコンテンツ2"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/content3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/lavender_border"
+                android:drawableLeft="@drawable/ic_filter_3"
+                android:drawablePadding="8dp"
+                android:hint="好きなコンテンツ3"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="編集を保存する"
-                android:id="@+id/keep"
+                android:id="@+id/confirm"
                 android:layout_marginLeft="60sp"
                 android:textSize="18sp"
                 android:backgroundTint="@color/color1"

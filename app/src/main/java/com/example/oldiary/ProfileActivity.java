@@ -30,6 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
+    private List<Integer> gCodeList = new ArrayList<>();
     String userId;
     AlertDialog.Builder dialogBuilder;
     Dialog dialog;
@@ -102,7 +103,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void setGenre() {
-        List<String> gCodeList = new ArrayList<>();
         mDatabase.child("users").child(userId).child("favoriteGenre").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -117,6 +117,7 @@ public class ProfileActivity extends AppCompatActivity {
                     if (!userId.equals("id_0")) {
                         for (String xs : split) {
                             i++;
+                            gCodeList.add(Integer.parseInt(xs));
                             int viewId = getResources().getIdentifier("textViewGenre" + i, "id", getPackageName());
                             TextView genre = findViewById(viewId);
                             genre.setText(genreList[Integer.parseInt(xs)]);
@@ -141,7 +142,10 @@ public class ProfileActivity extends AppCompatActivity {
                         })
                         .show();
             } else {
-                Intent intent = new Intent(getApplication(), EditprofileActivity.class);
+                Intent intent = new Intent(getApplication(), EditProfileActivity.class);
+                intent.putExtra("GenreCode1", gCodeList.get(0));
+                intent.putExtra("GenreCode2", gCodeList.get(1));
+                intent.putExtra("GenreCode3", gCodeList.get(2));
                 startActivity(intent);
             }
         });

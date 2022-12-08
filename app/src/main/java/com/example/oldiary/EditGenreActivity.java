@@ -91,24 +91,14 @@ public class EditGenreActivity extends AppCompatActivity {
     }
 
     private void loadData(MyAdapter2 adapter2, ListView listView) {
-        mDatabase.child("users").child(userId).child("favoriteGenre").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
-                }
-                else {
-                    String Result = String.valueOf(task.getResult().getValue());
-                    String reResult = Result.replace("[", "").replace("]", "").replace(" ", "");
-                    String[] split = reResult.split(",");
-                    for (String xs : split) {
-                        addSelectedGenreListList(Integer.parseInt(xs));
-                    }
-                    adapter2.alreadyChecked(selectedGenreList);
-                    listView.setAdapter(adapter2);
-                }
-            }
-        });
+        selectedGenreList = new ArrayList<>();//
+        Intent intent = getIntent();
+        selectedGenreList.add(intent.getIntExtra("GenreCode1", -1));
+        selectedGenreList.add(intent.getIntExtra("GenreCode2", -1));
+        selectedGenreList.add(intent.getIntExtra("GenreCode3", -1));
+        //Log.d(TAG, String.valueOf(selectedGenreList));
+        adapter2.alreadyChecked(selectedGenreList);
+        listView.setAdapter(adapter2);
     }
 
 
@@ -155,16 +145,20 @@ public class EditGenreActivity extends AppCompatActivity {
             if (bStates) { //ボタン有効時
                 new AlertDialog.Builder(EditGenreActivity.this)
                         .setTitle("確認")
-                        .setMessage(String.format("名前: %s\nひとことコメント: %s\nジャンル: %s,%s,%s\n\n以上の内容でプロフィールの編集を完了しますか？",
-                                userName, comment, textData[selectedGenreList.get(0)], textData[selectedGenreList.get(1)], textData[selectedGenreList.get(2)]))
+                        .setMessage(String.format("1: %s\n2: %s\n3: %s\n\n好きなジャンルの編集を完了しますか？",
+                                textData[selectedGenreList.get(0)], textData[selectedGenreList.get(1)], textData[selectedGenreList.get(2)]))
                         .setPositiveButton("はい", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                mDatabase.child("users").child(userId).child("userName").setValue(userName);
-                                mDatabase.child("users").child(userId).child("comment").setValue(comment);
-                                mDatabase.child("users").child(userId).child("favoriteGenre").setValue(selectedGenreList); //firebaseにデータ送信
-                                Intent intentDone = new Intent(getApplication(), HomeActivity.class);
-                                //intentDone.putExtra("UserID", userId);
+                                //mDatabase.child("users").child(userId).child("userName").setValue(userName);
+                                //mDatabase.child("users").child(userId).child("comment").setValue(comment);
+                                //mDatabase.child("users").child(userId).child("favoriteGenre").setValue(selectedGenreList); //firebaseにデータ送信
+                                Intent intentDone = new Intent(getApplication(), EditProfileActivity.class);
+                                intentDone.putExtra("GenreCode1", selectedGenreList.get(0));
+                                intentDone.putExtra("GenreCode2", selectedGenreList.get(1));
+                                intentDone.putExtra("GenreCode3", selectedGenreList.get(2));
+                                intentDone.putExtra("BACK", true);
                                 intentDone.putExtra("UserName", userName);
+                                intentDone.putExtra("Comment", comment);
                                 //AlarmActivity alm = new AlarmActivity();
                                 //alm.mDestroy();
                                 startActivity(intentDone);
@@ -172,12 +166,7 @@ public class EditGenreActivity extends AppCompatActivity {
                         })
                         .setNegativeButton("いいえ", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intentBack = new Intent(getApplication(), PopupActivity.class);
-                                intentBack.putExtra("BACK", true);
-                                intentBack.putExtra("UserName", userName);
-                                intentBack.putExtra("Comment", comment);
-                                Log.d(TAG, userName+comment);
-                                startActivity(intentBack);
+                                ;
                             }
                         })
                         .show();

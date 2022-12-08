@@ -16,4 +16,11 @@ public class GenreData {
     public boolean isChecked(){
         return checked;
     }
+
+    public static final String[] genreList = {
+            "サッカー", "野球", "テニス", "ガーデニング", "読書",
+            "ピアノ", "ゴルフ", "映画鑑賞", "音楽鑑賞", "散歩",
+            "ランニング", "料理", "ボランティア", "将棋", "囲碁",
+            "カラオケ", "旅行", "ワープロ", "手芸", "ギター",
+    };
 }

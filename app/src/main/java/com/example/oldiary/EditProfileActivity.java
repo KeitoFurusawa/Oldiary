@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,7 +20,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class PopupActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class EditProfileActivity extends AppCompatActivity {
     private static final String TAG = "edit";
     private DatabaseReference mDatabase;
     private SharedPreferences preference;
@@ -27,11 +31,12 @@ public class PopupActivity extends AppCompatActivity {
     private String userId;
     private String userName;
     private String comment;
+    private List<Integer> selectedGenreList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_popup);
+        setContentView(R.layout.activity_editprofile);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
@@ -39,13 +44,14 @@ public class PopupActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
-        setOnClick();
         getUserId();
         setUserName();
+        setGenre();
         setComment();
+        setOnClick();
     }
 
-    protected void getUserId() {
+    private void getUserId() {
         userId = preference.getString("UserID", "");
     }
 
@@ -70,7 +76,6 @@ public class PopupActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 
     private void setComment() {
@@ -78,6 +83,7 @@ public class PopupActivity extends AppCompatActivity {
         if (intent.getBooleanExtra("BACK", false)) {
             comment = intent.getStringExtra("Comment");
             TextView textComment = findViewById(R.id.comment);
+            textComment.setMovementMethod(new ScrollingMovementMethod());
             textComment.setText(comment);
         } else {
             mDatabase.child("users").child(userId).child("comment").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -98,7 +104,26 @@ public class PopupActivity extends AppCompatActivity {
                 }
             });
         }
+    }
 
+    private void setGenre() {
+        Intent intent = getIntent();
+        selectedGenreList = new ArrayList<>();
+        selectedGenreList.add(intent.getIntExtra("GenreCode1", -1));
+        selectedGenreList.add(intent.getIntExtra("GenreCode2", -1));
+        selectedGenreList.add(intent.getIntExtra("GenreCode3", -1));
+        int i = 0;
+        for (Integer n : selectedGenreList) {
+            int viewId = getResources().getIdentifier("content" + (i+1), "id", getPackageName());
+            TextView genre = findViewById(viewId);
+            if (n < 0) { //インテントからジャンルデータの読み込み失敗
+                genre.setText("ERROR");
+            } else {
+                new GenreData();
+                genre.setText((GenreData.genreList[n]));
+            }
+            i++;
+        }
     }
 
     private void confirm() {
@@ -109,31 +134,59 @@ public class PopupActivity extends AppCompatActivity {
     }
 
     private void setOnClick() {
-        Button btnCancel = findViewById(R.id.cancel);
-        Button btnNext = findViewById(R.id.next);
+        //Button btnCancel = findViewById(R.id.cancel);
+        Button btnChose = findViewById(R.id.buttonChoseContent);
+        Button btnConfirm = findViewById(R.id.confirm);
+        /** 戻るボタン
         btnCancel.setOnClickListener(v -> {
-            new AlertDialog.Builder(PopupActivity.this)
-                .setTitle("注意")
-                .setMessage("プロフィールの編集を中断しますか?\n(変更内容は破棄されます)")
-                .setPositiveButton("はい", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent2 = new Intent(getApplication(), ProfileActivity.class);
-                        startActivity(intent2);
-                    }
-                })
-                .setNegativeButton("いいえ", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        ;
-                    }
-                })
-                .show();
+            new AlertDialog.Builder(EditProfileActivity.this)
+                    .setTitle("注意")
+                    .setMessage("プロフィールの編集を中断しますか?\n(変更内容は破棄されます)")
+                    .setPositiveButton("はい", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent2 = new Intent(getApplication(), ProfileActivity.class);
+                            startActivity(intent2);
+                        }
+                    })
+                    .setNegativeButton("いいえ", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            ;
+                        }
+                    })
+                    .show();
         });
-        btnNext.setOnClickListener(v -> {
+        */
+
+        btnChose.setOnClickListener(v -> {
             confirm(); //ここで変更内容を格納
             Intent intent = new Intent(getApplication(), EditGenreActivity.class);
             intent.putExtra("UserName", userName);
             intent.putExtra("Comment", comment);
+            intent.putExtra("GenreCode1", selectedGenreList.get(0));
+            intent.putExtra("GenreCode2", selectedGenreList.get(1));
+            intent.putExtra("GenreCode3", selectedGenreList.get(2));
             startActivity(intent);
+        });
+        btnConfirm.setOnClickListener(v -> {
+            confirm(); //ここで変更内容を格納
+            new AlertDialog.Builder(EditProfileActivity.this)
+                    .setTitle("確認")
+                    .setMessage("変更内容を保存しますか？")
+                    .setPositiveButton("はい", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            mDatabase.child("users").child(userId).child("userName").setValue(userName);
+                            mDatabase.child("users").child(userId).child("comment").setValue(comment);
+                            mDatabase.child("users").child(userId).child("favoriteGenre").setValue(selectedGenreList); //firebaseにデータ送信
+                            Intent intentDone = new Intent(getApplication(), HomeActivity.class);
+                            startActivity(intentDone);
+                        }
+                    })
+                    .setNegativeButton("いいえ", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            ;
+                        }
+                    })
+                    .show();
         });
     }
 }
