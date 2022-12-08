@@ -43,7 +43,6 @@ public class PopupActivity extends AppCompatActivity {
         getUserId();
         setUserName();
         setComment();
-
     }
 
     protected void getUserId() {

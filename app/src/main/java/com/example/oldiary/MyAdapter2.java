@@ -46,15 +46,12 @@ public class MyAdapter2 extends ArrayAdapter<GenreData> {
         textView.setTextSize(20); //リストビューのテキストサイズ
 
         CheckBox checkBox = convertView.findViewById(R.id.checkBox);
-        if (selectedGenreList.size() != 0) {
-            int pos = selectedGenreList.get(0);
-            if (position == pos) {
-                //Log.d(TAG, textView.getText().toString() + " checked");
-                checkBox.setChecked(true);
-                item.setChecked(true);
-                //Log.d(TAG, pos + "is" +  String.valueOf(checkBox.isChecked()));
-                selectedGenreList.remove(0);
-            }
+        if (selectedGenreList.contains(position)) {
+            Log.d(TAG, textView.getText().toString() + " checked");
+            checkBox.setChecked(true);
+            item.setChecked(true);
+            Log.d(TAG, position + "is" +  String.valueOf(checkBox.isChecked()));
+            selectedGenreList.remove(selectedGenreList.indexOf(position));
         }
         if (!checkBoxTextList.contains(item.getTextData())) {
             //checkBox.setId(position);
