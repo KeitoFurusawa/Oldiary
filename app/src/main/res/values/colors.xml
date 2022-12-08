@@ -15,5 +15,6 @@
     <color name="active">#50C2C9</color>
 
     <color name="color1">#A5A5A5</color>
-    <color name="color2">#95488DE3</color>
+    <color name="color2">#FAFAFA</color>
+    <color name="color3">#95488DE3</color>
 </resources>

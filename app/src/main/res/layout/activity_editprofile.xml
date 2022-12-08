@@ -49,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/color2"
                 android:text="選ぶ"
+                android:textColor="@color/black"
                 android:textAlignment="center"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="100sp"/>

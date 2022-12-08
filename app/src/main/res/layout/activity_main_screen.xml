@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color2"
     tools:context=".MainScreen">
+
+    <ImageView
+        android:id="@+id/start_title"
+        android:layout_width="350sp"
+        android:layout_height="100sp"
+        android:layout_marginTop="50sp"
+        app:srcCompat="@drawable/oldiary_title"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageButton
+        android:id="@+id/door"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:soundEffectsEnabled="false"
+        android:layout_below="@+id/start_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50sp"
+        app:srcCompat="@drawable/closedoor" />
 
     <TextView
         android:id="@+id/announce"
@@ -12,49 +31,13 @@
         android:layout_height="wrap_content"
         android:text="扉を押して始める"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.964" />
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/door"
+        android:layout_marginTop="30sp"/>
 
-    <ImageView
-        android:id="@+id/start_title"
-        android:layout_width="306dp"
-        android:layout_height="128dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.034"
-        app:srcCompat="@drawable/oldiary_title" />
 
-    <ImageButton
-        android:id="@+id/door"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:soundEffectsEnabled="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.733"
-        app:srcCompat="@drawable/closedoor" />
 
-    <ImageButton
-        android:id="@+id/imageButtonDebug"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/ic_menu_manage" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

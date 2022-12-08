@@ -6,19 +6,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.media.SoundPool;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -48,7 +45,6 @@ public class LoginActivity extends AlarmActivity {
         editor = preference.edit();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         playMusic();
-        setOnClickBack();
         setOnClickCreateNew();
         setOnClickLogin();
         ss();
@@ -81,15 +77,15 @@ public class LoginActivity extends AlarmActivity {
         }
     }
 
-    //戻る
-    protected void setOnClickBack() {
-        ImageButton imageButton = findViewById(R.id.imageButtonBack);
-        imageButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplication(), MainActivity.class);
+    public void onClick(View view) {
+        Button button = findViewById(R.id.backbtn);
+        button.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getApplication(), MainScreen.class);
             mDestroy();
             startActivity(intent);
         });
     }
+
     //新規アカウント作成
     protected void setOnClickCreateNew() {
         Button button= findViewById(R.id.make_account);

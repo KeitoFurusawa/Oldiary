@@ -13,9 +13,7 @@ import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,7 +56,7 @@ public class WriteActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.image_view);
 
-        findViewById(R.id.button5).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.photo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -78,7 +76,7 @@ public class WriteActivity extends AppCompatActivity {
     }
 
     protected void setOnClick() {
-        ImageButton imageButton = findViewById(R.id.cancel);
+        Button imageButton = findViewById(R.id.cancel);
 
         // lambda式
         imageButton.setOnClickListener(v -> {
@@ -129,7 +127,7 @@ public class WriteActivity extends AppCompatActivity {
     }
 
     protected void findViews(){
-        button1 = findViewById(R.id.button3);
+        button1 = findViewById(R.id.camera);
     }
     protected void setListeners(){
         button1.setOnClickListener(new View.OnClickListener(){
