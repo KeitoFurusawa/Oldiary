@@ -1,6 +1,7 @@
 package com.example.oldiary;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainScreen extends AppCompatActivity {
     private final static String TAG = "main";
+    private ProgressDialog progressDialog;
     MediaPlayer mediaPlayer;
     SoundPool soundPool;    // 効果音を鳴らす本体（コンポ）
     int mp3a;
@@ -134,7 +136,7 @@ public class MainScreen extends AppCompatActivity {
         } else { //ログイン済み
             Intent intentHome = new Intent(getApplication(), HomeActivity.class);
             intentHome.putExtra("UserID", loggedInId);
-
+            //StartLoading();
             mDatabase.child("users").child(loggedInId).child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -157,9 +159,21 @@ public class MainScreen extends AppCompatActivity {
                         String value = String.valueOf(task.getResult().getValue());
                         intentHome.putExtra("UserName", value);
                         startActivity(intentHome);
+                        //EndLoading();
                     }
                 }
             });
         }
+    }
+
+    private void StartLoading() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("ロード中");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+    }
+
+    private void EndLoading() {
+        progressDialog.dismiss();
     }
 }

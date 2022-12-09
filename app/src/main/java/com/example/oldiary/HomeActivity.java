@@ -1,6 +1,7 @@
 package com.example.oldiary;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class HomeActivity extends AppCompatActivity {
     private final static String TAG = "home";
+    private ProgressDialog progressDialog;
     MediaPlayer mediaPlayer;
     String userName;
     String userId;
@@ -34,10 +36,11 @@ public class HomeActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private String gender = "null";
     private String color = "null";
-    private int image;
+    private boolean checkID = false, checkName= false, checkAvatar = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        StartLoading();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ActionBar actionBar = getSupportActionBar();
@@ -60,6 +63,23 @@ public class HomeActivity extends AppCompatActivity {
         setOnClick5();
         setOnClick6();
         setOnClickLogout();
+    }
+
+
+
+
+    private void StartLoading() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("ロード中");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+    }
+
+    private void checkLoading() {
+        if (checkID && checkName &&checkAvatar) {
+            progressDialog.dismiss();
+        }
+
     }
 
     protected void playMusic() {
@@ -142,6 +162,8 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             Log.d(TAG, userId);
         }
+        checkID = true;
+        checkLoading();
     }
 
     private void setUserName() {
@@ -171,6 +193,8 @@ public class HomeActivity extends AppCompatActivity {
                         TextView textViewUserId = findViewById(R.id.textViewId);
                         textViewUserId.setText(userName);
                     }
+                    checkName = true;
+                    checkLoading();
                 }
             }
         });
@@ -219,5 +243,7 @@ public class HomeActivity extends AppCompatActivity {
         int drawableId = getResources().getIdentifier(color+"_"+gender, "drawable", getPackageName());
         ImageView imageView = findViewById(R.id.avatar);
         imageView.setImageResource(drawableId);
+        checkAvatar = true;
+        checkLoading();
     }
 }
