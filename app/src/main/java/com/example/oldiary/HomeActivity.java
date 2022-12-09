@@ -61,12 +61,12 @@ public class HomeActivity extends AppCompatActivity {
         setUserName();
         loadPrevAvatar();
         playMusic();
-        setOnClick();
-        setOnClick2();
-        setOnClick3();
-        setOnClick4();
-        setOnClick5();
-        setOnClick6();
+        setOnClickBack();
+        setOnClickWrite();
+        setOnClickHistory();
+        setOnClickConnect();
+        setOnClickProfile();
+        setOnClickHelp();
         setOnClickLogout();
     }
 
@@ -106,7 +106,7 @@ public class HomeActivity extends AppCompatActivity {
         mediaPlayer.pause();
     }
 
-    protected void setOnClick() {
+    protected void setOnClickBack() {
         ImageButton imagebutton = findViewById(R.id.back_start);
         imagebutton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), MainActivity.class);
@@ -114,7 +114,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    protected void setOnClick2() {
+    protected void setOnClickWrite() {
         ImageButton imageButton2 = findViewById(R.id.write);
         imageButton2.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), WriteActivity.class);
@@ -123,7 +123,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    protected void setOnClick3() {
+    protected void setOnClickHistory() {
         ImageButton imageButton3 = findViewById(R.id.bookshelf);
         imageButton3.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), HistoryActivity.class);
@@ -131,7 +131,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    protected void setOnClick4() {
+    protected void setOnClickConnect() {
         ImageButton imageButton4 = findViewById(R.id.go_outside);
         imageButton4.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), ConnectActivity.class);
@@ -139,7 +139,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    protected void setOnClick5() {
+    protected void setOnClickProfile() {
         ImageButton imageButton5 = findViewById(R.id.avatar);
         imageButton5.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), ProfileActivity.class);
@@ -147,7 +147,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    protected void setOnClick6() {
+    protected void setOnClickHelp() {
         ImageButton imageButton6 = findViewById(R.id.collection_of_words);
         imageButton6.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), WordActivity.class);
