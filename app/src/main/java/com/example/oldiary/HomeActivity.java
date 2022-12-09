@@ -1,15 +1,19 @@
 package com.example.oldiary;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +30,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class HomeActivity extends AppCompatActivity {
     private final static String TAG = "home";
+    private ImageButton avatarObj;
+    private TextView nameObj;
+    private ProgressDialog progressDialog;
     MediaPlayer mediaPlayer;
     String userName;
     String userId;
@@ -34,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private String gender = "null";
     private String color = "null";
-    private int image;
+    private boolean checkID = false, checkName= false, checkAvatar = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
+        StartLoading();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
@@ -53,13 +61,34 @@ public class HomeActivity extends AppCompatActivity {
         setUserName();
         loadPrevAvatar();
         playMusic();
-        setOnClick();
-        setOnClick2();
-        setOnClick3();
-        setOnClick4();
-        setOnClick5();
-        setOnClick6();
+        setOnClickBack();
+        setOnClickWrite();
+        setOnClickHistory();
+        setOnClickConnect();
+        setOnClickProfile();
+        setOnClickHelp();
         setOnClickLogout();
+    }
+
+
+    private void StartLoading() {
+        nameObj = findViewById(R.id.textViewId);
+        avatarObj = findViewById(R.id.avatar);
+        nameObj.setVisibility(View.GONE);
+        avatarObj.setVisibility(View.GONE);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.getWindow().setNavigationBarColor(0);
+        progressDialog.setMessage("ロード中");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+    }
+
+    private void checkLoading() {
+        if (checkID && checkName && checkAvatar) {
+            progressDialog.dismiss();
+            nameObj.setVisibility(View.VISIBLE);
+            avatarObj.setVisibility(View.VISIBLE);
+        }
     }
 
     protected void playMusic() {
@@ -77,7 +106,7 @@ public class HomeActivity extends AppCompatActivity {
         mediaPlayer.pause();
     }
 
-    protected void setOnClick() {
+    protected void setOnClickBack() {
         ImageButton imagebutton = findViewById(R.id.back_start);
         imagebutton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), MainActivity.class);
@@ -85,7 +114,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    protected void setOnClick2() {
+    protected void setOnClickWrite() {
         ImageButton imageButton2 = findViewById(R.id.write);
         imageButton2.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), WriteActivity.class);
@@ -94,7 +123,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    protected void setOnClick3() {
+    protected void setOnClickHistory() {
         ImageButton imageButton3 = findViewById(R.id.bookshelf);
         imageButton3.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), HistoryActivity.class);
@@ -102,7 +131,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    protected void setOnClick4() {
+    protected void setOnClickConnect() {
         ImageButton imageButton4 = findViewById(R.id.go_outside);
         imageButton4.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), ConnectActivity.class);
@@ -110,7 +139,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    protected void setOnClick5() {
+    protected void setOnClickProfile() {
         ImageButton imageButton5 = findViewById(R.id.avatar);
         imageButton5.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), ProfileActivity.class);
@@ -118,7 +147,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    protected void setOnClick6() {
+    protected void setOnClickHelp() {
         ImageButton imageButton6 = findViewById(R.id.collection_of_words);
         imageButton6.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), WordActivity.class);
@@ -142,6 +171,8 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             Log.d(TAG, userId);
         }
+        checkID = true;
+        checkLoading();
     }
 
     private void setUserName() {
@@ -171,6 +202,8 @@ public class HomeActivity extends AppCompatActivity {
                         TextView textViewUserId = findViewById(R.id.textViewId);
                         textViewUserId.setText(userName);
                     }
+                    checkName = true;
+                    checkLoading();
                 }
             }
         });
@@ -219,5 +252,7 @@ public class HomeActivity extends AppCompatActivity {
         int drawableId = getResources().getIdentifier(color+"_"+gender, "drawable", getPackageName());
         ImageView imageView = findViewById(R.id.avatar);
         imageView.setImageResource(drawableId);
+        checkAvatar = true;
+        checkLoading();
     }
 }

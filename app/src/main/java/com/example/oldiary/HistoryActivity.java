@@ -1,6 +1,7 @@
 package com.example.oldiary;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,6 +28,8 @@ import java.util.ArrayList;
 
 public class HistoryActivity extends AppCompatActivity {
     private static final String TAG = "history";
+    private ImageView avatarObj;
+    private ProgressDialog progressDialog;
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
     private DatabaseReference mDatabase;
@@ -43,6 +46,9 @@ public class HistoryActivity extends AppCompatActivity {
     TextView post;
     TextView postedAt;
     ArrayList<String> d_idList;
+    private String gender = "null";
+    private String color = "null";
+    private boolean checkID = false, checkPost= false, checkAvatar = false;
 
 
     @Override
@@ -53,15 +59,18 @@ public class HistoryActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setTitle("自分の投稿");
         }
+        StartLoading();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.history);
         mediaPlayer.setLooping(true);
         userId = preference.getString("UserID", "");
+        checkID = true;
         d_idList = new ArrayList<String>();
         setOnClickBack();
         setElm();
+        loadPrevAvatar();
         setOnClickReload();
     }
 
@@ -186,6 +195,8 @@ public class HistoryActivity extends AppCompatActivity {
                         Log.e(TAG, "ERROR: cannot get data"); //debug
                     } else {
                         post.setText(textResult);
+                        checkPost = true;
+                        checkLoading();
                     }
                 }
             }
@@ -218,6 +229,8 @@ public class HistoryActivity extends AppCompatActivity {
                         Log.e(TAG, "ERROR: cannot get data"); //debug
                     } else {
                         postedAt.setText(textResult);
+                        checkPost = true;
+                        checkLoading();
                     }
                 }
             }
@@ -229,6 +242,7 @@ public class HistoryActivity extends AppCompatActivity {
             if (!ibNextStatus) { //最後に到達している
                 Log.d(TAG, "button was disabled"); //debug
             } else {
+                //StartLoading();
                 nowDNum++;
                 if (!ibPrevStatus) {
                     enableIB("l"); //左を濃くする
@@ -247,6 +261,7 @@ public class HistoryActivity extends AppCompatActivity {
             if (!ibPrevStatus) { //最初に達している
                 Log.d(TAG, "button was disabled"); //debug
             } else {
+                //StartLoading();
                 nowDNum--;
                 if (!ibNextStatus) {
                     enableIB("r"); //右を濃くする
@@ -262,6 +277,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void setOnClickReload() {
         ibReload.setOnClickListener(v -> {
+            StartLoading();
             setElm();
         });
     }
@@ -283,6 +299,73 @@ public class HistoryActivity extends AppCompatActivity {
         } else {              //next
             ibNextStatus = true;
             ibNext.setImageResource(R.drawable.next);
+        }
+    }
+
+    private void loadPrevAvatar() {
+        mDatabase.child("users").child(userId).child("avatar").child("gender").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    gender = String.valueOf(task.getResult().getValue());
+                    Log.d(TAG, "result: " + gender);
+                    if (gender.equals("null")) {
+                        gender = "man";
+                    }
+                    Log.d(TAG, gender);
+                }
+            }
+        });
+        mDatabase.child("users").child(userId).child("avatar").child("color").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    color = String.valueOf(task.getResult().getValue());
+                    Log.d(TAG, "result: " + color);
+                    if (color.equals("null")) {
+                        color = "blue";
+                    }
+                    Log.d(TAG, color);
+                    setPrevAvatar();
+                }
+            }
+        });
+    }
+
+    private void setPrevAvatar() {
+        while(gender.equals("null") || color.equals("null")) {
+            Log.d(TAG, gender+color);
+        }
+        int drawableId = getResources().getIdentifier(color+"_"+gender, "drawable", getPackageName());
+        ImageView imageView = findViewById(R.id.avatar);
+        imageView.setImageResource(drawableId);
+        checkAvatar = true;
+        checkLoading();
+    }
+
+    private void StartLoading() {
+        checkPost = false;
+        avatarObj = findViewById(R.id.avatar);
+        if (!checkAvatar) {
+            avatarObj.setVisibility(View.GONE);
+        }
+        progressDialog = new ProgressDialog(this);
+        progressDialog.getWindow().setNavigationBarColor(0);
+        progressDialog.setMessage("ロード中");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+    }
+
+    private void checkLoading() {
+        if (checkID && checkAvatar && checkPost) {
+            progressDialog.dismiss();
+            avatarObj.setVisibility(View.VISIBLE);
         }
     }
 }

@@ -35,12 +35,6 @@ public class EditGenreActivity extends AppCompatActivity {
     private String userName;
     private String comment;
     private final static String TAG = "edit";
-    private static final String[] textData = {
-            "サッカー", "野球", "テニス", "ガーデニング", "読書",
-            "ピアノ", "ゴルフ", "映画鑑賞", "音楽鑑賞", "散歩",
-            "ランニング", "料理", "ボランティア", "将棋", "囲碁",
-            "カラオケ", "旅行", "ワープロ", "手芸", "ギター",
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +59,10 @@ public class EditGenreActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.listViewGenre);
         List<GenreData> list = new ArrayList<>();
-        for (int i = 0; i < textData.length; i++) {
+        new GenreData();
+        for (int i = 0; i < GenreData.genreList.length; i++) {
             GenreData genreData = new GenreData();
-            genreData.setTextData(textData[i]);
+            genreData.setTextData(GenreData.genreList[i]);
             //genreData.setChecked(true);
             list.add(genreData);
         }
@@ -146,7 +141,7 @@ public class EditGenreActivity extends AppCompatActivity {
                 new AlertDialog.Builder(EditGenreActivity.this)
                         .setTitle("確認")
                         .setMessage(String.format("1: %s\n2: %s\n3: %s\n\n好きなジャンルの編集を完了しますか？",
-                                textData[selectedGenreList.get(0)], textData[selectedGenreList.get(1)], textData[selectedGenreList.get(2)]))
+                                GenreData.genreList[selectedGenreList.get(0)], GenreData.genreList[selectedGenreList.get(1)], GenreData.genreList[selectedGenreList.get(2)]))
                         .setPositiveButton("はい", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 //mDatabase.child("users").child(userId).child("userName").setValue(userName);

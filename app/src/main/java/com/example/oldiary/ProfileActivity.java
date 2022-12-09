@@ -36,12 +36,6 @@ public class ProfileActivity extends AppCompatActivity {
     Dialog dialog;
     EditText user_name, content1, content2, content3, comment;
     Button save, cancel;
-    private static final String[] genreList = {
-            "サッカー", "野球", "テニス", "ガーデニング", "読書",
-            "ピアノ", "ゴルフ", "映画鑑賞", "音楽鑑賞", "散歩",
-            "ランニング", "料理", "ボランティア", "将棋", "囲碁",
-            "カラオケ", "旅行", "ワープロ", "手芸", "ギター",
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +114,7 @@ public class ProfileActivity extends AppCompatActivity {
                             gCodeList.add(Integer.parseInt(xs));
                             int viewId = getResources().getIdentifier("textViewGenre" + i, "id", getPackageName());
                             TextView genre = findViewById(viewId);
-                            genre.setText(genreList[Integer.parseInt(xs)]);
+                            genre.setText(GenreData.genreList[Integer.parseInt(xs)]);
                         }
                     }
                 }
