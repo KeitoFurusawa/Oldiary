@@ -1,12 +1,15 @@
 package com.example.oldiary;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class WordActivity extends AppCompatActivity {
 
@@ -39,5 +42,13 @@ public class WordActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         mediaPlayer.pause();
+    }
+
+    public void onClick(View view) {
+        Button button = findViewById(R.id.backbtn);
+        button.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getApplication(), HomeActivity.class);
+            startActivity(intent);
+        });
     }
 }

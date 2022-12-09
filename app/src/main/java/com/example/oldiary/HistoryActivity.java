@@ -4,18 +4,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -26,8 +22,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -43,7 +37,7 @@ public class HistoryActivity extends AppCompatActivity {
     int nowDNum;
     ImageButton ibNext;
     ImageButton ibPrev;
-    ImageButton ibReload;
+    Button ibReload;
     boolean ibNextStatus;
     boolean ibPrevStatus;
     TextView post;
@@ -67,9 +61,6 @@ public class HistoryActivity extends AppCompatActivity {
         userId = preference.getString("UserID", "");
         d_idList = new ArrayList<String>();
         setOnClickBack();
-        //changePhoto();
-        //changePhoto2();
-        //changePhoto3();
         setElm();
         setOnClickReload();
     }
@@ -91,41 +82,11 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     protected void setOnClickBack() {
-        ImageButton imageButton = findViewById(R.id.back_home);
-        imageButton.setOnClickListener(v -> {
+        Button button = findViewById(R.id.back_home);
+        button.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), HomeActivity.class);
             startActivity(intent);
         });
-    }
-
-    protected void changePhoto() {
-        ImageView choose1 = findViewById(R.id.photo_example);
-        TypedArray photo1 = getApplicationContext().getResources().obtainTypedArray(R.array.history_arrays);
-        int rand = (int) (Math.floor(Math.random() * 3));
-        Drawable drawable = photo1.getDrawable(rand);
-        choose1.setImageDrawable(drawable);
-
-        choose1.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim));
-    }
-
-    protected void changePhoto2() {
-        ImageView choose2 = findViewById(R.id.photo_example2);
-        TypedArray photo2 = getApplicationContext().getResources().obtainTypedArray(R.array.history_arrays);
-        int rand = (int) (Math.floor(Math.random() * 3));
-        Drawable drawable = photo2.getDrawable(rand);
-        choose2.setImageDrawable(drawable);
-
-        choose2.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim2));
-    }
-
-    protected void changePhoto3() {
-        ImageView choose3 = findViewById(R.id.photo_example3);
-        TypedArray photo3 = getApplicationContext().getResources().obtainTypedArray(R.array.history_arrays);
-        int rand = (int) (Math.floor(Math.random() * 3));
-        Drawable drawable = photo3.getDrawable(rand);
-        choose3.setImageDrawable(drawable);
-
-        choose3.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim3));
     }
 
     private void setElm() {

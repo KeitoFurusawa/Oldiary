@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             editor.putBoolean("Launched", true);
             editor.commit();
         } else {
-            Intent i = new Intent(MainActivity.this,  MainScreen.class);
+            Intent i = new Intent(MainActivity.this,  Loading.class);
             startActivity(i);
             finish();
         }
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 else {
-                    Intent i = new Intent(MainActivity.this,  MainScreen.class);
+                    Intent i = new Intent(MainActivity.this,  Loading.class);
                     startActivity(i);
                     finish();
                 }
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         skipbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,  MainScreen.class);
+                Intent i = new Intent(MainActivity.this,  Loading.class);
                 startActivity(i);
                 finish();
             }

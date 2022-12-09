@@ -1,9 +1,5 @@
 package com.example.oldiary;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +13,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +24,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class ConnectActivity extends AppCompatActivity {
@@ -39,7 +38,7 @@ public class ConnectActivity extends AppCompatActivity {
     int nowDNum;
     ImageButton ibNext;
     ImageButton ibPrev;
-    ImageButton ibReload;
+    Button ibReload;
     boolean ibNextStatus;
     boolean ibPrevStatus;
     TextView post;
@@ -85,8 +84,8 @@ public class ConnectActivity extends AppCompatActivity {
     }
     
     protected void setOnClickBack() {
-        ImageButton imageButton = findViewById(R.id.back_home);
-        imageButton.setOnClickListener(v -> {
+        Button button = findViewById(R.id.back_home);
+        button.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), HomeActivity.class);
             startActivity(intent);
         });

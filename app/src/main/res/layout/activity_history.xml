@@ -1,101 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HistoryActivity">
 
-    <ImageButton
-        android:id="@+id/back_home"
-        android:layout_width="73dp"
-        android:layout_height="67dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="651dp"
-        android:layout_marginEnd="335dp"
-        android:layout_marginBottom="29dp"
-        android:background="@drawable/button_overlay"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.235"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.187"
-        app:srcCompat="@android:drawable/ic_menu_revert" />
+    <Button
+        android:id="@+id/imageButtonReload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        android:drawableTop="@drawable/ic_autorenew"
+        android:text="更新"
+        android:textStyle="bold"
+        android:layout_marginTop="10sp"
+        android:layout_marginRight="10sp"
+        android:layout_alignParentRight="true"/>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/writeSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageButtonReload"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        app:cardBackgroundColor="@color/color2"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="50dp">
 
-    <ImageView
-        android:id="@+id/photo_example"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="126dp"
-        android:layout_marginEnd="185dp"
-        android:layout_marginBottom="104dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.084" />
+        <TextView
+            android:id="@+id/textViewPost"
+            android:layout_width="320dp"
+            android:layout_height="200dp"
+            android:layout_margin="25sp"
+            android:inputType="textMultiLine"
+            android:text="投稿内容"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
-    <ImageView
-        android:id="@+id/photo_example2"
-        android:layout_width="99dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="243dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="191dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.809"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.396" />
-
-    <ImageView
-        android:id="@+id/photo_example3"
-        android:layout_width="210dp"
-        android:layout_height="140dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="249dp"
-        android:layout_marginBottom="108dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.288"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photo_example" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="108dp"
-        android:layout_height="304dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/back_home"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.962"
-        app:srcCompat="@drawable/mii" />
+    </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/textViewPost"
-        android:layout_width="288dp"
-        android:layout_height="233dp"
-        android:background="@drawable/border"
-        android:inputType="textMultiLine"
-        android:text="Post"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.128" />
+        android:id="@+id/textViewPostedAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:text="投稿時間"
+        android:textColor="#010101"
+        android:textSize="20sp"
+        android:layout_below="@+id/writeSpace"
+        android:layout_centerHorizontal="true"/>
 
     <ImageButton
         android:id="@+id/imageButtonNext"
@@ -103,13 +62,11 @@
         android:layout_height="70dp"
         android:background="@drawable/button_overlay"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.953"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.475"
-        app:srcCompat="@drawable/next" />
+        android:src="@drawable/next"
+        android:layout_below="@+id/textViewPostedAt"
+        android:layout_marginTop="-10sp"
+        android:layout_marginRight="30sp"
+        android:layout_alignParentRight="true"/>
 
     <ImageButton
         android:id="@+id/imageButtonPrev"
@@ -117,41 +74,38 @@
         android:layout_height="70dp"
         android:background="@drawable/button_overlay"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.475"
-        app:srcCompat="@drawable/prev" />
+        android:src="@drawable/prev"
+        android:layout_below="@+id/textViewPostedAt"
+        android:layout_marginTop="-10sp"
+        android:layout_marginLeft="30sp"/>
 
-    <TextView
-        android:id="@+id/textViewPostedAt"
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="110dp"
+        android:layout_height="250dp"
+        android:layout_below="@+id/textViewPostedAt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/blue_man" />
+
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="postedAt"
-        android:textColor="#010101"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPost"
-        app:layout_constraintVertical_bias="0.013" />
+        android:src="@drawable/ellipse1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"/>
 
-    <ImageButton
-        android:id="@+id/imageButtonReload"
-        android:layout_width="55dp"
-        android:layout_height="52dp"
-        android:background="@drawable/button_overlay"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.98"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.017"
-        app:srcCompat="@drawable/reload" />
+    <Button
+        android:id="@+id/back_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:backgroundTint="@color/white"
+        android:text="戻る"
+        android:textSize="20sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
