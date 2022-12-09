@@ -5,12 +5,15 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +30,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class HomeActivity extends AppCompatActivity {
     private final static String TAG = "home";
+    private ImageButton avatarObj;
+    private TextView nameObj;
+
     private ProgressDialog progressDialog;
     MediaPlayer mediaPlayer;
     String userName;
@@ -40,13 +46,13 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        StartLoading();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.hide();
         }
+        StartLoading();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
@@ -69,6 +75,10 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void StartLoading() {
+        nameObj = findViewById(R.id.textViewId);
+        avatarObj = findViewById(R.id.avatar);
+        nameObj.setVisibility(View.GONE);
+        avatarObj.setVisibility(View.GONE);
         progressDialog = new ProgressDialog(this);
         progressDialog.getWindow().setNavigationBarColor(0);
         progressDialog.setMessage("ロード中");
@@ -77,10 +87,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void checkLoading() {
-        if (checkID && checkName &&checkAvatar) {
+        if (checkID && checkName && checkAvatar) {
             progressDialog.dismiss();
+            nameObj.setVisibility(View.VISIBLE);
+            avatarObj.setVisibility(View.VISIBLE);
         }
-
     }
 
     protected void playMusic() {
