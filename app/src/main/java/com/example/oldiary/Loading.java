@@ -1,6 +1,5 @@
 package com.example.oldiary;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -15,6 +14,8 @@ public class Loading extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
 
+
+        /*
         handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -24,5 +25,7 @@ public class Loading extends AppCompatActivity {
                 finish();
             }
         }, 3000);
+
+         */
     }
 }
