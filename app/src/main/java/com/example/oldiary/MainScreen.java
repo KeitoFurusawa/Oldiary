@@ -136,7 +136,7 @@ public class MainScreen extends AppCompatActivity {
         } else { //ログイン済み
             Intent intentHome = new Intent(getApplication(), HomeActivity.class);
             intentHome.putExtra("UserID", loggedInId);
-            //StartLoading();
+            StartLoading();
             mDatabase.child("users").child(loggedInId).child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -158,8 +158,8 @@ public class MainScreen extends AppCompatActivity {
                     else {
                         String value = String.valueOf(task.getResult().getValue());
                         intentHome.putExtra("UserName", value);
+                        EndLoading();
                         startActivity(intentHome);
-                        //EndLoading();
                     }
                 }
             });

@@ -32,7 +32,6 @@ public class HomeActivity extends AppCompatActivity {
     private final static String TAG = "home";
     private ImageButton avatarObj;
     private TextView nameObj;
-
     private ProgressDialog progressDialog;
     MediaPlayer mediaPlayer;
     String userName;
@@ -70,8 +69,6 @@ public class HomeActivity extends AppCompatActivity {
         setOnClick6();
         setOnClickLogout();
     }
-
-
 
 
     private void StartLoading() {

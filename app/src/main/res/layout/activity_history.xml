@@ -61,14 +61,14 @@
         android:layout_marginTop="104dp"
         android:layout_marginEnd="249dp"
         android:layout_marginBottom="108dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.288"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/photo_example" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/avatar"
         android:layout_width="108dp"
         android:layout_height="304dp"
         android:scaleType="centerCrop"
@@ -133,7 +133,7 @@
         android:text="postedAt"
         android:textColor="#010101"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPost"
