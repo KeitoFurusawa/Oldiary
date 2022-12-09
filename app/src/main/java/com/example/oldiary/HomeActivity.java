@@ -70,6 +70,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void StartLoading() {
         progressDialog = new ProgressDialog(this);
+        progressDialog.getWindow().setNavigationBarColor(0);
         progressDialog.setMessage("ロード中");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
