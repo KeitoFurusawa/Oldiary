@@ -177,7 +177,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             mDatabase.child("users").child(userId).child("userName").setValue(userName);
                             mDatabase.child("users").child(userId).child("comment").setValue(comment);
                             mDatabase.child("users").child(userId).child("favoriteGenre").setValue(selectedGenreList); //firebaseにデータ送信
-                            Intent intentDone = new Intent(getApplication(), HomeActivity.class);
+                            Intent intentDone = new Intent(getApplication(), ProfileActivity.class);
                             startActivity(intentDone);
                         }
                     })

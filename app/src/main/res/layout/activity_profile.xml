@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".AttendActivity">
 
+    <TextView
+        android:id="@+id/textViewUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="ユーザー名"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="40sp"/>
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
@@ -16,161 +27,169 @@
         android:layout_marginTop="60dp"/>
 
 
-    <TextView
-        android:id="@+id/textViewUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/profile_image"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="5dp"
-        android:text="ユーザー名"
-        android:textColor="#000"
-        android:textStyle="bold"
-        android:textSize="18sp"/>
-
-    <TextView
-        android:id="@+id/comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ひとことコメント"
-        android:layout_below="@id/textViewUserName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp" />
-
-    <ImageView
-        android:id="@+id/imageview_pic"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@id/comment"
-        android:layout_marginTop="-22dp"
-        android:src="@drawable/profile_ui" />
-
-    <LinearLayout
-        android:id="@+id/linearlayout_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/imageview_pic"
-        android:layout_marginTop="20dp">
-
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/ic_filter_1"
-            android:layout_marginLeft="70dp"
-            />
-
-        <TextView
-            android:id="@+id/textViewGenre1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="好きなコンテンツ１"
-            android:textSize="25sp"
-            android:textColor="#000"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearlayout_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/linearlayout_1"
-        android:layout_marginTop="10dp">
-
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/ic_filter_2"
-            android:layout_marginLeft="70dp"
-            />
-
-        <TextView
-            android:id="@+id/textViewGenre2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="好きなコンテンツ２"
-            android:textSize="25sp"
-            android:textColor="#000"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearlayout_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/linearlayout_2"
-        android:layout_marginTop="10dp">
-
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/ic_filter_3"
-            android:layout_marginLeft="70dp"
-            />
-
-        <TextView
-            android:id="@+id/textViewGenre3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="好きなコンテンツ３"
-            android:textSize="25sp"
-            android:textColor="#000"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"/>
-    </LinearLayout>
+   <androidx.cardview.widget.CardView
+       android:id="@+id/myInfo"
+       android:layout_width="300sp"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/profile_image"
+       android:layout_centerHorizontal="true"
+       app:cardBackgroundColor="@color/color2"
+       app:cardCornerRadius="20dp"
+       app:cardElevation="50dp">
 
 
-    <LinearLayout
-        android:id="@+id/linearlayout_editProf"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearlayout_3"
-        android:layout_marginTop="13dp"
-        android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="80dp"
-            android:src="@drawable/ic_settings" />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="40sp"
+           android:layout_marginTop="10dp"
+           android:text="好きなコンテンツ"
+           android:textColor="@color/color1"
+           android:textStyle="bold"
+           android:textSize="18sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:text="プロフィール 編集"
-            android:textColor="#000"
-            android:textSize="22sp" />
-    </LinearLayout>
+       <LinearLayout
+           android:id="@+id/linearlayout_1"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:layout_marginTop="40dp">
 
-    <LinearLayout
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/ic_filter_1"
+               android:layout_marginLeft="20dp" />
+
+           <TextView
+               android:id="@+id/textViewGenre1"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="好きなコンテンツ１"
+               android:textSize="20sp"
+               android:textColor="#000"
+               android:layout_marginLeft="20dp" />
+       </LinearLayout>
+
+       <LinearLayout
+           android:id="@+id/linearlayout_2"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:layout_marginTop="70dp">
+
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/ic_filter_2"
+               android:layout_marginLeft="20dp" />
+
+           <TextView
+               android:id="@+id/textViewGenre2"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="好きなコンテンツ２"
+               android:textSize="20sp"
+               android:textColor="#000"
+               android:layout_marginLeft="20dp" />
+       </LinearLayout>
+
+       <LinearLayout
+           android:id="@+id/linearlayout_3"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:layout_marginTop="100dp">
+
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/ic_filter_3"
+               android:layout_marginLeft="20dp" />
+
+           <TextView
+               android:id="@+id/textViewGenre3"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="好きなコンテンツ３"
+               android:textSize="20sp"
+               android:textColor="#000"
+               android:layout_marginLeft="20dp" />
+       </LinearLayout>
+
+       <LinearLayout
+           android:id="@+id/checkComment"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginBottom="10sp"
+           android:layout_marginTop="140sp"
+           android:onClick="onClick">
+
+           <ImageButton
+               android:id="@+id/allow"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="140sp"
+               android:src="@drawable/ic_keyboard_double_arrow_down"
+               android:background="@color/color2"
+               android:onClick="onClick"/>
+
+       </LinearLayout>
+
+       <TextView
+           android:id="@+id/titleComment"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="40sp"
+           android:layout_marginTop="170dp"
+           android:text="ひとことコメント"
+           android:textColor="@color/color1"
+           android:textStyle="bold"
+           android:textSize="18sp"/>
+
+       <TextView
+           android:id="@+id/comment"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="200sp"
+           android:layout_marginLeft="20sp"
+           android:layout_marginBottom="10sp"
+           android:text="ここにコメントが入ります"
+           android:textSize="20sp"
+           android:textColor="#000"/>
+
+   </androidx.cardview.widget.CardView>
+
+
+    <Button
         android:id="@+id/linearlayout_EditAvatar"
-        android:layout_width="match_parent"
+        android:layout_width="140sp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearlayout_editProf"
-        android:layout_marginTop="12dp"
-        android:orientation="horizontal">
+        android:backgroundTint="@color/white"
+        android:text="アバター\n変更"
+        android:layout_below="@+id/myInfo"
+        android:layout_marginTop="40sp"
+        android:layout_marginLeft="50sp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:drawableTop="@drawable/ic_manage_accounts" />
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="80dp"
-            android:src="@drawable/ic_settings" />
+    <Button
+        android:id="@+id/linearlayout_editProf"
+        android:layout_width="140sp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:text="プロフィール\n変更"
+        android:layout_below="@+id/myInfo"
+        android:layout_marginTop="40sp"
+        android:layout_marginRight="50sp"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:drawableTop="@drawable/ic_settings" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:text="アバター 編集"
-            android:textColor="#000"
-            android:textSize="22sp" />
-    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/linearlayout_logout"
@@ -178,7 +197,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="70dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -195,5 +214,25 @@
             android:textColor="#000"
             android:textSize="20sp" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ellipse1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"/>
+
+    <Button
+        android:id="@+id/backbtn"
+        android:onClick="onClick2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:backgroundTint="@color/white"
+        android:text="戻る"
+        android:textSize="20sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
