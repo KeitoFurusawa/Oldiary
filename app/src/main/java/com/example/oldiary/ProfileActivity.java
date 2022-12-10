@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,6 +38,11 @@ public class ProfileActivity extends AppCompatActivity {
     Dialog dialog;
     EditText user_name, content1, content2, content3, comment;
     Button save, cancel;
+    TextView textView1, textView2;
+    int count = 0;
+
+
+
     private static final String[] genreList = {
             "サッカー", "野球", "テニス", "ガーデニング", "読書",
             "ピアノ", "ゴルフ", "映画鑑賞", "音楽鑑賞", "散歩",
@@ -51,6 +58,13 @@ public class ProfileActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setTitle("プロフィール");
         }
+
+        textView1 = findViewById(R.id.titleComment);
+        textView2 = findViewById(R.id.comment);
+
+        textView1.setVisibility(View.GONE);
+        textView2.setVisibility(View.GONE);
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
@@ -61,11 +75,40 @@ public class ProfileActivity extends AppCompatActivity {
         setOnClickEdit();
         setOnClickLogout();
         setOnclickAvatar();
-        // setOnClickBack();
+
     }
 
     protected void getUserId() {
         userId = preference.getString("UserID", "");
+    }
+
+    public void onClick(View view) {
+        ImageButton imageButton = findViewById(R.id.allow);
+        textView1 = findViewById(R.id.titleComment);
+        textView2 = findViewById(R.id.comment);
+
+        if (count % 2 == 0) {
+            textView1.setVisibility(View.VISIBLE);
+            textView2.setVisibility(View.VISIBLE);
+            imageButton.setImageResource(R.drawable.ic_keyboard_double_arrow_up);
+            count++;
+        }
+
+        else {
+            textView1.setVisibility(View.GONE);
+            textView2.setVisibility(View.GONE);
+            imageButton.setImageResource(R.drawable.ic_keyboard_double_arrow_down);
+            count++;
+        }
+
+    }
+
+    public void onClick2(View view) {
+        Button button = findViewById(R.id.backbtn);
+        button.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getApplication(), HomeActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void setUserName() {
@@ -128,8 +171,8 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
     private void setOnClickEdit() {
-        LinearLayout lnEdit = findViewById(R.id.linearlayout_editProf);
-        lnEdit.setOnClickListener(v -> {
+        Button profBtn = findViewById(R.id.linearlayout_editProf);
+        profBtn.setOnClickListener(v -> {
             if (userId.equals("id_0")) {
                 new AlertDialog.Builder(ProfileActivity.this)
                         .setTitle("注意")
@@ -162,8 +205,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     protected void setOnclickAvatar() {
-        LinearLayout linearLayout = findViewById(R.id.linearlayout_EditAvatar);
-        linearLayout.setOnClickListener(v -> {
+        Button avatarBtn = findViewById(R.id.linearlayout_EditAvatar);
+        avatarBtn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), AvatarMakeActivity.class);
             startActivity(intent);
         });
