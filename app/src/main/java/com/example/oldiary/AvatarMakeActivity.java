@@ -8,9 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -223,5 +221,10 @@ public class AvatarMakeActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("いいえ", null)
                 .show();
+    }
+
+    public void onClick3(View view) {
+        Intent intent = new Intent(getApplication(), ProfileActivity.class);
+        startActivity(intent);
     }
 }

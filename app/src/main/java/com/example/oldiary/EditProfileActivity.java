@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -188,5 +189,10 @@ public class EditProfileActivity extends AppCompatActivity {
                     })
                     .show();
         });
+    }
+
+    public void onClick3(View view) {
+        Intent intent = new Intent(getApplication(), ProfileActivity.class);
+        startActivity(intent);
     }
 }

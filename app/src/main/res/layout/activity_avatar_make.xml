@@ -162,4 +162,26 @@
         android:onClick="onClick2"
         android:text="確定する" />
 
+    <ImageView
+        android:onClick="onClick3"
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ellipse1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"/>
+
+    <Button
+        android:id="@+id/backbtn"
+        android:onClick="onClick3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:backgroundTint="@color/white"
+        android:text="戻る"
+        android:textSize="20sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"/>
+
+
 </RelativeLayout>
