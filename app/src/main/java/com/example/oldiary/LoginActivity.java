@@ -23,8 +23,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Random;
-
 
 public class LoginActivity extends AlarmActivity {
     private static final String TAG = "Login";
@@ -168,26 +166,12 @@ public class LoginActivity extends AlarmActivity {
             soundPool.play(mp3a,9 , 9, 0, 0, 1);
             Log.e(TAG, "ERROR: that PhoneNumber wasn't registered");
             Toast.makeText(LoginActivity.this, "その電話番号は登録されていません", Toast.LENGTH_SHORT).show();
-        } else { //登録済み
-            /*idを渡してパスワード入力画面へ*/
-            Random random = new Random();
-            int randomValue = random.nextInt(3);
-            switch(randomValue) {
-                case 0:
-                    Intent intentNext = new Intent(getApplication(), Login2Activity.class);
-                    intentNext.putExtra("UserID", userId);
-                    startActivity(intentNext);
-                    break;
-                case 1:
-                    Intent intentNext2 = new Intent(getApplication(), Login2copy1Activity.class);
-                    intentNext2.putExtra("UserID", userId);
-                    startActivity(intentNext2);
-                    break;
-                case 2:
-                    Intent intentNext3 = new Intent(getApplication(), Login2copy2Activity.class);
-                    intentNext3.putExtra("UserID", userId);
-                    startActivity(intentNext3);
-            }
         }
+        else {
+            Intent intentNext = new Intent(getApplication(), Login2Activity.class);
+            intentNext.putExtra("UserID", userId);
+            startActivity(intentNext);
+        }
+
     }
 }

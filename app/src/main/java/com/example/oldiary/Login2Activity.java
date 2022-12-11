@@ -1,11 +1,5 @@
 package com.example.oldiary;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
@@ -14,9 +8,14 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,26 +23,59 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Login2Activity extends AppCompatActivity {
-    private static final String TAG = "Login";
+
+    private static final String TAG = Login2Activity.class.getSimpleName();
     String userId;
-    String inputPassword = "";
+    private String inputPassword = "";
     private String correctPassword;
     private DatabaseReference mDatabase;
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
     int count = 0;
 
+    private static final @IdRes
+    int[] BUTTONS_ID = {
+            R.id.button_0, R.id.button_1, R.id.button_2, R.id.button_3, R.id.button_4,
+            R.id.button_5, R.id.button_6, R.id.button_7, R.id.button_8, R.id.button_9
+    };
+
     SoundPool soundPool;
     int mp3a;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
+
+        TextView textView = findViewById(R.id.password);
+
+        View.OnClickListener listener = v -> {
+            if (inputPassword.length() < 4) {
+                inputPassword += ((Button)v).getText();
+                Log.d(TAG, inputPassword);
+                textView.setText(toAst(inputPassword));
+            }
+        };
+        Button[] buttons = new Button[BUTTONS_ID.length];
+        for (int i = 0; i < BUTTONS_ID.length; i++) {
+            buttons[i] = findViewById(BUTTONS_ID[i]);
+            buttons[i].setOnClickListener(listener);
         }
+        setRandomNumberTo(buttons);
+
+        Button cancel = findViewById(R.id.cancel);
+        cancel.setOnClickListener(v -> {
+            Log.d(TAG, "Previous PAss:" + inputPassword);
+            inputPassword = "";
+            textView.setText(toAst(inputPassword));
+            setRandomNumberTo(buttons); //キャンセルで入れ変えてみる
+        });
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
@@ -51,8 +83,22 @@ public class Login2Activity extends AppCompatActivity {
         getUserId();
         setCorrectPassword();
         setOnclickConfirm();
-        passWord();
         ss();
+    }
+
+    private  void setRandomNumberTo(Button[] buttons) {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < buttons.length; i++) numbers.add(i);
+        Collections.shuffle(numbers);
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i].setText("" + numbers.get(i));
+        }
+    }
+
+    private String toAst(String text) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < text.length(); i++) sb.append('*');
+        return sb.toString();
     }
 
     protected void ss() {
@@ -83,7 +129,6 @@ public class Login2Activity extends AppCompatActivity {
         Intent intent1 = getIntent();
         userId = intent1.getStringExtra("UserID");
         Log.d(TAG, "PhoneNumber: " + userId);
-
     }
 
     protected void setOnclickConfirm() {
@@ -106,127 +151,6 @@ public class Login2Activity extends AppCompatActivity {
         });
     }
 
-    protected void passWord() {
-        Button button0 = findViewById(R.id.button_0);
-        Button button1 = findViewById(R.id.button_1);
-        Button button2 = findViewById(R.id.button_2);
-        Button button3 = findViewById(R.id.button_3);
-        Button button4 = findViewById(R.id.button_4);
-        Button button5 = findViewById(R.id.button_5);
-        Button button6 = findViewById(R.id.button_6);
-        Button button7 = findViewById(R.id.button_7);
-        Button button8 = findViewById(R.id.button_8);
-        Button button9 = findViewById(R.id.button_9);
-        Button cancel = findViewById(R.id.cancel);
-
-        button0.setOnClickListener(v -> {
-            count += 1;
-            if (count < 5) {
-                inputPassword += "0";
-                Log.d(TAG, inputPassword);
-                TextView textView = findViewById(R.id.password);
-                textView.setText(toAst(inputPassword));
-            }
-        });
-
-        button1.setOnClickListener(v -> {
-            count += 1;
-            if (count < 5) {
-                inputPassword += "1";
-                Log.d(TAG, inputPassword);
-                TextView textView = findViewById(R.id.password);
-                textView.setText(toAst(inputPassword));
-            }
-        });
-
-        button2.setOnClickListener(v -> {
-            count += 1;
-            if (count < 5) {
-                inputPassword += "2";
-                Log.d(TAG, inputPassword);
-                TextView textView = findViewById(R.id.password);
-                textView.setText(toAst(inputPassword));
-            }
-        });
-
-        button3.setOnClickListener(v -> {
-            count += 1;
-            if (count < 5) {
-                inputPassword += "3";
-                Log.d(TAG, inputPassword);
-                TextView textView = findViewById(R.id.password);
-                textView.setText(toAst(inputPassword));
-            }
-        });
-
-        button4.setOnClickListener(v -> {
-            count += 1;
-            if (count < 5) {
-                inputPassword += "4";
-                Log.d(TAG, inputPassword);
-                TextView textView = findViewById(R.id.password);
-                textView.setText(toAst(inputPassword));
-            }
-        });
-
-        button5.setOnClickListener(v -> {
-            count += 1;
-            if (count < 5) {
-                inputPassword += "5";
-                Log.d(TAG, inputPassword);
-                TextView textView = findViewById(R.id.password);
-                textView.setText(toAst(inputPassword));
-            }
-        });
-
-        button6.setOnClickListener(v -> {
-            count += 1;
-            if (count < 5) {
-                inputPassword += "6";
-                Log.d(TAG, inputPassword);
-                TextView textView = findViewById(R.id.password);
-                textView.setText(toAst(inputPassword));
-            }
-        });
-
-        button7.setOnClickListener(v -> {
-            count += 1;
-            if (count < 5) {
-                inputPassword += "7";
-                Log.d(TAG, inputPassword);
-                TextView textView = findViewById(R.id.password);
-                textView.setText(toAst(inputPassword));
-            }
-        });
-
-        button8.setOnClickListener(v -> {
-            count += 1;
-            if (count < 5) {
-                inputPassword += "8";
-                Log.d(TAG, inputPassword);
-                TextView textView = findViewById(R.id.password);
-                textView.setText(toAst(inputPassword));
-            }
-        });
-
-        button9.setOnClickListener(v -> {
-            count += 1;
-            if (count < 5) {
-                inputPassword += "9";
-                Log.d(TAG, inputPassword);
-                TextView textView = findViewById(R.id.password);
-                textView.setText(toAst(inputPassword));
-            }
-        });
-
-        cancel.setOnClickListener(v -> {
-            Log.d(TAG, "Previous Pass:" + inputPassword);
-            inputPassword = "";
-            count = 0;
-            TextView textView = findViewById(R.id.password);
-            textView.setText(toAst(inputPassword));
-        });
-    }
 
     public void setCorrectPassword() {
         Log.d(TAG, "setCorrectPassword()");
@@ -236,17 +160,6 @@ public class Login2Activity extends AppCompatActivity {
                 Log.d("debug", "this is sCP onComplete");
                 if (!task.isSuccessful()) {
                     Log.e(TAG, "Error getting data", task.getException());
-                    new AlertDialog.Builder(Login2Activity.this)
-                            .setTitle("エラー")
-                            .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // OKボタン押下時の処理
-                                    Intent intent2 = new Intent(getApplication(), MainActivity.class);
-                                    startActivity(intent2);
-                                }
-                            })
-                            .show();
                 }
                 else {
                     correctPassword = String.valueOf(task.getResult().getValue());
@@ -264,17 +177,6 @@ public class Login2Activity extends AppCompatActivity {
                 Log.d("debug", "this is cUN onComplete");
                 if (!task.isSuccessful()) {
                     Log.e(TAG, "Error getting data", task.getException());
-                    new AlertDialog.Builder(Login2Activity.this)
-                            .setTitle("エラー")
-                            .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // OKボタン押下時の処理
-                                    Intent intent2 = new Intent(getApplication(), MainActivity.class);
-                                    startActivity(intent2);
-                                }
-                            })
-                            .show();
                 }
                 else {
                     String userName = String.valueOf(task.getResult().getValue());
@@ -289,26 +191,14 @@ public class Login2Activity extends AppCompatActivity {
                         intentNext.putExtra("UserName", userName);
                         editor.putString("UserID", userId);
                         editor.commit();
-                        startActivity(intentNext);
                         //
                         AlarmActivity alm = new AlarmActivity();
                         alm.mDestroy();
                         //
+                        startActivity(intentNext);
                     }
                 }
             }
         });
-    }
-
-    public String mulString(String s, int n) {
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < n; i++) {
-            sb.append(s);
-        }
-        return sb.toString();
-    }
-
-    public String toAst(String xs) {
-        return mulString("*", xs.length());
     }
 }
