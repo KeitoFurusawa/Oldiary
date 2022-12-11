@@ -4,29 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WriteActivity">
+    tools:context=".ReplyActivity">
 
-        <Button
-            android:id="@+id/cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:text="やめる"
-            android:layout_marginTop="10sp"
-            android:layout_marginStart="10sp"
-            android:textColor="@color/black"
-            android:drawableTop="@drawable/ic_cancel" />
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:text="やめる"
+        android:layout_marginTop="10sp"
+        android:layout_marginStart="10sp"
+        android:textColor="@color/black"
+        android:drawableTop="@drawable/ic_cancel" />
 
     <Button
         android:id="@+id/post"
         android:layout_width="130dp"
         android:layout_height="70dp"
-        android:text="投稿する"
+        android:layout_below="@+id/image_view"
+        android:layout_marginTop="25dp"
         android:backgroundTint="#00965F"
+        android:layout_centerHorizontal="true"
+        android:text="返信する"
         android:textSize="15sp"
-        android:textStyle="bold"
-        android:layout_marginTop="10sp"
-        android:layout_centerHorizontal="true"/>
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/keep"
@@ -38,16 +39,17 @@
         android:textStyle="bold"
         android:layout_alignParentRight="true"
         android:layout_marginTop="20sp"
-        android:layout_marginEnd="10sp" />
+        android:layout_marginEnd="10sp"
+        android:visibility="gone"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/writeSpace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/post"
+        android:layout_below="@+id/cancel"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="20sp"
-        android:layout_marginTop="20sp"
+        android:layout_marginTop="19dp"
         android:layout_marginEnd="20sp"
         android:layout_marginBottom="20sp"
         app:cardBackgroundColor="@color/color2"
@@ -55,7 +57,7 @@
         app:cardElevation="50dp">
 
         <EditText
-            android:id="@+id/editTextTextMultiLine2"
+            android:id="@+id/editTextReply"
             android:layout_width="320dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
@@ -63,7 +65,7 @@
             android:background="#00000000"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="本文を入力してください"
+            android:hint="返信内容を入力してください"
             android:inputType="textMultiLine" />
 
     </androidx.cardview.widget.CardView>
@@ -89,7 +91,8 @@
         android:layout_marginStart="20sp"
         android:textColor="@color/black"
         android:layout_alignParentLeft="true"
-        android:drawableTop="@drawable/ic_flag" />
+        android:drawableTop="@drawable/ic_flag"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/camera"
@@ -101,7 +104,8 @@
         android:layout_marginTop="15sp"
         android:layout_centerHorizontal="true"
         android:textColor="@color/black"
-        android:drawableTop="@drawable/ic_photo_camera" />
+        android:drawableTop="@drawable/ic_photo_camera"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/photo"
@@ -115,7 +119,8 @@
         android:backgroundTint="@color/white"
         android:drawableTop="@drawable/ic_insert_photo"
         android:text="写真"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:visibility="gone"/>
 
 
 

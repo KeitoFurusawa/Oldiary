@@ -41,7 +41,8 @@
             android:inputType="textMultiLine"
             android:text="投稿内容"
             android:textColor="#000000"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:scrollbars="vertical" />
 
     </androidx.cardview.widget.CardView>
 

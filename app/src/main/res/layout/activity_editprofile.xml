@@ -44,18 +44,18 @@
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/comment"
-                android:layout_width="match_parent"
-                android:layout_height="73dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/lavender_border"
-                android:drawableLeft="@drawable/ic_comment"
-                android:drawablePadding="8dp"
-                android:hint="ひとことコメント"
-                android:padding="8dp"
-                android:scrollbars="vertical"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+            android:id="@+id/comment"
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/lavender_border"
+            android:drawableLeft="@drawable/ic_comment"
+            android:drawablePadding="8dp"
+            android:hint="ひとことコメント"
+            android:padding="8dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
             <Button
                 android:id="@+id/buttonChoseContent"

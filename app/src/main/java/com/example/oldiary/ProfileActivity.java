@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -61,6 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         textView1 = findViewById(R.id.titleComment);
         textView2 = findViewById(R.id.comment);
+        textView2.setMovementMethod(new ScrollingMovementMethod());
 
         textView1.setVisibility(View.GONE);
         textView2.setVisibility(View.GONE);

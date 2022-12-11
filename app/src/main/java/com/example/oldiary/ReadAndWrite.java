@@ -24,7 +24,7 @@ public class ReadAndWrite extends CreateActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
-    public void writeDiary(String userId, String userName, String text, String dateTime, long timeInMillis) {
+    public void writeDiary(String userId, String text, String dateTime, long timeInMillis) {
         Log.d(TAG, text);
         mDatabase.child("users").child(userId).child("d_cnt").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -135,6 +135,61 @@ public class ReadAndWrite extends CreateActivity {
                         mDatabase.child("users").child(userId).child("diaries").child("d_idList").setValue(sb.toString());
                     }
                     //Log.d(TAG, value);
+                }
+            }
+        });
+    }
+
+    public void writeReply(String srcUserId, String dstDiaryId, String text, String dateTime, long timeInMillis) {
+        mDatabase.child("diaries").child(dstDiaryId).child("r_cnt").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    String getResult = String.valueOf(task.getResult().getValue());
+                    Log.d(TAG, getResult);
+                    if (getResult.equals("null")) { //最初の返信
+                        mDatabase.child("diaries").child(dstDiaryId).child("r_cnt").setValue(1);
+                        mDatabase.child("diaries").child(dstDiaryId).child("r_1").child("text").setValue(text);
+                        mDatabase.child("diaries").child(dstDiaryId).child("r_1").child("repliedAt").setValue(dateTime);
+                        mDatabase.child("diaries").child(dstDiaryId).child("r_1").child("timeInMillis").setValue(timeInMillis);
+                        mDatabase.child("diaries").child(dstDiaryId).child("r_1").child("repliedBy").setValue(srcUserId);
+                        addNewReply(dstDiaryId, "r_1");
+
+                    } else { // 2回目以降
+                        int count = Integer.parseInt(getResult) + 1;
+                        mDatabase.child("diaries").child(dstDiaryId).child("r_cnt").setValue(count);
+                        mDatabase.child("diaries").child(dstDiaryId).child("r_"+count).child("text").setValue(text);
+                        mDatabase.child("diaries").child(dstDiaryId).child("r_"+count).child("repliedAt").setValue(dateTime);
+                        mDatabase.child("diaries").child(dstDiaryId).child("r_"+count).child("timeInMillis").setValue(timeInMillis);
+                        mDatabase.child("diaries").child(dstDiaryId).child("r_"+count).child("repliedBy").setValue(srcUserId);
+                        addNewReply(dstDiaryId, "r_"+count);
+                    }
+                }
+            }
+        });
+    }
+
+    public void addNewReply(String dstDiaryId, String replyId) {
+        mDatabase.child("diaries").child(dstDiaryId).child("r_idList").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                Log.d("debug", "this is onComplete");
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    String value = String.valueOf(task.getResult().getValue());
+                    if (value.equals("null")) { //first reply
+                        mDatabase.child("diaries").child(dstDiaryId).child("r_idList").setValue(replyId);
+                    }
+                    else {
+                        StringBuffer sb = new StringBuffer(value);
+                        sb.append(",").append(replyId);
+                        mDatabase.child("diaries").child(dstDiaryId).child("r_idList").setValue(sb.toString());
+                    }
                 }
             }
         });

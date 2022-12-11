@@ -135,6 +135,7 @@ public class HomeActivity extends AppCompatActivity {
         ImageButton imageButton4 = findViewById(R.id.go_outside);
         imageButton4.setOnClickListener(v -> {
             Intent intent = new Intent(getApplication(), ConnectActivity.class);
+            intent.putExtra("INTENT_FROM", "home");
             startActivity(intent);
         });
     }
