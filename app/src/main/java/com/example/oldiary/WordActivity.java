@@ -3,28 +3,41 @@ package com.example.oldiary;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class WordActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
+    ExpandableListView expandableListView;
+    ExpandableListAdapter expandableListAdapter;
+    List<String> expandableListTitle;
+    HashMap<String, String> expandableListDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word);
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.hide();
+            actionBar.setTitle("用語集");
         }
-        TextView textView = findViewById(R.id.collection_of_words);
-        textView.setMovementMethod(new ScrollingMovementMethod());
+
+        expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+        expandableListDetail = ExpandablelistDataPump.getData();
+        expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
+        expandableListAdapter = new CustomExpandableLiatAdapter(this, expandableListTitle, expandableListDetail);
+        expandableListView.setAdapter(expandableListAdapter);
 
         playMusic();
     }
