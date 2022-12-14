@@ -244,6 +244,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void setOnClickNext() {
         ibNext.setOnClickListener(v -> {
+            cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_left));
             if (!ibNextStatus) { //最後に到達している
                 Log.d(TAG, "button was disabled"); //debug
             } else {
@@ -256,7 +257,6 @@ public class HistoryActivity extends AppCompatActivity {
                 if (nowDNum == d_cnt) {
                     disableIB("r"); //右を薄くする
                 }
-                cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_left));
                 setDiaryText();
                 setDiaryDateTime();
             }
@@ -265,6 +265,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void setOnClickPrev() {
         ibPrev.setOnClickListener(v -> {
+            cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_right));
             if (!ibPrevStatus) { //最初に達している
                 Log.d(TAG, "button was disabled"); //debug
             } else {
@@ -276,7 +277,6 @@ public class HistoryActivity extends AppCompatActivity {
                 if (nowDNum == 1) {
                     disableIB("l"); //左を薄くする
                 }
-                cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_right));
                 setDiaryText();
                 setDiaryDateTime();
             }
