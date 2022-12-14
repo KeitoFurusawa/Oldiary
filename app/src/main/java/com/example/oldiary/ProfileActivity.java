@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,7 +42,8 @@ public class ProfileActivity extends AppCompatActivity {
     Button save, cancel;
     TextView textView1, textView2;
     int count = 0;
-
+    private String gender = "null";
+    private String color = "null";
 
 
     private static final String[] genreList = {
@@ -73,6 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
         getUserId();
         setUserName();
         setComment();
+        loadPrevAvatar();
         setGenre();
         setOnClickEdit();
         setOnClickLogout();
@@ -213,5 +216,52 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+    }
+
+    private void loadPrevAvatar() {
+        mDatabase.child("users").child(userId).child("avatar").child("gender").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    gender = String.valueOf(task.getResult().getValue());
+                    Log.d(TAG, "result: " + gender);
+                    if (gender.equals("null")) {
+                        gender = "man";
+                    }
+                    Log.d(TAG, gender);
+                }
+            }
+        });
+        mDatabase.child("users").child(userId).child("avatar").child("color").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    color = String.valueOf(task.getResult().getValue());
+                    Log.d(TAG, "result: " + color);
+                    if (color.equals("null")) {
+                        color = "blue";
+                    }
+                    Log.d(TAG, color);
+                    setPrevAvatar();
+                }
+            }
+        });
+    }
+
+    private void setPrevAvatar() {
+        while(gender.equals("null") || color.equals("null")) {
+            Log.d(TAG, gender+color);
+        }
+        int drawableId = getResources().getIdentifier("icon_"+color+"_"+gender, "drawable", getPackageName());
+        ImageView imageView = findViewById(R.id.profile_image);
+        imageView.setImageResource(drawableId);
+        //checkAvatar = true;
+        //checkLoading();
     }
 }

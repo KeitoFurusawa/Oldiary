@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,6 +36,7 @@ public class HistoryActivity extends AppCompatActivity {
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
     private DatabaseReference mDatabase;
+    private CardView cv;
     String userName;
     String userId;
     MediaPlayer mediaPlayer;
@@ -50,7 +52,7 @@ public class HistoryActivity extends AppCompatActivity {
     ArrayList<String> d_idList;
     private String gender = "null";
     private String color = "null";
-    private boolean checkID = false, checkPost= false, checkAvatar = false;
+    private boolean checkID = false, checkPostText = false,checkPostTime = false, checkAvatar = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +102,7 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void setElm() {
+        cv = findViewById(R.id.writeSpace);
         ibNext = findViewById(R.id.imageButtonNext);
         ibPrev = findViewById(R.id.imageButtonPrev);
         ibReload = findViewById(R.id.imageButtonReload);
@@ -161,10 +164,13 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void checkCnt() {
         if (d_cnt == 0) { //投稿がない
-            post.setVisibility(View.GONE);
-            ibNext.setVisibility(View.GONE);
-            ibPrev.setVisibility(View.GONE);
+            post.setVisibility(View.INVISIBLE);
+            ibNext.setVisibility(View.INVISIBLE);
+            ibPrev.setVisibility(View.INVISIBLE);
+            cv.setVisibility(View.GONE);
+            //avatarObj.setVisibility(View.VISIBLE);
             postedAt.setText("投稿がありません");
+            allCheck();
         } else { //投稿がある
             nowDNum = 1;
             if (d_cnt > 1) { //Postが2以上
@@ -195,9 +201,10 @@ public class HistoryActivity extends AppCompatActivity {
                     String textResult = String.valueOf(task.getResult().getValue());
                     if (textResult.equals("null")) { //中身がない
                         Log.e(TAG, "ERROR: cannot get data"); //debug
+                        checkPostText = true;
                     } else {
                         post.setText(textResult);
-                        checkPost = true;
+                        checkPostText = true;
                         checkLoading();
                     }
                 }
@@ -229,9 +236,11 @@ public class HistoryActivity extends AppCompatActivity {
                     String textResult = String.valueOf(task.getResult().getValue());
                     if (textResult.equals("null")) { //中身がない
                         Log.e(TAG, "ERROR: cannot get data"); //debug
+                        checkPostTime = true;
+                        checkLoading();
                     } else {
                         postedAt.setText(textResult);
-                        checkPost = true;
+                        checkPostTime = true;
                         checkLoading();
                     }
                 }
@@ -351,8 +360,17 @@ public class HistoryActivity extends AppCompatActivity {
         checkLoading();
     }
 
+    private void allCheck() {
+        checkID = true;
+        checkPostText = true;
+        checkPostTime = true;
+        //checkAvatar = true;
+        checkLoading();
+    }
+
     private void StartLoading() {
-        checkPost = false;
+        checkPostTime = false;
+        checkPostText = false;
         avatarObj = findViewById(R.id.avatar);
         if (!checkAvatar) {
             avatarObj.setVisibility(View.GONE);
@@ -365,7 +383,11 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void checkLoading() {
-        if (checkID && checkAvatar && checkPost) {
+        Log.d(TAG, "C-ID: " + checkID);
+        Log.d(TAG, "C-AV: " + checkAvatar);
+        Log.d(TAG, "C-Post:" + checkPostText);
+        Log.d(TAG, "C-Time:" + checkPostTime);
+        if (checkID && checkAvatar && checkPostTime && checkPostText) {
             progressDialog.dismiss();
             avatarObj.setVisibility(View.VISIBLE);
         }

@@ -22,7 +22,7 @@
         android:id="@+id/profile_image"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/icon_bm"
+        android:src="@drawable/icon_blue_man"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"/>
 
