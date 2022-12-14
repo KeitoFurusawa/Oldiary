@@ -170,7 +170,7 @@ public class HistoryActivity extends AppCompatActivity {
             cv.setVisibility(View.GONE);
             //avatarObj.setVisibility(View.VISIBLE);
             postedAt.setText("投稿がありません");
-            allCheck();
+            skipCheck();
         } else { //投稿がある
             nowDNum = 1;
             if (d_cnt > 1) { //Postが2以上
@@ -360,8 +360,8 @@ public class HistoryActivity extends AppCompatActivity {
         checkLoading();
     }
 
-    private void allCheck() {
-        checkID = true;
+    private void skipCheck() {
+        //checkID = true;
         checkPostText = true;
         checkPostTime = true;
         //checkAvatar = true;

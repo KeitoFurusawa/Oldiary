@@ -2,6 +2,7 @@ package com.example.oldiary;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,7 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
     private List<Integer> gCodeList = new ArrayList<>();
-    String userId;
+    private String userId;
     AlertDialog.Builder dialogBuilder;
     Dialog dialog;
     EditText user_name, content1, content2, content3, comment;
@@ -44,6 +46,11 @@ public class ProfileActivity extends AppCompatActivity {
     int count = 0;
     private String gender = "null";
     private String color = "null";
+    private ProgressDialog progressDialog;
+    private boolean checkID, checkName, checkComment, checkGenre, checkIcon;
+    private ImageView imgProf;
+    private TextView textUserName;
+    private CardView cvInfo;
 
 
     private static final String[] genreList = {
@@ -61,6 +68,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setTitle("プロフィール");
         }
+        startLoading();
 
         textView1 = findViewById(R.id.titleComment);
         textView2 = findViewById(R.id.comment);
@@ -85,6 +93,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     protected void getUserId() {
         userId = preference.getString("UserID", "");
+        checkID = true;
+        checkLoading();
     }
 
     public void onClick(View view) {
@@ -125,8 +135,10 @@ public class ProfileActivity extends AppCompatActivity {
                 }
                 else {
                     String resultUserName = String.valueOf(task.getResult().getValue());
-                    TextView textUserName = findViewById(R.id.textViewUserName);
+                    textUserName = findViewById(R.id.textViewUserName);
                     textUserName.setText(resultUserName);
+                    checkName = true;
+                    checkLoading();
                 }
             }
         });
@@ -145,6 +157,8 @@ public class ProfileActivity extends AppCompatActivity {
                         TextView textViewComment = findViewById(R.id.comment);
                         textViewComment.setText(resultComment);
                     }
+                    checkComment = true;
+                    checkLoading();
                 }
             }
         });
@@ -171,6 +185,8 @@ public class ProfileActivity extends AppCompatActivity {
                             genre.setText(genreList[Integer.parseInt(xs)]);
                         }
                     }
+                    checkGenre = true;
+                    checkLoading();
                 }
             }
         });
@@ -259,9 +275,50 @@ public class ProfileActivity extends AppCompatActivity {
             Log.d(TAG, gender+color);
         }
         int drawableId = getResources().getIdentifier("icon_"+color+"_"+gender, "drawable", getPackageName());
-        ImageView imageView = findViewById(R.id.profile_image);
-        imageView.setImageResource(drawableId);
+        imgProf = findViewById(R.id.profile_image);
+        imgProf.setImageResource(drawableId);
+        checkIcon = true;
+        checkLoading();
+    }
+
+    private void skipCheck() {
+        //checkID = true;
+        //check = true;
+        //checkComment = true;
         //checkAvatar = true;
-        //checkLoading();
+        checkLoading();
+    }
+
+    private void startLoading() {
+        checkID = false;
+        checkName = false;
+        checkComment = false;
+        checkGenre = false;
+        checkIcon = false;
+
+        cvInfo = findViewById(R.id.myInfo);
+        textUserName = findViewById(R.id.textViewUserName);
+        if (!checkComment || !checkGenre || !checkIcon || checkName) {
+            cvInfo.setVisibility(View.GONE);
+            textUserName.setVisibility(View.GONE);
+        }
+        progressDialog = new ProgressDialog(this);
+        progressDialog.getWindow().setNavigationBarColor(0);
+        progressDialog.setMessage("ロード中");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+    }
+
+    private void checkLoading() {
+        /*Log.d(TAG, "C-ID: " + checkID);
+        Log.d(TAG, "C-AV: " + checkAvatar);
+        Log.d(TAG, "C-Post:" + checkPostText);
+        Log.d(TAG, "C-Time:" + checkPostTime);
+        */
+        if (checkID && checkIcon && checkGenre && checkName && checkComment) {
+            progressDialog.dismiss();
+            cvInfo.setVisibility(View.VISIBLE);
+            textUserName.setVisibility(View.VISIBLE);
+        }
     }
 }
