@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,6 +36,7 @@ public class ConnectActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private DatabaseReference mDatabase;
     String userId;
+    private CardView cv;
     private String dstUserId;
     private String dstDiaryId;
     private boolean fromR = false;
@@ -128,6 +131,7 @@ public class ConnectActivity extends AppCompatActivity {
     }
 
     private void setElm() {
+        cv = findViewById(R.id.writeSpace);
         ibNext = findViewById(R.id.imageButtonNext);
         ibPrev = findViewById(R.id.imageButtonPrev);
         ibReload = findViewById(R.id.imageButtonReload);
@@ -368,6 +372,7 @@ public class ConnectActivity extends AppCompatActivity {
             if (!ibNextStatus) { //最後に到達している
                 //Log.d(TAG, "button was disabled"); //debug
             } else {
+                cv.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadeout_left));
                 nowDNum++;
                 if (!ibPrevStatus) {
                     enableIB("l"); //左を濃くする
@@ -378,6 +383,7 @@ public class ConnectActivity extends AppCompatActivity {
                 setDiaryText();
                 setDiaryDateTime();
                 setPostedBy();
+                cv.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein_right));
             }
         });
     }
@@ -387,6 +393,7 @@ public class ConnectActivity extends AppCompatActivity {
             if (!ibPrevStatus) { //最初に達している
                 //Log.d(TAG, "button was disabled"); //debug
             } else {
+                cv.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadeout_right));
                 nowDNum--;
                 if (!ibNextStatus) {
                     enableIB("r"); //右を濃くする
@@ -397,6 +404,7 @@ public class ConnectActivity extends AppCompatActivity {
                 setDiaryText();
                 setDiaryDateTime();
                 setPostedBy();
+                cv.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein_left));
             }
         });
     }

@@ -286,7 +286,7 @@ public class HistoryActivity extends AppCompatActivity {
                     disableIB("l"); //左を薄くする
                 }
                 setDiaryText();
- v              setDiaryDateTime();
+                setDiaryDateTime();
                 cv.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein_left));
             }
         });
