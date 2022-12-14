@@ -52,7 +52,7 @@ public class HistoryActivity extends AppCompatActivity {
     ArrayList<String> d_idList;
     private String gender = "null";
     private String color = "null";
-    CardView cardView = findViewById(R.id.writeSpace);
+    CardView cardView;
     private boolean checkID = false, checkPost= false, checkAvatar = false;
 
     @Override
@@ -76,6 +76,9 @@ public class HistoryActivity extends AppCompatActivity {
         setElm();
         loadPrevAvatar();
         setOnClickReload();
+
+        cardView = findViewById(R.id.writeSpace);
+
     }
 
     protected void onResume() {
@@ -244,12 +247,11 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void setOnClickNext() {
         ibNext.setOnClickListener(v -> {
-            cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_left));
             if (!ibNextStatus) { //最後に到達している
                 Log.d(TAG, "button was disabled"); //debug
             } else {
                 //StartLoading();
-
+                cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadeout_left));
                 nowDNum++;
                 if (!ibPrevStatus) {
                     enableIB("l"); //左を濃くする
@@ -259,17 +261,18 @@ public class HistoryActivity extends AppCompatActivity {
                 }
                 setDiaryText();
                 setDiaryDateTime();
+                cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein_right));
             }
         });
     }
 
     private void setOnClickPrev() {
         ibPrev.setOnClickListener(v -> {
-            cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_right));
             if (!ibPrevStatus) { //最初に達している
                 Log.d(TAG, "button was disabled"); //debug
             } else {
                 //StartLoading();
+                cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadeout_right));
                 nowDNum--;
                 if (!ibNextStatus) {
                     enableIB("r"); //右を濃くする
@@ -279,6 +282,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
                 setDiaryText();
                 setDiaryDateTime();
+                cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein_left));
             }
         });
     }
