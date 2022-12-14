@@ -37,6 +37,7 @@ public class HistoryActivity extends AppCompatActivity {
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
     private DatabaseReference mDatabase;
+    private CardView cv;
     String userName;
     String userId;
     MediaPlayer mediaPlayer;
@@ -52,8 +53,7 @@ public class HistoryActivity extends AppCompatActivity {
     ArrayList<String> d_idList;
     private String gender = "null";
     private String color = "null";
-    CardView cardView;
-    private boolean checkID = false, checkPost= false, checkAvatar = false;
+    private boolean checkID = false, checkPostText = false,checkPostTime = false, checkAvatar = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +76,6 @@ public class HistoryActivity extends AppCompatActivity {
         setElm();
         loadPrevAvatar();
         setOnClickReload();
-
-        cardView = findViewById(R.id.writeSpace);
 
     }
 
@@ -106,6 +104,7 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void setElm() {
+        cv = findViewById(R.id.writeSpace);
         ibNext = findViewById(R.id.imageButtonNext);
         ibPrev = findViewById(R.id.imageButtonPrev);
         ibReload = findViewById(R.id.imageButtonReload);
@@ -167,10 +166,13 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void checkCnt() {
         if (d_cnt == 0) { //投稿がない
-            post.setVisibility(View.GONE);
-            ibNext.setVisibility(View.GONE);
-            ibPrev.setVisibility(View.GONE);
+            post.setVisibility(View.INVISIBLE);
+            ibNext.setVisibility(View.INVISIBLE);
+            ibPrev.setVisibility(View.INVISIBLE);
+            cv.setVisibility(View.GONE);
+            //avatarObj.setVisibility(View.VISIBLE);
             postedAt.setText("投稿がありません");
+            skipCheck();
         } else { //投稿がある
             nowDNum = 1;
             if (d_cnt > 1) { //Postが2以上
@@ -201,9 +203,10 @@ public class HistoryActivity extends AppCompatActivity {
                     String textResult = String.valueOf(task.getResult().getValue());
                     if (textResult.equals("null")) { //中身がない
                         Log.e(TAG, "ERROR: cannot get data"); //debug
+                        checkPostText = true;
                     } else {
                         post.setText(textResult);
-                        checkPost = true;
+                        checkPostText = true;
                         checkLoading();
                     }
                 }
@@ -235,9 +238,11 @@ public class HistoryActivity extends AppCompatActivity {
                     String textResult = String.valueOf(task.getResult().getValue());
                     if (textResult.equals("null")) { //中身がない
                         Log.e(TAG, "ERROR: cannot get data"); //debug
+                        checkPostTime = true;
+                        checkLoading();
                     } else {
                         postedAt.setText(textResult);
-                        checkPost = true;
+                        checkPostTime = true;
                         checkLoading();
                     }
                 }
@@ -251,7 +256,7 @@ public class HistoryActivity extends AppCompatActivity {
                 Log.d(TAG, "button was disabled"); //debug
             } else {
                 //StartLoading();
-                cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadeout_left));
+                cv.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadeout_left));
                 nowDNum++;
                 if (!ibPrevStatus) {
                     enableIB("l"); //左を濃くする
@@ -261,7 +266,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
                 setDiaryText();
                 setDiaryDateTime();
-                cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein_right));
+                cv.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein_right));
             }
         });
     }
@@ -272,7 +277,7 @@ public class HistoryActivity extends AppCompatActivity {
                 Log.d(TAG, "button was disabled"); //debug
             } else {
                 //StartLoading();
-                cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadeout_right));
+                cv.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadeout_right));
                 nowDNum--;
                 if (!ibNextStatus) {
                     enableIB("r"); //右を濃くする
@@ -281,8 +286,8 @@ public class HistoryActivity extends AppCompatActivity {
                     disableIB("l"); //左を薄くする
                 }
                 setDiaryText();
-                setDiaryDateTime();
-                cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein_left));
+ v              setDiaryDateTime();
+                cv.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein_left));
             }
         });
     }
@@ -361,8 +366,17 @@ public class HistoryActivity extends AppCompatActivity {
         checkLoading();
     }
 
+    private void skipCheck() {
+        //checkID = true;
+        checkPostText = true;
+        checkPostTime = true;
+        //checkAvatar = true;
+        checkLoading();
+    }
+
     private void StartLoading() {
-        checkPost = false;
+        checkPostTime = false;
+        checkPostText = false;
         avatarObj = findViewById(R.id.avatar);
         if (!checkAvatar) {
             avatarObj.setVisibility(View.GONE);
@@ -375,7 +389,11 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void checkLoading() {
-        if (checkID && checkAvatar && checkPost) {
+        Log.d(TAG, "C-ID: " + checkID);
+        Log.d(TAG, "C-AV: " + checkAvatar);
+        Log.d(TAG, "C-Post:" + checkPostText);
+        Log.d(TAG, "C-Time:" + checkPostTime);
+        if (checkID && checkAvatar && checkPostTime && checkPostText) {
             progressDialog.dismiss();
             avatarObj.setVisibility(View.VISIBLE);
         }

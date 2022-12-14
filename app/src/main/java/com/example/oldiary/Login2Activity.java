@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,8 @@ public class Login2Activity extends AppCompatActivity {
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
     int count = 0;
+    private TextView textView;
+    private boolean hide = true;
 
     private static final @IdRes
     int[] BUTTONS_ID = {
@@ -52,13 +56,18 @@ public class Login2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
 
-        TextView textView = findViewById(R.id.password);
+        textView = findViewById(R.id.password);
 
         View.OnClickListener listener = v -> {
             if (inputPassword.length() < 4) {
                 inputPassword += ((Button)v).getText();
                 Log.d(TAG, inputPassword);
-                textView.setText(toAst(inputPassword));
+                if (hide) {
+                    textView.setText(toAst(inputPassword));
+
+                } else {
+                    textView.setText(inputPassword);
+                }
             }
         };
         Button[] buttons = new Button[BUTTONS_ID.length];
@@ -84,6 +93,7 @@ public class Login2Activity extends AppCompatActivity {
         setCorrectPassword();
         setOnclickConfirm();
         ss();
+        setOnChangedListener();
     }
 
     private  void setRandomNumberTo(Button[] buttons) {
@@ -197,6 +207,24 @@ public class Login2Activity extends AppCompatActivity {
                         //
                         startActivity(intentNext);
                     }
+                }
+            }
+        });
+    }
+
+    private void setOnChangedListener() {
+        Switch hideSwitch = findViewById(R.id.switch1);
+        hideSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    hide = false;
+                    textView.setText(inputPassword);
+                    hideSwitch.setText("隠す");
+                } else {
+                    hide = true;
+                    textView.setText(toAst(inputPassword));
+                    hideSwitch.setText("表示する");
                 }
             }
         });
