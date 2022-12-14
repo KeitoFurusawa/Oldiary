@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -51,7 +52,7 @@ public class HistoryActivity extends AppCompatActivity {
     ArrayList<String> d_idList;
     private String gender = "null";
     private String color = "null";
-    TextView textView = findViewById(R.id.textViewPost);
+    CardView cardView = findViewById(R.id.writeSpace);
     private boolean checkID = false, checkPost= false, checkAvatar = false;
 
     @Override
@@ -255,7 +256,7 @@ public class HistoryActivity extends AppCompatActivity {
                 if (nowDNum == d_cnt) {
                     disableIB("r"); //右を薄くする
                 }
-                textView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_left));
+                cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_left));
                 setDiaryText();
                 setDiaryDateTime();
             }
@@ -275,7 +276,7 @@ public class HistoryActivity extends AppCompatActivity {
                 if (nowDNum == 1) {
                     disableIB("l"); //左を薄くする
                 }
-                textView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_right));
+                cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_right));
                 setDiaryText();
                 setDiaryDateTime();
             }
