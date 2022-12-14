@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -50,6 +51,7 @@ public class HistoryActivity extends AppCompatActivity {
     ArrayList<String> d_idList;
     private String gender = "null";
     private String color = "null";
+    TextView textView = findViewById(R.id.textViewPost);
     private boolean checkID = false, checkPost= false, checkAvatar = false;
 
     @Override
@@ -245,6 +247,7 @@ public class HistoryActivity extends AppCompatActivity {
                 Log.d(TAG, "button was disabled"); //debug
             } else {
                 //StartLoading();
+
                 nowDNum++;
                 if (!ibPrevStatus) {
                     enableIB("l"); //左を濃くする
@@ -252,6 +255,7 @@ public class HistoryActivity extends AppCompatActivity {
                 if (nowDNum == d_cnt) {
                     disableIB("r"); //右を薄くする
                 }
+                textView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_left));
                 setDiaryText();
                 setDiaryDateTime();
             }
@@ -271,6 +275,7 @@ public class HistoryActivity extends AppCompatActivity {
                 if (nowDNum == 1) {
                     disableIB("l"); //左を薄くする
                 }
+                textView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_right));
                 setDiaryText();
                 setDiaryDateTime();
             }
