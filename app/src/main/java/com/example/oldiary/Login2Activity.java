@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,7 @@ public class Login2Activity extends AppCompatActivity {
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
     int count = 0;
+    private Switch hideSwitch = findViewById(R.id.switch1);
 
     private static final @IdRes
     int[] BUTTONS_ID = {
@@ -197,6 +200,21 @@ public class Login2Activity extends AppCompatActivity {
                         //
                         startActivity(intentNext);
                     }
+                }
+            }
+        });
+    }
+
+    private void setOnChangedListener() {
+        hideSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+
+                    hideSwitch.setText("隠す");
+                } else {
+
+                    hideSwitch.setText("表示する");
                 }
             }
         });
