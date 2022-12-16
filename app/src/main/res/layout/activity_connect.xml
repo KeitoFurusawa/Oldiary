@@ -143,4 +143,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"/>
 
+    <ListView
+        android:id="@+id/listViewReplies"
+        android:layout_width="match_parent"
+        android:layout_height="194dp"
+        android:layout_below="@+id/imageButtonPrev"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="75dp" />
+
 </RelativeLayout>

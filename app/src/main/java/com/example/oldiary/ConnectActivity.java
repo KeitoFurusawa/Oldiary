@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class ConnectActivity extends AppCompatActivity {
     private static final String TAG = "connect";
@@ -53,6 +54,8 @@ public class ConnectActivity extends AppCompatActivity {
     private static final String API_KEY = "AIzaSyBtAfSPNfUXI3bUWBf65-nw-50pg9sXyF4";
     private boolean checkID = false, checkPost = false, checkUserName = false;
     private ProgressDialog progressDialog;
+    //ここからリプライに使う
+    private ArrayList<String> r_idList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -438,6 +441,33 @@ public class ConnectActivity extends AppCompatActivity {
         }
     }
 
+    private void getRepIdList() {
+        String d_id = d_idList.get(nowDNum - 1);
+        mDatabase.child("diaries").child(d_id).child("r_idList").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                    Toast.makeText(ConnectActivity.this, "データの取得に失敗しました。\nネットワークに接続してください。", Toast.LENGTH_SHORT).show();
+                } else {
+                    String r_idListResult = String.valueOf(task.getResult().getValue());
+                    if (r_idListResult.equals("null")) { //返信がない
+                        Log.e(TAG, "ERROR: cannot get post");
+                    } else {
+                        String[] split = r_idListResult.split(",");
+                        for (String xs : split) {
+                            r_idList.add(xs);
+                        }
+                        Collections.reverse(r_idList);
+                    }
+                }
+            }
+        });
+    }
+
+    private void SetReplies() {
+
+    }
 
 
     private void StartLoading() {
@@ -464,4 +494,5 @@ public class ConnectActivity extends AppCompatActivity {
             }
         }
     }
+
 }
