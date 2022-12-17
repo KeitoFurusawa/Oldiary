@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
@@ -34,6 +35,7 @@ public class WriteActivity extends AppCompatActivity {
     Button button1;
     private static final int RESULT_PICK_IMAGEFILE = 1000;
     private ImageView imageView;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,9 @@ public class WriteActivity extends AppCompatActivity {
         setOnClickPost();
         findViews();
         setListeners();
+
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.writing);
+        mediaPlayer.setLooping(true);
 
         imageView = findViewById(R.id.image_view);
 

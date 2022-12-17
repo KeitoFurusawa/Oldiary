@@ -65,10 +65,11 @@ public class ConnectActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setTitle("みんなの投稿");
         }
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.history);
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.forconnect);
         mediaPlayer.setLooping(true);
         userId = preference.getString("UserID", "");
         checkID = true;
