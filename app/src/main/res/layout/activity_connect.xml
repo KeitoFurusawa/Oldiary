@@ -75,24 +75,24 @@
         android:id="@+id/imageButtonNext"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_below="@+id/writeSpace"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="30sp"
         android:background="@drawable/button_overlay"
         android:scaleType="centerCrop"
-        android:src="@drawable/next"
-        android:layout_below="@+id/textViewPostedAt"
-        android:layout_marginTop="-10sp"
-        android:layout_marginRight="30sp"
-        android:layout_alignParentRight="true"/>
+        android:src="@drawable/next" />
 
     <ImageButton
         android:id="@+id/imageButtonPrev"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_below="@+id/writeSpace"
+        android:layout_marginLeft="30sp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/button_overlay"
         android:scaleType="centerCrop"
-        android:src="@drawable/prev"
-        android:layout_below="@+id/textViewPostedAt"
-        android:layout_marginTop="-10sp"
-        android:layout_marginLeft="30sp"/>
+        android:src="@drawable/prev" />
 
 
     <Button
@@ -141,5 +141,25 @@
         android:textSize="20sp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"/>
+
+    <ListView
+        android:id="@+id/listViewReplies"
+        android:layout_width="match_parent"
+        android:layout_height="186dp"
+        android:layout_below="@+id/imageButtonPrev"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="41dp"
+        android:layout_marginBottom="67dp" />
+
+    <TextView
+        android:id="@+id/textTitleReply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageButtonPrev"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="5dp"
+        android:text="返信一覧"
+        android:textColor="#000"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
