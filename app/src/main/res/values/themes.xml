@@ -16,5 +16,6 @@
         <item name="windowActionBar">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:soundEffectsEnabled">false</item>   // タップ音OFF
     </style>
 </resources>

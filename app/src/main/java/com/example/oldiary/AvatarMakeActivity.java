@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -201,6 +202,9 @@ public class AvatarMakeActivity extends AppCompatActivity {
         }
 
         imageView.setImageResource(image);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.1f, 1);
+        alphaAnimation.setDuration(1500);
+        imageView.startAnimation(alphaAnimation);
     }
 
     public void onClick2(View view) {
@@ -215,7 +219,7 @@ public class AvatarMakeActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         mDatabase.child("users").child(userId).child("avatar").child("gender").setValue(gender);
                         mDatabase.child("users").child(userId).child("avatar").child("color").setValue(color);
-                        Intent intent = new Intent(getApplication(), HomeActivity.class);
+                        Intent intent = new Intent(getApplication(), ProfileActivity.class);
                         startActivity(intent);
                     }
                 })

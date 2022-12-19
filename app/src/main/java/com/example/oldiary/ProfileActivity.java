@@ -18,8 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,7 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AlarmProfileActivity {
     private static final String TAG = "prof";
     private DatabaseReference mDatabase;
     private SharedPreferences preference;
@@ -64,10 +62,8 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle("プロフィール");
-        }
+
+        mStart();
         startLoading();
 
         textView1 = findViewById(R.id.titleComment);
@@ -120,6 +116,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void onClick2(View view) {
         Button button = findViewById(R.id.backbtn);
+        mDestroy();
         button.setOnClickListener(view1 -> {
             Intent intent = new Intent(getApplication(), HomeActivity.class);
             startActivity(intent);
@@ -200,6 +197,7 @@ public class ProfileActivity extends AppCompatActivity {
                         .setMessage("debugユーザ0はその機能を使えません。")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
+                                mDestroy();
                                 Intent intent2 = new Intent(getApplication(), HomeActivity.class);
                                 startActivity(intent2);
                             }
@@ -220,6 +218,7 @@ public class ProfileActivity extends AppCompatActivity {
         lnLogout.setOnClickListener(v -> {
             editor.putString("UserID", "");
             editor.commit();
+            mDestroy();
             Intent intent = new Intent(getApplication(), MainActivity.class);
             startActivity(intent);
         });

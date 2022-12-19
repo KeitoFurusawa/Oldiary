@@ -2,6 +2,7 @@ package com.example.oldiary;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView[] dots;
     ViewPagerAdapter viewPagerAdapter;
+
+    MediaPlayer mediaPlayer;
 
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
@@ -44,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (preference.getBoolean("Launched", false)==false) {
             tutorial();
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.start);
+            mediaPlayer.setLooping(true);
             editor.putBoolean("Launched", true);
             editor.commit();
         } else {

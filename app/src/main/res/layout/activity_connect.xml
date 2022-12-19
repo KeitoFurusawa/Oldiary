@@ -65,7 +65,6 @@
         android:id="@+id/textViewPostedAt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
         android:text="投稿時間"
         android:textColor="#010101"
         android:textSize="20sp"
