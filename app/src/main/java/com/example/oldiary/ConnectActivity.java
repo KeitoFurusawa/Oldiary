@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,12 +51,23 @@ public class ConnectActivity extends AppCompatActivity {
     TextView post;
     TextView postedAt;
     TextView postedBy;
+    ListView listView;
     ArrayList<String> d_idList;
     private static final String API_KEY = "AIzaSyBtAfSPNfUXI3bUWBf65-nw-50pg9sXyF4";
-    private boolean checkID = false, checkPost = false, checkUserName = false;
+    private boolean checkID = false, checkPost = false, checkUserName = false, checkReply = false;
     private ProgressDialog progressDialog;
+
     //ここからリプライに使う
     private ArrayList<String> r_idList;
+    private ArrayList<String> text;
+    private ArrayList<String> repliedBy;
+    private ArrayList<String> userName;
+    private ArrayList<String> repliedAt;
+    private ArrayList<Integer> iconId;
+    private ArrayList<String> gender;
+    private ArrayList<String> color;
+    private ArrayList<ReplyData> listItems = new ArrayList<>();
+    ListView listViewReply;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +150,8 @@ public class ConnectActivity extends AppCompatActivity {
         post.setMovementMethod(new ScrollingMovementMethod());
         postedAt = findViewById(R.id.textViewPostedAt);
         postedBy = findViewById(R.id.textViewPostedBy);
-        StartLoading();
+        listView = findViewById(R.id.listViewReplies);
+        //StartLoading();
         roadPublicDList(); //ポストのidのリストを読み込む
         roadPublicCnt(); //ポストの数を読み込む
     }
@@ -196,9 +209,11 @@ public class ConnectActivity extends AppCompatActivity {
             ibNext.setVisibility(View.GONE);
             ibPrev.setVisibility(View.GONE);
             postedAt.setText("投稿がありません");
+            TextView t = findViewById(R.id.textTitleReply);
+            t.setVisibility(View.GONE);
         } else { //投稿がある
             if (!(fromR || fromNR)) {
-                Log.d(TAG, "ref");
+                //Log.d(TAG, "ref");
                 nowDNum = 1;
                 if (d_cnt > 1) { //Postが2以上
                     disableIB("l"); //左ボタンを薄く
@@ -235,6 +250,7 @@ public class ConnectActivity extends AppCompatActivity {
 
     private void setDiaryText() {
         //String d_id = String.format("d_%s%d", userId, nowDNum);
+        StartLoading();
         String d_id = d_idList.get(nowDNum-1);
         dstDiaryId = d_idList.get(nowDNum-1);
         mDatabase.child("diaries").child(d_id).child("text").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -349,6 +365,7 @@ public class ConnectActivity extends AppCompatActivity {
                     } else {
                         postedBy.setText(textResult + " さんの投稿");
                         checkUserName = true;
+                        getRepIdList();
                         checkLoading();
                     }
                 }
@@ -364,7 +381,6 @@ public class ConnectActivity extends AppCompatActivity {
             buttonReply.setVisibility(View.VISIBLE);
         }
     }
-
 
     private void setOnClickNext() {
         ibNext.setOnClickListener(v -> {
@@ -442,7 +458,11 @@ public class ConnectActivity extends AppCompatActivity {
     }
 
     private void getRepIdList() {
+        Log.i(TAG, "getRepIdList()");
         String d_id = d_idList.get(nowDNum - 1);
+        r_idList = new ArrayList<>();
+        r_idList.clear();
+
         mDatabase.child("diaries").child(d_id).child("r_idList").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -453,29 +473,223 @@ public class ConnectActivity extends AppCompatActivity {
                     String r_idListResult = String.valueOf(task.getResult().getValue());
                     if (r_idListResult.equals("null")) { //返信がない
                         Log.e(TAG, "ERROR: cannot get post");
+                        listView.setVisibility(View.GONE);
+                        TextView text = findViewById(R.id.textTitleReply);
+                        text.setText("返信がありません");
+                        checkReply = true;
+                        checkLoading();
                     } else {
                         String[] split = r_idListResult.split(",");
+                        r_idList.clear();
                         for (String xs : split) {
                             r_idList.add(xs);
                         }
                         Collections.reverse(r_idList);
+                        Log.i(TAG, String.valueOf(r_idList)); //debug
+                        listView.setVisibility(View.VISIBLE);
+                        TextView text = findViewById(R.id.textTitleReply);
+                        text.setText("返信一覧");
+                        setReplies();
                     }
                 }
             }
         });
     }
 
-    private void SetReplies() {
+    private void setReplies() {
+        listViewReply = findViewById(R.id.listViewReplies);
+        String d_id = d_idList.get(nowDNum - 1);
+        listItems.clear();
+        text = new ArrayList<>();
+        //text.clear();
+        repliedBy = new ArrayList<>();
+        //repliedBy.clear();
+        userName = new ArrayList<>();
+        //userName.clear();
+        repliedAt = new ArrayList<>();
+        //repliedAt.clear();
+        iconId = new ArrayList<>();
+        //iconId.clear();
+        gender = new ArrayList<>();
+        //gender.clear();
+        color = new ArrayList<>();
+        //color.clear();
+        for (int i = 0; i < r_idList.size(); i++) {
+            text.add("");
+            repliedBy.add("");
+            userName.add("");
+            repliedAt.add("");
+            iconId.add(-1);
+            gender.add("");
+            color.add("");
+        }
+        int index;
+        for (String r_id : r_idList) {
+            index = r_idList.indexOf(r_id);
+            loadText(d_id, r_id, index);
+        }
+    }
 
+
+
+    private void loadText(String d_id, String r_id, int index) {
+        //テキストを読み込み
+        mDatabase.child("diaries").child(d_id).child(r_id).child("text").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                    Toast.makeText(ConnectActivity.this, "データの取得に失敗しました。\nネットワークに接続してください。", Toast.LENGTH_SHORT).show();
+                } else {
+                    String result = String.valueOf(task.getResult().getValue());
+                    if (result.equals("null")) { //エラー
+                        Log.e(TAG, "ERROR: cannot get data");
+                    } else {
+                        text.set(index, result);
+                        loadRepliedBy(d_id, r_id, index);
+                        Log.i(TAG, String.format("fin load text [%s]", text.get(index)));
+                    }
+                }
+            }
+        });
+    }
+
+    private void loadRepliedBy(String d_id, String r_id, int index) {
+        //リプライ者IDを読み込み
+        mDatabase.child("diaries").child(d_id).child(r_id).child("repliedBy").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                    Toast.makeText(ConnectActivity.this, "データの取得に失敗しました。\nネットワークに接続してください。", Toast.LENGTH_SHORT).show();
+                } else {
+                    String result = String.valueOf(task.getResult().getValue());
+                    if (result.equals("null")) { //エラー
+                        Log.e(TAG, "ERROR: cannot get data");
+                    } else {
+                        repliedBy.set(index, result);
+                        loadUserName(d_id, r_id, index);
+                        Log.i(TAG, String.format("fin load repliedBy [%s]", repliedBy.get(index)));
+                    }
+                }
+            }
+        });
+    }
+
+    private void loadUserName(String d_id, String r_id, int index) {
+        //リプライ者名を読み込み
+        mDatabase.child("users").child(repliedBy.get(index)).child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                    Toast.makeText(ConnectActivity.this, "データの取得に失敗しました。\nネットワークに接続してください。", Toast.LENGTH_SHORT).show();
+                } else {
+                    String result = String.valueOf(task.getResult().getValue());
+                    if (result.equals("null")) { //エラー
+                        Log.e(TAG, "ERROR: cannot get data");
+                    } else {
+                        userName.set(index, result);
+                        loadRepliedAt(d_id, r_id, index);
+                        Log.i(TAG, String.format("fin load userName [%s]", userName.get(index)));
+                    }
+                }
+            }
+        });
+    }
+
+    private void loadRepliedAt(String d_id, String r_id, int index) {
+        //リプライ日時を読み込み
+        mDatabase.child("diaries").child(d_id).child(r_id).child("repliedAt").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                    Toast.makeText(ConnectActivity.this, "データの取得に失敗しました。\nネットワークに接続してください。", Toast.LENGTH_SHORT).show();
+                } else {
+                    String result = String.valueOf(task.getResult().getValue());
+                    if (result.equals("null")) { //エラー
+                        Log.e(TAG, "ERROR: cannot get data");
+
+                    } else {
+                        repliedAt.set(index, result);
+                        loadPrevAvatar(repliedBy.get(index), index);
+                        Log.i(TAG, String.format("fin load repliedAt [%s]", repliedAt.get(index)));
+                    }
+                }
+            }
+        });
+    }
+
+    private void loadPrevAvatar(String repliedBy, int index) {
+        mDatabase.child("users").child(repliedBy).child("avatar").child("gender").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    gender.set(index, String.valueOf(task.getResult().getValue()));
+                    Log.d(TAG, "result: " + gender);
+                    if (gender.get(index).equals("null")) {
+                        gender.set(index, "man");
+                    }
+                    Log.i(TAG, gender.get(index));
+                }
+            }
+        });
+        mDatabase.child("users").child(repliedBy).child("avatar").child("color").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    color.set(index, String.valueOf(task.getResult().getValue()));
+                    Log.d(TAG, "result: " + color);
+                    if (color.get(index).equals("null")) {
+                        color.set(index, "blue");
+                    }
+                    Log.i(TAG, color.get(index));
+                    setPrevAvatar(index);
+                }
+            }
+        });
+    }
+
+    private void setPrevAvatar(int index) {
+        while(gender.equals("null") || color.equals("null")) {
+            Log.d(TAG, gender.get(index)+color.get(index));
+        }
+        iconId.set(index, getResources().getIdentifier("icon_"+color.get(index)+"_"+gender.get(index), "drawable", getPackageName()));
+        checkGetReplyData(index);
+        Log.i(TAG, String.format("fin load iconId [%d]", iconId.get(index)));
+    }
+
+    private void checkGetReplyData(int index) {
+        ReplyData item = new ReplyData(text.get(index), repliedBy.get(index), userName.get(index), repliedAt.get(index), iconId.get(index));
+        listItems.add(item);
+        if (index+1 == r_idList.size()) {
+            Log.i(TAG, "All FIN");
+            ReplyListAdapter adapter = new ReplyListAdapter(this, R.layout.replylist_item, listItems);
+            listViewReply.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+            Log.i(TAG, "r_idList: " + String.valueOf(r_idList));
+            checkReply = true;
+            checkLoading();
+        }
+            index++;
     }
 
 
     private void StartLoading() {
         checkPost = false;
         checkUserName = false;
+        checkReply = false;
         post.setVisibility(View.GONE);
         postedBy.setVisibility(View.GONE);
         postedAt.setVisibility(View.GONE);
+        listView.setVisibility(View.GONE);
         progressDialog = new ProgressDialog(this);
         progressDialog.getWindow().setNavigationBarColor(0);
         progressDialog.setMessage("ロード中");
@@ -484,14 +698,16 @@ public class ConnectActivity extends AppCompatActivity {
     }
 
     private void checkLoading() {
-        if (checkID && checkPost && checkUserName) {
+        if (checkID && checkPost && checkUserName && checkReply) {
             post.setVisibility(View.VISIBLE);
             postedBy.setVisibility(View.VISIBLE);
             postedAt.setVisibility(View.VISIBLE);
+            //listView.setVisibility(View.VISIBLE);
             progressDialog.dismiss();
             if (fromR) {
                 doneReply();
             }
+            //getRepIdList();
         }
     }
 
