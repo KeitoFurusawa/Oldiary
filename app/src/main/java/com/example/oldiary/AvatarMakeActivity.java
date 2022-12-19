@@ -151,7 +151,7 @@ public class AvatarMakeActivity extends AppCompatActivity {
                 image = R.drawable.pink_man;
             }
             else if (id2 == R.id.light_blue) {
-                color = "light_blue";
+                color = "lightblue";
                 image = R.drawable.lightblue_man;
             }
             else if (id2 == R.id.yellow) {
@@ -185,7 +185,7 @@ public class AvatarMakeActivity extends AppCompatActivity {
                 image = R.drawable.pink_woman;
             }
             else if (id2 == R.id.light_blue) {
-                color = "light_blue";
+                color = "lightblue";
                 image = R.drawable.lightblue_woman;
             }
             else if (id2 == R.id.yellow) {
