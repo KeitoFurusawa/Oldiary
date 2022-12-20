@@ -12,6 +12,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class ReadAndWrite extends CreateActivity {
@@ -24,7 +25,7 @@ public class ReadAndWrite extends CreateActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
-    public void writeDiary(String userId, String text, String dateTime, long timeInMillis) {
+    public void writeDiary(String userId, String text, String dateTime, long timeInMillis, ArrayList<Integer> selectedGenreList) {
         Log.d(TAG, text);
         mDatabase.child("users").child(userId).child("d_cnt").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -45,6 +46,11 @@ public class ReadAndWrite extends CreateActivity {
                         mDatabase.child("diaries").child("d_"+userId+"1").child("postedBy").setValue(userId);
                         addNewDiaryPublic("d_"+userId+"1");
                         addNewDiaryPersonal(userId, "d_"+userId+"1");
+                        if (selectedGenreList == null) {
+                            Log.i(TAG, "ジャンル選択がない");
+                        } else {
+                            mDatabase.child("diaries").child("d_"+userId+"1").child("genre").setValue(selectedGenreList);
+                        }
                     } else { // 2回目以降
                         int count = Integer.parseInt(getResult) + 1;
                         mDatabase.child("users").child(userId).child("d_cnt").setValue(count);
@@ -55,6 +61,11 @@ public class ReadAndWrite extends CreateActivity {
                         mDatabase.child("diaries").child("d_"+userId+count).child("postedBy").setValue(userId);
                         addNewDiaryPublic("d_"+userId+count);
                         addNewDiaryPersonal(userId, "d_"+userId+count);
+                        if (selectedGenreList == null) {
+                            Log.i(TAG, "ジャンル選択がない");
+                        } else {
+                            mDatabase.child("diaries").child("d_"+userId+count).child("genre").setValue(selectedGenreList);
+                        }
                     }
                 }
             }

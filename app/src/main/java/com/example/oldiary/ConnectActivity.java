@@ -70,7 +70,14 @@ public class ConnectActivity extends AppCompatActivity {
     private ArrayList<String> gender;
     private ArrayList<String> color;
     private ArrayList<ReplyData> listItems = new ArrayList<>();
+    private TextView repTitle;
     ListView listViewReply;
+    private boolean repBtnVisible = false;
+    private Button buttonReply;
+
+    //ジャンル
+    private int loadGCnt;
+    private TextView textViewGenre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +162,9 @@ public class ConnectActivity extends AppCompatActivity {
         postedAt = findViewById(R.id.textViewPostedAt);
         postedBy = findViewById(R.id.textViewPostedBy);
         listView = findViewById(R.id.listViewReplies);
-        //StartLoading();
+        textViewGenre = findViewById(R.id.textGenre);
+        repTitle = findViewById(R.id.textTitleReply);
+        buttonReply = findViewById(R.id.buttonReply);
         roadPublicDList(); //ポストのidのリストを読み込む
         roadPublicCnt(); //ポストの数を読み込む
     }
@@ -212,9 +221,9 @@ public class ConnectActivity extends AppCompatActivity {
             post.setVisibility(View.GONE);
             ibNext.setVisibility(View.GONE);
             ibPrev.setVisibility(View.GONE);
+            textViewGenre.setVisibility(View.GONE);
             postedAt.setText("投稿がありません");
-            TextView t = findViewById(R.id.textTitleReply);
-            t.setVisibility(View.GONE);
+            repTitle.setVisibility(View.GONE);
         } else { //投稿がある
             if (!(fromR || fromNR)) {
                 //Log.d(TAG, "ref");
@@ -308,6 +317,56 @@ public class ConnectActivity extends AppCompatActivity {
         });
     }
 
+    private void setGenre() {
+        loadGCnt = 0;
+        Log.i(TAG, "setGenre()");
+        String d_id = d_idList.get(nowDNum-1);
+        ArrayList<String> selectedGenreList = new ArrayList<>();
+        for (int i = 0; i < PutGenreAdapter.MAX_LENGTH_P; i++) {
+            mDatabase.child("diaries").child(d_id).child("genre").child(String.valueOf(i)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (!task.isSuccessful()) {
+                        Log.e(TAG, "Error getting data", task.getException());
+                        new AlertDialog.Builder(ConnectActivity.this)
+                                .setTitle("エラー")
+                                .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // OKボタン押下時の処理
+                                        Intent intent2 = new Intent(getApplication(), MainActivity.class);
+                                        startActivity(intent2);
+                                    }
+                                })
+                                .show();
+                    }
+                    else {
+                        String result = String.valueOf(task.getResult().getValue());
+                        Log.i(TAG, String.format("%d, %s", loadGCnt, result));
+                        if (result.equals("null")) { //中身がない
+                            Log.e(TAG, "ERROR: cannot get genre"); //debug
+                        } else {
+                            selectedGenreList.add(GenreData.genreList[Integer.parseInt(result)]);
+                        }
+                        loadGCnt++;
+                        if (loadGCnt == PutGenreAdapter.MAX_LENGTH_P) {
+                            Log.i(TAG, String.valueOf(selectedGenreList));
+                            if (selectedGenreList.size() == 0) {
+                                textViewGenre.setText("#ジャンルなし");
+                            } else {
+                                StringBuffer sb = new StringBuffer();
+                                for (int j = 0; j < selectedGenreList.size(); j++) {
+                                    sb.append("#" + selectedGenreList.get(j)).append(" ");
+                                }
+                                textViewGenre.setText(sb.toString());
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
     private void setPostedBy() {
         String d_id = d_idList.get(nowDNum-1);
         mDatabase.child("diaries").child(d_id).child("postedBy").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -369,6 +428,7 @@ public class ConnectActivity extends AppCompatActivity {
                     } else {
                         postedBy.setText(textResult + " さんの投稿");
                         checkUserName = true;
+                        setGenre(); ///
                         getRepIdList();
                         checkLoading();
                     }
@@ -378,11 +438,11 @@ public class ConnectActivity extends AppCompatActivity {
     }
 
     private void checkButtonVisibility(String userId) {
-        Button buttonReply = findViewById(R.id.buttonReply);
+        buttonReply = findViewById(R.id.buttonReply);
         if (userId.equals(this.userId)) {
-            buttonReply.setVisibility(View.GONE);
+            repBtnVisible = false;
         } else {
-            buttonReply.setVisibility(View.VISIBLE);
+            repBtnVisible = true;
         }
     }
 
@@ -435,7 +495,6 @@ public class ConnectActivity extends AppCompatActivity {
     }
 
     private void setOnClickReply() {
-        Button buttonReply = findViewById(R.id.buttonReply);
         buttonReply.setOnClickListener(v -> {
             Intent i = new Intent(getApplication(), ReplyActivity.class);
             i.putExtra("dstUserID", dstUserId);
@@ -466,7 +525,7 @@ public class ConnectActivity extends AppCompatActivity {
     }
 
     private void getRepIdList() {
-        Log.i(TAG, "getRepIdList()");
+        //Log.i(TAG, "getRepIdList()");
         String d_id = d_idList.get(nowDNum - 1);
         r_idList = new ArrayList<>();
         r_idList.clear();
@@ -493,7 +552,7 @@ public class ConnectActivity extends AppCompatActivity {
                             r_idList.add(xs);
                         }
                         Collections.reverse(r_idList);
-                        Log.i(TAG, String.valueOf(r_idList)); //debug
+                        //Log.i(TAG, String.valueOf(r_idList)); //debug
                         listView.setVisibility(View.VISIBLE);
                         TextView text = findViewById(R.id.textTitleReply);
                         text.setText("返信一覧");
@@ -555,7 +614,7 @@ public class ConnectActivity extends AppCompatActivity {
                     } else {
                         text.set(index, result);
                         loadRepliedBy(d_id, r_id, index);
-                        Log.i(TAG, String.format("fin load text [%s]", text.get(index)));
+                        //Log.i(TAG, String.format("fin load text [%s]", text.get(index)));
                     }
                 }
             }
@@ -577,7 +636,7 @@ public class ConnectActivity extends AppCompatActivity {
                     } else {
                         repliedBy.set(index, result);
                         loadUserName(d_id, r_id, index);
-                        Log.i(TAG, String.format("fin load repliedBy [%s]", repliedBy.get(index)));
+                        //Log.i(TAG, String.format("fin load repliedBy [%s]", repliedBy.get(index)));
                     }
                 }
             }
@@ -599,7 +658,7 @@ public class ConnectActivity extends AppCompatActivity {
                     } else {
                         userName.set(index, result);
                         loadRepliedAt(d_id, r_id, index);
-                        Log.i(TAG, String.format("fin load userName [%s]", userName.get(index)));
+                        //Log.i(TAG, String.format("fin load userName [%s]", userName.get(index)));
                     }
                 }
             }
@@ -622,7 +681,7 @@ public class ConnectActivity extends AppCompatActivity {
                     } else {
                         repliedAt.set(index, result);
                         loadPrevAvatar(repliedBy.get(index), index);
-                        Log.i(TAG, String.format("fin load repliedAt [%s]", repliedAt.get(index)));
+                        //Log.i(TAG, String.format("fin load repliedAt [%s]", repliedAt.get(index)));
                     }
                 }
             }
@@ -642,7 +701,7 @@ public class ConnectActivity extends AppCompatActivity {
                     if (gender.get(index).equals("null")) {
                         gender.set(index, "man");
                     }
-                    Log.i(TAG, gender.get(index));
+                    //Log.i(TAG, gender.get(index));
                 }
             }
         });
@@ -658,7 +717,7 @@ public class ConnectActivity extends AppCompatActivity {
                     if (color.get(index).equals("null")) {
                         color.set(index, "blue");
                     }
-                    Log.i(TAG, color.get(index));
+                    //Log.i(TAG, color.get(index));
                     setPrevAvatar(index);
                 }
             }
@@ -671,18 +730,18 @@ public class ConnectActivity extends AppCompatActivity {
         }
         iconId.set(index, getResources().getIdentifier("icon_"+color.get(index)+"_"+gender.get(index), "drawable", getPackageName()));
         checkGetReplyData(index);
-        Log.i(TAG, String.format("fin load iconId [%d]", iconId.get(index)));
+        //Log.i(TAG, String.format("fin load iconId [%d]", iconId.get(index)));
     }
 
     private void checkGetReplyData(int index) {
         ReplyData item = new ReplyData(text.get(index), repliedBy.get(index), userName.get(index), repliedAt.get(index), iconId.get(index));
         listItems.add(item);
         if (index+1 == r_idList.size()) {
-            Log.i(TAG, "All FIN");
+            //Log.i(TAG, "All FIN");
             ReplyListAdapter adapter = new ReplyListAdapter(this, R.layout.replylist_item, listItems);
             listViewReply.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-            Log.i(TAG, "r_idList: " + String.valueOf(r_idList));
+            //Log.i(TAG, "r_idList: " + String.valueOf(r_idList));
             checkReply = true;
             checkLoading();
         }
@@ -698,6 +757,11 @@ public class ConnectActivity extends AppCompatActivity {
         postedBy.setVisibility(View.GONE);
         postedAt.setVisibility(View.GONE);
         listView.setVisibility(View.GONE);
+        textViewGenre.setVisibility(View.GONE);
+        repTitle.setVisibility(View.GONE);
+        ibNext.setVisibility(View.GONE);
+        ibPrev.setVisibility(View.GONE);
+        buttonReply.setVisibility(View.GONE);
         progressDialog = new ProgressDialog(this);
         progressDialog.getWindow().setNavigationBarColor(0);
         progressDialog.setMessage("ロード中");
@@ -710,12 +774,17 @@ public class ConnectActivity extends AppCompatActivity {
             post.setVisibility(View.VISIBLE);
             postedBy.setVisibility(View.VISIBLE);
             postedAt.setVisibility(View.VISIBLE);
-            //listView.setVisibility(View.VISIBLE);
+            textViewGenre.setVisibility(View.VISIBLE);
+            repTitle.setVisibility(View.VISIBLE);
+            ibNext.setVisibility(View.VISIBLE);
+            ibPrev.setVisibility(View.VISIBLE);
             progressDialog.dismiss();
+            if (repBtnVisible) {
+                buttonReply.setVisibility(View.VISIBLE);
+            }
             if (fromR) {
                 doneReply();
             }
-            //getRepIdList();
         }
     }
 

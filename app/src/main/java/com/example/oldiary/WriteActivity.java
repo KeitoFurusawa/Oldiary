@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.FileDescriptor;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -35,6 +37,11 @@ public class WriteActivity extends AppCompatActivity {
     private static final int RESULT_PICK_IMAGEFILE = 1000;
     private ImageView imageView;
 
+    //genre
+    private static ArrayList<Integer> selectedGenreList = null;
+    private boolean fromG = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +52,13 @@ public class WriteActivity extends AppCompatActivity {
         }
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         userId =  preference.getString("UserID", "");
-        Intent intent1 = getIntent();
         checkUserId();
+        checkFromG();
         setOnClick();
         setOnClickPost();
         findViews();
         setListeners();
+        setOnClickGenre();
 
         imageView = findViewById(R.id.image_view);
 
@@ -63,6 +71,16 @@ public class WriteActivity extends AppCompatActivity {
                 startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
             }
         });
+    }
+
+    private void checkFromG() {
+        Intent i = getIntent();
+        if (i.getBooleanExtra("FromG", false)) {
+            fromG = true;
+            EditText et = findViewById(R.id.editTextTextMultiLine2);
+            et.setText(i.getStringExtra("TEXT"));
+            selectedGenreList = i.getIntegerArrayListExtra("GenreList");
+        }
     }
 
     protected void checkUserId() {
@@ -99,7 +117,7 @@ public class WriteActivity extends AppCompatActivity {
                 Calendar c = Calendar.getInstance();
                 TimeZone tz = TimeZone.getTimeZone("Asia/Tokyo");
                 c.setTimeZone(tz); //日本時間に設定
-                rad.writeDiary(userId, txt, dateTime(), c.getTimeInMillis());
+                rad.writeDiary(userId, txt, dateTime(), c.getTimeInMillis(), selectedGenreList);
                 new AlertDialog.Builder(WriteActivity.this)
                         .setTitle("")
                         .setMessage("投稿されました！")
@@ -115,6 +133,22 @@ public class WriteActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void setOnClickGenre() {
+        Button btnGenre = findViewById(R.id.genre);
+        btnGenre.setOnClickListener(v -> {
+            if (userId.equals("id_0")) {
+                Toast.makeText(WriteActivity.this, "デバッグユーザ0では制限されています", Toast.LENGTH_SHORT).show();
+            } else {
+                TextView textView = findViewById(R.id.editTextTextMultiLine2);
+                String txt = textView.getText().toString();
+                Intent i = new Intent(getApplication(), PutGenreActivity.class);
+                i.putExtra("TEXT", txt);
+                startActivity(i);
+            }
+        });
+    }
+
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {
         ParcelFileDescriptor parcelFileDescriptor =
                 getContentResolver().openFileDescriptor(uri, "r");
@@ -162,8 +196,6 @@ public class WriteActivity extends AppCompatActivity {
                 }
             }
         }
-
-
     }
 
     private String dateTime() {
