@@ -9,15 +9,15 @@
         android:id="@+id/iconImage"
         android:layout_width="95dp"
         android:layout_height="91dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="1dp"
         android:padding="3dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="297dp"
-        android:layout_height="32dp"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
         android:autoSizeTextType="uniform"
         android:gravity="center_vertical"
         android:maxLines="1"
@@ -30,8 +30,8 @@
 
     <TextView
         android:id="@+id/textReply"
-        android:layout_width="298dp"
-        android:layout_height="108dp"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
         android:text="Text"
         android:textColor="#000"
         android:textSize="12sp"
