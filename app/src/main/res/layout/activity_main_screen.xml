@@ -19,22 +19,22 @@
         android:id="@+id/door"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:soundEffectsEnabled="false"
         android:layout_below="@+id/start_title"
+        android:layout_marginTop="30dp"
+        android:soundEffectsEnabled="false"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50sp"
         app:srcCompat="@drawable/closedoor" />
 
     <TextView
         android:id="@+id/announce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
         android:text="扉を押して始める"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/door"
-        android:layout_marginTop="30sp"/>
+        android:textStyle="bold" />
 
 
 

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
 
-        if (preference.getBoolean("Launched", false)==false) {
+        if (!preference.getBoolean("Launched", false)) {
             tutorial();
             editor.putBoolean("Launched", true);
             editor.commit();

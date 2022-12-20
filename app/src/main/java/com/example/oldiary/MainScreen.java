@@ -12,9 +12,11 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +39,7 @@ public class MainScreen extends AppCompatActivity {
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
     private DatabaseReference mDatabase;
+    private static int resetCnt = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class MainScreen extends AppCompatActivity {
 
         imageChange();
         ss();
+        setOnClickResetListener();
 
         TextView txtView_start = findViewById(R.id.announce);
         blinkText(txtView_start, 650, 200);
@@ -166,5 +170,37 @@ public class MainScreen extends AppCompatActivity {
 
     private void EndLoading() {
         progressDialog.dismiss();
+    }
+
+    private void setOnClickResetListener() {
+        ImageView imgBtnReset = findViewById(R.id.start_title);
+        imgBtnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (++resetCnt > 9) {
+                    new AlertDialog.Builder(MainScreen.this)
+                            .setTitle("DeveloperMode")
+                            .setMessage("アプリデータを初期化しますか？")
+                            .setPositiveButton("はい", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    editor.putBoolean("Launched", false);
+                                    editor.putString("UserID", "");
+                                    editor.commit();
+                                    resetCnt = 0;
+                                    Intent intent2 = new Intent(getApplication(), MainActivity.class);
+                                    startActivity(intent2);
+                                }
+                            })
+                            .setNegativeButton("いいえ", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    resetCnt = 0;
+                                }
+                            })
+                            .show();
+
+                }
+            }
+        });
+
     }
 }
