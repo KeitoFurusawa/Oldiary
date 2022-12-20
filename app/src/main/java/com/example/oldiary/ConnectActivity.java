@@ -30,7 +30,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class ConnectActivity extends AppCompatActivity {
     private static final String TAG = "connect";
@@ -59,6 +58,7 @@ public class ConnectActivity extends AppCompatActivity {
     private static final String API_KEY = "AIzaSyBtAfSPNfUXI3bUWBf65-nw-50pg9sXyF4";
     private boolean checkID = false, checkPost = false, checkUserName = false, checkReply = false;
     private ProgressDialog progressDialog;
+
 
     //ここからリプライに使う
     private ArrayList<String> r_idList;
@@ -94,6 +94,7 @@ public class ConnectActivity extends AppCompatActivity {
         setElm();
         setOnClickReload();
         setOnClickNewDiary();
+
     }
     
     protected void onResume() {
@@ -109,7 +110,7 @@ public class ConnectActivity extends AppCompatActivity {
         mediaPlayer.release();
         mediaPlayer = null;
     }
-    
+
     protected void setOnClickBack() {
         Button button = findViewById(R.id.back_home);
         button.setOnClickListener(v -> {
