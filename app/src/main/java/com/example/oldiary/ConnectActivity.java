@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -94,8 +95,33 @@ public class ConnectActivity extends AppCompatActivity {
         setElm();
         setOnClickReload();
         setOnClickNewDiary();
-
+        changeButtonColor();
     }
+
+    protected void changeButtonColor() {
+        Button reaction1 = findViewById(R.id.action0);
+        Button reaction2 = findViewById(R.id.action1);
+        Button reaction3 = findViewById(R.id.action2);
+        Button reaction4 = findViewById(R.id.action3);
+        Button reaction5 = findViewById(R.id.action4);
+
+        reaction1.setOnClickListener(v -> {
+            reaction1.setBackgroundColor(R.color.inactive);
+        });
+        reaction2.setOnClickListener(v -> {
+            reaction2.setBackgroundColor(R.color.inactive);
+        });
+        reaction3.setOnClickListener(v -> {
+            reaction3.setBackgroundColor(R.color.inactive);
+        });
+        reaction4.setOnClickListener(v -> {
+            reaction4.setBackgroundColor(R.color.inactive);
+        });
+        reaction5.setOnClickListener(v -> {
+            reaction5.setBackgroundColor(R.color.inactive);
+        });
+    }
+
     
     protected void onResume() {
         super.onResume();
