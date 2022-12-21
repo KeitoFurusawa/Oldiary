@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -30,7 +31,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class ConnectActivity extends AppCompatActivity {
     private static final String TAG = "connect";
@@ -60,6 +60,7 @@ public class ConnectActivity extends AppCompatActivity {
     private boolean checkID = false, checkPost = false, checkUserName = false, checkReply = false;
     private ProgressDialog progressDialog;
 
+
     //ここからリプライに使う
     private ArrayList<String> r_idList;
     private ArrayList<String> text;
@@ -87,10 +88,11 @@ public class ConnectActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setTitle("みんなの投稿");
         }
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.history);
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.forconnect);
         mediaPlayer.setLooping(true);
         userId = preference.getString("UserID", "");
         checkID = true;
@@ -100,7 +102,33 @@ public class ConnectActivity extends AppCompatActivity {
         setElm();
         setOnClickReload();
         setOnClickNewDiary();
+        changeButtonColor();
     }
+
+    protected void changeButtonColor() {
+        Button reaction1 = findViewById(R.id.action0);
+        Button reaction2 = findViewById(R.id.action1);
+        Button reaction3 = findViewById(R.id.action2);
+        Button reaction4 = findViewById(R.id.action3);
+        Button reaction5 = findViewById(R.id.action4);
+
+        reaction1.setOnClickListener(v -> {
+            reaction1.setBackgroundColor(R.color.inactive);
+        });
+        reaction2.setOnClickListener(v -> {
+            reaction2.setBackgroundColor(R.color.inactive);
+        });
+        reaction3.setOnClickListener(v -> {
+            reaction3.setBackgroundColor(R.color.inactive);
+        });
+        reaction4.setOnClickListener(v -> {
+            reaction4.setBackgroundColor(R.color.inactive);
+        });
+        reaction5.setOnClickListener(v -> {
+            reaction5.setBackgroundColor(R.color.inactive);
+        });
+    }
+
     
     protected void onResume() {
         super.onResume();
@@ -115,7 +143,7 @@ public class ConnectActivity extends AppCompatActivity {
         mediaPlayer.release();
         mediaPlayer = null;
     }
-    
+
     protected void setOnClickBack() {
         Button button = findViewById(R.id.back_home);
         button.setOnClickListener(v -> {

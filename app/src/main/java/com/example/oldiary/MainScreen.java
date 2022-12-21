@@ -2,6 +2,7 @@ package com.example.oldiary;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -49,6 +50,9 @@ public class MainScreen extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
+
+        AudioManager manager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
@@ -56,6 +60,11 @@ public class MainScreen extends AppCompatActivity {
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds);
         mediaPlayer.setLooping(true);
+
+        // 最大音量値を取得
+        int vol = manager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        // 音量を設定
+        manager.setStreamVolume(AudioManager.STREAM_MUSIC, (int)(vol/2), 0);
 
         imageChange();
         ss();
@@ -73,7 +82,7 @@ public class MainScreen extends AppCompatActivity {
             try {
                 imageButton.setImageResource(R.drawable.opendoor);
                 Thread.sleep(500);
-                soundPool.play(mp3a,9 , 9, 0, 0, 2);
+                soundPool.play(mp3a,15 , 15, 0, 0, 2);
                 checkLoggedIn(loggedInId); //ログインチェック
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             } catch (InterruptedException e) {
