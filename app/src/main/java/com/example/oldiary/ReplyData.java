@@ -12,7 +12,7 @@ public class ReplyData {
 
     //コンストラクタ
     public ReplyData(String text, String repliedBy,String userName, String repliedAt, int iconId) {
-        String noLineBreakText = text.replace("\n", "");
+        String noLineBreakText = text.replace("\n", " ");
         this.text = noLineBreakText;
         this.repliedAt = repliedAt;
         this.repliedBy = repliedBy;
