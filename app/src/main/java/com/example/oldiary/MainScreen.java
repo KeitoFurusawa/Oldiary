@@ -186,7 +186,7 @@ public class MainScreen extends AppCompatActivity {
                                     editor.putBoolean("Launched", false);
                                     editor.putString("UserID", "");
                                     editor.commit();
-                                    resetCnt = 0;
+                                    resetCnt = 0;   
                                     Intent intent2 = new Intent(getApplication(), MainActivity.class);
                                     startActivity(intent2);
                                 }
