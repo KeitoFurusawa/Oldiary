@@ -20,6 +20,7 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
 
     private final static String TAG = "checkbox";
     private LayoutInflater mLayoutInflater;
+    private ArrayList<Integer> selectedGenreList = new ArrayList<>();
     private static ArrayList<String> checkBoxTextList = new ArrayList<>(); ///
     private static ArrayList<CheckBox> checkBoxList = new ArrayList<>(); ///
 
@@ -44,11 +45,18 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
         textView.setTextSize(20); //リストビューのテキストサイズ
 
         CheckBox checkBox = convertView.findViewById(R.id.checkBox);
+        if (selectedGenreList.contains(position)) {
+            Log.d(TAG, textView.getText().toString() + " checked");
+            checkBox.setChecked(true);
+            item.setChecked(true);
+            Log.d(TAG, position + "is" +  String.valueOf(checkBox.isChecked()));
+            selectedGenreList.remove(selectedGenreList.indexOf(position));
+        }
         if (!checkBoxTextList.contains(item.getTextData())) {
             //checkBox.setId(position);
-            Log.d(TAG, "setCheckBok"+position);
-            checkBoxTextList.add(item.getTextData());
-            checkBoxList.add(checkBox);
+            //Log.d(TAG, "setCheckBox"+position);
+            //checkBoxTextList.add(item.getTextData());
+            //checkBoxList.add(checkBox);
             checkBox.setOnCheckedChangeListener(null);
             checkBox.setChecked(item.isChecked());
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
