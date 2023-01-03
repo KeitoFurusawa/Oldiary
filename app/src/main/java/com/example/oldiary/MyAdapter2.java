@@ -25,7 +25,6 @@ public class MyAdapter2 extends ArrayAdapter<GenreData> {
     private static ArrayList<CheckBox> checkBoxList = new ArrayList<>(); ///
 
 
-
     public MyAdapter2(Context context, int resourceId, List<GenreData> objects) {
         super(context, resourceId, objects);
         // getLayoutInflater()メソッドはActivityじゃないと使えない
