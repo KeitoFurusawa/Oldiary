@@ -67,7 +67,7 @@
         android:layout_marginTop="3sp"
         android:text="投稿時間"
         android:textColor="#010101"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_below="@+id/writeSpace"
         android:layout_centerHorizontal="true"/>
 

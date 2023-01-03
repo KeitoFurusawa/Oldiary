@@ -6,39 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".WriteActivity">
 
-        <Button
-            android:id="@+id/cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:text="やめる"
-            android:layout_marginTop="10sp"
-            android:layout_marginStart="10sp"
-            android:textColor="@color/black"
-            android:drawableTop="@drawable/ic_cancel" />
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10sp"
+        android:backgroundTint="@color/white"
+        android:drawableTop="@drawable/ic_cancel"
+        android:text="やめる"
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/post"
-        android:layout_width="130dp"
-        android:layout_height="70dp"
-        android:text="投稿する"
-        android:backgroundTint="#00965F"
-        android:textSize="15sp"
-        android:textStyle="bold"
+        android:layout_width="108dp"
+        android:layout_height="69dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10sp"
-        android:layout_centerHorizontal="true"/>
+        android:backgroundTint="#00965F"
+        android:text="投稿する"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/keep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="一時保存"
-        android:backgroundTint="#E9401E"
-        android:textSize="15sp"
-        android:textStyle="bold"
         android:layout_alignParentRight="true"
         android:layout_marginTop="20sp"
-        android:layout_marginEnd="10sp" />
+        android:layout_marginEnd="10sp"
+        android:backgroundTint="#E9401E"
+        android:text="一時保存"
+        android:textSize="10sp"
+        android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/writeSpace"
@@ -81,37 +82,39 @@
 
     <Button
         android:id="@+id/genre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:text="ジャンル"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
         android:layout_below="@+id/image_view"
-        android:layout_marginTop="15sp"
-        android:layout_marginStart="20sp"
-        android:textColor="@color/black"
         android:layout_alignParentLeft="true"
-        android:drawableTop="@drawable/ic_flag" />
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20sp"
+        android:backgroundTint="@color/white"
+        android:drawableTop="@drawable/ic_flag"
+        android:text="ジャンル"
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:text="カメラ"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
         android:layout_below="@+id/image_view"
-        android:layout_marginTop="15sp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/white"
+        android:drawableTop="@drawable/ic_photo_camera"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/black"
-        android:drawableTop="@drawable/ic_photo_camera" />
+        android:text="カメラ"
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
         android:layout_below="@+id/image_view"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="15sp"
-        android:layout_marginEnd="20sp"
+        android:layout_marginEnd="12dp"
         android:layout_marginBottom="20sp"
         android:backgroundTint="@color/white"
         android:drawableTop="@drawable/ic_insert_photo"

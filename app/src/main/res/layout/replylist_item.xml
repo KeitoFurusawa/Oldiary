@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="260dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:autoSizeTextType="uniform"
         android:gravity="center_vertical"
@@ -30,7 +30,7 @@
 
     <TextView
         android:id="@+id/textReply"
-        android:layout_width="260dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Text"
         android:textColor="#000"

@@ -10,8 +10,9 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="アバター 編集"
         android:textColor="#000"
         android:textSize="40sp"
@@ -30,12 +31,12 @@
 
     <ImageView
         android:id="@+id/avatar"
-        android:layout_width="150dp"
-        android:layout_height="220dp"
-        app:srcCompat="@drawable/blue_man"
+        android:layout_width="157dp"
+        android:layout_height="170dp"
         android:layout_below="@+id/avatar_now"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        app:srcCompat="@drawable/blue_man" />
 
     <TextView
         android:id="@+id/ques1"
@@ -44,7 +45,7 @@
         android:layout_below="@+id/avatar"
         android:text="あなたの性別をお選びください"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:textColor="#000"
         android:textStyle="bold"
         android:textSize="20sp"/>
@@ -63,18 +64,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:text="男性" />
+            android:text="男性"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <RadioButton
             android:id="@+id/woman"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:text="女性" />
+            android:text="女性"
+            android:textSize="15sp"
+            android:textStyle="bold" />
     </RadioGroup>
 
     <TextView
@@ -84,7 +85,7 @@
         android:layout_below="@+id/choice1"
         android:text="好きな色をお選びください(1色)"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:textColor="#000"
         android:textStyle="bold"
         android:textSize="20sp"/>
@@ -133,21 +134,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="ピンク" />
+            android:text="桃" />
 
-            <RadioButton
+        <RadioButton
                 android:id="@+id/light_blue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="水色" />
+                android:text="水" />
 
         <RadioButton
             android:id="@+id/yellow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="黄色" />
+            android:text="黄" />
 
     </RadioGroup>
 
