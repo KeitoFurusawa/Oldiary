@@ -9,20 +9,22 @@
 
     <ImageView
         android:id="@+id/start_title"
-        android:layout_width="350sp"
-        android:layout_height="100sp"
-        android:layout_marginTop="50sp"
-        app:srcCompat="@drawable/oldiary_title"
-        android:layout_centerHorizontal="true"/>
+        android:layout_width="244dp"
+        android:layout_height="65dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/oldiary_title" />
 
     <ImageButton
         android:id="@+id/door"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="201dp"
+        android:layout_height="396dp"
         android:layout_below="@+id/start_title"
-        android:layout_marginTop="30dp"
-        android:soundEffectsEnabled="false"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:scaleType="centerCrop"
+        android:soundEffectsEnabled="false"
         app:srcCompat="@drawable/closedoor" />
 
     <TextView

@@ -12,7 +12,6 @@
         android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/black_han_sans"
         android:textStyle="bold"
         android:textSize="35sp"
         android:layout_centerHorizontal="true"
@@ -21,34 +20,34 @@
 
     <ImageView
         android:id="@+id/ojigi"
-        android:layout_width="298dp"
-        android:layout_height="268dp"
+        android:layout_width="236dp"
+        android:layout_height="192dp"
         android:layout_below="@+id/welcome"
-        android:layout_marginTop="-22dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="-22dp"
         android:src="@drawable/ojigi" />
 
     <FrameLayout
         android:id="@+id/frame"
+        android:layout_width="280dp"
+        android:layout_height="226dp"
         android:layout_below="@+id/ojigi"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/border"
         android:layout_marginTop="-30sp"
-        android:layout_width="280dp"
-        android:layout_height="300dp">
-    </FrameLayout>
+        android:background="@drawable/border"></FrameLayout>
 
     <TextView
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ログイン"
         android:layout_below="@+id/welcome"
+        android:layout_alignTop="@+id/frame"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="ログイン"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="250sp"
-        android:layout_centerHorizontal="true"/>
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextPhoneNumber"
@@ -82,19 +81,19 @@
         android:textSize="20sp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/collection_of_words"
-        android:layout_marginTop="40sp"/>
+        android:layout_marginTop="20sp"/>
 
     <TextView
         android:id="@+id/newAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/frame"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:text="アカウントをお持ちでない方は\n↓こちらから作成できます↓"
         android:textAlignment="center"
         android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/buttonLogin"
-        android:layout_marginTop="70sp"/>
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/make_account"
