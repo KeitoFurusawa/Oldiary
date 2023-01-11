@@ -181,7 +181,7 @@ public class Login2Activity extends AppCompatActivity {
 
     protected void checkUserName() {
         Log.d(TAG, "checkUserName()");
-        mDatabase.child("users").child(userId).child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        mDatabase.child("users").child(userId).child("favoriteGenre").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 Log.d("debug", "this is cUN onComplete");
