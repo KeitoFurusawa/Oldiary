@@ -89,7 +89,7 @@ public class PopupActivity extends AppCompatActivity {
                     else {
                         comment = String.valueOf(task.getResult().getValue());
                         if (comment.equals("null")) {
-                            Log.d(TAG, "the result of getting comment data is null");
+                            //Log.d(TAG, "the result of getting comment data is null");
                         } else {
                             TextView textComment = findViewById(R.id.comment);
                             textComment.setText(comment);

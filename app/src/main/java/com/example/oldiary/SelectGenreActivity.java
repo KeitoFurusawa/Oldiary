@@ -79,7 +79,7 @@ public class SelectGenreActivity extends AppCompatActivity {
         for (int i = 0; i < selectedGenreList.size(); i++) {
             sb.append(selectedGenreList.get(i));
         }
-        Log.d(TAG, sb.toString());
+        //Log.d(TAG, sb.toString());
     }
 
     public void removeSelectedGenreListList(int pos) {
@@ -88,7 +88,7 @@ public class SelectGenreActivity extends AppCompatActivity {
         for (int i = 0; i < selectedGenreList.size(); i++) {
             sb.append(selectedGenreList.get(i));
         }
-        Log.d(TAG, sb.toString());
+        //Log.d(TAG, sb.toString());
     }
 
     public int sizeOfSelectedGenreList() {
@@ -112,7 +112,7 @@ public class SelectGenreActivity extends AppCompatActivity {
     protected void setOnClick() {
         Button button = findViewById(R.id.buttonConfirm);
         button.setOnClickListener(v -> {
-            Log.d(TAG, String.valueOf("Button States: " + bStates)); //有効
+            //Log.d(TAG, String.valueOf("Button States: " + bStates)); //有効
             if (bStates) { //ボタン有効時
                 mDatabase.child("users").child(userId).child("favoriteGenre").setValue(selectedGenreList); //firebaseにデータ送信
                 Intent intentNext = new Intent(getApplication(), HomeActivity.class);

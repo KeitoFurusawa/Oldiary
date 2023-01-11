@@ -56,17 +56,17 @@ public class RegisterActivity extends AppCompatActivity {
         mDatabase.child("users").child("id_0120002222").child("diaries").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Log.d("debug", "this is onComplete");
+                //Log.d("debug", "this is onComplete");
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     String value = String.valueOf(task.getResult().getValue());
                     String[] split = value.split("[,{}]");
                     for (String xs : split) {
-                        Log.d(TAG, xs);
+                        //Log.d(TAG, xs);
                     }
-                    //Log.d(TAG, value);
+                    ////Log.d(TAG, value);
                 }
             }
         });
@@ -74,13 +74,13 @@ public class RegisterActivity extends AppCompatActivity {
         mDatabase.child("users").child("id_0").child("password").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Log.d("debug", "this is onComplete");
+                //Log.d("debug", "this is onComplete");
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     //String value = task.getResult().getValue();
-                    Log.d(TAG, "value: " + (String)task.getResult().getValue());
+                    //Log.d(TAG, "value: " + (String)task.getResult().getValue());
                 }
             }
         });

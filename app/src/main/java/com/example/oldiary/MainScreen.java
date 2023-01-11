@@ -133,7 +133,7 @@ public class MainScreen extends AppCompatActivity {
     }
 
     protected void checkLoggedIn(String loggedInId) {
-        Log.d(TAG, loggedInId);
+        //Log.d(TAG, loggedInId);
         if (loggedInId.length() == 0) { //未ログイン
             Intent intentLogin = new Intent(getApplication(), LoginActivity.class);
             startActivity(intentLogin);
@@ -144,7 +144,7 @@ public class MainScreen extends AppCompatActivity {
             mDatabase.child("users").child(loggedInId).child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    Log.d("debug", "this is onComplete");
+                    //Log.d("debug", "this is onComplete");
                     if (!task.isSuccessful()) {
                         //Log.e(TAG, "Error getting data", task.getException());
                         new AlertDialog.Builder(MainScreen.this)

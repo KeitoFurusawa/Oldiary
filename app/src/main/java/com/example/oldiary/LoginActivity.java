@@ -101,8 +101,8 @@ public class LoginActivity extends AlarmActivity {
             phoneNumber = textViewPhoneNumber.getText().toString();
             //password = textViewPassword.getText().toString();
             String userId = "id_" + phoneNumber;
-            Log.d(TAG, phoneNumber);//debug 確認用
-            //Log.d(TAG, password);   //debug 確認用
+            //Log.(TAG, phoneNumber);//debug 確認用
+            ////Log.(TAG, password);   //debug 確認用
 
             if ((phoneNumber.length() > 8) /*&& (password.length() == 4)*/) {
                 getData(userId);
@@ -114,7 +114,7 @@ public class LoginActivity extends AlarmActivity {
                     startActivity(intent);
                 } else {
                     soundPool.play(mp3a,9 , 9, 0, 0, 1);
-                    Log.d(TAG, "incorrect input value");//入力が正しくない
+                    //Log.(TAG, "incorrect input value");//入力が正しくない
                     Toast.makeText(LoginActivity.this, "電話番号・暗証番号を正しく入力してください", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -122,11 +122,11 @@ public class LoginActivity extends AlarmActivity {
     }
 
     protected void getData(String userId) {
-        //Log.d("debug", "this is getData");
+        ////Log.("debug", "this is getData");
         mDatabase.child("users").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                //Log.d("debug", "this is onComplete");
+                ////Log.("debug", "this is onComplete");
                 if (!task.isSuccessful()) {
                     Log.e(TAG, "Error getting data", task.getException());
                     new AlertDialog.Builder(LoginActivity.this)
@@ -152,16 +152,16 @@ public class LoginActivity extends AlarmActivity {
     }
 
     protected void setResult(String result) {
-        Log.d("debug", "setResult");
+        //Log.("debug", "setResult");
         this.getResult = result;
     }
 
     protected void checkResult(String userId) {
-        Log.d("debug", "this is checkPhoneNum");
+        //Log.("debug", "this is checkPhoneNum");
         while (this.getResult == null) {
-            Log.d(TAG, "loading info");
+            //Log.(TAG, "loading info");
         }
-        Log.d(TAG, userId + ": " + getResult); //debug
+        //Log.(TAG, userId + ": " + getResult); //debug
         if (getResult.equals("null")) { //電話番号未登録
             soundPool.play(mp3a,9 , 9, 0, 0, 1);
             Log.e(TAG, "ERROR: that PhoneNumber wasn't registered");

@@ -41,7 +41,7 @@ public class MakeProfile extends AppCompatActivity {
     private void getUserId() {
         Intent intentPrev = getIntent();
         userId = intentPrev.getStringExtra("UserID");
-        Log.d(TAG, userId);
+        //Log.d(TAG, userId);
     }
 
     //Back
@@ -88,7 +88,7 @@ public class MakeProfile extends AppCompatActivity {
                 int date = Integer.parseInt(textViewDate.getText().toString());
                 AgeCalculator ac = new AgeCalculator();
                 int age = ac.getAge(year, month, date);
-                Log.d(TAG, String.format("name: %s, %d/%d/%d, age: %d", userName, year, month, date, age));
+                //Log.d(TAG, String.format("name: %s, %d/%d/%d, age: %d", userName, year, month, date, age));
                 if (userName.equals("null")) {
                     Toast.makeText(
                             MakeProfile.this, "その名前はご利用いただけません。", Toast.LENGTH_SHORT).show();

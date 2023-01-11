@@ -46,15 +46,15 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
 
         CheckBox checkBox = convertView.findViewById(R.id.checkBox);
         if (selectedGenreList.contains(position)) {
-            Log.d(TAG, textView.getText().toString() + " checked");
+            //Log.(TAG, textView.getText().toString() + " checked");
             checkBox.setChecked(true);
             item.setChecked(true);
-            Log.d(TAG, position + "is" +  String.valueOf(checkBox.isChecked()));
+            //Log.(TAG, position + "is" +  String.valueOf(checkBox.isChecked()));
             selectedGenreList.remove(selectedGenreList.indexOf(position));
         }
         if (!checkBoxTextList.contains(item.getTextData())) {
             //checkBox.setId(position);
-            //Log.d(TAG, "setCheckBox"+position);
+            ////Log.(TAG, "setCheckBox"+position);
             //checkBoxTextList.add(item.getTextData());
             //checkBoxList.add(checkBox);
             checkBox.setOnCheckedChangeListener(null);
@@ -64,7 +64,7 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     SelectGenreActivity sga = new SelectGenreActivity();
                     if((sga.sizeOfSelectedGenreList() >= 3) && b) { //3つ以上のチェックはさせない
-                        Log.e(TAG, "list is full");
+                        //Log.e(TAG, "list is full");
                         GenreData genreData = getItem(position);
                         genreData.setChecked(false);
                         compoundButton.setChecked(false);
@@ -73,16 +73,16 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
                         if (b) { //trueの時チェックがついた。
                             GenreData genreData = getItem(position);
                             genreData.setChecked(b);
-                            Log.d(TAG, "checked " + position); //debug
+                            //Log.(TAG, "checked " + position); //debug
                             sga.addSelectedGenreListList(position);//selectedIdList.append(position);
-                            Log.d(TAG, "Size of list: " + sga.sizeOfSelectedGenreList());
+                            //Log.(TAG, "Size of list: " + sga.sizeOfSelectedGenreList());
                             if (sga.sizeOfSelectedGenreList() == 3) {
                                 sga.enableButton(); //もし３つチェックになったらボタンを有効化
                             }
                         } else { //falseの時チェックが外れた
                             GenreData genreData = getItem(position);
                             genreData.setChecked(b);
-                            Log.d(TAG, "unchecked " + position); //debug
+                            //Log.(TAG, "unchecked " + position); //debug
                             sga.removeSelectedGenreListList(position);//remove position from list
                             if (sga.bStates) { //もしボタンが有効化されていたら無効化
                                 sga.disableButton();
@@ -94,13 +94,13 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
         } else {
             checkBoxList.get(position).setOnCheckedChangeListener(null);
             checkBoxList.get(position).setChecked(item.isChecked());
-            Log.d(TAG, "else" + position);
+            //Log.(TAG, "else" + position);
             checkBoxList.get(position).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     SelectGenreActivity sga = new SelectGenreActivity();
                     if((sga.sizeOfSelectedGenreList() >= 3) && b) { //3つ以上のチェックはさせない
-                        Log.e(TAG, "list is full");
+                        //Log.e(TAG, "list is full");
                         GenreData genreData = getItem(position);
                         genreData.setChecked(false);
                         compoundButton.setChecked(false);
@@ -109,16 +109,16 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
                         if (b) { //trueの時チェックがついた。
                             GenreData genreData = getItem(position);
                             genreData.setChecked(b);
-                            Log.d(TAG, "checked " + position); //debug
+                            //Log.(TAG, "checked " + position); //debug
                             sga.addSelectedGenreListList(position);//selectedIdList.append(position);
-                            Log.d(TAG, "Size of list: " + sga.sizeOfSelectedGenreList());
+                            //Log.(TAG, "Size of list: " + sga.sizeOfSelectedGenreList());
                             if (sga.sizeOfSelectedGenreList() == 3) {
                                 sga.enableButton(); //もし３つチェックになったらボタンを有効化
                             }
                         } else { //falseの時チェックが外れた
                             GenreData genreData = getItem(position);
                             genreData.setChecked(b);
-                            Log.d(TAG, "unchecked " + position); //debug
+                            //Log.(TAG, "unchecked " + position); //debug
                             sga.removeSelectedGenreListList(position);//remove position from list
                             if (sga.bStates) { //もしボタンが有効化されていたら無効化
                                 sga.disableButton();
@@ -135,9 +135,9 @@ public class MyAdapter extends ArrayAdapter<GenreData> {
 
     public void onClickElm(int pos) {
         for (String s: checkBoxTextList) {
-            //Log.d(TAG, s);
+            ////Log.(TAG, s);
         }
         checkBoxList.get(pos).performClick();
-        //Log.d(TAG, "sizeOfCheckbox: " + checkBoxTextList.size());
+        ////Log.(TAG, "sizeOfCheckbox: " + checkBoxTextList.size());
     }
 }

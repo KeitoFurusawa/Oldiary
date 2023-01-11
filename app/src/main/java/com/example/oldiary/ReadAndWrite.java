@@ -26,18 +26,18 @@ public class ReadAndWrite extends CreateActivity {
     }
 
     public void writeDiary(String userId, String text, String dateTime, long timeInMillis, ArrayList<Integer> selectedGenreList) {
-        Log.d(TAG, text);
+        //Log.d(TAG, text);
         mDatabase.child("users").child(userId).child("d_cnt").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     String getResult = String.valueOf(task.getResult().getValue());
-                    Log.d(TAG, getResult);
+                    //Log.d(TAG, getResult);
                     if (getResult.equals("null")) { //初投稿
-                        Log.d(TAG, "ERROR: cnt is null");
+                        //Log.d(TAG, "ERROR: cnt is null");
                         mDatabase.child("users").child(userId).child("d_cnt").setValue(1);
                         //mDatabase.child("users").child(userId).child("diaries").child("d_id").setValue(userId+"1");
                         mDatabase.child("diaries").child("d_"+userId+"1").child("text").setValue(text);
@@ -78,7 +78,7 @@ public class ReadAndWrite extends CreateActivity {
         User user = new User(phoneNumber, password);
         sb.append(phoneNumber);
         String ID = sb.toString();
-        Log.d(TAG, ID);
+        //Log.d(TAG, ID);
         mDatabase.child("users").child(ID).setValue(user);
     }
 
@@ -86,9 +86,9 @@ public class ReadAndWrite extends CreateActivity {
         mDatabase.child("diaries").child("d_idList").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Log.d("debug", "this is onComplete");
+                //Log.d("debug", "this is onComplete");
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     String value = String.valueOf(task.getResult().getValue());
@@ -100,7 +100,7 @@ public class ReadAndWrite extends CreateActivity {
                         sb.append(",").append(diaryId);
                         mDatabase.child("diaries").child("d_idList").setValue(sb.toString());
                     }
-                    //Log.d(TAG, value);
+                    ////Log.d(TAG, value);
                 }
             }
         });
@@ -108,9 +108,9 @@ public class ReadAndWrite extends CreateActivity {
         mDatabase.child("diaries").child("dCntPublic").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Log.d("debug", "this is onComplete");
+                //Log.d("debug", "this is onComplete");
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     String value = String.valueOf(task.getResult().getValue());
@@ -121,7 +121,7 @@ public class ReadAndWrite extends CreateActivity {
                         int cnt = Integer.parseInt(value);
                         mDatabase.child("diaries").child("dCntPublic").setValue(++cnt);
                     }
-                    //Log.d(TAG, value);
+                    ////Log.d(TAG, value);
                 }
             }
         });
@@ -131,9 +131,9 @@ public class ReadAndWrite extends CreateActivity {
         mDatabase.child("users").child(userId).child("diaries").child("d_idList").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Log.d("debug", "this is onComplete");
+                //Log.d("debug", "this is onComplete");
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     String value = String.valueOf(task.getResult().getValue());
@@ -145,7 +145,7 @@ public class ReadAndWrite extends CreateActivity {
                         sb.append(",").append(diaryId);
                         mDatabase.child("users").child(userId).child("diaries").child("d_idList").setValue(sb.toString());
                     }
-                    //Log.d(TAG, value);
+                    ////Log.d(TAG, value);
                 }
             }
         });
@@ -156,11 +156,11 @@ public class ReadAndWrite extends CreateActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     String getResult = String.valueOf(task.getResult().getValue());
-                    Log.d(TAG, getResult);
+                    //Log.d(TAG, getResult);
                     if (getResult.equals("null")) { //最初の返信
                         mDatabase.child("diaries").child(dstDiaryId).child("r_cnt").setValue(1);
                         mDatabase.child("diaries").child(dstDiaryId).child("r_1").child("text").setValue(text);
@@ -187,9 +187,9 @@ public class ReadAndWrite extends CreateActivity {
         mDatabase.child("diaries").child(dstDiaryId).child("r_idList").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Log.d("debug", "this is onComplete");
+                //Log.d("debug", "this is onComplete");
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     String value = String.valueOf(task.getResult().getValue());

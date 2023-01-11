@@ -33,6 +33,7 @@ import java.util.Collections;
 
 public class ConnectActivity extends AppCompatActivity {
     private static final String TAG = "connect";
+    private static final String SPTAG = "bugcheck";
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
     private DatabaseReference mDatabase;
@@ -188,6 +189,7 @@ public class ConnectActivity extends AppCompatActivity {
                             d_idList.add(xs);
                         }
                         Collections.reverse(d_idList);
+                        Log.i(SPTAG, String.valueOf(d_idList));
                     }
                 }
             }
@@ -266,19 +268,19 @@ public class ConnectActivity extends AppCompatActivity {
         //String d_id = String.format("d_%s%d", userId, nowDNum);
         StartLoading();
         String d_id = d_idList.get(nowDNum-1);
-        Log.i(TAG, d_id);
+        //Log.i(SPTAG, d_id);
         dstDiaryId = d_idList.get(nowDNum-1);
         mDatabase.child("diaries").child(d_id).child("text").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                     Toast.makeText(ConnectActivity.this, "データの取得に失敗しました。\nネットワークに接続してください。", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     String textResult = String.valueOf(task.getResult().getValue());
                     if (textResult.equals("null")) { //中身がない
-                        Log.e(TAG, "ERROR: cannot get data"); //debug
+                        //Log.e(TAG, "ERROR: cannot get data"); //debug
                     } else {
                         post.setText(textResult);
                     }
@@ -294,7 +296,7 @@ public class ConnectActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                     new AlertDialog.Builder(ConnectActivity.this)
                             .setTitle("エラー")
                             .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
@@ -310,7 +312,7 @@ public class ConnectActivity extends AppCompatActivity {
                 else {
                     String textResult = String.valueOf(task.getResult().getValue());
                     if (textResult.equals("null")) { //中身がない
-                        Log.e(TAG, "ERROR: cannot get data"); //debug
+                        //Log.e(TAG, "ERROR: cannot get data"); //debug
                     } else {
                         postedAt.setText(textResult);
                     }
@@ -321,7 +323,7 @@ public class ConnectActivity extends AppCompatActivity {
 
     private void setGenre() {
         loadGCnt = 0;
-        Log.i(TAG, "setGenre()");
+        //Log.i(TAG, "setGenre()");
         String d_id = d_idList.get(nowDNum-1);
         ArrayList<String> selectedGenreList = new ArrayList<>();
         for (int i = 0; i < PutGenreAdapter.MAX_LENGTH_P; i++) {
@@ -329,7 +331,7 @@ public class ConnectActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if (!task.isSuccessful()) {
-                        Log.e(TAG, "Error getting data", task.getException());
+                        //Log.e(TAG, "Error getting data", task.getException());
                         new AlertDialog.Builder(ConnectActivity.this)
                                 .setTitle("エラー")
                                 .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
@@ -344,15 +346,15 @@ public class ConnectActivity extends AppCompatActivity {
                     }
                     else {
                         String result = String.valueOf(task.getResult().getValue());
-                        Log.i(TAG, String.format("%d, %s", loadGCnt, result));
+                        //Log.i(TAG, String.format("%d, %s", loadGCnt, result));
                         if (result.equals("null")) { //中身がない
-                            Log.e(TAG, "ERROR: cannot get genre"); //debug
+                            //Log.e(TAG, "ERROR: cannot get genre"); //debug
                         } else {
                             selectedGenreList.add(GenreData.genreList[Integer.parseInt(result)]);
                         }
                         loadGCnt++;
                         if (loadGCnt == PutGenreAdapter.MAX_LENGTH_P) {
-                            Log.i(TAG, String.valueOf(selectedGenreList));
+                            //Log.i(TAG, String.valueOf(selectedGenreList));
                             if (selectedGenreList.size() == 0) {
                                 textViewGenre.setText("#ジャンルなし");
                             } else {
@@ -375,7 +377,7 @@ public class ConnectActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                     new AlertDialog.Builder(ConnectActivity.this)
                             .setTitle("エラー")
                             .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
@@ -391,7 +393,7 @@ public class ConnectActivity extends AppCompatActivity {
                 else {
                     String textResult = String.valueOf(task.getResult().getValue());
                     if (textResult.equals("null")) { //中身がない
-                        Log.e(TAG, "ERROR: cannot get data"); //debug
+                        //Log.e(TAG, "ERROR: cannot get data"); //debug
                     } else {
                         dstUserId = textResult;
                         innerSetPostedBy(textResult);
@@ -409,7 +411,7 @@ public class ConnectActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                     new AlertDialog.Builder(ConnectActivity.this)
                             .setTitle("エラー")
                             .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
@@ -425,7 +427,7 @@ public class ConnectActivity extends AppCompatActivity {
                 else {
                     String textResult = String.valueOf(task.getResult().getValue());
                     if (textResult.equals("null")) { //中身がない
-                        Log.e(TAG, "ERROR: cannot get data"); //debug
+                        //Log.e(TAG, "ERROR: cannot get data"); //debug
                         postedBy.setText("NoDATA");
                     } else {
                         postedBy.setText(textResult + " さんの投稿");
@@ -536,12 +538,12 @@ public class ConnectActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                     Toast.makeText(ConnectActivity.this, "データの取得に失敗しました。\nネットワークに接続してください。", Toast.LENGTH_SHORT).show();
                 } else {
                     String r_idListResult = String.valueOf(task.getResult().getValue());
                     if (r_idListResult.equals("null")) { //返信がない
-                        Log.e(TAG, "ERROR: cannot get post");
+                        //Log.e(TAG, "ERROR: cannot get post");
                         listView.setVisibility(View.GONE);
                         TextView text = findViewById(R.id.textTitleReply);
                         text.setText("返信がありません");
@@ -607,12 +609,12 @@ public class ConnectActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                     Toast.makeText(ConnectActivity.this, "データの取得に失敗しました。\nネットワークに接続してください。", Toast.LENGTH_SHORT).show();
                 } else {
                     String result = String.valueOf(task.getResult().getValue());
                     if (result.equals("null")) { //エラー
-                        Log.e(TAG, "ERROR: cannot get data");
+                        //Log.e(TAG, "ERROR: cannot get data");
                     } else {
                         text.set(index, result);
                         loadRepliedBy(d_id, r_id, index);
@@ -629,12 +631,12 @@ public class ConnectActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                     Toast.makeText(ConnectActivity.this, "データの取得に失敗しました。\nネットワークに接続してください。", Toast.LENGTH_SHORT).show();
                 } else {
                     String result = String.valueOf(task.getResult().getValue());
                     if (result.equals("null")) { //エラー
-                        Log.e(TAG, "ERROR: cannot get data");
+                        //Log.e(TAG, "ERROR: cannot get data");
                     } else {
                         repliedBy.set(index, result);
                         loadUserName(d_id, r_id, index);
@@ -651,12 +653,12 @@ public class ConnectActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                     Toast.makeText(ConnectActivity.this, "データの取得に失敗しました。\nネットワークに接続してください。", Toast.LENGTH_SHORT).show();
                 } else {
                     String result = String.valueOf(task.getResult().getValue());
                     if (result.equals("null")) { //エラー
-                        Log.e(TAG, "ERROR: cannot get data");
+                        //Log.e(TAG, "ERROR: cannot get data");
                     } else {
                         userName.set(index, result);
                         loadRepliedAt(d_id, r_id, index);
@@ -673,12 +675,12 @@ public class ConnectActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                     Toast.makeText(ConnectActivity.this, "データの取得に失敗しました。\nネットワークに接続してください。", Toast.LENGTH_SHORT).show();
                 } else {
                     String result = String.valueOf(task.getResult().getValue());
                     if (result.equals("null")) { //エラー
-                        Log.e(TAG, "ERROR: cannot get data");
+                        //Log.e(TAG, "ERROR: cannot get data");
 
                     } else {
                         repliedAt.set(index, result);
@@ -695,11 +697,11 @@ public class ConnectActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     gender.set(index, String.valueOf(task.getResult().getValue()));
-                    Log.d(TAG, "result: " + gender);
+                    //Log.d(TAG, "result: " + gender);
                     if (gender.get(index).equals("null")) {
                         gender.set(index, "man");
                     }
@@ -711,11 +713,11 @@ public class ConnectActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     color.set(index, String.valueOf(task.getResult().getValue()));
-                    Log.d(TAG, "result: " + color);
+                    //Log.d(TAG, "result: " + color);
                     if (color.get(index).equals("null")) {
                         color.set(index, "blue");
                     }
@@ -728,7 +730,7 @@ public class ConnectActivity extends AppCompatActivity {
 
     private void setPrevAvatar(int index) {
         while(gender.equals("null") || color.equals("null")) {
-            Log.d(TAG, gender.get(index)+color.get(index));
+            //Log.d(TAG, gender.get(index)+color.get(index));
         }
         iconId.set(index, getResources().getIdentifier("icon_"+color.get(index)+"_"+gender.get(index), "drawable", getPackageName()));
         checkGetReplyData(index);

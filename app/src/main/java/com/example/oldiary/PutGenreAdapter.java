@@ -42,7 +42,7 @@ public class PutGenreAdapter extends ArrayAdapter<GenreData> {
         textView.setTextSize(20); //リストビューのテキストサイズ
 
         CheckBox checkBox = convertView.findViewById(R.id.checkBox);
-        Log.d(TAG, "setCheckBok"+position);
+        //Log.d(TAG, "setCheckBok"+position);
         checkBox.setOnCheckedChangeListener(null);
         checkBox.setChecked(item.isChecked());
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -50,7 +50,7 @@ public class PutGenreAdapter extends ArrayAdapter<GenreData> {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 PutGenreActivity pga = new PutGenreActivity();
                 if((pga.sizeOfSelectedGenreList() >= MAX_LENGTH_P) && b) { //3つ以上のチェックはさせない
-                    Log.e(TAG, "list is full");
+                    //Log.e(TAG, "list is full");
                     GenreData genreData = getItem(position);
                     genreData.setChecked(false);
                     compoundButton.setChecked(false);
@@ -59,16 +59,16 @@ public class PutGenreAdapter extends ArrayAdapter<GenreData> {
                     if (b) { //trueの時チェックがついた。
                         GenreData genreData = getItem(position);
                         genreData.setChecked(b);
-                        Log.d(TAG, "checked " + position); //debug
+                        //Log.d(TAG, "checked " + position); //debug
                         pga.addSelectedGenreListList(position);//selectedIdList.append(position);
-                        Log.d(TAG, "Size of list: " + pga.sizeOfSelectedGenreList());
+                        //Log.d(TAG, "Size of list: " + pga.sizeOfSelectedGenreList());
                         if (pga.sizeOfSelectedGenreList() == 3) {
                             pga.enableButton(); //もし３つチェックになったらボタンを有効化
                         }
                     } else { //falseの時チェックが外れた
                         GenreData genreData = getItem(position);
                         genreData.setChecked(b);
-                        Log.d(TAG, "unchecked " + position); //debug
+                        //Log.d(TAG, "unchecked " + position); //debug
                         pga.removeSelectedGenreListList(position);//remove position from list
                         if (pga.bStates) { //もしボタンが有効化されていたら無効化
                             pga.disableButton();

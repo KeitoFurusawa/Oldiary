@@ -242,11 +242,11 @@ public class ProfileActivity extends AlarmProfileActivity {
                 }
                 else {
                     gender = String.valueOf(task.getResult().getValue());
-                    Log.d(TAG, "result: " + gender);
+                    //Log.d(TAG, "result: " + gender);
                     if (gender.equals("null")) {
                         gender = "man";
                     }
-                    Log.d(TAG, gender);
+                    //Log.d(TAG, gender);
                 }
             }
         });
@@ -258,11 +258,11 @@ public class ProfileActivity extends AlarmProfileActivity {
                 }
                 else {
                     color = String.valueOf(task.getResult().getValue());
-                    Log.d(TAG, "result: " + color);
+                    //Log.d(TAG, "result: " + color);
                     if (color.equals("null")) {
                         color = "blue";
                     }
-                    Log.d(TAG, color);
+                    //Log.d(TAG, color);
                     setPrevAvatar();
                 }
             }
@@ -271,7 +271,7 @@ public class ProfileActivity extends AlarmProfileActivity {
 
     private void setPrevAvatar() {
         while(gender.equals("null") || color.equals("null")) {
-            Log.d(TAG, gender+color);
+            //Log.d(TAG, gender+color);
         }
         int drawableId = getResources().getIdentifier("icon_"+color+"_"+gender, "drawable", getPackageName());
         imgProf = findViewById(R.id.profile_image);
@@ -309,10 +309,10 @@ public class ProfileActivity extends AlarmProfileActivity {
     }
 
     private void checkLoading() {
-        /*Log.d(TAG, "C-ID: " + checkID);
-        Log.d(TAG, "C-AV: " + checkAvatar);
-        Log.d(TAG, "C-Post:" + checkPostText);
-        Log.d(TAG, "C-Time:" + checkPostTime);
+        /*//Log.d(TAG, "C-ID: " + checkID);
+        //Log.d(TAG, "C-AV: " + checkAvatar);
+        //Log.d(TAG, "C-Post:" + checkPostText);
+        //Log.d(TAG, "C-Time:" + checkPostTime);
         */
         if (checkID && checkIcon && checkGenre && checkName && checkComment) {
             progressDialog.dismiss();

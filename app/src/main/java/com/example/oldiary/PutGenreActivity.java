@@ -73,7 +73,7 @@ public class PutGenreActivity extends AppCompatActivity {
         for (int i = 0; i < selectedGenreList.size(); i++) {
             sb.append(selectedGenreList.get(i));
         }
-        Log.d(TAG, sb.toString());
+        //Log.d(TAG, sb.toString());
     }
 
     public void removeSelectedGenreListList(int pos) {
@@ -82,7 +82,7 @@ public class PutGenreActivity extends AppCompatActivity {
         for (int i = 0; i < selectedGenreList.size(); i++) {
             sb.append(selectedGenreList.get(i));
         }
-        Log.d(TAG, sb.toString());
+        //Log.d(TAG, sb.toString());
     }
 
     public int sizeOfSelectedGenreList() {

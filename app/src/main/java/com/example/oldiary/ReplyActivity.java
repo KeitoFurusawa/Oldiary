@@ -65,22 +65,22 @@ public class ReplyActivity extends AppCompatActivity {
         dstUserId = i.getStringExtra("dstUserID");
         dstDiaryId = i.getStringExtra("dstDiaryID");
         nowDNum = i.getIntExtra("D-NUM", -1);
-        Log.d(TAG, "Dnum: " + nowDNum);
+        //Log.d(TAG, "Dnum: " + nowDNum);
         mDatabase.child("users").child(dstUserId).child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Log.d("debug", "this is onComplete");
+                //Log.d("debug", "this is onComplete");
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     String value = String.valueOf(task.getResult().getValue());
                     if (value.equals("null")) { //first reply
-                        Log.e(TAG, "failed to get Dest User Name");
+                        //Log.e(TAG, "failed to get Dest User Name");
                     }
                     else {
                         dstUserName = value;
-                        //Log.d(TAG, dstUserId + "," + dstUserName + "," + dstDiaryId);
+                        ////Log.d(TAG, dstUserId + "," + dstUserName + "," + dstDiaryId);
                     }
                 }
             }
@@ -89,9 +89,9 @@ public class ReplyActivity extends AppCompatActivity {
 
     protected void checkUserId() {
         if (userId.equals("")) {
-            Log.e(TAG, "failed to get User ID");
+            //Log.e(TAG, "failed to get User ID");
         } else {
-            //Log.d(TAG, userId);
+            ////Log.d(TAG, userId);
         }
     }
 
@@ -101,7 +101,7 @@ public class ReplyActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplication(), ConnectActivity.class);
             intent.putExtra("INTENT_FROM", "notReplied");
             intent.putExtra("REPLY_TO", "null");
-            Log.d(TAG, "DNum: " + nowDNum);
+            //Log.d(TAG, "DNum: " + nowDNum);
             intent.putExtra("D-NUM", nowDNum);
             startActivity(intent);
         });
@@ -116,7 +116,7 @@ public class ReplyActivity extends AppCompatActivity {
                 Toast.makeText(ReplyActivity.this, "デバッグユーザ0は投稿できません", Toast.LENGTH_SHORT).show();
             }
             else if (txt.length() == 0) {
-                //Log.d(TAG, dateTime());
+                ////Log.d(TAG, dateTime());
                 Toast.makeText(ReplyActivity.this, "返信内容がありません", Toast.LENGTH_SHORT).show();
             } else {
                 ReadAndWrite rad = new ReadAndWrite();
@@ -149,7 +149,7 @@ public class ReplyActivity extends AppCompatActivity {
     private String dateTime() {
         int year, month, date, hour, minute, second;
         Calendar c = Calendar.getInstance();
-        //Log.d(TAG, String.valueOf(c));
+        ////Log.d(TAG, String.valueOf(c));
         TimeZone tz = TimeZone.getTimeZone("Asia/Tokyo");
         c.setTimeZone(tz); //日本時間に設定
         year = c.get(Calendar.YEAR);

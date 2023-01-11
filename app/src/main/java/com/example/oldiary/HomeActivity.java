@@ -168,9 +168,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private void checkUserId() {
         if (userId.equals("")) {
-            Log.e(TAG, "failed to get User ID");
+            //Log.e(TAG, "failed to get User ID");
         } else {
-            Log.d(TAG, userId);
+            //Log.(TAG, userId);
         }
         checkID = true;
         checkLoading();
@@ -181,7 +181,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                     new AlertDialog.Builder(HomeActivity.this)
                             .setTitle("エラー")
                             .setMessage("データの取得に失敗しました。\nネットワークに接続してください。")
@@ -197,7 +197,7 @@ public class HomeActivity extends AppCompatActivity {
                 else {
                     String userNameResult = String.valueOf(task.getResult().getValue());
                     if (userNameResult.equals("null")) { //初回ログイン
-                        Log.e(TAG, "ERROR: cannot get name");
+                        //Log.e(TAG, "ERROR: cannot get name");
                     } else {
                         userName = userNameResult;
                         TextView textViewUserId = findViewById(R.id.textViewId);
@@ -215,15 +215,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     gender = String.valueOf(task.getResult().getValue());
-                    Log.d(TAG, "result: " + gender);
+                    //Log.(TAG, "result: " + gender);
                     if (gender.equals("null")) {
                         gender = "man";
                     }
-                    Log.d(TAG, gender);
+                    //Log.(TAG, gender);
                 }
             }
         });
@@ -231,15 +231,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     color = String.valueOf(task.getResult().getValue());
-                    Log.d(TAG, "result: " + color);
+                    //Log.(TAG, "result: " + color);
                     if (color.equals("null")) {
                         color = "blue";
                     }
-                    Log.d(TAG, color);
+                    //Log.(TAG, color);
                     setPrevAvatar();
                 }
             }
@@ -248,7 +248,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setPrevAvatar() {
         while(gender.equals("null") || color.equals("null")) {
-            Log.d(TAG, gender+color);
+            //Log.(TAG, gender+color);
         }
         int drawableId = getResources().getIdentifier(color+"_"+gender, "drawable", getPackageName());
         ImageView imageView = findViewById(R.id.avatar);

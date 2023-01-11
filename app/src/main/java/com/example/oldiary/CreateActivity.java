@@ -90,7 +90,7 @@ public class CreateActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else { //電話番号の長さが9未満はエラー
                     soundPool.play(mp3a,9 , 9, 0, 0, 1);
-                    Log.d(TAG, "length of phoneNumber is not enough");
+                    //Log.d(TAG, "length of phoneNumber is not enough");
                     Toast.makeText(CreateActivity.this, "正しい電話番号を入力してください", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -100,13 +100,13 @@ public class CreateActivity extends AppCompatActivity {
     //onComplete
     // データベースから一度だけ情報を読み取る
     protected void getData(String userId) {
-        Log.d("debug", "this is getData");
+        //Log.d("debug", "this is getData");
         mDatabase.child("users").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Log.d("debug", "this is onComplete");
+                //Log.d("debug", "this is onComplete");
                 if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
+                    //Log.e(TAG, "Error getting data", task.getException());
                     //Toast.makeText(CreateActivity.this, "データの取得に失敗しました。\nネットワークに接続してください。", Toast.LENGTH_SHORT).show();
                     new AlertDialog.Builder(CreateActivity.this)
                             .setTitle("エラー")
@@ -130,19 +130,19 @@ public class CreateActivity extends AppCompatActivity {
     }
 
     protected void setResult(String result) {
-        Log.d("debug", "setResult");
+        //Log.d("debug", "setResult");
         this.getResult = result;
     }
 
     protected void checkResult(String userId) {
-        Log.d("debug", "this is checkPhoneNum");
+        //Log.d("debug", "this is checkPhoneNum");
         while (this.getResult == null) {
-            Log.d(TAG, "loading info");
+            //Log.d(TAG, "loading info");
         }
-        Log.d(TAG, userId + ": " + getResult); //debug
+        //Log.d(TAG, userId + ": " + getResult); //debug
         if (!(getResult.equals("null"))) { //idでサーバを検索した時登録済みの場合はエラー
             soundPool.play(mp3a,9 , 9, 0, 0, 1);
-            Log.e(TAG, "ERROR: that PhoneNumber was already registered");
+            //Log.e(TAG, "ERROR: that PhoneNumber was already registered");
             Toast.makeText(CreateActivity.this, "その電話番号はすでに使われています。", Toast.LENGTH_SHORT).show();
         } else { //未登録の番号はOK
             Intent intent = new Intent(getApplication(), Create2Activity.class);

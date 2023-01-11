@@ -69,7 +69,7 @@ public class Create2Activity extends AppCompatActivity {
     protected void getPhoneNumber() {
         Intent intent1 = getIntent();
         phoneNumber = intent1.getStringExtra("PhoneNumber");
-        Log.d(TAG, "PhoneNumber: " + phoneNumber);
+        ////Log.d(TAG, "PhoneNumber: " + phoneNumber);
     }
 
     protected void getPassword() {
@@ -77,7 +77,7 @@ public class Create2Activity extends AppCompatActivity {
         buttonGo.setOnClickListener(v -> {
             if (password.length() < 4) {
                 soundPool.play(mp3b,9 , 9, 0, 0, 1f);
-                Log.e(TAG, "ERROR: the length of password is not enough.");
+                //Log.e(TAG, "ERROR: the length of password is not enough.");
                 Toast.makeText(
                         Create2Activity.this, "パスワードは4桁入力してください", Toast.LENGTH_SHORT).show();
             } else {
@@ -93,7 +93,7 @@ public class Create2Activity extends AppCompatActivity {
                                 Intent intent2 = new Intent(getApplication(), SuccessActivity.class);
                                 startActivity(intent2);
                                 soundPool.play(mp3a,9 , 9, 0, 0, 2);
-                                Log.d("AlertDialog", "Positive which :" + which);
+                                //Log.d("AlertDialog", "Positive which :" + which);
                             }
                         })
                         .show();
@@ -118,7 +118,7 @@ public class Create2Activity extends AppCompatActivity {
             count += 1;
             if (count < 5) {
                 password += "0";
-                Log.d(TAG, password);
+                ////Log.d(TAG, password);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(password);
             }
@@ -128,7 +128,7 @@ public class Create2Activity extends AppCompatActivity {
             count += 1;
             if (count < 5) {
                 password += "1";
-                Log.d(TAG, password);
+                ////Log.d(TAG, password);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(password);
             }
@@ -138,7 +138,7 @@ public class Create2Activity extends AppCompatActivity {
             count += 1;
             if (count < 5) {
                 password += "2";
-                Log.d(TAG, password);
+                //Log.d(TAG, password);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(password);
             }
@@ -148,7 +148,7 @@ public class Create2Activity extends AppCompatActivity {
             count += 1;
             if (count < 5) {
                 password += "3";
-                Log.d(TAG, password);
+                //Log.d(TAG, password);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(password);
             }
@@ -158,7 +158,7 @@ public class Create2Activity extends AppCompatActivity {
             count += 1;
             if (count < 5) {
                 password += "4";
-                Log.d(TAG, password);
+                //Log.d(TAG, password);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(password);
             }
@@ -168,7 +168,7 @@ public class Create2Activity extends AppCompatActivity {
             count += 1;
             if (count < 5) {
                 password += "5";
-                Log.d(TAG, password);
+                //Log.d(TAG, password);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(password);
             }
@@ -178,7 +178,7 @@ public class Create2Activity extends AppCompatActivity {
             count += 1;
             if (count < 5) {
                 password += "6";
-                Log.d(TAG, password);
+                //Log.d(TAG, password);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(password);
             }
@@ -188,7 +188,7 @@ public class Create2Activity extends AppCompatActivity {
             count += 1;
             if (count < 5) {
                 password += "7";
-                Log.d(TAG, password);
+                //Log.d(TAG, password);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(password);
             }
@@ -198,7 +198,7 @@ public class Create2Activity extends AppCompatActivity {
             count += 1;
             if (count < 5) {
                 password += "8";
-                Log.d(TAG, password);
+                //Log.d(TAG, password);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(password);
             }
@@ -208,14 +208,14 @@ public class Create2Activity extends AppCompatActivity {
             count += 1;
             if (count < 5) {
                 password += "9";
-                Log.d(TAG, password);
+                //Log.d(TAG, password);
                 TextView textView = findViewById(R.id.password);
                 textView.setText(password);
             }
         });
 
         cancel.setOnClickListener(v -> {
-            Log.d(TAG, "Previous Pass:" + password);
+            //Log.d(TAG, "Previous Pass:" + password);
             password = "";
             count = 0;
             TextView textView = findViewById(R.id.password);

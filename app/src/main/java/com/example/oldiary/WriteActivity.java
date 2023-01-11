@@ -90,9 +90,9 @@ public class WriteActivity extends AppCompatActivity {
 
     protected void checkUserId() {
         if (userId.equals("")) {
-            Log.e(TAG, "failed to get User ID");
+            //Log.e(TAG, "failed to get User ID");
         } else {
-            Log.d(TAG, userId);
+            //Log.d(TAG, userId);
         }
     }
 
@@ -115,7 +115,7 @@ public class WriteActivity extends AppCompatActivity {
                 Toast.makeText(WriteActivity.this, "デバッグユーザ0は投稿できません", Toast.LENGTH_SHORT).show();
             }
             else if (txt.length() == 0) {
-                Log.d(TAG, dateTime());
+                //Log.d(TAG, dateTime());
                 Toast.makeText(WriteActivity.this, "投稿内容がありません", Toast.LENGTH_SHORT).show();
             } else {
                 ReadAndWrite rad = new ReadAndWrite();
@@ -131,7 +131,7 @@ public class WriteActivity extends AppCompatActivity {
                                 // OKボタン押下時の処理
                                 Intent intent = new Intent(getApplication(), HomeActivity.class);
                                 startActivity(intent);
-                                Log.d("AlertDialog", "Positive which :" + which);
+                                //Log.d("AlertDialog", "Positive which :" + which);
                             }
                         })
                         .show();
@@ -206,7 +206,7 @@ public class WriteActivity extends AppCompatActivity {
     private String dateTime() {
         int year, month, date, hour, minute, second;
         Calendar c = Calendar.getInstance();
-        Log.d(TAG, String.valueOf(c));
+        //Log.d(TAG, String.valueOf(c));
         TimeZone tz = TimeZone.getTimeZone("Asia/Tokyo");
         c.setTimeZone(tz); //日本時間に設定
         year = c.get(Calendar.YEAR);

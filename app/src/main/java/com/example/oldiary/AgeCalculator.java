@@ -56,20 +56,20 @@ public class AgeCalculator {
         int result = nowY - year;
 
         //debug
-        Log.d(TAG, "30month? " + (monthCheck30(month)));
-        Log.d(TAG, "31month? " + (monthCheck31(month)));
+        //Log.d(TAG, "30month? " + (monthCheck30(month)));
+        //Log.d(TAG, "31month? " + (monthCheck31(month)));
 
 
         if ((result < 0) || (year < 1900) || (month < 1) || (month > 12) || (date < 1)) {
-            Log.e(TAG, "input date is wrong code:1");
+            //Log.e(TAG, "input date is wrong code:1");
             return -1;
         }
         if ((monthCheck30(month) && (date > 30)) || (monthCheck31(month) && (date > 31))) {
-            Log.e(TAG, "input date is wrong code:2");
+            //Log.e(TAG, "input date is wrong code:2");
             return -1;
         }
         if (((leap(year) && month == 2) && (date > 29)) || (!(leap(year)) && (month == 2) && (date > 28))) {
-            Log.e(TAG, "input date is wrong code:3");
+            //Log.e(TAG, "input date is wrong code:3");
             return -1;
         }
 

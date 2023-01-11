@@ -61,7 +61,7 @@ public class Login2Activity extends AppCompatActivity {
         View.OnClickListener listener = v -> {
             if (inputPassword.length() < 4) {
                 inputPassword += ((Button)v).getText();
-                Log.d(TAG, inputPassword);
+                //Log.(TAG, inputPassword);
                 if (hide) {
                     textView.setText(toAst(inputPassword));
 
@@ -79,7 +79,7 @@ public class Login2Activity extends AppCompatActivity {
 
         Button cancel = findViewById(R.id.cancel);
         cancel.setOnClickListener(v -> {
-            Log.d(TAG, "Previous PAss:" + inputPassword);
+            //Log.(TAG, "Previous PAss:" + inputPassword);
             inputPassword = "";
             textView.setText(toAst(inputPassword));
             setRandomNumberTo(buttons); //キャンセルで入れ変えてみる
@@ -138,7 +138,7 @@ public class Login2Activity extends AppCompatActivity {
     protected void getUserId() {
         Intent intent1 = getIntent();
         userId = intent1.getStringExtra("UserID");
-        Log.d(TAG, "PhoneNumber: " + userId);
+        //Log.(TAG, "PhoneNumber: " + userId);
     }
 
     protected void setOnclickConfirm() {
@@ -149,8 +149,8 @@ public class Login2Activity extends AppCompatActivity {
                 Toast.makeText(
                         Login2Activity.this, "パスワードは4桁入力してください", Toast.LENGTH_SHORT).show();
             } else {
-                Log.d(TAG, "inputPass: " + inputPassword);
-                Log.d(TAG, "correctPass: " + correctPassword);
+                //Log.(TAG, "inputPass: " + inputPassword);
+                //Log.(TAG, "correctPass: " + correctPassword);
                 if (inputPassword.equals(correctPassword)) { //パスワードが正しい
                     checkUserName();
                 } else {
@@ -163,34 +163,34 @@ public class Login2Activity extends AppCompatActivity {
 
 
     public void setCorrectPassword() {
-        Log.d(TAG, "setCorrectPassword()");
+        //Log.(TAG, "setCorrectPassword()");
         mDatabase.child("users").child(userId).child("password").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Log.d("debug", "this is sCP onComplete");
+                //Log.("debug", "this is sCP onComplete");
                 if (!task.isSuccessful()) {
                     Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     correctPassword = String.valueOf(task.getResult().getValue());
-                    Log.d(TAG, correctPassword); //debug
+                    //Log.(TAG, correctPassword); //debug
                 }
             }
         });
     }
 
     protected void checkUserName() {
-        Log.d(TAG, "checkUserName()");
+        //Log.(TAG, "checkUserName()");
         mDatabase.child("users").child(userId).child("favoriteGenre").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Log.d("debug", "this is cUN onComplete");
+                //Log.("debug", "this is cUN onComplete");
                 if (!task.isSuccessful()) {
                     Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
                     String userName = String.valueOf(task.getResult().getValue());
-                    Log.d(TAG, userName); //debug
+                    //Log.(TAG, userName); //debug
                     if (userName.equals("null")) { //初回ログイン
                         Intent intentNext = new Intent(getApplication(), MakeProfile.class);
                         intentNext.putExtra("UserID", userId); //インテントにユーザIDを渡す

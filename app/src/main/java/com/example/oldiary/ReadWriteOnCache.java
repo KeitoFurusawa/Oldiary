@@ -31,14 +31,14 @@ public class ReadWriteOnCache extends CreateActivity {
                 outputStream.write(txt.getBytes());
             }
         } catch (IOException e) {
-            Log.e(TAG, "exception", e);
+            //Log.e(TAG, "exception", e);
         } finally {
             try {
                 if (outputStream != null) {
                     outputStream.close();
                 }
             } catch (IOException e) {
-                Log.e(TAG, "exception", e);
+                //Log.e(TAG, "exception", e);
             }
         }
     }
@@ -56,12 +56,12 @@ public class ReadWriteOnCache extends CreateActivity {
                 sb.append(data);
             }
         }catch (IOException e) {
-            Log.e(TAG, "exception", e);
+            //Log.e(TAG, "exception", e);
         }finally {
             try {
                 if(inputStream != null) { inputStream.close(); }
             } catch (IOException e) {
-                Log.e(TAG, "exception", e);
+                //Log.e(TAG, "exception", e);
             }
         }
         return sb.toString();

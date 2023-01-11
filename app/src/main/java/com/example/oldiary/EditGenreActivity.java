@@ -53,7 +53,7 @@ public class EditGenreActivity extends AppCompatActivity {
         getUserId();
         userName = intent1.getStringExtra("UserName");
         comment = intent1.getStringExtra("Comment");
-        Log.d(TAG, String.format("check intent: %s %s %s", userId, userName, comment)); //
+        //Log.d(TAG, String.format("check intent: %s %s %s", userId, userName, comment)); //
 
         setOnClick(); //確定ボタン
 
@@ -74,7 +74,7 @@ public class EditGenreActivity extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Log.d(TAG, "pushed pos: " + position);
+                        //Log.d(TAG, "pushed pos: " + position);
                         adapter.onClickElm(position);
                     }
         });
@@ -91,7 +91,7 @@ public class EditGenreActivity extends AppCompatActivity {
         selectedGenreList.add(intent.getIntExtra("GenreCode1", -1));
         selectedGenreList.add(intent.getIntExtra("GenreCode2", -1));
         selectedGenreList.add(intent.getIntExtra("GenreCode3", -1));
-        //Log.d(TAG, String.valueOf(selectedGenreList));
+        ////Log.d(TAG, String.valueOf(selectedGenreList));
         adapter2.alreadyChecked(selectedGenreList);
         listView.setAdapter(adapter2);
     }
@@ -103,7 +103,7 @@ public class EditGenreActivity extends AppCompatActivity {
         for (int i = 0; i < selectedGenreList.size(); i++) {
             sb.append(selectedGenreList.get(i));
         }
-        Log.d(TAG, sb.toString());
+        //Log.d(TAG, sb.toString());
     }
 
     public void removeSelectedGenreListList(int pos) {
@@ -112,7 +112,7 @@ public class EditGenreActivity extends AppCompatActivity {
         for (int i = 0; i < selectedGenreList.size(); i++) {
             sb.append(selectedGenreList.get(i));
         }
-        Log.d(TAG, sb.toString());
+        //Log.d(TAG, sb.toString());
     }
 
     public int sizeOfSelectedGenreList() {
@@ -136,7 +136,7 @@ public class EditGenreActivity extends AppCompatActivity {
     protected void setOnClick() {
         Button button = findViewById(R.id.buttonConfirm);
         button.setOnClickListener(v -> {
-            Log.d(TAG, String.valueOf("Button States: " + bStates)); //有効
+            //Log.d(TAG, String.valueOf("Button States: " + bStates)); //有効
             if (bStates) { //ボタン有効時
                 new AlertDialog.Builder(EditGenreActivity.this)
                         .setTitle("確認")

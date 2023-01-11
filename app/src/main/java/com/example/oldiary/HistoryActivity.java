@@ -113,7 +113,7 @@ public class HistoryActivity extends AppCompatActivity {
         postedAt = findViewById(R.id.textViewPostedAt);
         roadDList(); //ポストのidのリストを読み込む
         roadCnt(); //ポストの数を読み込む
-        //Log.d(TAG, String.valueOf(d_cnt)); //debug
+        ////Log.(TAG, String.valueOf(d_cnt)); //debug
     }
 
     private void roadDList() {
@@ -126,7 +126,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
                 else {
                     String d_idListResult = String.valueOf(task.getResult().getValue());
-                    //Log.d(TAG, "result on roadCnt: " + d_cntResult); //debug
+                    ////Log.(TAG, "result on roadCnt: " + d_cntResult); //debug
                     if (d_idListResult.equals("null")) { //投稿がない
                         Log.e(TAG, "ERROR: cannot get post");
                     } else {
@@ -141,7 +141,7 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void roadCnt() {
-        //Log.d(TAG, "onRoadCnt->userId: " + userId); //debug
+        ////Log.(TAG, "onRoadCnt->userId: " + userId); //debug
         mDatabase.child("users").child(userId).child("d_cnt").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -151,7 +151,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
                 else {
                     String d_cntResult = String.valueOf(task.getResult().getValue());
-                    //Log.d(TAG, "result on roadCnt: " + d_cntResult); //debug
+                    ////Log.(TAG, "result on roadCnt: " + d_cntResult); //debug
                     if (d_cntResult.equals("null")) { //投稿がない
                         d_cnt = 0;
                         Log.e(TAG, "ERROR: cannot get post");
@@ -253,7 +253,7 @@ public class HistoryActivity extends AppCompatActivity {
     private void setOnClickNext() {
         ibNext.setOnClickListener(v -> {
             if (!ibNextStatus) { //最後に到達している
-                Log.d(TAG, "button was disabled"); //debug
+                //Log.(TAG, "button was disabled"); //debug
             } else {
                 //StartLoading();
                 cv.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadeout_left));
@@ -274,7 +274,7 @@ public class HistoryActivity extends AppCompatActivity {
     private void setOnClickPrev() {
         ibPrev.setOnClickListener(v -> {
             if (!ibPrevStatus) { //最初に達している
-                Log.d(TAG, "button was disabled"); //debug
+                //Log.(TAG, "button was disabled"); //debug
             } else {
                 //StartLoading();
                 cv.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadeout_right));
@@ -328,11 +328,11 @@ public class HistoryActivity extends AppCompatActivity {
                 }
                 else {
                     gender = String.valueOf(task.getResult().getValue());
-                    Log.d(TAG, "result: " + gender);
+                    //Log.(TAG, "result: " + gender);
                     if (gender.equals("null")) {
                         gender = "man";
                     }
-                    Log.d(TAG, gender);
+                    //Log.(TAG, gender);
                 }
             }
         });
@@ -344,11 +344,11 @@ public class HistoryActivity extends AppCompatActivity {
                 }
                 else {
                     color = String.valueOf(task.getResult().getValue());
-                    Log.d(TAG, "result: " + color);
+                    //Log.(TAG, "result: " + color);
                     if (color.equals("null")) {
                         color = "blue";
                     }
-                    Log.d(TAG, color);
+                    //Log.(TAG, color);
                     setPrevAvatar();
                 }
             }
@@ -357,7 +357,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void setPrevAvatar() {
         while(gender.equals("null") || color.equals("null")) {
-            Log.d(TAG, gender+color);
+            //Log.(TAG, gender+color);
         }
         int drawableId = getResources().getIdentifier(color+"_"+gender, "drawable", getPackageName());
         ImageView imageView = findViewById(R.id.avatar);
@@ -389,10 +389,10 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void checkLoading() {
-        Log.d(TAG, "C-ID: " + checkID);
-        Log.d(TAG, "C-AV: " + checkAvatar);
-        Log.d(TAG, "C-Post:" + checkPostText);
-        Log.d(TAG, "C-Time:" + checkPostTime);
+        //Log.(TAG, "C-ID: " + checkID);
+        //Log.(TAG, "C-AV: " + checkAvatar);
+        //Log.(TAG, "C-Post:" + checkPostText);
+        //Log.(TAG, "C-Time:" + checkPostTime);
         if (checkID && checkAvatar && checkPostTime && checkPostText) {
             progressDialog.dismiss();
             avatarObj.setVisibility(View.VISIBLE);
