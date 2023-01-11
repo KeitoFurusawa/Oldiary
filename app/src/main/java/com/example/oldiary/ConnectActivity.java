@@ -265,6 +265,7 @@ public class ConnectActivity extends AppCompatActivity {
         //String d_id = String.format("d_%s%d", userId, nowDNum);
         StartLoading();
         String d_id = d_idList.get(nowDNum-1);
+        Log.i(TAG, d_id);
         dstDiaryId = d_idList.get(nowDNum-1);
         mDatabase.child("diaries").child(d_id).child("text").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
