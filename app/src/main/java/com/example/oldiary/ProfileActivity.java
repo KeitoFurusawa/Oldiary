@@ -50,6 +50,10 @@ public class ProfileActivity extends AlarmProfileActivity {
     private TextView textUserName;
     private CardView cvInfo;
 
+    //from判定
+    private String intentFrom;
+    private int d_num;
+
 
     private static final String[] genreList = {
             "サッカー", "野球", "テニス", "ガーデニング", "読書",
@@ -89,8 +93,26 @@ public class ProfileActivity extends AlarmProfileActivity {
 
     protected void getUserId() {
         userId = preference.getString("UserID", "");
-        checkID = true;
+        checkFrom();
         checkLoading();
+    }
+
+    private void checkFrom() {
+        Intent intent = getIntent();
+        intentFrom = intent.getStringExtra("FROM");
+        if ((intentFrom!=null) && (intentFrom.equals("history") || intentFrom.equals("connect"))) {
+            d_num = intent.getIntExtra("D-NUM", -1);
+            if (!userId.equals(intent.getStringExtra("LOOK_AT"))) {
+                userId = intent.getStringExtra("LOOK_AT");
+                Button profBtn = findViewById(R.id.linearlayout_editProf);
+                LinearLayout lnLogout = findViewById(R.id.linearlayout_logout);
+                Button avatarBtn = findViewById(R.id.linearlayout_EditAvatar);
+                profBtn.setVisibility(View.INVISIBLE);
+                lnLogout.setVisibility(View.INVISIBLE);
+                avatarBtn.setVisibility(View.INVISIBLE);
+            }
+        }
+        checkID = true;
     }
 
     public void onClick(View view) {
@@ -118,7 +140,19 @@ public class ProfileActivity extends AlarmProfileActivity {
         Button button = findViewById(R.id.backbtn);
         mDestroy();
         button.setOnClickListener(view1 -> {
-            Intent intent = new Intent(getApplication(), HomeActivity.class);
+            Log.d(TAG, "clickBackBtn");
+            Intent intent;
+            if (intentFrom != null && intentFrom.equals("history")) {
+                intent = new Intent(getApplication(), HistoryActivity.class);
+                intent.putExtra("INTENT_FROM", "profile");
+                intent.putExtra("D-NUM", d_num);
+            } else if (intentFrom != null && intentFrom.equals("connect")) {
+                intent = new Intent(getApplication(), ConnectActivity.class);
+                intent.putExtra("INTENT_FROM", "profile");
+                intent.putExtra("D-NUM", d_num);
+            } else {
+                intent = new Intent(getApplication(), HomeActivity.class);
+            }
             startActivity(intent);
         });
     }
@@ -140,6 +174,8 @@ public class ProfileActivity extends AlarmProfileActivity {
             }
         });
     }
+
+
 
     private void setComment() {
         mDatabase.child("users").child(userId).child("comment").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {

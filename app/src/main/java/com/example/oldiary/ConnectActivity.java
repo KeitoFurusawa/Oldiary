@@ -11,8 +11,10 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,7 +59,7 @@ public class ConnectActivity extends AppCompatActivity {
     ListView listView;
     ArrayList<String> d_idList;
     private static final String API_KEY = "AIzaSyBtAfSPNfUXI3bUWBf65-nw-50pg9sXyF4";
-    private boolean checkID = false, checkPost = false, checkUserName = false, checkReply = false;
+    private boolean checkID = false, checkPost = false, checkUserName = false, checkReply = false, checkIcon = false;
     private ProgressDialog progressDialog;
 
 
@@ -68,8 +70,8 @@ public class ConnectActivity extends AppCompatActivity {
     private ArrayList<String> userName;
     private ArrayList<String> repliedAt;
     private ArrayList<Integer> iconId;
-    private ArrayList<String> gender;
-    private ArrayList<String> color;
+    private ArrayList<String> genderR;
+    private ArrayList<String> colorR;
     private ArrayList<ReplyData> listItems = new ArrayList<>();
     private TextView repTitle;
     ListView listViewReply;
@@ -79,6 +81,11 @@ public class ConnectActivity extends AppCompatActivity {
     //ジャンル
     private int loadGCnt;
     private TextView textViewGenre;
+
+    //posted avatar
+    private String gender;
+    private String color;
+    private ImageView imgProf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +109,7 @@ public class ConnectActivity extends AppCompatActivity {
         setElm();
         setOnClickReload();
         setOnClickNewDiary();
+        setOnclickIcon();
     }
     
     protected void onResume() {
@@ -140,11 +148,11 @@ public class ConnectActivity extends AppCompatActivity {
         if (intentFrom.equals("reply")) {
             fromR = true;
             nowDNum = i.getIntExtra("D-NUM", -1);
-            Log.d(TAG, "R/DNum: " + nowDNum);
-        } else if (intentFrom.equals("notReplied")) {
+            //Log.d(TAG, "R/DNum: " + nowDNum);
+        } else if (intentFrom.equals("notReplied") || intentFrom.equals("profile")) {
             fromNR = true;
             nowDNum = i.getIntExtra("D-NUM", -1);
-            Log.d(TAG, "NR/DNum: " + nowDNum);
+            //Log.d(TAG, "NR/DNum: " + nowDNum);
         }
     }
 
@@ -167,6 +175,7 @@ public class ConnectActivity extends AppCompatActivity {
         textViewGenre = findViewById(R.id.textGenre);
         repTitle = findViewById(R.id.textTitleReply);
         buttonReply = findViewById(R.id.buttonReply);
+        imgProf = findViewById(R.id.profile_image);
         roadPublicDList(); //ポストのidのリストを読み込む
         roadPublicCnt(); //ポストの数を読み込む
     }
@@ -396,6 +405,7 @@ public class ConnectActivity extends AppCompatActivity {
                         //Log.e(TAG, "ERROR: cannot get data"); //debug
                     } else {
                         dstUserId = textResult;
+                        setPostedAvatar();
                         innerSetPostedBy(textResult);
                         checkPost = true;
                         checkLoading();
@@ -439,6 +449,52 @@ public class ConnectActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void setPostedAvatar() {
+        mDatabase.child("users").child(dstUserId).child("avatar").child("gender").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    gender = String.valueOf(task.getResult().getValue());
+                    //Log.d(TAG, "result: " + gender);
+                    if (gender.equals("null")) {
+                        gender = "man";
+                    }
+                    //Log.d(TAG, gender);
+                }
+            }
+        });
+        mDatabase.child("users").child(dstUserId).child("avatar").child("color").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    color = String.valueOf(task.getResult().getValue());
+                    //Log.d(TAG, "result: " + color);
+                    if (color.equals("null")) {
+                        color = "blue";
+                    }
+                    //Log.d(TAG, color);
+                    innerSetPostedAvatar();
+                }
+            }
+        });
+    }
+
+    private void innerSetPostedAvatar() {
+        while(gender.equals("null") || color.equals("null")) {
+            //Log.d(TAG, gender+color);
+        }
+        int drawableId = getResources().getIdentifier("icon_"+color+"_"+gender, "drawable", getPackageName());
+        imgProf.setImageResource(drawableId);
+        checkIcon = true;
+        checkLoading();
     }
 
     private void checkButtonVisibility(String userId) {
@@ -572,27 +628,20 @@ public class ConnectActivity extends AppCompatActivity {
         String d_id = d_idList.get(nowDNum - 1);
         listItems.clear();
         text = new ArrayList<>();
-        //text.clear();
         repliedBy = new ArrayList<>();
-        //repliedBy.clear();
         userName = new ArrayList<>();
-        //userName.clear();
         repliedAt = new ArrayList<>();
-        //repliedAt.clear();
         iconId = new ArrayList<>();
-        //iconId.clear();
-        gender = new ArrayList<>();
-        //gender.clear();
-        color = new ArrayList<>();
-        //color.clear();
+        genderR = new ArrayList<>();
+        colorR = new ArrayList<>();
         for (int i = 0; i < r_idList.size(); i++) {
             text.add("");
             repliedBy.add("");
             userName.add("");
             repliedAt.add("");
             iconId.add(-1);
-            gender.add("");
-            color.add("");
+            genderR.add("");
+            colorR.add("");
         }
         int index;
         for (String r_id : r_idList) {
@@ -700,10 +749,10 @@ public class ConnectActivity extends AppCompatActivity {
                     //Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
-                    gender.set(index, String.valueOf(task.getResult().getValue()));
+                    genderR.set(index, String.valueOf(task.getResult().getValue()));
                     //Log.d(TAG, "result: " + gender);
-                    if (gender.get(index).equals("null")) {
-                        gender.set(index, "man");
+                    if (genderR.get(index).equals("null")) {
+                        genderR.set(index, "man");
                     }
                     //Log.i(TAG, gender.get(index));
                 }
@@ -716,10 +765,10 @@ public class ConnectActivity extends AppCompatActivity {
                     //Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
-                    color.set(index, String.valueOf(task.getResult().getValue()));
+                    colorR.set(index, String.valueOf(task.getResult().getValue()));
                     //Log.d(TAG, "result: " + color);
-                    if (color.get(index).equals("null")) {
-                        color.set(index, "blue");
+                    if (colorR.get(index).equals("null")) {
+                        colorR.set(index, "blue");
                     }
                     //Log.i(TAG, color.get(index));
                     setPrevAvatar(index);
@@ -729,10 +778,10 @@ public class ConnectActivity extends AppCompatActivity {
     }
 
     private void setPrevAvatar(int index) {
-        while(gender.equals("null") || color.equals("null")) {
+        while(genderR.equals("null") || colorR.equals("null")) {
             //Log.d(TAG, gender.get(index)+color.get(index));
         }
-        iconId.set(index, getResources().getIdentifier("icon_"+color.get(index)+"_"+gender.get(index), "drawable", getPackageName()));
+        iconId.set(index, getResources().getIdentifier("icon_"+colorR.get(index)+"_"+genderR.get(index), "drawable", getPackageName()));
         checkGetReplyData(index);
         //Log.i(TAG, String.format("fin load iconId [%d]", iconId.get(index)));
     }
@@ -745,11 +794,36 @@ public class ConnectActivity extends AppCompatActivity {
             ReplyListAdapter adapter = new ReplyListAdapter(this, R.layout.replylist_item, listItems);
             listViewReply.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-            //Log.i(TAG, "r_idList: " + String.valueOf(r_idList));
+            //
+            listViewReply.setOnItemClickListener(
+                    new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String repUserId = repliedBy.get(position);
+                            Log.d(TAG, String.valueOf(position) + repUserId);
+                            Intent intent = new Intent(getApplication(), ProfileActivity.class);
+                            intent.putExtra("FROM", "connect");
+                            intent.putExtra("LOOK_AT", repUserId);
+                            intent.putExtra("D-NUM", nowDNum);
+                            startActivity(intent);
+                        }
+                    }
+            );
+            //
             checkReply = true;
             checkLoading();
         }
             index++;
+    }
+
+    private void setOnclickIcon() {
+        imgProf.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplication(), ProfileActivity.class);
+            intent.putExtra("FROM", "connect");
+            intent.putExtra("LOOK_AT", dstUserId);
+            intent.putExtra("D-NUM", nowDNum);
+            startActivity(intent);
+        });
     }
 
 
@@ -766,6 +840,7 @@ public class ConnectActivity extends AppCompatActivity {
         ibNext.setVisibility(View.GONE);
         ibPrev.setVisibility(View.GONE);
         buttonReply.setVisibility(View.GONE);
+        imgProf.setVisibility(View.INVISIBLE);
         progressDialog = new ProgressDialog(this);
         progressDialog.getWindow().setNavigationBarColor(0);
         progressDialog.setMessage("ロード中");
@@ -774,7 +849,8 @@ public class ConnectActivity extends AppCompatActivity {
     }
 
     private void checkLoading() {
-        if (checkID && checkPost && checkUserName && checkReply) {
+        if (checkID && checkPost && checkUserName && checkReply && checkIcon) {
+            imgProf.setVisibility(View.VISIBLE);
             post.setVisibility(View.VISIBLE);
             postedBy.setVisibility(View.VISIBLE);
             postedAt.setVisibility(View.VISIBLE);
