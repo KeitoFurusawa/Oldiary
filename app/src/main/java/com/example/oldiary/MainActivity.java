@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     }
     protected void onDestroy() {
         super.onDestroy();
-        mediaPlayer.release();
+        // mediaPlayer.release();
         mediaPlayer = null;
     }
 
