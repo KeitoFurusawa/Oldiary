@@ -88,6 +88,20 @@ public class WriteActivity extends AppCompatActivity {
         }
     }
 
+    protected void onResume() {
+        super.onResume();
+        mediaPlayer.start();
+    }
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer.pause();
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.release();
+        mediaPlayer = null;
+    }
+
     protected void checkUserId() {
         if (userId.equals("")) {
             //Log.e(TAG, "failed to get User ID");

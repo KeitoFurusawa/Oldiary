@@ -2,7 +2,10 @@ package com.example.oldiary;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -20,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     ViewPager mSlideViewPager;
     LinearLayout mDotLayout;
     Button backbtn, nextbtn, skipbtn;
+
+    SoundPool soundPool;
+    int back, next;
 
     TextView[] dots;
     ViewPagerAdapter viewPagerAdapter;
@@ -57,14 +63,46 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
+        ss();
 
+    }
 
+    protected void ss(){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        } else {
+            AudioAttributes attr = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build();
+            soundPool = new SoundPool.Builder()
+                    .setAudioAttributes(attr)
+                    .setMaxStreams(5)
+                    .build();
+            back = soundPool.load(this, R.raw.back, 1);
+            next = soundPool.load(this, R.raw.next, 1);
+        }
+    }
+
+    protected void onResume() {
+        super.onResume();
+        mediaPlayer.start();
+    }
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer.pause();
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.release();
+        mediaPlayer = null;
     }
 
     public void tutorial() {
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                soundPool.play(back,15 , 15, 0, 0, 2);
                 if (getItem(0) > 0) {
                     mSlideViewPager.setCurrentItem(getItem(-1), true);
                 }
@@ -74,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                soundPool.play(next,15 , 15, 0, 0, 2);
                 if (getItem(0) < 3) {
                     mSlideViewPager.setCurrentItem(getItem(1), true);
                 }
@@ -89,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         skipbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                soundPool.play(next,15 , 15, 0, 0, 2);
                 Intent i = new Intent(MainActivity.this,  Loading.class);
                 startActivity(i);
                 finish();

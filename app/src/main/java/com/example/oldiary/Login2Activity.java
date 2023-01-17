@@ -49,7 +49,7 @@ public class Login2Activity extends AppCompatActivity {
     };
 
     SoundPool soundPool;
-    int mp3a;
+    int mp3a, back, next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,12 +124,15 @@ public class Login2Activity extends AppCompatActivity {
                     .setMaxStreams(5)
                     .build();
             mp3a = soundPool.load(this, R.raw.success, 1);
+            back = soundPool.load(this, R.raw.back, 1);
+            next = soundPool.load(this, R.raw.next, 1);
         }
     }
 
     protected void setOnClick() {
         Button button = findViewById(R.id.button_back);
         button.setOnClickListener(v -> {
+            soundPool.play(back,15 , 15, 0, 0, 2);
             Intent intent = new Intent(getApplication(), LoginActivity.class);
             startActivity(intent);
         });

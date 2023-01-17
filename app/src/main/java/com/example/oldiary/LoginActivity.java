@@ -33,7 +33,7 @@ public class LoginActivity extends AlarmActivity {
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
     SoundPool soundPool;
-    int mp3a;
+    int mp3a, back, next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +71,15 @@ public class LoginActivity extends AlarmActivity {
                     .setMaxStreams(5)
                     .build();
             mp3a = soundPool.load(this, R.raw.error, 1);
-
+            back = soundPool.load(this, R.raw.back, 1);
+            next = soundPool.load(this, R.raw.next, 1);
         }
     }
 
     public void onClick(View view) {
         Button button = findViewById(R.id.backbtn);
         button.setOnClickListener(view1 -> {
+            soundPool.play(back,15 , 15, 0, 0, 2);
             Intent intent = new Intent(getApplication(), MainScreen.class);
             mDestroy();
             startActivity(intent);
@@ -168,6 +170,7 @@ public class LoginActivity extends AlarmActivity {
             Toast.makeText(LoginActivity.this, "その電話番号は登録されていません", Toast.LENGTH_SHORT).show();
         }
         else {
+            soundPool.play(next,15 , 15, 0, 0, 2);
             Intent intentNext = new Intent(getApplication(), Login2Activity.class);
             intentNext.putExtra("UserID", userId);
             startActivity(intentNext);

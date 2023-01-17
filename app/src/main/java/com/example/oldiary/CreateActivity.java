@@ -12,11 +12,11 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
-import android.media.SoundPool;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +30,7 @@ public class CreateActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private static String getResult;
     SoundPool soundPool;
-    int mp3a;
+    int mp3a, back, next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,8 @@ public class CreateActivity extends AppCompatActivity {
                     .setMaxStreams(5)
                     .build();
             mp3a = soundPool.load(this, R.raw.error, 1);
-
+            back = soundPool.load(this, R.raw.back, 1);
+            next = soundPool.load(this, R.raw.next, 1);
         }
     }
 
@@ -67,6 +68,7 @@ public class CreateActivity extends AppCompatActivity {
     protected void setOnClick() {
         Button button = findViewById(R.id.button_back);
         button.setOnClickListener(v -> {
+            soundPool.play(back,15 , 15, 0, 0, 2);
             Intent intent = new Intent(getApplication(), LoginActivity.class);
             startActivity(intent);
         });
@@ -85,6 +87,7 @@ public class CreateActivity extends AppCompatActivity {
                 //debug用 0は通過
                 if (phoneNumber.equals("0")) {
                     //格納されている文字列の比較は.equalsを使わないといけない
+                    soundPool.play(next,15 , 15, 0, 0, 2);
                     Intent intent = new Intent(getApplication(), Create2Activity.class);
                     intent.putExtra("PhoneNumber", phoneNumber);
                     startActivity(intent);
@@ -145,6 +148,7 @@ public class CreateActivity extends AppCompatActivity {
             //Log.e(TAG, "ERROR: that PhoneNumber was already registered");
             Toast.makeText(CreateActivity.this, "その電話番号はすでに使われています。", Toast.LENGTH_SHORT).show();
         } else { //未登録の番号はOK
+            soundPool.play(next,15 , 15, 0, 0, 2);
             Intent intent = new Intent(getApplication(), Create2Activity.class);
             intent.putExtra("PhoneNumber", phoneNumber);
             startActivity(intent);

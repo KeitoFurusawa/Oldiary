@@ -23,7 +23,7 @@ public class Create2Activity extends AppCompatActivity {
     private static final String TAG = "CreateActivity";
 
     SoundPool soundPool;
-    int mp3a, mp3b;
+    int mp3a, mp3b, back, next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +55,15 @@ public class Create2Activity extends AppCompatActivity {
                     .build();
             mp3a = soundPool.load(this, R.raw.success, 1);
             mp3b = soundPool.load(this, R.raw.error, 1);
+            back = soundPool.load(this, R.raw.back, 1);
+            next = soundPool.load(this, R.raw.next, 1);
         }
     }
 
     protected void setOnClick() {
         Button button = findViewById(R.id.button_back);
         button.setOnClickListener(v -> {
+            soundPool.play(back,15 , 15, 0, 0, 2);
             Intent intent = new Intent(getApplication(), CreateActivity.class);
             startActivity(intent);
         });
