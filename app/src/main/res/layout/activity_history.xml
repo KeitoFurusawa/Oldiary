@@ -6,27 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".HistoryActivity">
 
-    <Button
-        android:id="@+id/imageButtonReload"
+    <TextView
+        android:id="@+id/textGenre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/black"
-        android:drawableTop="@drawable/ic_autorenew"
-        android:text="更新"
-        android:textStyle="bold"
-        android:layout_marginTop="10sp"
-        android:layout_marginRight="10sp"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="42dp"
+        android:text="genre"
+        android:textColor="#00008b" />
+
+    <TextView
+        android:id="@+id/textTitleReply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewPostedAt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="5dp"
+        android:text="返信一覧"
+        android:textColor="#000" />
+
+    <ListView
+        android:id="@+id/listViewReplies"
+        android:layout_width="match_parent"
+        android:layout_height="186dp"
+        android:layout_below="@+id/textTitleReply"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="72dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/writeSpace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageButtonReload"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:layout_marginStart="20sp"
-        android:layout_marginTop="20sp"
+        android:layout_marginTop="61dp"
         android:layout_marginEnd="20sp"
         android:layout_marginBottom="20sp"
         app:cardBackgroundColor="@color/color2"
@@ -39,11 +60,10 @@
             android:layout_height="200dp"
             android:layout_margin="12sp"
             android:inputType="textMultiLine"
+            android:scrollbars="vertical"
             android:text="投稿内容"
             android:textColor="#000000"
-            android:textSize="18sp"
-            android:scrollbars="vertical"
-            />
+            android:textSize="18sp" />
 
     </androidx.cardview.widget.CardView>
 
@@ -80,15 +100,6 @@
         android:layout_below="@+id/textViewPostedAt"
         android:layout_marginTop="-10sp"
         android:layout_marginLeft="30sp"/>
-
-    <ImageView
-        android:id="@+id/avatar"
-        android:layout_width="110dp"
-        android:layout_height="250dp"
-        android:layout_below="@+id/textViewPostedAt"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/blue_man" />
 
     <ImageView
         android:id="@+id/imageView"
