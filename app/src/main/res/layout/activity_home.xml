@@ -107,7 +107,7 @@
         android:id="@+id/collection_of_words"
         android:layout_width="47dp"
         android:layout_height="46dp"
-        android:background="#FCF2E5"
+        android:background="#FFFFFF"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
