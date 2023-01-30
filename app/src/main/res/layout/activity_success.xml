@@ -36,6 +36,7 @@
         android:id="@+id/try_login"
         android:layout_width="142dp"
         android:layout_height="64dp"
+        android:backgroundTint="#388E3C"
         android:text="ログインを行う"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
