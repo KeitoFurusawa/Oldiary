@@ -85,7 +85,7 @@
         android:id="@+id/collection_of_words"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="入力例 09012345678\n(ハイフンなし)"
+        android:text="デバッグ用: 0番"
         app:layout_constraintBottom_toTopOf="@+id/editTextPhoneNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
